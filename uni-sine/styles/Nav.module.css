@@ -1,0 +1,20 @@
+#navbar {
+    padding: 15px 30px;
+    background: #1f1f1f;
+    color: rgb(255, 255, 255);
+    border-image: linear-gradient(to right,#f02828,#e8d90a,#e80a0a); 
+    border-width: 0 0 3px 0;
+    border-style: solid;
+    border-image-slice: 1;
+    text-align: center;
+
+}
+
+#navbar > * {
+    padding: 10px;
+}
+
+.nav-container {
+    padding: 0 5pc 0 5pc !important;
+    font-size: 26px;
+}

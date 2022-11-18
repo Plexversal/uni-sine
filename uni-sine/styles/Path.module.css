@@ -1,0 +1,43 @@
+.path {
+    
+    padding: 1em 1em;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: linear-gradient(to bottom,#e6e6e6,#e7e7e7);
+    text-align: center;
+    color: rgb(81, 79, 82);
+    display: flex;
+    justify-content: space-around;
+    overflow: auto;
+    margin: auto;
+
+}
+
+.path ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.path ul li a{
+    text-decoration: underline;
+}
+
+.path ul li a:hover{
+    color: rgba(81, 79, 82, 0.63);
+
+}
+
+.path ul li:not(:first-child)::before {
+    content: '\00a0>\00a0'
+}
+
+
+@media (max-width: 1000px) {
+    .path {
+        width: 100%;
+    }
+}

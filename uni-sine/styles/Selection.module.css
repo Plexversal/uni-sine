@@ -1,0 +1,39 @@
+.selection-container {
+    box-sizing: border-box;
+    color: #303030;
+    max-width: 300px; /* Prevents 100% width size of container using a max width */
+    min-width: 300px;
+    min-height: 250px;
+    max-height: 250px;
+
+    margin: 20px;
+    padding: 20px;
+    border-radius: 26px;
+    background: #ffffff;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+    background-image: linear-gradient(to bottom right, #04c7e933, #df00f341);
+    box-shadow:  12px 12px 34px #bbbbbb,
+             -12px -12px 34px #ffffff;
+
+}
+
+
+.selection-container:hover { transform: scale(1.1); }
+
+.selection-container p {
+    color: #3030309d;
+}
+
+@media (max-width: 600px) {
+    .selection-container {
+        min-height: fit-content;
+        max-height: fit-content;
+    }
+    .selection-container p {
+        display: none;
+    }
+    .selection-container h2 {
+        margin: 0;
+    }
+}
