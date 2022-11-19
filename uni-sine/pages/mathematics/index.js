@@ -1,112 +1,117 @@
-import SecondaryBanner from '../../components/SecondaryBanner'
-import Selection from '../../components/physics/Selection'
-
+import SecondaryBanner from '../../components/page-construction/SecondaryBanner'
+import Selection from '../../components/page-construction/Selection'
 import styles from '../../styles/Content.module.css'
-import Link from 'next/link'
 
-export default function Maths() {
+
+/*
+
+This should probably be changed to client side rendering using useEffect. 
+This would allow local loading in search function which makes more sense as loading all this data may not be required for every load
+
+*/
+export async function getStaticProps() {
+    let data = await fetch('http://localhost:3000/mathematics/probability').then(r => r.text())
+
+    let data2 = await fetch('http://localhost:3000/mathematics/fundamental-trigonometry').then(r => r.text())
+        
+    let data3 = await fetch('http://localhost:3000/mathematics/graphing-cubic-functions').then(r => r.text())
+
+    return {
+        props: {
+            prob: data,
+            trig: data2
+        }
+    }
+}
+
+export default function Maths({prob, trig}) {
 
   let documentsContentListArray = [
-    'Laws of exponents',
-    'Fraction laws',
-    'Probability',
-    'Vectors',
     {
-        name: 'Graphing Functions', 
-        sub: ['Graphing linear functions', 'Graphing inequalities', 'Graphing quadratic functions', 'Graphing Cubic functions', 'Graphing radicals', 'Graphing exponentials', 'Graphing Logarithms', 'Graphing multiple x terms']
+        title: 'Laws of exponents', 
+        description: 'Learn the fundamentals of powers and how to calculate results when using all the math operations with exponents involved.'
     },
-    'Fundamental Trigonometry',
-    "Triangle area and sectors",
-    "Logarithms",
-    "Calculus"
-]
+    {
+        title: 'Fraction laws', 
+        description: 'Learn the rules governing how to add, subtract, multiply and divide fractions as well as all the relevant terminology. '
+    },
+    {
+        title: 'Fundamental Probability',
+        description: 'The basics of probability including how to construct probability trees and Venn diagrams with correct notation.'
+    },
+    {
+        title: 'Binomial and Normal distributions',
+        description: 'Expand on the knowledge of probability and learn how real world data can be represented in probability distributions.'
+    },
+    {
+        title: 'Vectors',
+        description: ''
+    },
+    {
+        title: 'Graphing Linear functions',
+        description: ''
+    },
+    {
+        title: 'Graphing Quadratic functions',
+        description: ''
+    },
+    {
+        title: 'Graphing Cubic functions',
+        description: ''
+    },
+    {
+        title: 'Graphing inequalities',
+        description: ''
+    },
+    {
+        title: 'Graphing radicals',
+        description: ''
+    },
+    {
+        title: 'Graphing Logarithms and exponentials',
+        description: ''
+    },
+    {
+        title: 'Fundamental Trigonometry',
+        description: ''
+    },
+    {
+        title: "Triangle area and sectors",
+        description: ''
+    },
+    {
+        title: "Logarithms",
+        description: ''
+    },
+    {
+        title: "Differentiation",
+        description: ''
+    },
+    {
+        title: 'Integration',
+        description: ''
+    },
+    ]
+    console.log(prob, trig)
+    return (
+        <>
+            <SecondaryBanner title='Mathematics' subheader={`${documentsContentListArray.length} Articles · Updated 25/06/2022`} />
+            <div className={styles['content-container']}>
+                <div className={styles['search-content-wrapper']}>
+                    <h3>Browse topics below or search</h3>
+                    <input type='text'></input>
+                </div>
+                <div className={styles['middle-content-container']}>
+                    {documentsContentListArray.map((a, i) =>
+                        <Selection key={i}
+                            link={`/mathematics/${documentsContentListArray[i].title.toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}
+                            title={documentsContentListArray[i].title}
+                            description={documentsContentListArray[i].description}
+                        />
+                    )}
 
-return (
-  <>
-      <SecondaryBanner title='Mathematics' subheader={`${documentsContentListArray.length} Articles · Updated 25/06/2022`}  />
-      <div className={styles['content-container']}>
-          <div className={styles['side-list-container']}>
-              <div className={styles['list-parent']}>
-                  <h2>Content List</h2>
-                  <h3>Documents</h3>
-                  <ol>{
-                      documentsContentListArray.map((a,i) => (   // This maps the array of content in a list and creates list items for each array item
-                      <li key={i}>{
-                          typeof a === `object` ? (
-                              <>{
-                                  <Link href={`/mathematics/${a.name.toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}>{a.name}</Link>}
-                                  <ul>
-                                      {a.sub.map((e, i) => 
-                                      <li key={i}>{<Link href={`/mathematics/${e.toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}>{e}</Link>}</li>
-                                      )}
-                                  </ul></>
-                              ) : (<Link href={`/mathematics/${a.toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}>{a}</Link>)
-                      }
-                      </li>
-                  ))
-                  }</ol>
-                  
-              </div>
-      
-          </div>
-          <div className={styles['middle-content-container']}>
-              <Selection 
-              link={`/mathematics/${documentsContentListArray[0].toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}
-              title={documentsContentListArray[0]}
-              description={<p>
-                  Calculate specific charge of the standard particles in an atom and what each subatomic particle's mass and charge are.
-              </p>}/>
-              <Selection 
-              link={`/mathematics/${documentsContentListArray[1].toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}
-              title={documentsContentListArray[1]}
-              description={<p>
-                  Calculate specific charge of the standard particles in an atom and what each subatomic particle's mass and charge are.
-              </p>}/>
-              <Selection 
-              link={`/mathematics/${documentsContentListArray[2].toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}
-              title={documentsContentListArray[2]}
-              description={<p>
-                  Calculate specific charge of the standard particles in an atom and what each subatomic particle's mass and charge are.
-              </p>}/>
-              <Selection 
-              link={`/mathematics/${documentsContentListArray[3].toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}
-              title={documentsContentListArray[3]}
-              description={<p>
-                  Calculate specific charge of the standard particles in an atom and what each subatomic particle's mass and charge are.
-              </p>}/>
-
-              <Selection 
-                    link={`/mathematics/${documentsContentListArray[4].name.toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}
-                    title={documentsContentListArray[4].name}
-                    description={<p>
-                        Calculate specific charge of the standard particles in an atom and what each subatomic particle's mass and charge are.
-                </p>}/>
-                <Selection 
-              link={`/mathematics/${documentsContentListArray[5].toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}
-              title={documentsContentListArray[5]}
-              description={<p>
-                  Calculate specific charge of the standard particles in an atom and what each subatomic particle's mass and charge are.
-              </p>}/>
-              <Selection 
-              link={`/mathematics/${documentsContentListArray[6].toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}
-              title={documentsContentListArray[6]}
-              description={<p>
-                  Calculate specific charge of the standard particles in an atom and what each subatomic particle's mass and charge are.
-              </p>}/>
-              <Selection 
-              link={`/mathematics/${documentsContentListArray[7].toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}
-              title={documentsContentListArray[7]}
-              description={<p>
-                  Calculate specific charge of the standard particles in an atom and what each subatomic particle's mass and charge are.
-              </p>}/>
-              <Selection 
-              link={`/mathematics/${documentsContentListArray[8].toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}
-              title={documentsContentListArray[8]}
-              description={<p>
-                  Calculate specific charge of the standard particles in an atom and what each subatomic particle's mass and charge are.
-              </p>}/>
-          </div>
-      </div>
-  </>
-)
-  }
+                </div>
+            </div>
+        </>
+    )
+}

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React, { useEffect, useState, } from "react"
 import dynamic from 'next/dynamic'
-import styles from '../styles/Page.module.css'
+import styles from '../../styles/Page.module.css'
 
 // this Sketch function is required to allow client side rendering only as window will not be present server side
 const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {

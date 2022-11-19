@@ -1,5 +1,5 @@
-import Path from "../../components/Path"
-import SecondaryBanner from '../../components/SecondaryBanner'
+import Path from "../../components/page-construction/Path"
+import SecondaryBanner from '../../components/page-construction/SecondaryBanner'
 import styles from '../../styles/Page.module.css'
 import React, { useEffect, useState, } from "react"
 import P5NormalDistribution from "../../components/P5NormalDistribution"

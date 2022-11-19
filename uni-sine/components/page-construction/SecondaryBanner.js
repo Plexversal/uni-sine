@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import styles from '../styles/Banner.module.css'
+import styles from '../../styles/Banner.module.css'
 import Link from 'next/link'
 import {BsFacebook, BsTwitter, BsYoutube} from 'react-icons/bs'
 

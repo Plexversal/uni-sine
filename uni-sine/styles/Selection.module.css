@@ -5,8 +5,6 @@
     min-width: 300px;
     min-height: 250px;
     max-height: 250px;
-
-    margin: 20px;
     padding: 20px;
     border-radius: 26px;
     background: #ffffff;
@@ -15,7 +13,7 @@
     background-image: linear-gradient(to bottom right, #04c7e933, #df00f341);
     box-shadow:  12px 12px 34px #bbbbbb,
              -12px -12px 34px #ffffff;
-
+    
 }
 
 

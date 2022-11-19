@@ -1,8 +1,8 @@
 import '../styles/globals.css'
-import Layout from '../components/Layout'
+import Layout from '../components/page-construction/Layout'
 import Script from 'next/script'
 import Head from 'next/head'
-import FastRead from '../components/FastRead'
+import FastRead from '../components/page-construction/FastRead'
 
 // component which wraps all the pages
 function MyApp({ Component, pageProps, router }) {

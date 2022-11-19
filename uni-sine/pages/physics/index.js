@@ -1,5 +1,5 @@
-import SecondaryBanner from '../../components/SecondaryBanner'
-import Selection from '../../components/physics/Selection'
+import SecondaryBanner from '../../components/page-construction/SecondaryBanner'
+import Selection from '../../components/page-construction/Selection'
 
 import styles from '../../styles/Content.module.css'
 import Link from 'next/link'
@@ -32,30 +32,6 @@ export default function Physics() {
         <>
             <SecondaryBanner title='Physics' subheader={`${documentsContentListArray.length} Articles · Updated 22/03/2022`}  />
             <div className={styles['content-container']}>
-                <div className={styles['side-list-container']}>
-                    <div className={styles['list-parent']}>
-                        <h2>Content List</h2>
-                        <h3>Documents</h3>
-                        <ol>{
-                            documentsContentListArray.map((a,i) => (   // This maps the array of content in a list and creates list items for each array item
-                            <li key={i}>{
-                                typeof a === `object` ? (
-                                    <>{
-                                        <Link href={`/physics/${a.name.toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}>{a.name}</Link>}
-                                        <ul>
-                                            {a.sub.map((e, i) => 
-                                            <li key={i}>{<Link href={`/physics/${e.toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}>{e}</Link>}</li>
-                                            )}
-                                        </ul></>
-                                    ) : (<Link href={`/physics/${a.toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}>{a}</Link>)
-                            }
-                            </li>
-                        ))
-                        }</ol>
-                        
-                    </div>
-            
-                </div>
                 <div className={styles['middle-content-container']}>
                     <Selection 
                     link={`/physics/${documentsContentListArray[0].toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}

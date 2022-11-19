@@ -161,7 +161,7 @@ export default function Home() {
         y: 0,
         opacity: 1,
         transition: {
-          delay: .6,
+          delay: .2,
           type: 'spring',
           damping: '20',
           stiffness: '100'
@@ -171,7 +171,7 @@ export default function Home() {
         y: 0,
         opacity: 1,
         transition: {
-          delay: .7,
+          delay: .3,
           type: 'spring',
           damping: '20',
           stiffness: '100'
@@ -181,7 +181,7 @@ export default function Home() {
         y: 0,
         opacity: 1,
         transition: {
-          delay: 8,
+          delay: .4,
           type: 'spring',
           damping: '20',
           stiffness: '100'
@@ -395,7 +395,7 @@ export default function Home() {
 
             </motion.div>
 
-            <motion.div animate={animation2} className={styles['category-section']}>
+            <motion.div animate={animation3} className={styles['category-section']}>
               <div className={`${styles['comp-banner']} ${styles.banner}`}>
                 <div className={styles['banner-content-container']}>
                   <img className={styles['img-category']} src='/static/home/comp_sci_home.svg'></img>

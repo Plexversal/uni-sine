@@ -6,7 +6,7 @@ function Selection(props) {
     return (
     <Link href={props.link}><div className={styles['selection-container']}>
         <h2>{props.title}</h2>
-        {props.description}
+        <p>{props.description}</p>
     </div></Link>
     )
   }
