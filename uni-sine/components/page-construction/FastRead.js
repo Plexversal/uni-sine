@@ -1,29 +1,57 @@
-import React from "react"
-import Link from 'next/link'
+import React, { useEffect, useState } from "react"
 
+import Link from 'next/link'
+import styles from '../../styles/Path.module.css'
+import {GoEye, GoEyeClosed } from 'react-icons/go'
 
 function FastRead() {
-
     function enable() {
-        let els = document.getElementById('article').querySelectorAll('p')
-        console.log(els)
-        console.log(document.body)
-        
-        for(var i=0;i < els.length; i++){
-            let wordsarray = els[i].textContent.split(" ")
-            els[i].innerHTML = wordsarray.map(function(e){
-                //if(/[^a-zA-Z]/gi.test(e)) return e // make this exclusion of numbers/symbols more advanced such as if tag surrounding word then ignore it completely 
-                return `<b>${e.slice(0, Math.ceil(e.length/2))}</b>${e.slice(Math.ceil(e.length/2))}`
-            }).join(" ")
+      let els = document.getElementById('article').querySelectorAll('p')
+      for (var i = 0; i < els.length; i++) {
+        if (!els[i].querySelector("math")) {
+          let wordsarray = els[i].textContent.split(" ")
+          els[i].innerHTML = wordsarray.map(function (e) {
+            return `<b>${e.slice(0, Math.ceil(e.length / 2))}</b>${e.slice(Math.ceil(e.length / 2))}`
+          }).join(" ")
         }
-
+  
+        if (els[i].querySelector("math")) {
+          // same bold code as above but can ignore the text surrounded in <math> tags
+        }
+      }
     }
-
+  
+    function disable() {
+      let els = document.getElementById('article').querySelectorAll('p')
+      for (var i = 0; i < els.length; i++) {
+        if (!els[i].querySelector("math")) {
+          let wordsarray = els[i].textContent.split(" ")
+          els[i].innerHTML = wordsarray.join(" ")
+        }
+      }
+    }
+  
+    let [isEnabled, setIsEnabled] = useState(false)
+    function toggle() {
+      if (isEnabled) {
+        disable()
+        setIsEnabled(false)
+      } else {
+        enable()
+        setIsEnabled(true)
+      }
+    }
+  
     return (
-    <div>
-        <button onClick={enable}>Enable fast read</button>
-    </div>
+      <button title={isEnabled ?  "Disable fast read": "Enable fast read" } className={styles['fast-read-btn']} onClick={toggle}>
+        {
+            isEnabled ?  <GoEyeClosed /> : <GoEye /> 
+        }
+      </button>
     )
   }
+  
+
+
 
 export default FastRead

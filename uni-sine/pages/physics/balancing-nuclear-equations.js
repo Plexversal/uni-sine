@@ -24,7 +24,7 @@ function BNE() {
         <>
             <SecondaryBanner title='Balancing nuclear equations' subheader={`${minsToRead()} · Updated 22/03/2022`}  />
             <Path />
-            <article id='article' className={styles['page-wrapper']}>
+            <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}> 
                     <h2>Structure of the Atom</h2>
                     <p>As you may have already heard, energy within particles has to be conserved and energy is not lost when reactions and emission takes place, but rather, energy is transferred to different states. There are different decay events that can happen for Nuclei which are covered in this section.</p>

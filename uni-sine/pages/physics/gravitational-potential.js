@@ -24,7 +24,7 @@ function GP() {
         <>
             <SecondaryBanner title='Gravitational potential' subheader={`${minsToRead()} · Updated 22/03/2022`} />
             <Path />
-            <article id='article' className={styles['page-wrapper']}>
+            <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
                     <h2>Gravitational potential</h2>
                     <p>Gravitational potential is related to the amount energy a mass has based on its location within a gravitational field.</p>

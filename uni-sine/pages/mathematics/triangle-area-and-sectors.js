@@ -25,7 +25,7 @@ function trig2() {
         <>
             <SecondaryBanner title='Triangle area and sectors' subheader={`${minsToRead()} · Updated 21/08/2022`} />
             <Path />
-            <article id='article' className={styles['page-wrapper']}>
+            <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
                     <h1>Area of a triangle, sectors, segments and arc length</h1>
                     <h2>Area of a triangle</h2>

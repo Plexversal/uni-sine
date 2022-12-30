@@ -154,7 +154,6 @@ export default function Home() {
   }, [inViewS3])
 
   useEffect(() => {
-  console.log(inViewS3)
 
     if (inViewS2) {
       animation.start({
@@ -402,7 +401,8 @@ export default function Home() {
 
                   <h1>Computer Science</h1>
                   <p>Discover the true power of technology and learn various coding techniques, IT skills and applied math.</p>
-                  <Link href='/computer-science'><button className={styles['field-btn']}>Jump in!</button></Link>
+                  <p><strong>Coming soon!</strong></p>
+                  {/* <Link href='/computer-science'><button className={styles['field-btn']}>Jump in!</button></Link> */}
 
                 </div>
               </div>

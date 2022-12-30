@@ -23,7 +23,7 @@ function KTL() {
         <>
             <SecondaryBanner title='Keplers third law' subheader={`${minsToRead()} · Updated 22/03/2022`} />
             <Path />
-            <article id='article' className={styles['page-wrapper']}>
+            <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
                     <h2>Kepler's third law</h2>
                     <p>Kepler&rsquo;s third law indicates a direct relationship between a planets orbital period and the radius of the orbit. Specifically given by:</p>

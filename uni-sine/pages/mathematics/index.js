@@ -2,10 +2,7 @@ import SecondaryBanner from '../../components/page-construction/SecondaryBanner'
 import Selection from '../../components/page-construction/Selection'
 import styles from '../../styles/Content.module.css'
 import { useEffect, useState } from 'react'
-import Router, { useRouter } from 'next/router'
 import fs from 'fs/promises'
-import util from 'util'
-import path from 'path'
 
 export async function getStaticProps() {
     let paths1 = await fs.readdir('../uni-sine/pages/mathematics')
@@ -23,8 +20,28 @@ export async function getStaticProps() {
 export default function Maths({ paths }) {
 
     const [currentDir, setCurrentDir] = useState(null)
+    const [algebraTopic, setAlgebraTopic] = useState(null)
+    const [graphingTopic, setGraphingTopic] = useState(null)
+    const [trigonometryTopic, setTrigonometryTopic] = useState(null)
+    const [probabilityTopic, setProbabilityTopic] = useState(null)
+    const [calculusTopic, setCalculusTopic] = useState(null)
+    const [vectorsTopic, setVectorsTopic] = useState(null)
+
+    const [noResults, setNoResults] = useState(false)
+
+
     useEffect(() => {
-        setCurrentDir(window.location.pathname)
+        setCurrentDir(window.location.pathname);
+        setAlgebraTopic(document.getElementById('algebra-topic-wrapper').children.length > 0)
+        setGraphingTopic(document.getElementById('graphing-topic-wrapper').children.length > 0)
+        setTrigonometryTopic(document.getElementById('trigonometry-topic-wrapper').children.length > 0)
+        setProbabilityTopic(document.getElementById('probability-topic-wrapper').children.length > 0)
+        setCalculusTopic(document.getElementById('calculus-topic-wrapper').children.length > 0)
+        setVectorsTopic(document.getElementById('vectors-topic-wrapper').children.length > 0)
+
+        let collection = document.getElementById('middle-content-container').children
+        setNoResults(Array.from(collection).some(e => e.tagName === 'H2'))
+
     })
     
     const [documentsContentListArray, setList] = useState([
@@ -44,20 +61,14 @@ export default function Maths({ paths }) {
             title: 'Fundamental Probability',
             description: 'The basics of probability including how to construct probability trees and Venn diagrams with correct notation.',
             category: 'Probability',
-            path: 'probability'
+            path: 'fundamental-probability'
 
         },
         {
             title: 'Binomial and Normal distributions',
             description: 'Expand on the knowledge of probability and learn how real world data can be represented in probability distributions.',
             category: 'Probability',
-            path: ''
-        },
-        {
-            title: 'Vectors',
-            description: '',
-            category: 'Vectors',
-            path: ''
+            path: 'binomial-and-normal-distributions'
         },
         {
             title: 'Graphing Linear functions',
@@ -77,23 +88,23 @@ export default function Maths({ paths }) {
             category: 'Graphing equations',
             path: 'graphong-cubic-functions'
         },
+        // {
+        //     title: 'Graphing inequalities',
+        //     description: '',
+        //     category: 'Graphing equations',
+        //     path: ''
+        // },
+        // {
+        //     title: 'Graphing radicals',
+        //     description: '',
+        //     category: 'Graphing equations',
+        //     path: ''
+        // },
         {
-            title: 'Graphing inequalities',
-            description: '',
+            title: 'Graphing Logarithms and Exponentials',
+            description: 'Use Exponential and logarithmic graphs to represent relationships between variables that are proportional over large ranges of values.',
             category: 'Graphing equations',
-            path: ''
-        },
-        {
-            title: 'Graphing radicals',
-            description: '',
-            category: 'Graphing equations',
-            path: ''
-        },
-        {
-            title: 'Graphing Logarithms and exponentials',
-            description: '',
-            category: 'Graphing equations',
-            path: ''
+            path: 'graphing-logarithms-and-exponentials'
         },
         {
             title: 'Fundamental Trigonometry',
@@ -109,27 +120,32 @@ export default function Maths({ paths }) {
         },
         {
             title: "Logarithms",
-            description: '',
+            description: 'Use logarithms to find variables in exponents and how to graph logarithmic functions. Explore the use of Eulers number with natural log.',
             category: 'Algebra',
             path: ''
         },
         {
-            title: "Differentiation",
-            description: '',
-            category: 'Calculus',
-            path: ''
+            title: "Vectors",
+            description: 'Using vectors to calculate direction and magnitude, incorporate properties of trigonometry and apply to real world situations.',
+            category: 'Vectors',
+            path: 'vectors'
         },
-        {
-            title: 'Integration',
-            description: '',
-            category: 'Calculus',
-            path: ''
-        },
+        // {
+        //     title: "Differentiation",
+        //     description: '',
+        //     category: 'Calculus',
+        //     path: ''
+        // },
+        // {
+        //     title: 'Integration',
+        //     description: '',
+        //     category: 'Calculus',
+        //     path: ''
+        // },
     ])
 
     const [data, setData] = useState([])
     const [isLoading, setLoading] = useState(false)
-    const [results, setResults] = useState([])
     const [searchTerm, setSearchTerm] = useState(null)
 
     function searchQuery(e) {
@@ -138,7 +154,7 @@ export default function Maths({ paths }) {
         if (!(data.length > 0)) {
             setLoading(true)
             paths.forEach(e => {
-                fetch(`http://localhost:3000/mathematics/${e}`)
+                fetch(`http://localhost:3000/${currentDir}/${e}`)
                     .then(r => r.text())
                     .then((data) => {
                         setData(oldArray => [...oldArray, { [e]: data }])
@@ -166,12 +182,12 @@ export default function Maths({ paths }) {
                 } else {
                     // loop through fetched data, check if the path of current topic looped through is equal to the to path in data
                     data.forEach(e => Object.keys(e).forEach((key, index) => {
-                        if (e[key].toLowerCase().includes(searchTerm)) {
+                        if (e[key].toLowerCase().includes(searchTerm.toLowerCase())) {
                             if (a.path == key) return check = true
                         }
                     })
                     )
-                    if (a.title.toLowerCase().includes(searchTerm?.toLowerCase()) || check) {
+                    if (a.title.toLowerCase().includes(searchTerm.toLowerCase()) || check) {
 
                         return <Selection key={i}
                             link={`${currentDir}/${documentsContentListArray[i].title.toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}
@@ -188,42 +204,46 @@ export default function Maths({ paths }) {
         )
     }
 
+    function searchComponent () {
+        return (<div className={styles['search-content-wrapper']}>
+        <input placeholder='Browse topics below or search' className={styles['user-topic-search']} id='user-search-topic' onChange={e => searchQuery(e)} type='text'></input>
+    </div>)
+    }
 
     return (
         <>
-            <SecondaryBanner title='Mathematics' subheader={`${documentsContentListArray.length} Articles · Updated 25/06/2022`} />
+            <SecondaryBanner title='Mathematics' search={searchComponent} subheader={`${documentsContentListArray.length} Articles · Updated 25/06/2022`} />
             <div className={styles['content-container']}>
-                <div className={styles['search-content-wrapper']}>
-                    <h3>Browse topics below or search</h3>
-                    <input placeholder='Search topics' className={styles['user-topic-search']} id='user-search-topic' onChange={e => searchQuery(e)} type='text'></input>
-                </div>
-                {
 
+                {!noResults ? <h2>No topics match search criteria</h2> : <></>}
 
-                    isLoading ? <p>Loading</p> :
-                        <div className={styles['middle-content-container']}>
-                            <h2>Algebra</h2>
-                            <div className={styles['middle-content-wrapper']}>
+                        <div id='middle-content-container' className={styles['middle-content-container']}>
+                            {algebraTopic ? <h2 id='algebra-topic-title'>Algebra</h2> : <></>}
+                            <div id='algebra-topic-wrapper' className={styles['middle-content-wrapper']}>
                                 {displayTopic('Algebra')}
                             </div>
-                            <h2>Calculus</h2>
-                            <div className={styles['middle-content-wrapper']}>
-                                {displayTopic('Calculus')}
-                            </div>
-                            <h2>Probability</h2>
-                            <div className={styles['middle-content-wrapper']}>
-                                {displayTopic('Probability')}
-                            </div>
-                            <h2>Graphing equations</h2>
-                            <div className={styles['middle-content-wrapper']}>
+                            {graphingTopic ? <h2 id='graphing-topic-title'>Graphing equations</h2> : <></>}
+                            <div id='graphing-topic-wrapper' className={styles['middle-content-wrapper']}>
                                 {displayTopic('Graphing equations')}
                             </div>
-                            <h2>Trigonometry</h2>
-                            <div className={styles['middle-content-wrapper']}>
+                            {trigonometryTopic ? <h2 id='trigonometry-topic-title'>Trigonometry</h2> : <></>}
+                            <div id='trigonometry-topic-wrapper' className={styles['middle-content-wrapper']}>
                                 {displayTopic('Trigonometry')}
                             </div>
+                            {probabilityTopic ? <h2 id='probability-topic-title'>Probability</h2> : <></>}
+                            <div id='probability-topic-wrapper' className={styles['middle-content-wrapper']}>
+                                {displayTopic('Probability')}
+                            </div>
+                            {calculusTopic ? <h2 id='calculus-topic-title'>Calculus</h2> : <></>}
+                            <div id='calculus-topic-wrapper' className={styles['middle-content-wrapper']}>
+                                {displayTopic('Calculus')}
+                            </div>
+                            {vectorsTopic ? <h2 id='vectors-topic-title'>Vectors</h2> : <></>}
+                            <div id='vectors-topic-wrapper' className={styles['middle-content-wrapper']}>
+                                {displayTopic('Vectors')}
+                            </div>
                         </div>
-                }
+                
             </div>
         </>
     )

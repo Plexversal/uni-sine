@@ -1,46 +1,64 @@
-.container {
+.banner-container{
     padding: 15px 30px;
     background: #292a30;
     color: white;
     height: 250px;
     display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.banner-main-content {
+    display: flex;
     align-items: flex-end;
     justify-content: space-between;
 }
 
-.container ul {
+.banner-main-content ul {
     list-style-type: none;
     display: flex;
     padding: 0;
 }
 
-.container ul li{
+.banner-main-content ul li{
     margin: 0 10px;    
 }
 
-.banner-container {
+.banner-main-content {
 
     padding: 0 5pc 0 5pc !important;
     font-size: 26px;
 }
 
-.banner-container h1 {
+.banner-main-content h1 {
     margin: 0;
 }
 
-.banner-container p {
+.banner-main-content p {
     font-size: medium;
     color: #ffffffc7;
 }
 
+.social-link-fb svg:hover {
+    fill: #4267B2;
+}
+
+.social-link-tw svg:hover {
+    fill: #1DA1F2;
+}
+
 @media (max-width: 600px) {
-    .container {
+    .banner-container {
+        height: fit-content;
+    }
+    .banner-main-content  {
         flex-direction: column;
         height: fit-content;
         align-items: center;
         text-align: center;
     }
-    .banner-container {
+    .banner-main-content {
 
         padding: 0 !important;
     }

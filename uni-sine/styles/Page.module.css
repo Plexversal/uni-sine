@@ -35,7 +35,6 @@
 .checkbox-container {
     display: flex;
     align-items: center;
-    width: 100%;
 }
 
 
@@ -44,8 +43,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
-
 }
 
 .p5-sketch-details {
@@ -194,4 +191,8 @@
         flex-direction: column;
 
     }
+    .p5-selection-range {
+        flex-direction: column;
+    }
+    
 }

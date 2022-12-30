@@ -18,15 +18,18 @@ function Path() {
 
     
     return (
-    <div className={styles['path']}>
-        <div className={styles['path-child']}>
-          <ul>
-            {path.map((e, i) => (
-              <li key={i}>{e}</li>
-            ))}
-          </ul>
-        </div>
-        <div>Uni-Sine</div>
+      <div className={styles['path-container']}>
+        <div className={styles['path']}>
+            <div className={styles['path-child']}>
+              <ul>
+                {path.map((e, i) => (
+                  <li key={i}>{e}</li>
+                ))}
+              </ul>
+            </div>
+            <div>Uni-Sine</div>
+          </div>
+
       </div>
     )
   }

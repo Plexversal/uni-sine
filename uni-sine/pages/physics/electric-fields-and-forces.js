@@ -25,7 +25,7 @@ function EF() {
         <>
             <SecondaryBanner title='Electric Fields and Forces' subheader={`${minsToRead()} · Updated 22/03/2022`} />
             <Path />
-            <article id='article' className={styles['page-wrapper']}>
+            <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
                     <h2>Electric Field Equations</h2>
                     <p>Electric fields relate to objects that have charge, when an object has charge it has an electric field, much like an object with mass has a gravitational field. When another charged object is placed in and electric field it will experience a non-contact force.</p>

@@ -71,10 +71,11 @@ function P5Graph(props) {
     p5.fill('#fff')
     p5.fill('#900')
 
-    a = parseFloat(document.getElementById('function-a')?.value ?? props.a ?? 1)
-    b = parseFloat(document.getElementById('function-b')?.value ?? props.b ?? 0)
-    c = parseFloat(document.getElementById('function-c')?.value ?? props.c ?? 0)
-    d = parseFloat(document.getElementById('function-d')?.value ?? props.d ?? 0)
+    a = props.custom ? parseFloat(document.getElementById('function-a')?.value) : null ?? props.a ?? 1
+    b = props.custom ? parseFloat(document.getElementById('function-b')?.value) : null ?? props.b ?? 0
+    c = props.custom ? parseFloat(document.getElementById('function-c')?.value) : null ?? props.c ?? 0
+    d = props.custom ? parseFloat(document.getElementById('function-d')?.value) : null ?? props.d ?? 0
+
 
 
     // potential performance issue due to function being exeucted in draw function
@@ -92,6 +93,7 @@ function P5Graph(props) {
       //console.log(typeof(c))
       for (let x = 10; x > -10; x -= 0.1) {
         let ycubic = (a * Math.pow(x, 3)) + (b * Math.pow(x, 2)) + (c * x) + d
+
         p5.vertex(x * 25, ycubic * 25)
 
       }
@@ -145,8 +147,31 @@ function P5Graph(props) {
         <div id='function-d-label'>D = {funcD}</div>
       </div>
     </div> : <></>}
-    {props?.showFunction ? <p>Parsed function: <strong>y = {Math.sign(funcA) == 0 ?  `` : <>{funcA}x<sup>2</sup></>} {Math.sign(funcB) == 0 ? `` : funcB >= 0 ? `${funcA == 0 ? `` : `+`} ${funcB}x`:`- ${Math.abs(funcB)}x`} {Math.sign(funcC) == 0 ? `${funcB == 0 ? funcA == 0 ? funcC : `` : ``}` : funcC > 0 ? `${funcB == 0 ? funcA == 0 ? funcC : `+ ${funcC}` : `+ ${funcC}`}` : `- ${Math.abs(funcC)}`}</strong></p> : <></>}
- 
+    {
+    props?.showFunction ? 
+        <p>
+            
+            <strong>
+              y = {Math.sign(funcA) == 0 ? `` :
+                <>{funcA}x<sup>3</sup></>}
+              {Math.sign(funcB) == 0 ? `` :
+                funcB >= 0 ?
+                  <>{funcA == 0 ? `` : `+`} {funcB}x<sup>2</sup></> :
+                  <> - {Math.abs(funcB)}x<sup>2</sup></>}
+              {Math.sign(funcC) == 0 ? `` :
+                funcC >= 0 ?
+                  `${funcA == 0 ? `` : `+`} ${funcC}x` :
+                  ` - ${Math.abs(funcC)}x`}
+              {Math.sign(funcD) == 0 ? `` :
+                funcD >= 0 ?
+                  `${funcD == 0 ? `` : `+`} ${funcD}` :
+                  ` - ${Math.abs(funcD)}`}
+            </strong>
+        </p> : 
+        <></>
+}
+
+    
   </div>
 
     <Sketch setup={setup} draw={draw} />

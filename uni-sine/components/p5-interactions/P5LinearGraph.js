@@ -1,85 +1,171 @@
 import Link from 'next/link'
 import React, { useEffect, useState, } from "react"
 import dynamic from 'next/dynamic'
+import styles from '../../styles/Page.module.css'
 
 // this Sketch function is required to allow client side rendering only as window will not be present server side
 const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
-    ssr: false,
-  })
+  ssr: false,
+})
 
-function P5Graph() {
+function P5Graph(props) {
+  // props = showIntercepts, showControls, showFunction, a, b, c
+  let b, c
+  let [windowWidth, setWindowWidth] = useState(500)
+  let [pixelScale, setPixelScale] = useState(25)
 
+  const [funcB, setFuncB] = useState(b)
+  const [funcC, setFuncC] = useState(c)
 
-    const setup = (p5, canvasParentRef) => {
-		// use parent to render the canvas in this ref
-		// (without that p5 will render the canvas outside of your component)
-		p5.createCanvas(500, 500).parent(canvasParentRef);
-        p5.stroke('#000000')        
-	};
-    
-    const draw = (p5) => {
-		// NOTE: Do not use setState in the draw function or in functions that are executed
-		// in the draw function...
-		// please use normal variables or class properties for these purposes
+  let width = windowWidth
+  let height = windowWidth
+  const setup = (p5, canvasParentRef) => {
 
+    p5.createCanvas(500, 500).parent(canvasParentRef)
+    p5.stroke('#000000')
 
-        // plotting a point is originX or Y + (25*amount)
-		p5.background('#eee');
-        p5.stroke('black')
+  };
 
-        function axis() {
-            p5.strokeWeight(2)
-            p5.line(250, 500, 250, 0)
-            p5.strokeWeight(2)
-            p5.line(0, 250, 500, 250)
-
-        }
-
-        axis()
-
-        for(var x=0; x < p5.canvas.width / 25; x++) {
-            p5.strokeWeight(0.1)
-            p5.line(x*25, 0, x*25, p5.canvas.height)
-            p5.strokeWeight(0.1)
-            p5.line(0, x*25, p5.canvas.width, x*25)
-        }
-
-        // y = x + 5
-        let pointm = -1
-        let pointb = 7
-        let originX = (p5.canvas.width / 2)
-        let originY = (p5.canvas.height / 2)
-
-        function linear(x1, y1, x2, y2) {
-
-            let p1 = p5.createVector(x1, y1);
-            let p2 = p5.createVector(x2, y2);
-        
-            let dia_len = p5.createVector(window.innerWidth, window.innerHeight).mag();
-            let dir_v = p5.createVector(p2.x - p1.x, p2.y - p1.y).setMag(dia_len)
-            let lp1 = p5.createVector(p1.x + dir_v.x, p1.y + dir_v.y)
-            let lp2 = p5.createVector(p1.x - dir_v.x, p1.y - dir_v.y)
-
-            p5.strokeWeight(2)
-            p5.stroke('lightblue')
-            p5.line(lp1.x, lp1.y, lp2.x, lp2.y);
-        }
-
-        linear(originX, originY-(25*pointb), originX+(25*((pointb < 0 ? Math.abs(pointb) : -Math.abs(pointb))/pointm)), originY)
-
-        p5.strokeWeight(1)
-        p5.fill('#000000')
-        p5.ellipse(originX, originY-(25*pointb), 7)
-        p5.ellipse(originX+(25*((pointb < 0 ? Math.abs(pointb) : -Math.abs(pointb))/pointm)), originY, 7)
-
-
-	};
-
-    return (<>
-        <Sketch setup={setup} draw={draw} />
-    </>)
-
-    
+  function onChnageB() {
+    setFuncB(document.getElementById('function-b').value)
   }
+  function onChnageC() {
+    setFuncC(document.getElementById('function-c').value)
+  }
+
+  const resizeCheck = () => {
+    if (window.innerWidth < 625) {
+      setWindowWidth(400)
+      setPixelScale(20)
+    
+    } else {
+      setWindowWidth(500)
+      setPixelScale(25)
+    }
+  }
+  useEffect(() => {
+    resizeCheck()
+  }, [])
+
+  const draw = (p5) => {
+
+    p5.background('#FFF');
+    p5.stroke('black')
+
+    // Axis
+
+    function axis() {
+      p5.strokeWeight(2)
+      p5.line(width / 2, height, width / 2, 0)
+      p5.strokeWeight(2)
+      p5.line(0, height / 2, width, height / 2)
+
+    }
+
+    axis()
+
+    // BG lines
+    for (var x = 0; x < width / pixelScale; x++) {
+      p5.strokeWeight(0.1)
+      p5.line(x * pixelScale, 0, x * pixelScale, height)
+      p5.strokeWeight(0.1)
+      p5.line(0, x * pixelScale, width, x * pixelScale)
+    }
+
+    p5.translate(width / 2, height / 2)
+    p5.scale(1, -1)
+    p5.fill('#fff')
+    p5.fill('#900')
+
+    b = props.custom ? parseFloat(document.getElementById('function-b')?.value) : null ?? props.b ?? 0
+    c = props.custom ? parseFloat(document.getElementById('function-c')?.value) : null ?? props.c ?? 0
+
+    // potential performance issue due to function being exeucted in draw function
+    setFuncB(b)
+    setFuncC(c)
+
+
+    p5.strokeWeight(3)
+    p5.noFill()
+    p5.beginShape()
+    p5.stroke('#06A')
+    for (let x = 10; x > -10; x -= 0.1) {
+      let ylin = b*x + c
+      p5.vertex(x * pixelScale, ylin * pixelScale)
+    }
+    
+    p5.endShape() 
+    p5.stroke('#a00')
+    p5.fill('#a00')
+
+      if (props?.showIntercepts) {
+        p5.ellipse(0, c * pixelScale, 4) // y intercept x=0, y=c becuase a*0^2 + b*0 = c
+        p5.ellipse((-c/b)*pixelScale, 0, 4) 
+
+      }
+
+
+    p5.push();
+    p5.scale(1, -1); // reverse the global flip
+    p5.strokeWeight(1);
+    p5.textStyle(p5.NORMAL)
+    p5.textSize(12);
+    
+    for (let t = -5; t < 10; t += 5) {
+      p5.stroke('#000')
+      p5.fill('#000')
+      p5.text(t, pixelScale * t -5, 15);
+      p5.text(t, 3, pixelScale * -t + 5);
+
+    }
+    p5.strokeWeight(0);
+    p5.textSize(14);
+    p5.stroke('#000')
+    p5.fill('#000')
+    p5.text(`Intercepts:`, -220, -230)
+    p5.text(`(0, ${c.toFixed(2)})`, -220, -210)
+    p5.text(`(${(-c/b).toFixed(2)}, 0)`, -220, -190)
+    p5.pop();
+  };
+  const windowResized = (p5) => {
+    resizeCheck()
+
+    p5.resizeCanvas(width, height);
+  }
+  return (<><br></br><div className={styles['p5-container']}>
+  <div className={styles['p5-sketch-details']}>
+    {props.showControls ?     <div className={styles['p5-selection-range']}>
+      <div>
+        <input id='function-b' type="range" min="-50" max="50" onChange={onChnageB}></input>
+        <div id='function-b-label'>M = {funcB}</div>
+      </div>
+      <div>
+        <input id='function-c' type="range" min="-20" max="20" onChange={onChnageC}></input>
+        <div id='function-c-label'>B = {funcC}</div>
+      </div>
+    </div> : <></>}
+    {props?.showFunction ? <p>
+        <strong>
+              y =&nbsp;
+              {Math.sign(funcB) == 0 ? (funcC != 0 ? `` : `0`) :
+                funcB >= 0 ?
+                  <>{funcB}x</>:
+                  <>-{Math.abs(funcB)}x</>}
+              {Math.sign(funcC) == 0 ? `` :
+                funcC >= 0 ?
+                  `${funcB == 0 ? `` : ` + `} ${funcC}` :
+                  ` - ${Math.abs(funcC)}`}
+            </strong>
+        </p> : <></>}
+ 
+  </div>
+
+    <Sketch setup={setup} draw={draw} 
+          windowResized={windowResized}
+          />
+  </div><br></br></>)
+
+
+}
 
 export default P5Graph

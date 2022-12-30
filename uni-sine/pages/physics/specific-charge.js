@@ -2,7 +2,7 @@ import Path from "../../components/page-construction/Path"
 import SecondaryBanner from '../../components/page-construction/SecondaryBanner'
 import styles from '../../styles/Page.module.css'
 import React, { useEffect, useState, } from "react"
-import P5NormalDistribution from "../../components/P5NormalDistribution"
+import P5NormalDistribution from "../../components/p5-interactions/P5NormalDistribution"
 
 
 function SC() {
@@ -25,7 +25,7 @@ function SC() {
         <>
             <SecondaryBanner title='Specific charge' subheader={`${minsToRead()} · Updated 22/03/2022`}  />
             <Path />
-            <article id="article" className={`${styles['page-wrapper']} article`}>
+            <article itemScope itemType="http://schema.org/Article" id="article" className={`${styles['page-wrapper']} article`}>
             
             <div className={styles['article-container']}>
                 <h2>Calculate specific charge</h2>
@@ -89,8 +89,6 @@ function SC() {
                     <img src="/static/physics/specific-charge/image008.png" className={styles['equation']}></img>
                     <p>You can of course do this exact method for any of the other particles and it will work exactly the same to find specific charge for such particle.</p>
                     <br></br>
-                    <P5NormalDistribution  {...{showControls: true, showFunction: true}}/>
-
                 </div>
 
             </article>

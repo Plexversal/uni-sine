@@ -25,7 +25,7 @@ function fractions() {
         <>
             <SecondaryBanner title='Fraction laws' subheader={`${minsToRead()} · Updated 30/06/2022`} />
             <Path />
-            <article id='article' className={styles['page-wrapper']}>
+            <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
                     <h2>Terms of a fraction</h2>
                     <p>There are two terms when it comes to fractions. One is the denominator and the other is the numerator.</p>

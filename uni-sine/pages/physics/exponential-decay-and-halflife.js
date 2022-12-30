@@ -23,7 +23,7 @@ function ED() {
         <>
             <SecondaryBanner title='Exponential decay and half-life' subheader={`${minsToRead()} · Updated 22/03/2022`}  />
             <Path />
-            <article id='article' className={styles['page-wrapper']}>
+            <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}> 
                     <h2>Half-life equation</h2>
                     <p>The decay of a single radioactive isotope cannot be predicted individually and is considered to be completely random. However, with an initial set amount of radioactive substance, we can calculate the time taken for how much of that substance has decayed into half of its original amount, this is called half-life.</p>

@@ -23,7 +23,7 @@ function GF() {
         <>
             <SecondaryBanner title='Gravitational fields and forces' subheader={`${minsToRead()} · Updated 22/03/2022`} />
             <Path />
-            <article id='article' className={styles['page-wrapper']}>
+            <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
                     <h2>Gravitational force equation</h2>
                     <p>Gravitational fields are relevant when there are bodies of mass. You can work out different things with the force of gravity and when objects are placed within the gravitational field of a mass.</p>

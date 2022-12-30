@@ -23,6 +23,12 @@
     justify-content: center;
     flex-direction: column;
     width: 50%;
+    align-self: center;
+    
+}
+
+.middle-content-container {
+    align-self: flex-start;
 }
 
 .middle-content-container > h2 {
@@ -30,16 +36,28 @@
 }
 
 .user-topic-search {
+    transition: background .4s, box-shadow .2s;
     width: 100%;
-    padding: 14px 12px 14px 40px;
-    border: 1px solid #555;
-    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 13px center;
-}
-
-.user-topic-search:focus {
-    box-shadow: 0 0 3px 0 #988dff;
-    border-color: #988dff;
+    padding: 20px 32px 21px 55px;
+    border: none;
     outline: none;
+    color: rgb(252, 252, 252);
+    font-size: 18px;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 3%);
+    background: rgba(255, 255, 255, 0.253) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' fill='white' height='18' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 20px center;
+}
+.user-topic-search::placeholder {
+    color: white;
+}
+.user-topic-search:focus::placeholder {
+    color: rgb(46, 46, 46);
+
+}
+.user-topic-search:focus {
+    color: rgb(46, 46, 46);
+
+    background: rgba(241, 241, 241, 0.938) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' fill='rgb(46, 46, 46)' height='18' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 20px center;
 }
 
 @media (max-width: 1500px) {
@@ -47,4 +65,13 @@
         max-width: 90vw;
     }
 
+}
+
+@media (max-width: 600px) {
+    .middle-content-container {
+        align-self: auto;
+    }
+    .search-content-wrapper {
+        width: 80%;
+    }
 }

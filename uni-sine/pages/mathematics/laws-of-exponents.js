@@ -25,7 +25,7 @@ function exponents() {
         <>
             <SecondaryBanner title='Laws of exponents' subheader={`${minsToRead()} · Updated 30/06/2022`} />
             <Path />
-            <article id='article' className={styles['page-wrapper']}>
+            <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
                     <h2>Laws of exponents</h2>
                     <p>There are a few laws of exponents that are very important to understand in order to functionally apply to most mathematical equations.</p>

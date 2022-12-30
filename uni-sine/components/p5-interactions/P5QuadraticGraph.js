@@ -9,6 +9,7 @@ const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
 })
 
 function P5Graph(props) {
+  // props = showIntercepts, showControls, showFunction, a, b, c
   let a, b, c
 
   const [funcA, setFuncA] = useState(a) 
@@ -65,9 +66,9 @@ function P5Graph(props) {
     p5.fill('#fff')
     p5.fill('#900')
 
-    a = parseFloat(document.getElementById('function-a')?.value ?? props.a ?? 1)
-    b = parseFloat(document.getElementById('function-b')?.value ?? props.b ?? 0)
-    c = parseFloat(document.getElementById('function-c')?.value ?? props.c ?? 0)
+    a = props.custom ? parseFloat(document.getElementById('function-a')?.value) : null ?? props.a ?? 1
+    b = props.custom ? parseFloat(document.getElementById('function-b')?.value) : null ?? props.b ?? 0
+    c = props.custom ? parseFloat(document.getElementById('function-c')?.value) : null ?? props.c ?? 0
 
     // potential performance issue due to function being exeucted in draw function
     setFuncA(a)
@@ -86,7 +87,9 @@ function P5Graph(props) {
     //console.log(b*25 + c)
     //console.log(typeof(c))
     for (let x = 10; x > -10; x -= 0.1) {
+      //let yquad = (a * Math.pow(x, 2)) + (b * x) + c
       let yquad = (a * Math.pow(x, 2)) + (b * x) + c
+
       let ycubic = (a * Math.pow(x, 3)) + (b * Math.pow(x, 2)) + (c * x) + 4
       let yabs = (a * Math.abs(x)) + (b * x) + c
       let yrad = (a * (Math.sqrt(x))) + (b * x) + c
@@ -128,7 +131,14 @@ function P5Graph(props) {
       p5.text(t, 3, 25 * -t + 5);
 
     }
+    p5.strokeWeight(0);
+    p5.textSize(14);
+    p5.stroke('#000')
+    p5.fill('#000')
+    p5.text(`x-intercepts`, -220, -230)
 
+    p5.text(`(${xInterceptNeg.toFixed(2)}, 0)`, -220, -210)
+    p5.text(`(${xInterceptPos.toFixed(2)}, 0)`, -220, -190)
     p5.pop();
     
   };
@@ -149,7 +159,7 @@ function P5Graph(props) {
         <div id='function-c-label'>C = {funcC}</div>
       </div>
     </div> : <></>}
-    {props?.showFunction ? <p>Parsed function: <strong>y = {Math.sign(funcA) == 0 ?  `` : <>{funcA}x<sup>2</sup></>} {Math.sign(funcB) == 0 ? `` : funcB >= 0 ? `${funcA == 0 ? `` : `+`} ${funcB}x`:`- ${Math.abs(funcB)}x`} {Math.sign(funcC) == 0 ? `${funcB == 0 ? funcA == 0 ? funcC : `` : ``}` : funcC > 0 ? `${funcB == 0 ? funcA == 0 ? funcC : `+ ${funcC}` : `+ ${funcC}`}` : `- ${Math.abs(funcC)}`}</strong></p> : <></>}
+    {props?.showFunction ? <p><strong>y = {Math.sign(funcA) == 0 ?  `` : <>{funcA}x<sup>2</sup></>} {Math.sign(funcB) == 0 ? `` : funcB >= 0 ? `${funcA == 0 ? `` : `+`} ${funcB}x`:`- ${Math.abs(funcB)}x`} {Math.sign(funcC) == 0 ? `${funcB == 0 ? funcA == 0 ? funcC : `` : ``}` : funcC > 0 ? `${funcB == 0 ? funcA == 0 ? funcC : `+ ${funcC}` : `+ ${funcC}`}` : `- ${Math.abs(funcC)}`}</strong></p> : <></>}
  
   </div>
 

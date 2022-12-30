@@ -26,10 +26,12 @@ function quadratic() {
         <>
             <SecondaryBanner title='Graphing Quadratic functions' subheader={`${minsToRead()} · Updated 26/06/2022`} />
             <Path />
-            <article id='article' className={styles['page-wrapper']}>
+            <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
 
                     <h2 >Properties of quadratic graphs</h2>
+                    <P5Graph  {...{showControls: true, showFunction: true, showIntercepts: true, custom: true}}/>
+
                     <p >Quadratic equations can easily be identified as an x term is always squared. The general format for a quadratic equation is:</p>
                     <img src="/static/maths/quadratic-equations/image001.png" className={styles['equation']}></img>
                     <p >You can also identify a quadratic graph quite easily when looking at it. It has a distinct U-shape or &cap;-shape when negative.</p>

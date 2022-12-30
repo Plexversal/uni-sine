@@ -22,8 +22,6 @@ function MyApp({ Component, pageProps, router }) {
         <title>uni-sine</title>
       </Head>
       <Component {...pageProps} />
-      <FastRead />
-
     </Layout>
   )
 }

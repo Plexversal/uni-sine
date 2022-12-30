@@ -23,7 +23,7 @@ function EV() {
         <>
             <SecondaryBanner title='Escape velocity' subheader={`${minsToRead()} · Updated 22/03/2022`}  />
             <Path />
-            <article id='article' className={styles['page-wrapper']}>
+            <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}> 
                     <h2>Escape velocity equation</h2>
                     <p>There is an equation to work out escape velocity of a gravitational field, which is how fast a mass must travel to escape the field. When the equation gives the object negative potential energy it has escaped the gravitational field.</p>

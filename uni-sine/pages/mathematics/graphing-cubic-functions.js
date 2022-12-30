@@ -26,9 +26,9 @@ function cubics() {
         <>
             <SecondaryBanner title='Graphing Cubic functions' subheader={`${minsToRead()} · Updated 24/07/2022`} />
             <Path />
-            <article id='article' className={styles['page-wrapper']}>
+            <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
-                    <h1>Graphing cubic functions</h1>
+                    <P5Graph {...{showControls: true, showFunction: true, showIntercepts: true, custom: true}}/>
                     <h2>Properties of Cubic&rsquo;s</h2>
                     <p>Cubic functions are identified by the fact that have an x term which is cubed. The general format for a cubic equation is:</p>
                     <img src="/static/maths/cubic-equations/image001.png" className={styles['equation']}></img>
@@ -57,6 +57,13 @@ function cubics() {
                     
                     <p>The discriminant is a none zero number and so there will be 2 answers for the x value and so a minimum and maximum will be present.</p>
                     <img src="/static/maths/cubic-equations/image007.png" className={styles['equation']}></img>
+                    <p>The Y value for the above points can be found simply by putting these specific x values back into the cubic equation:</p>
+                    <img src="/static/maths/cubic-equations/correction-image001 (1).png" className={styles['equation']}></img>
+                    <img src="/static/maths/cubic-equations/correction-image001 (2).png" className={styles['equation']}></img>
+                    <img src="/static/maths/cubic-equations/correction-image001 (3).png" className={styles['equation']}></img>
+                    <img src="/static/maths/cubic-equations/correction-image001 (4).png" className={styles['equation']}></img>
+
+
                     <p>Step 3) find the second derivative of the quadratic equation and input the x values we just found:</p>
                     <img src="/static/maths/cubic-equations/image003.png" className={styles['equation']}></img>
                     <img src="/static/maths/cubic-equations/image008.png" className={styles['equation']}></img>
@@ -72,11 +79,11 @@ function cubics() {
 
                     <p>You may also choose points closest to the nearest integer of the min and max points. So, in this case x = 4 and x = 0. We already had x = 0 so x = 1 could work too.</p>
                     <p>So, plotting the points gives the following:</p>
-                    <P5Graph {...{points: [{x:4,y:-4}, {x:0,y:4}, {x:1,y:8}], noLine: true}}/>
+                    <P5Graph {...{points: [{x:3.8,y:-4.2}, {x:0,y:4}, {x:0.9,y:8.05}], noLine: true}}/>
 
 
                     <p>Connecting the graph should result in the following cubic:</p>
-                    <P5Graph {...{points: [{x:4,y:-4}, {x:0,y:4}, {x:1,y:8}], a: 1, b: -7, c: 10, d: 4, noLine: false}}/>
+                    <P5Graph {...{points: [{x:3.8,y:-4.2}, {x:0,y:4}, {x:0.9,y:8.05}], a: 1, b: -7, c: 10, d: 4, noLine: false}}/>
 
                     
                     <h2>Saddle point</h2>

@@ -170,7 +170,7 @@ function P5Trig(props) {
       p5.textSize(17);
       p5.noStroke()
       p5.fill('#000')
-      p5.text('Click to drag' ,(point3x * pixelScale)-50, -(point3y * pixelScale)-25)
+      p5.text('Click to drag', (point3x * pixelScale) - 50, -(point3y * pixelScale) - 25)
       p5.pop()
 
 
@@ -186,8 +186,8 @@ function P5Trig(props) {
     p5.noStroke()
 
     p5.fill('#ec9c33') // side text color
-    if (!(document.getElementById('hideSideA')?.checked == true && props.custom) && (props.showSidea || props.custom)) 
-    p5.text(`a${props.hidea ? `` : ': ' + parseFloat(p5.dist(point1x, point1y, point3x, point3y).toFixed(2))}`, ((point3x * pixelScale + point1x * pixelScale) / 2), -(((point3y * pixelScale + point1y * pixelScale) / 2)));
+    if (!(document.getElementById('hideSideA')?.checked == true && props.custom) && (props.showSidea || props.custom))
+      p5.text(`a${props.hidea ? `` : ': ' + parseFloat(p5.dist(point1x, point1y, point3x, point3y).toFixed(2))}`, ((point3x * pixelScale + point1x * pixelScale) / 2), -(((point3y * pixelScale + point1y * pixelScale) / 2)));
     if (!(document.getElementById('hideSideB')?.checked == true && props.custom) && (props.showSideb || props.custom)) p5.text(`b${props.hideb ? `` : ': ' + parseFloat(p5.dist(point1x, point1y, point2x, point2y).toFixed(2))}`, ((point1x * pixelScale + point2x * pixelScale) / 2), -(((point1y * pixelScale + point2y * pixelScale) / 2)));
     if (!(document.getElementById('hideSideC')?.checked == true && props.custom) && (props.showSidec || props.custom)) p5.text(`c${props.hidec ? `` : ': ' + parseFloat(p5.dist(point2x, point2y, point3x, point3y).toFixed(2))}`, ((point2x * pixelScale + point3x * pixelScale) / 2), -(((point2y * pixelScale + point3y * pixelScale) / 2)));
 
@@ -259,14 +259,14 @@ function P5Trig(props) {
       {props.custom === true ?
         <>
           <h1>Generate Random Problem</h1>
-          <div className={styles['p5-options']} style={{width: width}}>
+          <div className={styles['p5-options']} style={{ width: width }}>
             <div>
-            <button className={styles['button-input']} id='randomise-btn' type="button" name="randomise" onClick={randomise}>Random Problem</button>
-            <div className={styles['checkbox-container']}>
+              <button className={styles['button-input']} id='randomise-btn' type="button" name="randomise" onClick={randomise}>Random Problem</button>
+              <div className={styles['checkbox-container']}>
                 <div>Degrees</div>
                 <div>
-                <input className={styles['input-switch']} type="checkbox" id="degrees" />
-                <label className={styles['input-switch-label']} htmlFor="degrees">Toggle</label>
+                  <input className={styles['input-switch']} type="checkbox" id="degrees" />
+                  <label className={styles['input-switch-label']} htmlFor="degrees">Toggle</label>
                 </div>
               </div>
             </div>
@@ -288,7 +288,7 @@ function P5Trig(props) {
               </div>
 
             </div>
-            <div className={styles['selections-container']}  id='side-container'>
+            <div className={styles['selections-container']} id='side-container'>
 
               <div className={styles['checkbox-container']}>
                 <div>Hide side A</div>
@@ -313,14 +313,14 @@ function P5Trig(props) {
         </>
         : <></>}
 
-        <span id={props.custom ? styles[`custom-triangle`] : null}>
-      <Sketch
-        setup={setup}
-        draw={draw}
-        windowResized={windowResized}
-        mousePressed={props.custom ? mousePressed : null}
-        mouseDragged={props.custom ? mouseDragged : null}
-        mouseReleased={props.custom ? mouseReleased : null} /></span>
+      <span id={props.custom ? styles[`custom-triangle`] : null}>
+        <Sketch
+          setup={setup}
+          draw={draw}
+          windowResized={windowResized}
+          mousePressed={props.custom ? mousePressed : null}
+          mouseDragged={props.custom ? mouseDragged : null}
+          mouseReleased={props.custom ? mouseReleased : null} /></span>
     </div>
     <br></br></>)
 

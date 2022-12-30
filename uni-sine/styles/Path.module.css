@@ -13,8 +13,14 @@
     overflow: auto;
     margin: auto;
 
+    align-items: center;
 }
-
+.path-child {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
 .path ul {
     list-style: none;
     display: flex;
@@ -35,9 +41,34 @@
     content: '\00a0>\00a0'
 }
 
+.fast-read-btn {
+    display: inline-flex;
+    padding: 4px 8px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    overflow: hidden;
+    font-weight: 500;
+    height: 30px;
+    font-size: 0.9em;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    color: white;
+    background: #31353a;
+    justify-self: flex-end;
+    width: fit-content;
+}
 
 @media (max-width: 1000px) {
     .path {
         width: 100%;
+    }
+
+}
+
+@media (max-width: 600px) {
+    .path {
+        display: none;
     }
 }

@@ -26,7 +26,7 @@ function trig() {
         <>
             <SecondaryBanner title='Fundamental Trigonometry' subheader={`${minsToRead()} · Updated 21/08/2022`} />
             <Path />
-            <article id='article' className={styles['page-wrapper']}>
+            <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
                     <h1>Fundamental Trigonometry</h1>
                     <P5Trig {...{custom: true}}/>
