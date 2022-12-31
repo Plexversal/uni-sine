@@ -17,16 +17,19 @@ function P5Graph(props) {
   const [lnOn, setLnOn] = useState(props.ln)
 
 
-
-  let width = 500;
-  let height = 500;
+  let [windowWidth, setWindowWidth] = useState(500)
+  let [pixelScale, setPixelScale] = useState(25)
+  let width = windowWidth
+  let height = windowWidth
   const setup = (p5, canvasParentRef) => {
 
     p5.createCanvas(500, 500).parent(canvasParentRef)
     p5.stroke('#000000')
 
   };
-
+  useEffect(() => {
+    return resizeCheck()
+  }, [])
   function onChnageA() {
     setFuncA(document.getElementById('function-a').value)
   }
@@ -36,7 +39,16 @@ function P5Graph(props) {
   function onChnageC() {
     setFuncC(document.getElementById('function-c').value)
   }
-
+  const resizeCheck = () => {
+    if (window.innerWidth < 625) {
+      setWindowWidth(250)
+      setPixelScale(12.5)
+    
+    } else {
+      setWindowWidth(500)
+      setPixelScale(25)
+    }
+  }
   const draw = (p5) => {
     if(document.getElementById('lnSwitch')?.checked == true && props.custom) {
       setLnOn(true)
@@ -59,11 +71,11 @@ function P5Graph(props) {
     axis()
 
     // BG lines
-    for (var x = 0; x < width / 25; x++) {
+    for (var x = 0; x < width / pixelScale; x++) {
       p5.strokeWeight(0.1)
-      p5.line(x * 25, 0, x * 25, height)
+      p5.line(x * pixelScale, 0, x * pixelScale, height)
       p5.strokeWeight(0.1)
-      p5.line(0, x * 25, width, x * 25)
+      p5.line(0, x * pixelScale, width, x * pixelScale)
     }
 
     p5.translate(width / 2, height / 2)
@@ -91,7 +103,7 @@ function P5Graph(props) {
       for (let x = 10; x > -10; x -= 0.01) {
         let yln = a * Math.log(x+b)
         let ylog = a * ( Math.log(x+b) /*exponenet*/ / Math.log(c) /*base*/)
-        p5.vertex(x * 25, lnOn ? yln * 25 : ylog * 25) 
+        p5.vertex(x * pixelScale, lnOn ? yln * pixelScale : ylog * pixelScale) 
       }
       p5.endShape() 
       // y = a^x
@@ -99,7 +111,7 @@ function P5Graph(props) {
         p5.beginShape()
         for (let x = 5; x > -10; x -= 0.01) {
           let yexp = Math.pow(Math.abs(c), x)
-          p5.vertex(x * 25, yexp * 25)
+          p5.vertex(x * pixelScale, yexp * pixelScale)
         }
         p5.endShape() 
   
@@ -107,7 +119,7 @@ function P5Graph(props) {
         p5.beginShape()
         for (let x = 10; x > -10; x -= 0.1) {
           let yexp = x
-          p5.vertex(x * 25, yexp * 25)
+          p5.vertex(x * pixelScale, yexp * pixelScale)
         }
         p5.endShape() 
       }
@@ -118,7 +130,7 @@ function P5Graph(props) {
 
     if(props?.points){
       props.points.forEach(e => {
-        p5.ellipse(e.x*25, e.y*25, 3)
+        p5.ellipse(e.x*pixelScale, e.y*pixelScale, 3)
       })
     }
 
@@ -140,7 +152,11 @@ function P5Graph(props) {
     p5.pop();
     
   };
+  const windowResized = (p5) => {
+    resizeCheck()
 
+    p5.resizeCanvas(width, height);
+  }
   return (<><br></br><div className={styles['p5-container']}>
   <div className={styles['p5-sketch-details']}>
     {props.showControls ?     <div className={styles['p5-selection-range']}>
@@ -166,7 +182,7 @@ function P5Graph(props) {
  
   </div>
 
-    <Sketch setup={setup} draw={draw} />
+    <Sketch setup={setup} draw={draw} windowResized={windowResized}/>
   </div><br></br></>)
 
 
