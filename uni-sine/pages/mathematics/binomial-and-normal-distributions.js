@@ -32,7 +32,7 @@ function Distributions() {
                 <div className={styles['article-container']}>
                     <FastRead />
                     <h2>Binomial distributions</h2>
-                    <img src="/static/maths/probability/image058.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image058.png" className={styles['equation']}></img>
 
                     <p>The above equation represents the binomial distribution equation and can be used to work out probabilities that satisfy specific characteristics.</p>
                     <p>X is binomially distributed when there are two outcomes, such as success and failure, hence the binomial term. The probability for success has to be the same each trial and so probability involving no replacement would not work with this.</p>
@@ -41,7 +41,7 @@ function Distributions() {
                     <p>r = number of successes</p>
                     <p>p = probability of success</p>
                     <p>This can also be written as the following:</p>
-                    <img src="/static/maths/probability/image059.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image059.png" className={styles['equation']}></img>
 
                     <p>With the same attributes applying.</p>
                     <p>The number of trials could technically be represented by probability trees however with large amounts of trials this would be hard to draw and so the above equations are easier to follow.</p>
@@ -61,37 +61,37 @@ function Distributions() {
                         <p><strong>a)</strong> This question provides the information that we have multiple events each with late or not late (success or failure) and each event is independent. So, this can use binomial distribution.</p>
                             
                         <p> Using this for the first part we can say that X is binomially distributed with the following parameters:</p>
-                        <img src="/static/maths/probability/image060.png" className={styles['equation']}></img>
+                        <img alt=''src="/static/maths/probability/image060.png" className={styles['equation']}></img>
 
                     
                     
                     <p>The specific probability we need to find is no more than 10 days in a 28-day period:</p>
-                    <img src="/static/maths/probability/image061.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image061.png" className={styles['equation']}></img>
                     
                     <p>This is equal to:</p>
-                    <img src="/static/maths/probability/image062.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image062.png" className={styles['equation']}></img>
                     
                     <p>We can input this data into the cumulative distribution function (cdf) on a calculator but if this was written in formula form it would be the following:</p>
-                    <img src="/static/maths/probability/image063.png" className={styles['equation']}></img>
-                    <img src="/static/maths/probability/image064.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image063.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image064.png" className={styles['equation']}></img>
                     
                     <p>As you can see doing all these calculations individually would get quite complex and time consuming which is why a calculator would be needed:</p>
     
-                    <img src="/static/maths/probability/image065.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image065.png" className={styles['equation']}></img>
 
                     <p><strong>b)</strong> The second part of the question will have a different binomial distribution value as the days have changed from 28 to 14 but the method is the same:</p>
-                    <img src="/static/maths/probability/image066.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image066.png" className={styles['equation']}></img>
                     
                     <p>The specific probability we need to find is exactly half the 14 days which is 7:</p>
-                    <img src="/static/maths/probability/image067.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image067.png" className={styles['equation']}></img>
                     
                     <p>This can be calculated using the binomial probability distribution function (pdf) on a calculator or using the formula:</p>
                     
-                    <img src="/static/maths/probability/image068.png" className={styles['equation']}></img>
-                    <img src="/static/maths/probability/image069.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image068.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image069.png" className={styles['equation']}></img>
                     
                     <h2>Normal distributions</h2>
-                    <img src="/static/maths/probability/image070.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image070.png" className={styles['equation']}></img>
 
                     <p>Just like binomial distribution, normal distribution has its own notation to indicate that the random variable X is normally distributed with 2 values describing the data&rsquo;s variance and mean.</p>
                     <p>&mu; = Mean</p>
@@ -104,10 +104,10 @@ function Distributions() {
                     <p>The total probability under the graph is equal to one.</p>
                     <p>The probability of a range of values is the area under the graph between two upper and lower bounds. Integration can be used to calculate this probability; however, the integral is non-elementary and incorporates the Gauss error function and so the best route of calculation is using a calculator instead.</p>
                     <p>The function of the graph, also known as the probability density function, is as follows:</p>
-                    <img src="/static/maths/probability/image071.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image071.png" className={styles['equation']}></img>
 
                     <p>So, to work out the probability between two boundaries of the distribution graph you can integrate the above:</p>
-                    <img src="/static/maths/probability/image072.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image072.png" className={styles['equation']}></img>
 
                     <p>Again, a calculator does this for you but this is what the specific integral would look like.</p>
                     <p>On a calculator, choosing the normal cumulative distribution function, enter the corresponding values for the mean, standard deviation and the X values.</p>
@@ -130,29 +130,29 @@ function Distributions() {
                     
                     
                         <p><strong>a)</strong> The question can be formatted into the normal distribution notation:</p>
-                        <img src="/static/maths/probability/image073.png" className={styles['equation']}></img>
+                        <img alt=''src="/static/maths/probability/image073.png" className={styles['equation']}></img>
             
                     
                     <p>For the first part, X is less than 50, so entering these values into the normal cumulative distribution function with a lower bound of -99 (any lower bound large enough will suffice) we get the following result:</p>
                     
-                    <img src="/static/maths/probability/image074.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image074.png" className={styles['equation']}></img>
                     
                    
                         <p><strong>b)</strong> Just like part a, we use the same calculations except we need to convert the probability into two parts:</p>
-                        <img src="/static/maths/probability/image075.png" className={styles['equation']}></img>
-                        <img src="/static/maths/probability/image076.png" className={styles['equation']}></img>
-                        <img src="/static/maths/probability/image077.png" className={styles['equation']}></img>
-                        <img src="/static/maths/probability/image078.png" className={styles['equation']}></img>
+                        <img alt=''src="/static/maths/probability/image075.png" className={styles['equation']}></img>
+                        <img alt=''src="/static/maths/probability/image076.png" className={styles['equation']}></img>
+                        <img alt=''src="/static/maths/probability/image077.png" className={styles['equation']}></img>
+                        <img alt=''src="/static/maths/probability/image078.png" className={styles['equation']}></img>
         
 
                     
                     <h3>Standard normal distribution</h3>
                     <p>The standard normal distribution can convert any normal distribution into a standard form where the mean is always 0 and the variance is 1 which means the standard deviation is also 1.</p>
                     <p>The standard normal distribution is represented by the value: Z</p>
-                    <img src="/static/maths/probability/image079.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image079.png" className={styles['equation']}></img>
 
                     <p>To convert a normal distribution to a standard normal distribution:</p>
-                    <img src="/static/maths/probability/image080.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image080.png" className={styles['equation']}></img>
 
                     <p>Using the Z value can be useful if a calculator only works with standard normal distributions.</p>
                     <p>The Z value is also useful to calculate the inverse of a normal distribution function if given an area and have to find the missing mean or standard deviation.</p>
@@ -169,17 +169,17 @@ function Distributions() {
                     
                         <p><strong>a)</strong> The mean is missing so we can first put the question into notation that is familiar</p>
                     
-                        <img src="/static/maths/probability/image081.png" className={styles['equation']}></img>
+                        <img alt=''src="/static/maths/probability/image081.png" className={styles['equation']}></img>
                     
                     <p>We can work out the Z value using the calculator as we know the area under the graph by the given probability:</p>
-                    <img src="/static/maths/probability/image082.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image082.png" className={styles['equation']}></img>
 
                     <p>As we now have the Z value, we can use the Z formula to find the mean for the specific probability distribution:</p>
                     
-                    <img src="/static/maths/probability/image083.png" className={styles['equation']}></img>
-                    <img src="/static/maths/probability/image084.png" className={styles['equation']}></img>
-                    <img src="/static/maths/probability/image085.png" className={styles['equation']}></img>
-                    <img src="/static/maths/probability/image086.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image083.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image084.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image085.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image086.png" className={styles['equation']}></img>
                     
                     
                     
@@ -198,43 +198,43 @@ function Distributions() {
                     
                     
                         <p><strong>a)</strong> We have two missing variables we need to find so we will need to use simultaneous equations. The first step is to find the inverse normal or the probabilities given to get a Z value for both:</p>
-                        <img src="/static/maths/probability/image070.png" className={styles['equation']}></img>
-                        <img src="/static/maths/probability/image087.png" className={styles['equation']}></img>
+                        <img alt=''src="/static/maths/probability/image070.png" className={styles['equation']}></img>
+                        <img alt=''src="/static/maths/probability/image087.png" className={styles['equation']}></img>
                     
                     <p>The second Z value can be calculated using the fact that 1 &ndash; 0.1152 is the same value, this is if the calculator only supports values less than a specific value.</p>
 
-                    <img src="/static/maths/probability/image088.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image088.png" className={styles['equation']}></img>
                     <p>We now have what we need to formulate the simultaneous equation to solve for both variables:</p>
-                    <img src="/static/maths/probability/imagem4.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/imagem4.png" className={styles['equation']}></img>
 
-                    <img src="/static/maths/probability/image089.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image089.png" className={styles['equation']}></img>
 
                     <p>Rearrange:</p>
                     
-                    <img src="/static/maths/probability/image090.png" className={styles['equation']}></img>
-                    <img src="/static/maths/probability/image091.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image090.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image091.png" className={styles['equation']}></img>
                     
                     <p>First solve for sigma by subtracting both equations:</p>
-                    <img src="/static/maths/probability/imagem1.png" className={styles['equation']}></img>
-                    <img src="/static/maths/probability/imagem2.png" className={styles['equation']}></img>
-                    <img src="/static/maths/probability/image092.png" className={styles['equation']}></img>
-                    <img src="/static/maths/probability/image093.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/imagem1.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/imagem2.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image092.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image093.png" className={styles['equation']}></img>
                     
                     <p>Now we can solve for mu by substituting sigma into one of the equations:</p>
-                    <img src="/static/maths/probability/imagem3.png" className={styles['equation']}></img>
-                    <img src="/static/maths/probability/image094.png" className={styles['equation']}></img>
-                    <img src="/static/maths/probability/image095.png" className={styles['equation']}></img>
-                    <img src="/static/maths/probability/image096.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/imagem3.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image094.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image095.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image096.png" className={styles['equation']}></img>
 
                     
                     <h3>Normal approximations with Binomial distributions</h3>
                     <p>Binomial distributions that meet specific characteristics can be approximated using a normal distribution as well.</p>
                     <p>A binomial distribution does not have a mean and variance so to find this for a binomial distribution you can do the following:</p>
-                    <img src="/static/maths/probability/image097.png" className={styles['equation']}></img>
-                    <img src="/static/maths/probability/image098.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image097.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image098.png" className={styles['equation']}></img>
 
                     <p>When representing binomial to normal we use Y:</p>
-                    <img src="/static/maths/probability/image099.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image099.png" className={styles['equation']}></img>
 
                     <p>Binomial distributions converted to normal distributions only work well if the probability is close to 0.5 and there is a large number of trials.</p>
                     <p>It can also work if np and nq are more than 5.</p>
@@ -250,22 +250,22 @@ function Distributions() {
                             </ol>
                         </li>
                     </ol>
-                    <img src="/static/maths/probability/image100.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image100.png" className={styles['equation']}></img>
                     
                    
                         <p><strong>a)</strong> We can convert the binomial distribution to a normal distribution using the np and npq substitution for mean and variance:</p>
-                        <img src="/static/maths/probability/image101.png" className={styles['equation']}></img>
-                        <img src="/static/maths/probability/image102.png" className={styles['equation']}></img>
+                        <img alt=''src="/static/maths/probability/image101.png" className={styles['equation']}></img>
+                        <img alt=''src="/static/maths/probability/image102.png" className={styles['equation']}></img>
                     
                     <p>The probability given will need to use a continuity correction:</p>
-                    <img src="/static/maths/probability/image103.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image103.png" className={styles['equation']}></img>
 
                     <p>We can convert to Z value and work out the normal distribution for this probability:</p>
-                    <img src="/static/maths/probability/image104.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image104.png" className={styles['equation']}></img>
 
                     <p>We can now input this as the upper bound and -100 as the lower bound on the calculator, this will give probability less than that value so to find more than this value we can subtract from 1:</p>
-                    <img src="/static/maths/probability/image105.png" className={styles['equation']}></img>
-                    <img src="/static/maths/probability/image106.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image105.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/probability/image106.png" className={styles['equation']}></img>
 
 
                 </div>

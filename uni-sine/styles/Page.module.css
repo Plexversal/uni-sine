@@ -186,7 +186,7 @@
     }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 625px) {
     .p5-options {
         flex-direction: column;
 

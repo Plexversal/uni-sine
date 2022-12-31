@@ -5,29 +5,31 @@ export default function Document() {
     <Html lang='en'>
       <Head />
 
-    <link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon"/>
-
-    {/* <link rel="apple-touch-icon" type="image/x-icon" href="/img/favicon.png"/>
-    <meta name="theme-color" content="#454e56"/>
+    <link rel="shortcut icon" href="/static/logo.png" type="image/x-icon"/>
+    <link rel="apple-touch-icon" type="image/x-icon" href="/static/logo.png"/>
+    <meta name="theme-color" content="white"/>
     <meta name="viewport" content="width=device-width,minimum-scale=1"/>
+    <meta name="description" content="Learn the fundamentals of Physics, Maths and Computer science in a single place."/>
+    <meta name="image" content="/static/logo.png"/>
+    {/* 
     <link rel="manifest" href="/manifest.json"/>
     
-    <link rel="canonical" href="https://fireship.io/courses/react-next-firebase/"/>
+    <link rel="canonical" href=""/>
 
-    <meta name="description" content="Build a full-stack app with React, Firebase, and Next.js"/>
-    <meta name="image" content="https://fireship.io/courses/react-next-firebase/img/featured.png"/>
+    <meta name="description" content=""/>
+    <meta name="image" content=""/>
 
     <meta property="og:title" content="Next.js Firebase Full Course"/>
     <meta property="og:type" content="article"/>
-    <meta property="og:url" content="https://fireship.io/courses/react-next-firebase/"/>
-    <meta property="og:image" content="https://fireship.io/courses/react-next-firebase/img/featured.png"/>
-    <meta property="og:description" content="Build a full-stack app with React, Firebase, and Next.js"/>
+    <meta property="og:url" content=""/>
+    <meta property="og:image" content=""/>
+    <meta property="og:description" content=""/>
 
-    <meta name="twitter:card" content="summary"/>
-    <meta name="twitter:site" content="@fireship_dev"/>
-    <meta name="twitter:title" content="Next.js Firebase Full Course"/>
-    <meta name="twitter:description" content="Build a full-stack app with React, Firebase, and Next.js"/>
-    <meta name="twitter:image" content="https://fireship.io/courses/react-next-firebase/img/featured.png"/> */}
+    <meta name="twitter:card" content=""/>
+    <meta name="twitter:site" content=""/>
+    <meta name="twitter:title" content=""/>
+    <meta name="twitter:description""/>
+    <meta name="twitter:image" content=""/> */}
       
       <body>
         <Main />

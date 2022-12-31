@@ -336,21 +336,21 @@ export default function Home() {
         </section>
         <section id='section-3' className={styles['section-three']}>
           <div className={styles['section-three-content-1']}>
-            <div ref={ref2} className={styles['section-three-content-sub']}>
+            <div ref={ref2} className={`${styles["section-three-content-sub"]} ${styles["section-one-sub-content"]}`}>
               <motion.div animate={animation6}>
                 <h1>Unique practice questions</h1>
                 <h2>Generate unlimited practice questions using specially engineered tools to help you get comfortable with the topic.</h2>
               </motion.div>
               <motion.img animate={animation7} src='/static/home/unique-questions.gif'></motion.img>
             </div>
-            <div ref={ref3} className={styles['section-three-content-sub']}>
+            <div ref={ref3} className={`${styles["section-three-content-sub"]} ${styles["section-two-sub-content"]}`}>
               <motion.img animate={animation8} className={styles['section-three-content-sub-img']} src='/static/home/interactive-comps.gif'></motion.img>
               <motion.div animate={animation9}>
                 <h1>Interactive components</h1>
                 <h2>Use our wide range of interactive tools and calculators to form a new perspective to help you learn faster.</h2>
               </motion.div>
             </div>
-            <div ref={ref4} className={styles['section-three-content-sub']}>
+            <div ref={ref4} className={`${styles["section-three-content-sub"]}`}>
               <motion.div animate={animation10}>
                 <h1>In-depth math</h1>
                 <h2>Most topics heavily rely on math, so take advantage of the in-depth mathematical equations for a deeper understanding.</h2>
@@ -370,7 +370,7 @@ export default function Home() {
               className={styles['category-section']}>
               <div className={`${styles['physics-banner']} ${styles.banner}`}>
                 <div className={styles['banner-content-container']}>
-                  <img className={styles['img-category']} src='/static/home/physics_home.svg'></img>
+                  <img alt=''className={styles['img-category']} src='/static/home/physics_home.svg'></img>
 
 
                   <h1>Physics</h1>
@@ -385,7 +385,7 @@ export default function Home() {
               <div className={`${styles['maths-banner']} ${styles.banner}`}>
 
                 <div className={styles['banner-content-container']}>
-                  <img className={styles['img-category']} src='/static/home/maths_home.svg'></img>
+                  <img alt=''className={styles['img-category']} src='/static/home/maths_home.svg'></img>
                   <h1>Mathematics</h1>
                   <p>Learn the fundamentals in the natural language of the universe itself and discover great mathematical ability.</p>
                   <Link href='/mathematics'><button className={styles['field-btn']}>Jump in!</button></Link>
@@ -397,7 +397,7 @@ export default function Home() {
             <motion.div animate={animation3} className={styles['category-section']}>
               <div className={`${styles['comp-banner']} ${styles.banner}`}>
                 <div className={styles['banner-content-container']}>
-                  <img className={styles['img-category']} src='/static/home/comp_sci_home.svg'></img>
+                  <img alt=''className={styles['img-category']} src='/static/home/comp_sci_home.svg'></img>
 
                   <h1>Computer Science</h1>
                   <p>Discover the true power of technology and learn various coding techniques, IT skills and applied math.</p>

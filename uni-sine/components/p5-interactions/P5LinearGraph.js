@@ -9,6 +9,7 @@ const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
 })
 
 function P5Graph(props) {
+
   // props = showIntercepts, showControls, showFunction, a, b, c
   let b, c
   let [windowWidth, setWindowWidth] = useState(500)
@@ -21,11 +22,13 @@ function P5Graph(props) {
   let height = windowWidth
   const setup = (p5, canvasParentRef) => {
 
-    p5.createCanvas(500, 500).parent(canvasParentRef)
+    p5.createCanvas(width, height).parent(canvasParentRef)
     p5.stroke('#000000')
 
   };
-
+  useEffect(() => {
+    return resizeCheck()
+  }, [])
   function onChnageB() {
     setFuncB(document.getElementById('function-b').value)
   }
@@ -35,17 +38,15 @@ function P5Graph(props) {
 
   const resizeCheck = () => {
     if (window.innerWidth < 625) {
-      setWindowWidth(400)
-      setPixelScale(20)
+      setWindowWidth(250)
+      setPixelScale(12.5)
     
     } else {
       setWindowWidth(500)
       setPixelScale(25)
     }
   }
-  useEffect(() => {
-    resizeCheck()
-  }, [])
+
 
   const draw = (p5) => {
 

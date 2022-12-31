@@ -16,15 +16,32 @@ function P5Graph(props) {
   const [funcB, setFuncB] = useState(b)
   const [funcC, setFuncC] = useState(c)
 
-
-  let width = 500;
-  let height = 500;
+  let [windowWidth, setWindowWidth] = useState(500)
+  let [pixelScale, setPixelScale] = useState(25)
+  
+  let width = windowWidth
+  let height = windowWidth
   const setup = (p5, canvasParentRef) => {
 
-    p5.createCanvas(500, 500).parent(canvasParentRef)
+    p5.createCanvas(width, height).parent(canvasParentRef)
     p5.stroke('#000000')
 
   };
+  useEffect(() => {
+    return resizeCheck()
+  }, [])
+
+
+  const resizeCheck = () => {
+    if (window.innerWidth < 625) {
+      setWindowWidth(250)
+      setPixelScale(12.5)
+    
+    } else {
+      setWindowWidth(500)
+      setPixelScale(25)
+    }
+  }
 
   function onChnageA() {
     setFuncA(document.getElementById('function-a').value)
@@ -54,11 +71,11 @@ function P5Graph(props) {
     axis()
 
     // BG lines
-    for (var x = 0; x < width / 25; x++) {
+    for (var x = 0; x < width / pixelScale; x++) {
       p5.strokeWeight(0.1)
-      p5.line(x * 25, 0, x * 25, height)
+      p5.line(x * pixelScale, 0, x * pixelScale, height)
       p5.strokeWeight(0.1)
-      p5.line(0, x * 25, width, x * 25)
+      p5.line(0, x * pixelScale, width, x * pixelScale)
     }
 
     p5.translate(width / 2, height / 2)
@@ -82,39 +99,36 @@ function P5Graph(props) {
 
     p5.strokeWeight(3)
     p5.noFill()
+
+    if(!props.noLine){
     p5.beginShape()
     p5.stroke('#06A')
-    //console.log(b*25 + c)
-    //console.log(typeof(c))
+
     for (let x = 10; x > -10; x -= 0.1) {
       //let yquad = (a * Math.pow(x, 2)) + (b * x) + c
       let yquad = (a * Math.pow(x, 2)) + (b * x) + c
-
-      let ycubic = (a * Math.pow(x, 3)) + (b * Math.pow(x, 2)) + (c * x) + 4
-      let yabs = (a * Math.abs(x)) + (b * x) + c
-      let yrad = (a * (Math.sqrt(x))) + (b * x) + c
-      let ylin = b*x + c
-      let ysin = (a * Math.pow(Math.sin(x), 1))
-      
-
-      p5.vertex(x * 25, yquad * 25)
-    }
     
+      p5.vertex(x * pixelScale, yquad * pixelScale)
+    }
     p5.endShape() 
+  }
+
+    // symmetry line
     p5.stroke('#dd000066')
+    if(props.showSymmetry){
     for (let x = 10; x > -10; x -= 0.5) {
       let ylin = -b/(2*a)
-      p5.ellipse(ylin * 25, x * 25, 1)
+      p5.ellipse(ylin * pixelScale, x * pixelScale, 1)
     }
-
+  }
     p5.stroke('#a00')
     p5.fill('#a00')
 
     if(props?.showIntercepts){
-      p5.ellipse(xInterceptNeg*25, 0, 4) // x intercept using quadratic formula
-      p5.ellipse(xInterceptPos*25, 0, 4)// x intercept using quadratic formula
-      p5.ellipse(0, c*25, 4) // y intercept x=0, y=c becuase a*0^2 + b*0 = c
-      p5.ellipse((-(b))/(2*a) * 25, ((a * Math.pow((-(b))/(2*a), 2)) + (b * (-(b))/(2*a)) + c) * 25, 4) // min/max
+      p5.ellipse(xInterceptNeg*pixelScale, 0, 4) // x intercept using quadratic formula
+      p5.ellipse(xInterceptPos*pixelScale, 0, 4)// x intercept using quadratic formula
+      p5.ellipse(0, c*pixelScale, 4) // y intercept x=0, y=c becuase a*0^2 + b*0 = c
+      p5.ellipse((-(b))/(2*a) * pixelScale, ((a * Math.pow((-(b))/(2*a), 2)) + (b * (-(b))/(2*a)) + c) * pixelScale, 4) // min/max
     }
 
     
@@ -142,7 +156,11 @@ function P5Graph(props) {
     p5.pop();
     
   };
+  const windowResized = (p5) => {
+    resizeCheck()
 
+    p5.resizeCanvas(width, height);
+  }
   return (<><br></br><div className={styles['p5-container']}>
   <div className={styles['p5-sketch-details']}>
     {props.showControls ?     <div className={styles['p5-selection-range']}>
@@ -163,7 +181,7 @@ function P5Graph(props) {
  
   </div>
 
-    <Sketch setup={setup} draw={draw} />
+    <Sketch setup={setup} draw={draw} windowResized={windowResized}/>
   </div><br></br></>)
 
 

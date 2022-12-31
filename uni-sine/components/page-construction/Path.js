@@ -11,19 +11,18 @@ function Path() {
         let arr1 = arr.map(e => '/' + e) // ['/path1', '/path2', ...]
         let arr2 = Array.from({ length: arr1.length }, (_, i) => arr1.slice(0, i + 1).join("")) // ['/path1', '/path1/path2', ...]
         arr2.unshift('/') // ['/', '/path1', '/path1/path2', ...]
-        setPath(arr2.map(e => <Link href={`${e}`}>{`${ e.length == 1 ? 'home' : e.split('/').slice(-1).pop()}`}</Link>))
+        setPath(arr2.map((e, i) => <Link key={i} href={`${e}`}>{`${ e.length == 1 ? 'home' : e.split('/').slice(-1).pop()}`}</Link>))
      
     }, [])
-    
-
+  
     
     return (
       <div className={styles['path-container']}>
         <div className={styles['path']}>
             <div className={styles['path-child']}>
               <ul>
-                {path.map((e, i) => (
-                  <li key={i}>{e}</li>
+              {path.map((e, i) => (
+                  <li key={`${i}`}>{e}</li>
                 ))}
               </ul>
             </div>

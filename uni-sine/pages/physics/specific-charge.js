@@ -3,7 +3,7 @@ import SecondaryBanner from '../../components/page-construction/SecondaryBanner'
 import styles from '../../styles/Page.module.css'
 import React, { useEffect, useState, } from "react"
 import P5NormalDistribution from "../../components/p5-interactions/P5NormalDistribution"
-
+import Image from 'next/image'
 
 function SC() {
 
@@ -78,15 +78,15 @@ function SC() {
                             </td>
                         </tr>
                     </tbody></table>
-                    <p>The absolute charge values were found using Robert Millikan's oil drop experiment.</p>
+                    <p>The absolute charge values were found using Robert Millikan&apos;s oil drop experiment.</p>
                     <p>The equation for finding specific charge:</p>
-                    <img src="/static/physics/specific-charge/image005.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/physics/specific-charge/image005.png" className={styles['equation']}></img>
                     <p>So, for example if we want to find specific charge of an electron using the values in the table above:</p>
-                    <img src="/static/physics/specific-charge/image006.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/physics/specific-charge/image006.png" className={styles['equation']}></img>
                     <p>using indices division laws to work out the final equation:</p>
-                    <img src="/static/physics/specific-charge/image007.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/physics/specific-charge/image007.png" className={styles['equation']}></img>
                     <p>So, electron specific charge in its final form:</p>
-                    <img src="/static/physics/specific-charge/image008.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/physics/specific-charge/image008.png" className={styles['equation']}></img>
                     <p>You can of course do this exact method for any of the other particles and it will work exactly the same to find specific charge for such particle.</p>
                     <br></br>
                 </div>

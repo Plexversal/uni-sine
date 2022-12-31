@@ -6,7 +6,7 @@ export default function Home() {
             <li>
               <strong>Software</strong>
               <ul>
-                  <li>JavaScript how-to's</li>
+                  <li>JavaScript how-to&apos;s</li>
                   <li>DevOps methodology</li>
                   <li>Windows
                       <ul>

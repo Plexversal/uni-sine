@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react"
 import P5Graph from '../../components/p5-interactions/P5CubicGraph'
 
 
-function cubics() {
+function Cubics() {
 
     let [dom, setDom] = useState([])
 
@@ -31,7 +31,7 @@ function cubics() {
                     <P5Graph {...{showControls: true, showFunction: true, showIntercepts: true, custom: true}}/>
                     <h2>Properties of Cubic&rsquo;s</h2>
                     <p>Cubic functions are identified by the fact that have an x term which is cubed. The general format for a cubic equation is:</p>
-                    <img src="/static/maths/cubic-equations/image001.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image001.png" className={styles['equation']}></img>
                     <p>This can also be in a factorised form which still has the capability to be graphed without expanding as the process is a simple substation in most cases.</p>
                     <p>Cubic functions differ to quadratic functions in that the graph will always cross the x axis, this is because there is at least one real root in the equation.</p>
                     <h2>Local minimum and maximum</h2>
@@ -47,35 +47,35 @@ function cubics() {
                     <h3>Example</h3>
                     <p>Find the local minimum and maximum of the cubic function f(x) = x<sup>3</sup> &ndash; 7x<sup>2</sup> + 10x + 4</p>
                     <p>Step 1) Differentiate the equation:</p>
-                    <img src="/static/maths/cubic-equations/image002.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image003.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image002.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image003.png" className={styles['equation']}></img>
                     
                     <p>Step 2) Input this quadratic into the quadratic equation:</p>
-                    <img src="/static/maths/cubic-equations/image004.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image005.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image006.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image004.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image005.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image006.png" className={styles['equation']}></img>
                     
                     <p>The discriminant is a none zero number and so there will be 2 answers for the x value and so a minimum and maximum will be present.</p>
-                    <img src="/static/maths/cubic-equations/image007.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image007.png" className={styles['equation']}></img>
                     <p>The Y value for the above points can be found simply by putting these specific x values back into the cubic equation:</p>
-                    <img src="/static/maths/cubic-equations/correction-image001 (1).png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/correction-image001 (2).png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/correction-image001 (3).png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/correction-image001 (4).png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/correction-image001 (1).png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/correction-image001 (2).png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/correction-image001 (3).png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/correction-image001 (4).png" className={styles['equation']}></img>
 
 
                     <p>Step 3) find the second derivative of the quadratic equation and input the x values we just found:</p>
-                    <img src="/static/maths/cubic-equations/image003.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image008.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image009.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image010.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image003.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image008.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image009.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image010.png" className={styles['equation']}></img>
 
                     <p>Now we know that for x at 3.8, the second derivative is positive meaning that this is a local minimum because the graph is set to go positive in the y axis on either side.</p>
                     <p>We also know that for x at 0.9, the second derivative is negative meaning that this is a local maximum because the graph is set to go negative in the y axis on either side.</p>
                     <p>Step 4) Find more values to help graph the equation.</p>
                     <p>The first easy one to graph is x = 0 as with most graphs.</p>
-                    <img src="/static/maths/cubic-equations/image011.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image012.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image011.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image012.png" className={styles['equation']}></img>
 
                     <p>You may also choose points closest to the nearest integer of the min and max points. So, in this case x = 4 and x = 0. We already had x = 0 so x = 1 could work too.</p>
                     <p>So, plotting the points gives the following:</p>
@@ -92,21 +92,21 @@ function cubics() {
                     <h3>Example</h3>
                     <p>Find the slope of the tangent line equal to zero for the cubic function: f(x) = x<sup>3</sup> + 3</p>
                     <p>First differentiate the function:</p>
-                    <img src="/static/maths/cubic-equations/image013.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image013.png" className={styles['equation']}></img>
                     
                     <p>Now substitute this into the quadratic formula:</p>
-                    <img src="/static/maths/cubic-equations/image004.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image014.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image015.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image004.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image014.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image015.png" className={styles['equation']}></img>
 
                     <p>We didn&rsquo;t have to use the quadratic formula here because knowing that 3x<sup>2</sup> = 0, then x would have to be zero anyway but it&rsquo;s good to visualise how zero is the answer and the fact there is only one answer instead of 2 answers indicating this is indeed a saddle point.</p>
                     <p>Substituting x = 0 back into the original cubic function gives a y value of 3. So when x = 0, y = 3. This is our first point.</p>
                     <p>To graph this function, we can take an x point at either side of this saddle point and work out the y value.</p>
                     <p>The two values would be 1 and -1.</p>
-                    <img src="/static/maths/cubic-equations/image016.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image017.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image018.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image019.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image016.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image017.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image018.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image019.png" className={styles['equation']}></img>
 
                     <p>You could use additional points such as -2 and 2 for more accuracy or even fractional x values but this should be enough to graph:</p>
                     <P5Graph {...{points: [{x:-1,y:2}, {x:1,y:4}, {x:0,y:3}], a: 1, b: 0, c: 0, d: 3}}/>
@@ -114,34 +114,34 @@ function cubics() {
                     <h2>Factorised form</h2>
                     <p>Graph the equation: f(x) = (x + 2)<sup>3</sup></p>
                     <p>When in factorised form such as this it can be rewritten into the form below:</p>
-                    <img src="/static/maths/cubic-equations/image020.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image020.png" className={styles['equation']}></img>
 
                     <p>When in this form it can be easier to work out what any y value is when we substitute an x value as we can just complete the equation.</p>
                     <p>We need to find points to plot on the graph, we need to know the point in which the graph curves and if it has a minimum, maximum or saddle point. It may also not have a point in which the gradient of the curve is zero and so we would need to know that too.</p>
                     <p>To find any points where the gradient is zero, we need to expand the factorised form to then use the methods mentioned before:</p>
-                    <img src="/static/maths/cubic-equations/image021.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image022.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image023.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image021.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image022.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image023.png" className={styles['equation']}></img>
 
                     <p>Now we can find the first derivative of the above expression:</p>
-                    <img src="/static/maths/cubic-equations/image024.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image024.png" className={styles['equation']}></img>
 
                     <p>Using the derived expression, we can use the quadratic formula to find the roots and determine where the graph will have any x values where the gradient of the tangent line equals zero.</p>
-                    <img src="/static/maths/cubic-equations/image004.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image025.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image026.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image027.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image004.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image025.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image026.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image027.png" className={styles['equation']}></img>
 
                     <p>We now know that when x = -2, y = 0. We also know how this graph should look as it has just one point meaning a saddle point, it should rise and stop then rise again.</p>
                     <p>We can now calculate additional points such as x = -3 and x = -1 because these are close to the saddle point:</p>
-                    <img src="/static/maths/cubic-equations/image028.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image029.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image030.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image028.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image029.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image030.png" className={styles['equation']}></img>
 
                     <p>When x = -3, y = -1</p>
-                    <img src="/static/maths/cubic-equations/image031.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image032.png" className={styles['equation']}></img>
-                    <img src="/static/maths/cubic-equations/image033.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image031.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image032.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/image033.png" className={styles['equation']}></img>
 
                     <p>When x = -1, y = 1</p>
                     <p>We should now have enough points to graph the equation, you could plot more using the same method for better accuracy.</p>
@@ -158,4 +158,4 @@ function cubics() {
     )
 }
 
-export default cubics
+export default Cubics

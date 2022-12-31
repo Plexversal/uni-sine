@@ -24,18 +24,20 @@ function Nav(props) {
                 <ul>
                     <li>
                         <a className={styles['social-link-tw']} rel="noreferrer" target='_blank' 
-                        href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out ${URL}!`)}`}>
+                        href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out ${URL}!`)}`}
+                        aria-label="Share to twitter">
                         <BsTwitter size='1.5rem'/></a>
                     </li>
                     <li>
                         <a className={styles['social-link-fb']} rel="noreferrer" target='_blank'
-                        href={`https://www.facebook.com/sharer.php?t=${encodeURIComponent(`Uni-Sine`)}&u=${encodeURIComponent(`Check out ${URL}!`)}`}>
+                        href={`https://www.facebook.com/sharer.php?t=${encodeURIComponent(`Uni-Sine`)}&u=${encodeURIComponent(`Check out ${URL}!`)}`}
+                        aria-label="Share to Facebook">
 
                         <BsFacebook size='1.5rem' />
                         </a>
                     </li>
                     <li>
-                        <a rel="noreferrer" target='_blank' href="https://google.com"><BsYoutube size='1.5rem'/></a>
+                        <BsYoutube size='1.5rem'/>
                     </li>
                 </ul>
             </div>

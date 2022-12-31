@@ -12,6 +12,11 @@ function P5Graph(props) {
   let a = 0
 
   const [funcA, setFuncA] = useState(a) 
+  let [windowWidth, setWindowWidth] = useState(500)
+  let [pixelScale, setPixelScale] = useState(25)
+  let [pixelScalex, setPixelScalex] = useState(100)
+  let [pixelScaley, setPixelScaley] = useState(400)
+
 
   function erf(x) {
 
@@ -24,11 +29,11 @@ function P5Graph(props) {
     +(0.0000430638*Math.pow(x, 6)), 16))
     
 } 
-  let width = 500;
-  let height = 500;
+let width = windowWidth
+let height = windowWidth
   const setup = (p5, canvasParentRef) => {
 
-    p5.createCanvas(500, 500).parent(canvasParentRef)
+    p5.createCanvas(width, height).parent(canvasParentRef)
     p5.stroke('#000000')
 
   };
@@ -55,7 +60,22 @@ function P5Graph(props) {
       }
     }
   }
-
+  useEffect(() => {
+    return resizeCheck()
+  }, [])
+  const resizeCheck = () => {
+    if (window.innerWidth < 625) {
+      setWindowWidth(250)
+      setPixelScale(25)
+      setPixelScalex(50)
+      setPixelScaley(200)
+    } else {
+      setWindowWidth(500)
+      setPixelScale(50)
+      setPixelScalex(100)
+      setPixelScaley(400)
+    }
+  }
   const draw = (p5) => {
 
     p5.background('#FFF');
@@ -74,11 +94,11 @@ function P5Graph(props) {
     axis()
 
     // BG lines
-    for (var x = 0; x < width / 50; x++) {
+    for (var x = 0; x < width / pixelScale; x++) {
       p5.strokeWeight(0.1)
-      p5.line(x * 50, 0, x * 50, height)
+      p5.line(x * pixelScale, 0, x * pixelScale, height)
       p5.strokeWeight(0.1)
-      p5.line(0, x * 50, width, x * 50)
+      p5.line(0, x * pixelScale, width, x * pixelScale)
     }
 
     p5.translate(width / 2, height / 2)
@@ -96,11 +116,11 @@ function P5Graph(props) {
     p5.fill('#ADD8E6');
     for (let x = funcA; x > -10; x -= 0.1) {
       let ynormal = (1/(sigma*Math.sqrt(2*Math.PI)))*Math.pow(Math.E, (-(1/2))*Math.pow(((x-mu)/sigma), 2))
-      p5.vertex(x * 100, ynormal * 400)
+      p5.vertex(x * pixelScalex, ynormal * pixelScaley)
       
     }
-    p5.vertex(funcA*100, 1)
-    p5.vertex(funcA*100, (1/(sigma*Math.sqrt(2*Math.PI)))*Math.pow(Math.E, (-(1/2))*Math.pow(((funcA-mu)/sigma), 2))*400)
+    p5.vertex(funcA*pixelScalex, 1)
+    p5.vertex(funcA*pixelScalex, (1/(sigma*Math.sqrt(2*Math.PI)))*Math.pow(Math.E, (-(1/2))*Math.pow(((funcA-mu)/sigma), 2))*pixelScaley)
     p5.endShape()
 
     // normal distribution curve
@@ -112,7 +132,7 @@ function P5Graph(props) {
     for (let x = 10; x > -10; x -= 0.1) {
       let ynormal = (1/(sigma*Math.sqrt(2*Math.PI)))*Math.pow(Math.E, (-(1/2))*Math.pow(((x-mu)/sigma), 2))
 
-      p5.vertex(x * 100, ynormal * 400)
+      p5.vertex(x * pixelScalex, ynormal * pixelScaley)
       
     }
     
@@ -130,7 +150,7 @@ function P5Graph(props) {
     for (let t = -5; t < 5; t += 1) {
       p5.stroke('#000')
       p5.fill('#000')
-      p5.text(t, 100 * t -5, 15);
+      p5.text(t, pixelScalex * t -5, 15);
       //p5.text(t, 3, 200 * -t + 5);
 
     }
@@ -146,7 +166,11 @@ function P5Graph(props) {
     p5.pop();
     
   };
+  const windowResized = (p5) => {
+    resizeCheck()
 
+    p5.resizeCanvas(width, height);
+  }
   return (<><br></br><div className={styles['p5-container']}>
   <div className={styles['p5-sketch-details']}>
     {props.showControls ?     <div className={styles['p5-selection-range']}>
@@ -163,7 +187,7 @@ function P5Graph(props) {
  
   </div>
 
-    <Sketch setup={setup} draw={draw} />
+    <Sketch setup={setup} draw={draw} windowResized={windowResized}/>
   </div><br></br></>)
 
 

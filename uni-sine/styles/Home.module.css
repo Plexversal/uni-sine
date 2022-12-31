@@ -208,7 +208,7 @@
   border-radius: 100%;
 
 }
-
+ 
 .section-three {
   display: inline-block;
   padding: 0 250px 100px 250px;
@@ -225,6 +225,7 @@
   display: flex;
   gap: 6em;
   overflow-x: visible;
+  align-items: center ;
 }
 
 
@@ -238,6 +239,12 @@
 }
 .section-three-content-sub div h2 {
   font-weight: 400;
+}
+.section-one-sub-content div h1 {
+  color: #ec9c33;
+}
+.section-two-sub-content div h1 {
+  color: #ADD8E6;
 }
 @media (max-width: 1500px)  {
   .section-one-content {
