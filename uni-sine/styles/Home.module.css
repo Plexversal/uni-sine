@@ -246,6 +246,20 @@
 .section-two-sub-content div h1 {
   color: #ADD8E6;
 }
+.privacy-container {
+  margin-top: 50px;
+  margin-bottom: 100px;
+  padding: 0px 15%;
+}
+
+.privacy-container h1{
+  font-size: 2.5em;
+}
+
+.privacy-container h2{
+  font-size: 1.5em;
+}
+
 @media (max-width: 1500px)  {
   .section-one-content {
 
@@ -324,9 +338,10 @@
   .section-three-content-sub img {
     width: 300px;
   }
-}
+  .privacy-container {
 
-@media (max-width: 600px)  {
+    padding: 0px 5% !important;
+  }
   .section-three-content-sub div h1 {
     font-size: 2em;
   }

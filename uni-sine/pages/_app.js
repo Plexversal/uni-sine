@@ -3,6 +3,7 @@ import Layout from '../components/page-construction/Layout'
 import Script from 'next/script'
 import Head from 'next/head'
 import FastRead from '../components/page-construction/FastRead'
+import Footer from '../components/page-construction/Footer'
 
 // component which wraps all the pages
 function MyApp({ Component, pageProps, router }) {
@@ -13,6 +14,7 @@ function MyApp({ Component, pageProps, router }) {
         <title>uni-sine</title>
       </Head>
       <Component {...pageProps} />
+      <Footer />
     </>
   )
 
