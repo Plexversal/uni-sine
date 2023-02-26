@@ -15,7 +15,14 @@ a {
   box-sizing: border-box;
 }
 
+main {
+  min-height: 100vh;
+}
 
+button {
+  font-family: inherit;
+
+}
 .react-p5 {
   text-align: center;
   align-self: center;

@@ -1,9 +1,10 @@
 
 
-.section-one {
-  background: radial-gradient(circle at bottom right, rgba(115,0,44,1) 0%, rgba(0,0,0,1) 32%, rgba(0,0,0,1) 100%);
+.landing-section {
+  background: radial-gradient(circle at bottom right, #200047 0%, #496C6C 42%, #496C6C 100%);
+  backdrop-filter:blur(100px);
   width: 100%;
-  min-height: 100vh;
+  min-height: 1080px;
   padding: 0px 0px 20px;
   color: #fff;
   background-size: cover;
@@ -12,46 +13,111 @@
 
 }
 
-.section-one-top {
+.landing-section-top {
   margin: 0 250px;
 }
-.section-one-content {
-  z-index: 1;
+.landing-section-content {
+
   display: flex;
   justify-content: space-between;
+  gap: 10em;
+  margin: 200px 150px;
+}
+
+.landing-section-content > div > h1 {
+  font-weight: 500;
+  margin: 0;
+}
+
+.landing-section-content > div > p {
+  font-size: 1.5em;
+  color: #b8b8b8;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  gap: 3em;
-  margin: 0 250px 100px 250px;
+  padding: 15px 120px;
+  background: #00000088;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+.header > div > h1 {
+  margin: 0;
+  font-size: 2.5em !important;
+  color: #FF006B;
+}
+.header > div > p {
+  margin: 0;
+  color: #C7C7C7;
+  font-size: 1.2em;
+}
+
+
+.header > div > a {
+  padding: 10px 50px;
+  border-radius: 999px;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 1.3em;
+  margin: 0px 10px;
+  cursor: pointer;
+}
+
+.explore-btn {
+  border: 5px solid #00FFC2;
+  padding: 10px 50px;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 1.3em;
+  margin: 0px 10px;
+  background: none;
+  color: white;
+  cursor: pointer;
+  margin-top: 100px;
+  font-family: inherit;
+  transition: all .3s;
 
 }
 
-.learn-more-btn {
-  text-align: center;
-  margin: auto;
-  align-items: center;
-  display: block;
-  background-color: #fff;
-  border-color: transparent;
-  border-radius: 4rem;
-  box-shadow: 8px 11px 8px -2px rgba(0,0,0,0.1);
-  cursor: pointer;
-  font-size: 1em;
-  font-family: inherit;
-  padding: 10px;
-  font-weight: 500;
-  transition: all .3s;
-  }
-
-.learn-more-btn:hover{
+.explore-btn:hover{
   box-shadow: 4px 4px 8px -2px rgba(0,0,0,0.1);
-  transform: scale(1.1);
+  transform: scale(1.2) !important;
+  border: 5px solid #ffffff;
+
 } 
+.join-link {
+  border: 5px solid #FF006B;
+  color: #FF006B;
+  transition: all .3s;
 
+}
 
+.join-link:hover{
+  color: #fff;
+  border: 5px solid #ffffff;
+
+}
+
+.sign-in-link {
+  border: 5px solid #ffffff;
+  transition: all .3s;
+  color: white;
+}
+
+.sign-in-link:hover {
+  border: 5px solid #000;
+  color: #fff;
+}
 
 .image-container {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(12, 1fr);
+
   align-self: center;
   
 }
@@ -61,55 +127,124 @@
 }
 
 .home-img-1 {
-  grid-column: 3/5;
-  width: 200px;
-  height: 350px;
+  grid-column: 5/7;
+  width: 110px;
+  height: auto;
   object-fit: contain;
   align-self: end;
   z-index: 3;
 }
 
 .home-img-2 {
-  grid-column: 4/-1;
-  width: 500px;
-  height: 400px;
+  grid-column: 6/-1;
+  width: 400px;
+  height: auto;
   object-fit: contain;
   align-self: end;
   z-index: 2;
 }
 
 .home-img-3 {
-  grid-column: 1/-2;
-  width: 650px;
-  height: 550px;
+  grid-column: 1/-4;
+  width: 500px;
+  height: auto;
   object-fit: contain;
   align-self: end;
   z-index: 1;
 }
-
-.main-text-2-sub {
-  color: rgb(255, 0, 98);
-  font-size: 1.6em;
-  margin: 20px 0px 20px 0px;
-  display: inline-block;
-  font-weight: 600;
-
+.info-bubbles-section {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 1;
+  justify-content: center;
+  align-items: center;
+  transform: translate(0, -16rem);
+}
+.info-bubble {
+  border-radius: 3rem;
+  background: white;
+  box-shadow: 17px 16px 38px 5px rgba(0,0,0,0.1);
+  padding: 80px;
+  margin: 20px 0;
+  width: 1000px;
 }
 
-.main-text-2 {
-  font-size: 2em;
-  font-weight: 400;
-
+.info-bubble > div > h1 {
+  font-size: 3em !important;
+  font-weight: 500;
+  margin: 0;
 }
 
-.section-two {
+.price-section > h1 {
+  text-align: center;
+  color: #fff;
+  font-weight: 500;
+}
+
+.price-section {
+  background: #000;
+  padding: 200px 0;
+}
+
+.plan-options-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  flex-basis: 100%;
+}
+
+.plan-options-container > div {
+  width: 400px;
+  box-shadow: 9px 16px 12px 5px rgba(0,0,0,0.1);
+  border-radius: 2rem;
+  padding: 40px;
+  background: #fff;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.plan-options-container > div:nth-child(2) {
+  transform: scale(1.15);
+}
+.plan-options-container > div > a {
+  width: 100%;
+  background: none;
+  text-align: center;
+  border: 2px solid black;
+  padding: 8px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all .3s;
+  font-weight: 500;
+}
+.plan-options-container > div > a:hover {
+  background: #000;
+  color: white;
+}
+.feature-list {
+  list-style: none; 
+  padding: 0;
+}
+
+.feature-list li {
+  margin: 20px 0;
+  background-image: url('/static/home/checkmark.svg');
+  background-repeat: no-repeat;
+  padding-left: 30px;
+  background-position: 0 50%;
+}
+
+.field-select-section {
   background-color: black;
-
   margin-bottom: 9em;
 
 }
 
-.section-two-container {
+.field-select-section-container {
   display: flex;
 
   background-color: white;
@@ -128,7 +263,7 @@
   margin: 15px;
 }
 
-.section-two h1 {
+.field-select-section h1 {
   text-align: center;
 }
 
@@ -240,10 +375,10 @@
 .section-three-content-sub div h2 {
   font-weight: 400;
 }
-.section-one-sub-content div h1 {
+.landing-section-sub-content div h1 {
   color: #ec9c33;
 }
-.section-two-sub-content div h1 {
+.field-select-section-sub-content div h1 {
   color: #ADD8E6;
 }
 .privacy-container {
@@ -261,14 +396,14 @@
 }
 
 @media (max-width: 1500px)  {
-  .section-one-content {
+  .landing-section-content {
 
     margin: 0 50px 100px 50px;
 
   }
   
 
-  .section-one-top {
+  .landing-section-top {
     margin: 0 50px;
   }
 
@@ -294,7 +429,7 @@
 }
 
 @media (max-width: 1000px)  {
-  .section-one-content {
+  .landing-section-content {
     flex-direction: column;
     margin: 0 50px 100px 50px;
   }
@@ -310,11 +445,8 @@
   .section-three-content-sub div h1 {
     font-size: 3em;
   }
-  .section-one-top > h1 {
+  .landing-section-top > h1 {
     font-size: 3.3em !important;
-  }
-  .main-text-2 {
-    font-size: 1.6em;
   }
 
 }

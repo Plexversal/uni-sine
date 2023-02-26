@@ -4,8 +4,12 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useEffect } from 'react'
 import { useAnimation } from 'framer-motion'
-export default function Home() {
+export const getServerSideProps = ({ query }) => ({
+  props: query
+});
 
+export default function Home(props) {
+  console.log(props.country)
   const [ ref, inViewS2 ] = useInView({
     triggerOnce: true,
     threshold: .1
@@ -222,45 +226,34 @@ export default function Home() {
   }, [inViewS2])
 
   function scrollClick() {
-    location.href='#section-3';
+    document.getElementById('field-select-section').scrollIntoView({
+      block: 'start',
+      behavior: 'smooth'
+  })
   }
+  
   return (
     <>
       <div className={styles.container}>
-        <section className={styles['section-one']}>
-          <div className={styles['section-one-top']}>
-            <motion.h1 initial='hidden' animate='visible' variants={{
-              hidden: {
-                opacity: 0,
-                y: `0.25em`,
-              },
-              visible: {
-                opacity: 1,
-                y: `0em`,
-                transition: {
-                  duration: .8,
+      <header className={styles['header']}>
+            <div className={styles['logo']}>
+              <h1>Uni-Sine</h1>
+              <p>Learning</p>
+            </div>
+            <div className={styles['account-actions']}>
+              <a className={styles['join-link']}>Join</a>
+              <a className={styles['sign-in-link']}>Sign in</a>
+            </div>
+          </header>
+        <section className={styles['landing-section']}>
 
-                },
-              },
-            }}>
-              Uni-Sine
-            </motion.h1>
-          </div>
-          <div className={styles['section-one-content']}>
-            <motion.h2 className={styles['main-text-2']} initial='hidden' animate='visible' variants={{
-              hidden: {
-                opacity: 0,
-                y: `0.25em`,
-              },
-              visible: {
-                opacity: 1,
-                y: `0em`,
-                transition: {
-                  duration: .8,
-
-                },
-              },
-            }}><span className={styles['main-text-2-sub']} >All the knowledge you need in one place</span><br></br>Learn at your own pace with a variety of interactive ways to help you learn faster.</motion.h2>
+          <div className={styles['landing-section-content']}>
+            <div className={styles['landing-left']}>
+              <h1>All the knowledge you need in one place</h1>
+              <p>Uni-Sine Learning is an online learning platform designed to help you learn through visual and interactive tools.</p>
+              <p>Need to pass your exams? Or perhaps just curious about the world. This is the place to learn. </p>
+              <motion.button onClick={scrollClick} transition={{repeat: Infinity, repeatDelay: 1}} animate={{ scale: [1, 1.1, 1.2, 1, 1]}} className={styles['explore-btn']}>Explore Topics</motion.button>
+            </div>
 
             <div className={styles['image-container']}>
               <motion.img src="/static/home/mac-final.png" className={styles['home-img-3']} initial='hidden' animate='visible' variants={
@@ -332,37 +325,86 @@ export default function Home() {
               </motion.img>
             </div>
           </div>
-          <motion.button  transition={{repeat: Infinity, repeatDelay: 1}} animate={{ scale: [1, 1.2, 1.2, 1, 1]}} onClick={scrollClick} className={styles['learn-more-btn']}>Learn more</motion.button>
         </section>
-        <section id='section-3' className={styles['section-three']}>
-          <div className={styles['section-three-content-1']}>
-            <div ref={ref2} className={`${styles["section-three-content-sub"]} ${styles["section-one-sub-content"]}`}>
-              <motion.div animate={animation6}>
-                <h1>Unique practice questions</h1>
-                <h2>Generate unlimited practice questions using specially engineered tools to help you get comfortable with the topic.</h2>
-              </motion.div>
-              <motion.img animate={animation7} src='/static/home/unique-questions.gif'></motion.img>
+
+        <section className={styles['info-bubbles-section']}>
+          <div className={styles['info-bubble']}>
+            <div>
+              <h1>Unique Practice questions</h1>
+              <ul>
+                <li>Generate unlimited, unique practice questions</li>
+                <li>Tools designed with hard coded math for accurate results</li>
+              </ul>
             </div>
-            <div ref={ref3} className={`${styles["section-three-content-sub"]} ${styles["section-two-sub-content"]}`}>
-              <motion.img animate={animation8} className={styles['section-three-content-sub-img']} src='/static/home/interactive-comps.gif'></motion.img>
-              <motion.div animate={animation9}>
-                <h1>Interactive components</h1>
-                <h2>Use our wide range of interactive tools and calculators to form a new perspective to help you learn faster.</h2>
-              </motion.div>
+            {/* <Image></Image> */}
+          </div>
+          <div className={styles['info-bubble']}>
+            {/* <Image></Image> */}
+            <div>
+              <h1>30+ Different visual calculators</h1>
+              <p>Go beyond a standard calculator with a variety of visual graphing and algebra calculators specially designed for helping you learn faster</p>
             </div>
-            <div ref={ref4} className={`${styles["section-three-content-sub"]}`}>
-              <motion.div animate={animation10}>
-                <h1>In-depth math</h1>
-                <h2>Most topics heavily rely on math, so take advantage of the in-depth mathematical equations for a deeper understanding.</h2>
-              </motion.div>
-              <motion.img animate={animation11} src='/static/home/in-depth-math.png'></motion.img >
+
+          </div>
+          <div className={styles['info-bubble']}>
+            <div>
+            <h1>High level math explained for any skill level</h1>
+              <p>We know not everyone can pick up math easily, that's why we make every effort to show and derive every step.</p>
+            </div>
+            {/* <Image></Image> */}
+          </div>
+          <div className={styles['info-bubble']}>
+            {/* <Image></Image> */}
+            <div>
+              <h1>Built for A-levels and ACT's</h1>
+              <ul>
+                <li>Improve your chances of scoring higher in A-levels, ACT's or SAT's</li>
+                <li>Information has been sourced specially around the grading exam boards of these tests such as AQA and OCR</li>
+              </ul>
             </div>
           </div>
 
-
         </section>
-        <section  ref={ref} className={styles['section-two']}>
-          <motion.div animate={animation5} className={styles['section-two-container']}>
+        <section className={styles['price-section']}>
+          <h1>Choose a plan</h1>
+          <div className={styles['plan-options-container']}>
+              <div>
+                <div>
+                  <p>Billed Monthly</p>
+                  <h2>$10 / month</h2>
+                  <ul className={styles['feature-list']}>
+                    <li>Full access to all interactive components and calculators</li>
+                    <li>Access to all premium and university level pages</li>
+                    <li>Email support</li>
+                  </ul>
+                </div>
+                <a>Sign up</a>
+              </div>
+              <div>
+                <div>
+                <p>Billed Yearly</p>
+                <h2>$8 / month</h2>
+                <ul className={styles['feature-list']}>
+                  <li>Full access to all interactive components and calculators</li>
+                  <li>Access to all premium and university level pages</li>
+                  <li>Email support</li>
+                </ul>
+                </div>
+                <a>Sign up</a>
+              </div>
+              <div>
+                <div>
+                  <p>Education</p>
+                  <h2>$ Custom</h2>
+                  <p>For education institutions looking to get access for multiple students.</p>
+                  <p>We are want everyone to have the best access to education and are happy to work with schools and colleges</p>
+                </div>
+                <a>Contact</a>
+              </div>
+          </div>
+        </section>
+        <section ref={ref} id='field-select-section' className={styles['field-select-section']}>
+          <motion.div animate={animation5} className={styles['field-select-section-container']}>
           <h1>Choose a field</h1>
           <div className={styles['selections']}>
 

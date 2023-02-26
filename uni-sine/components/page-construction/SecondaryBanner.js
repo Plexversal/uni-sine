@@ -30,7 +30,7 @@ function Nav(props) {
                     </li>
                     <li>
                         <a className={styles['social-link-fb']} rel="noreferrer" target='_blank'
-                        href={`https://www.facebook.com/sharer.php?t=${encodeURIComponent(`Uni-Sine`)}&u=${encodeURIComponent(`Check out ${URL}!`)}`}
+                        href={`https://www.facebook.com/profile.php?id=100089927042311`}
                         aria-label="Share to Facebook">
 
                         <BsFacebook size='1.5rem' />
