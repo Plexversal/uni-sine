@@ -349,16 +349,16 @@ export default function Home(props) {
           <div className={styles['info-bubble']}>
             <div>
             <h1>High level math explained for any skill level</h1>
-              <p>We know not everyone can pick up math easily, that's why we make every effort to show and derive every step.</p>
+              <p>We know not everyone can pick up math easily, that&apos;s why we make every effort to show and derive every step.</p>
             </div>
             {/* <Image></Image> */}
           </div>
           <div className={styles['info-bubble']}>
             {/* <Image></Image> */}
             <div>
-              <h1>Built for A-levels and ACT's</h1>
+              <h1>Built for A-levels and ACT&apos;s</h1>
               <ul>
-                <li>Improve your chances of scoring higher in A-levels, ACT's or SAT's</li>
+                <li>Improve your chances of scoring higher in A-levels, ACT&apos;s or SAT&apos;s</li>
                 <li>Information has been sourced specially around the grading exam boards of these tests such as AQA and OCR</li>
               </ul>
             </div>
