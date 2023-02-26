@@ -239,6 +239,7 @@ export default function Home(props) {
             <div className={styles['logo']}>
               <h1>Uni-Sine</h1>
               <p>Learning</p>
+              <p>{props.country}</p>
             </div>
             <div className={styles['account-actions']}>
               <a className={styles['join-link']}>Join</a>
