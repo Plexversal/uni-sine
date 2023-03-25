@@ -3,7 +3,7 @@ import { Html, Head, Main, NextScript } from 'next/document'
 export default function Document() {
   return (
     <Html lang='en'>
-      <Head />
+      <Head/> 
 
     <link rel="shortcut icon" href="/static/logo.png" type="image/x-icon"/>
     <link rel="apple-touch-icon" type="image/x-icon" href="/static/logo.png"/>

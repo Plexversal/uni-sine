@@ -1,0 +1,9 @@
+/* Layout.module.css */
+.container {
+    display: flex;
+}
+
+.main {
+    margin-top: 60px; /* Push the main content down by the nav height */
+    flex-grow: 1;
+}

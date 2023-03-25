@@ -1,0 +1,46 @@
+/* components/UserAccountModal.module.css */
+.Modal,
+.modal-initial {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  background-color: white;
+  padding: 2rem;
+  border-radius: 4px;
+  outline: none;
+  /* max-width: 400px;
+  width: 90%; */
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.modal-open {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+.Overlay,
+.overlay-initial {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 0.3s ease;
+}
+
+.overlay-open {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.close-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}

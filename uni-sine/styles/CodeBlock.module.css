@@ -1,0 +1,18 @@
+.code-container {
+    background-color: "#1e1e1e";
+    padding-left: "1rem";
+    border-radius: "5px";
+    font-size: "1.1em";
+    position: relative;
+}
+
+.copy-btn {
+    background-color: #333;
+    color: white;
+    border-radius: 3px;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    font-size: 0.9em;
+    outline: none;
+    border: none;
+}

@@ -3,8 +3,6 @@ import SecondaryBanner from '../../components/page-construction/SecondaryBanner'
 import styles from '../../styles/Page.module.css'
 import React, { useEffect, useState } from "react"
 import P5NormalDistribution from "../../components/p5-interactions/P5NormalDistribution"
-import FastRead from "../../components/page-construction/FastRead"
-import Head from "next/head"
 
 function Distributions() {
 
@@ -30,7 +28,6 @@ function Distributions() {
 
             <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
-                    <FastRead />
                     <h2>Binomial distributions</h2>
                     <img alt=''src="/static/maths/probability/image058.png" className={styles['equation']}></img>
 

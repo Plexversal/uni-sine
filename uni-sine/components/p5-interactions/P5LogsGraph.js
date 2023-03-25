@@ -178,7 +178,7 @@ function P5Graph(props) {
           <label className={styles['input-switch-label']} htmlFor="lnSwitch">Toggle</label>
         </div>
     </div> : <></>}
-    {props?.showFunction ? <p><strong>y = {funcA} log<sub>{lnOn ? `e` : funcC}</sub>(x + {funcB})</strong></p> : <></>}
+    {props?.showFunction ? <p className='exclude-fast-read'><strong>y = {funcA} log<sub>{lnOn ? `e` : funcC}</sub>(x + {funcB})</strong></p> : <></>}
  
   </div>
 

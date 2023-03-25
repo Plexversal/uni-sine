@@ -58,10 +58,10 @@ function Cubics() {
                     <p>The discriminant is a none zero number and so there will be 2 answers for the x value and so a minimum and maximum will be present.</p>
                     <img alt=''src="/static/maths/cubic-equations/image007.png" className={styles['equation']}></img>
                     <p>The Y value for the above points can be found simply by putting these specific x values back into the cubic equation:</p>
-                    <img alt=''src="/static/maths/cubic-equations/correction-image001 (1).png" className={styles['equation']}></img>
-                    <img alt=''src="/static/maths/cubic-equations/correction-image001 (2).png" className={styles['equation']}></img>
-                    <img alt=''src="/static/maths/cubic-equations/correction-image001 (3).png" className={styles['equation']}></img>
-                    <img alt=''src="/static/maths/cubic-equations/correction-image001 (4).png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/correction-image001.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/correction-image002.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/correction-image003.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/maths/cubic-equations/correction-image004.png" className={styles['equation']}></img>
 
 
                     <p>Step 3) find the second derivative of the quadratic equation and input the x values we just found:</p>

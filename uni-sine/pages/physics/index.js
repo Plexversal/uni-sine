@@ -5,29 +5,36 @@ import styles from '../../styles/Content.module.css'
 import { useEffect, useState } from 'react'
 import fs from 'fs/promises'
 
-export async function getStaticProps() {
-    let paths1 = await fs.readdir('../uni-sine/pages/physics')
-    let paths = paths1.map((e, i) =>
-        e.replace(/\.[^\/.]+$/, "")
-
-    ).filter(e => e != `index`)
+export async function getServerSideProps() {
+    const paths1 = await fs.readdir('../uni-sine/pages/physics')
+    const paths = paths1
+      .map((e) => e.replace(/\.[^\/.]+$/, ''))
+      .filter((e) => e !== 'index')
+  
+    const formattedData = await Promise.all(
+      paths.map(async (e) => {
+        const response = await fetch(`http://localhost:3000/physics/${e}`)
+        const data = await response.text()
+        return { [e]: data }
+      })
+    )
+  
     return {
-        props: {
-            paths
-        }
+      props: {
+        pageData: formattedData,
+      },
     }
-}
+  }
 
-export default function Physics({ paths }) {
+export default function Physics({ pageData }) {
 
-    const [currentDir, setCurrentDir] = useState(null)
+    const currentDir = '/physics'
     const [forcesTopic, setForcesTopic] = useState(null)
     const [particlesTopic, setParticlesTopic] = useState(null)
     const [noResults, setNoResults] = useState(false)
 
 
     useEffect(() => {
-        setCurrentDir(window.location.pathname);
         setForcesTopic(document.getElementById('forces-topic-wrapper').children.length > 0)
         setParticlesTopic(document.getElementById('particles-topic-wrapper').children.length > 0)
 
@@ -36,7 +43,7 @@ export default function Physics({ paths }) {
         setNoResults(Array.from(collection).some(e => e.tagName === 'H2'))
 
     })
-    
+
     const [documentsContentListArray, setList] = useState([
         {
             title: 'Specific charge',
@@ -83,25 +90,10 @@ export default function Physics({ paths }) {
         },
     ])
 
-    const [data, setData] = useState([])
-    const [isLoading, setLoading] = useState(false)
     const [searchTerm, setSearchTerm] = useState(null)
 
     function searchQuery(e) {
         setSearchTerm(e.target.value)
-        if (!(data.length > 0)) {
-            setLoading(true)
-            paths.forEach(e => {
-                fetch(`http://localhost:3000/${currentDir}/${e}`)
-                    .then(r => r.text())
-                    .then((data) => {
-                        setData(oldArray => [...oldArray, { [e]: data }])
-                        setLoading(false)
-                    })
-            })
-        }
-
-
     }
 
     function displayTopic(topic) {
@@ -119,7 +111,7 @@ export default function Physics({ paths }) {
                         description={documentsContentListArray[i].description} />
                 } else {
                     // loop through fetched data, check if the path of current topic looped through is equal to the to path in data
-                    data.forEach(e => Object.keys(e).forEach((key, index) => {
+                    pageData.forEach(e => Object.keys(e).forEach((key, index) => {
                         if (e[key].toLowerCase().includes(searchTerm.toLowerCase())) {
                             if (a.path == key) return check = true
                         }
@@ -141,10 +133,10 @@ export default function Physics({ paths }) {
         }
         )
     }
-    function searchComponent () {
+    function searchComponent() {
         return (<div className={styles['search-content-wrapper']}>
-        <input placeholder='Browse topics below or search' className={styles['user-topic-search']} id='user-search-topic' onChange={e => searchQuery(e)} type='text'></input>
-    </div>)
+            <input placeholder='Browse topics below or search' className={styles['user-topic-search']} id='user-search-topic' onChange={e => searchQuery(e)} type='text'></input>
+        </div>)
     }
 
     return (
@@ -153,17 +145,17 @@ export default function Physics({ paths }) {
             <div className={styles['content-container']}>
                 {!noResults ? <h2>No topics match search criteria</h2> : <></>}
 
-                        <div id='middle-content-container' className={styles['middle-content-container']}>
-                            {forcesTopic ? <h2 id='forces-topic-title'>Forces</h2> : <></>}
-                            <div id='forces-topic-wrapper' className={styles['middle-content-wrapper']}>
-                                {displayTopic('Forces')}
-                            </div>
-                            {particlesTopic ? <h2 id='particles-topic-title'>Particles</h2> : <></>}
-                            <div id='particles-topic-wrapper' className={styles['middle-content-wrapper']}>
-                                {displayTopic('Particles')}
-                            </div>
-                        </div>
-                
+                <div id='middle-content-container' className={styles['middle-content-container']}>
+                    {forcesTopic ? <h2 id='forces-topic-title'>Forces</h2> : <></>}
+                    <div id='forces-topic-wrapper' className={styles['middle-content-wrapper']}>
+                        {displayTopic('Forces')}
+                    </div>
+                    {particlesTopic ? <h2 id='particles-topic-title'>Particles</h2> : <></>}
+                    <div id='particles-topic-wrapper' className={styles['middle-content-wrapper']}>
+                        {displayTopic('Particles')}
+                    </div>
+                </div>
+
             </div>
         </>
     )

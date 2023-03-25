@@ -7,7 +7,12 @@
     border-style: solid;
     border-image-slice: 1;
     text-align: center;
-
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1; /* Ensure the nav stays on top of other elements */
+    /* Add any additional styles for your Nav */
 }
 
 #navbar > * {

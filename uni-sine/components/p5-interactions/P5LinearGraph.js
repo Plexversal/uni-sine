@@ -145,7 +145,7 @@ function P5Graph(props) {
         <div id='function-c-label'>B = {funcC}</div>
       </div>
     </div> : <></>}
-    {props?.showFunction ? <p>
+    {props?.showFunction ? <p className='exclude-fast-read'>
         <strong>
               y =&nbsp;
               {Math.sign(funcB) == 0 ? (funcC != 0 ? `` : `0`) :

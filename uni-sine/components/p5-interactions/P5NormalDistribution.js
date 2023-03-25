@@ -179,7 +179,7 @@ let height = windowWidth
         <div id='function-a-label'>X = {<input id='function-text' step="0.05" min="-99" max="99" value={funcA} onKeyDown={enforceMinMax} onChange={onChangeText}></input>}</div>
       </div>
     </div> : <></>}
-    {props?.showFunction ? <p>P(X &#60; {funcA}) (area) = <strong>{
+    {props?.showFunction ? <p className='exclude-fast-read'>P(X &#60; {funcA}) (area) = <strong>{
     
       funcA < 0 ?  ((-erf(-(funcA/Math.sqrt(2)))+1)/2).toFixed(7) : ((erf((funcA/Math.sqrt(2)))+1)/2).toFixed(7)
     

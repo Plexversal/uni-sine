@@ -196,3 +196,13 @@
     }
     
 }
+
+.code-snippet {
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: block;
+    font-family: "Courier New", monospace;
+    padding: 10px;
+    white-space: pre-wrap; /* This is important to preserve the code indentation */
+}

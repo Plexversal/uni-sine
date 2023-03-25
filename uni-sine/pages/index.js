@@ -4,32 +4,40 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useEffect } from 'react'
 import { useAnimation } from 'framer-motion'
+import { useUser } from '@auth0/nextjs-auth0/client';
+import Script from 'next/script'
+import PricingPage  from '../components/page-construction/Payment'
+import Header from '../components/page-construction/Header'
 export const getServerSideProps = ({ query }) => ({
   props: query
 });
 
 export default function Home(props) {
-  console.log(props.country)
-  const [ ref, inViewS2 ] = useInView({
+
+  const { user, error, isLoading } = useUser();
+  //if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error.message}</div>;
+
+  const [ref, inViewS2] = useInView({
     triggerOnce: true,
     threshold: .1
   })
 
-  const [ ref2, inViewS3 ] = useInView({
+  const [ref2, inViewS3] = useInView({
     triggerOnce: true,
     threshold: .1
   })
-  const [ ref3, inViewS4 ] = useInView({
-    triggerOnce: true,
-    threshold: .1
-  })
-
-  const [ ref4, inViewS5 ] = useInView({
+  const [ref3, inViewS4] = useInView({
     triggerOnce: true,
     threshold: .1
   })
 
-  
+  const [ref4, inViewS5] = useInView({
+    triggerOnce: true,
+    threshold: .1
+  })
+
+
   const animation = useAnimation()
   const animation2 = useAnimation()
   const animation3 = useAnimation()
@@ -43,7 +51,7 @@ export default function Home(props) {
   const animation11 = useAnimation()
 
   useEffect(() => {
-    if(inViewS3) {
+    if (inViewS3) {
       animation10.start({
         scale: 1,
         opacity: 1,
@@ -66,7 +74,7 @@ export default function Home(props) {
         x: '0'
       })
     }
-    if(!inViewS3){
+    if (!inViewS3) {
       animation10.start({
         x: '-100vw',
         opacity: 0,
@@ -82,7 +90,7 @@ export default function Home(props) {
   }, [inViewS5])
 
   useEffect(() => {
-    if(inViewS3) {
+    if (inViewS3) {
       animation8.start({
         scale: 1,
         opacity: 1,
@@ -104,7 +112,7 @@ export default function Home(props) {
         x: '0'
       })
     }
-    if(!inViewS3){
+    if (!inViewS3) {
       animation8.start({
         x: '-100vw',
         opacity: 0,
@@ -120,7 +128,7 @@ export default function Home(props) {
   }, [inViewS4])
 
   useEffect(() => {
-    if(inViewS3) {
+    if (inViewS3) {
       animation6.start({
         scale: 1,
         opacity: 1,
@@ -142,7 +150,7 @@ export default function Home(props) {
         x: '0'
       })
     }
-    if(!inViewS3){
+    if (!inViewS3) {
       animation6.start({
         x: '-100vw',
         opacity: 0,
@@ -192,7 +200,7 @@ export default function Home(props) {
 
       })
       animation4.start({
-          scale: '10'
+        scale: '10'
       })
       // animation5.start({
       //   clipPath: 'circle(150% at 0% 50%)',
@@ -218,10 +226,10 @@ export default function Home(props) {
       })
       animation4.start({
         scale: '0'
-    })
-    // animation5.start({
-    //   clipPath: 'circle(10% at 0% 50%)'
-    // })
+      })
+      // animation5.start({
+      //   clipPath: 'circle(10% at 0% 50%)'
+      // })
     }
   }, [inViewS2])
 
@@ -229,23 +237,15 @@ export default function Home(props) {
     document.getElementById('field-select-section').scrollIntoView({
       block: 'start',
       behavior: 'smooth'
-  })
+    })
   }
-  
+
   return (
     <>
+        <Script src='https://js.stripe.com/v3/pricing-table.js' async={true} defer />
+
       <div className={styles.container}>
-      <header className={styles['header']}>
-            <div className={styles['logo']}>
-              <h1>Uni-Sine</h1>
-              <p>Learning</p>
-              <p>{props.country}</p>
-            </div>
-            <div className={styles['account-actions']}>
-              <a className={styles['join-link']}>Join</a>
-              <a className={styles['sign-in-link']}>Sign in</a>
-            </div>
-          </header>
+        <Header />
         <section className={styles['landing-section']}>
 
           <div className={styles['landing-section-content']}>
@@ -253,7 +253,7 @@ export default function Home(props) {
               <h1>All the knowledge you need in one place</h1>
               <p>Uni-Sine Learning is an online learning platform designed to help you learn through visual and interactive tools.</p>
               <p>Need to pass your exams? Or perhaps just curious about the world. This is the place to learn. </p>
-              <motion.button onClick={scrollClick} transition={{repeat: Infinity, repeatDelay: 1}} animate={{ scale: [1, 1.1, 1.2, 1, 1]}} className={styles['explore-btn']}>Explore Topics</motion.button>
+              <motion.button onClick={scrollClick} transition={{ repeat: Infinity, repeatDelay: 1 }} animate={{ scale: [1, 1.1, 1.2, 1, 1] }} className={styles['explore-btn']}>Explore Topics</motion.button>
             </div>
 
             <div className={styles['image-container']}>
@@ -337,10 +337,11 @@ export default function Home(props) {
                 <li>Tools designed with hard coded math for accurate results</li>
               </ul>
             </div>
-            {/* <Image></Image> */}
+            <img src='/static/home/unique-questions.gif' />
+
           </div>
           <div className={styles['info-bubble']}>
-            {/* <Image></Image> */}
+            <img src='/static/home/interactive-comps.gif' />
             <div>
               <h1>30+ Different visual calculators</h1>
               <p>Go beyond a standard calculator with a variety of visual graphing and algebra calculators specially designed for helping you learn faster</p>
@@ -349,13 +350,13 @@ export default function Home(props) {
           </div>
           <div className={styles['info-bubble']}>
             <div>
-            <h1>High level math explained for any skill level</h1>
+              <h1>High level math explained for any skill level</h1>
               <p>We know not everyone can pick up math easily, that&apos;s why we make every effort to show and derive every step.</p>
             </div>
-            {/* <Image></Image> */}
+            <img className={styles['info-bubble-img-no-style']} src='/static/home/math-visual-4.png' />
           </div>
           <div className={styles['info-bubble']}>
-            {/* <Image></Image> */}
+            <img src='/static/home/unique-questions.gif' />
             <div>
               <h1>Built for A-levels and ACT&apos;s</h1>
               <ul>
@@ -367,91 +368,93 @@ export default function Home(props) {
 
         </section>
         <section className={styles['price-section']}>
+          {/* <PricingPage /> */}
           <h1>Choose a plan</h1>
           <div className={styles['plan-options-container']}>
+            <div>
               <div>
-                <div>
-                  <p>Billed Monthly</p>
-                  <h2>$10 / month</h2>
-                  <ul className={styles['feature-list']}>
-                    <li>Full access to all interactive components and calculators</li>
-                    <li>Access to all premium and university level pages</li>
-                    <li>Email support</li>
-                  </ul>
-                </div>
-                <a>Sign up</a>
-              </div>
-              <div>
-                <div>
-                <p>Billed Yearly</p>
-                <h2>$8 / month</h2>
+                <p>Billed Monthly</p>
+                <h2>{props.country == 'GB' ? `£` : `$`}10 / month</h2>
                 <ul className={styles['feature-list']}>
                   <li>Full access to all interactive components and calculators</li>
                   <li>Access to all premium and university level pages</li>
                   <li>Email support</li>
                 </ul>
-                </div>
-                <a>Sign up</a>
               </div>
+              <a>Sign up</a>
+            </div>
+            <div>
               <div>
-                <div>
-                  <p>Education</p>
-                  <h2>$ Custom</h2>
-                  <p>For education institutions looking to get access for multiple students.</p>
-                  <p>We are want everyone to have the best access to education and are happy to work with schools and colleges</p>
-                </div>
-                <a>Contact</a>
+                <p>Billed Yearly</p>
+                <h2>{props.country == 'GB' ? `£` : `$`}8 / month</h2>
+                <ul className={styles['feature-list']}>
+                  <li>Full access to all interactive components and calculators</li>
+                  <li>Access to all premium and university level pages</li>
+                  <li>Email support</li>
+                </ul>
               </div>
+              <a>Sign up</a>
+            </div>
+            <div>
+              <div>
+                <p>Education</p>
+                <h2>{props.country == 'GB' ? `£` : `$`} Custom</h2>
+                <p>For education institutions looking to get access for multiple students.</p>
+                <p>We are want everyone to have the best access to education and are happy to work with schools and colleges</p>
+              </div>
+              <a>Contact</a>
+            </div>
           </div>
         </section>
         <section ref={ref} id='field-select-section' className={styles['field-select-section']}>
           <motion.div animate={animation5} className={styles['field-select-section-container']}>
-          <h1>Choose a field</h1>
-          <div className={styles['selections']}>
+            <h1>Choose a field</h1>
+            <div className={styles['selections']}>
 
-            <motion.div  animate={animation}
-              className={styles['category-section']}>
-              <div className={`${styles['physics-banner']} ${styles.banner}`}>
-                <div className={styles['banner-content-container']}>
-                  <img alt=''className={styles['img-category']} src='/static/home/physics_home.svg'></img>
+              <motion.div animate={animation}
+                className={styles['category-section']}>
+                <div className={`${styles['physics-banner']} ${styles.banner}`}>
+                  <div className={styles['banner-content-container']}>
+                    <img alt='' className={styles['img-category']} src='/static/home/physics_home.svg'></img>
 
 
-                  <h1>Physics</h1>
-                  <p>Find various topics across all areas of physics and learn the nature of how our entire universe works.</p>
-                  <Link href='/physics'><button className={styles['field-btn']}>Jump in!</button></Link>
+                    <h1>Physics</h1>
+                    <p>Find various topics across all areas of physics and learn the nature of how our entire universe works.</p>
+                    <Link href='/physics'><button className={styles['field-btn']}>Jump in!</button></Link>
+                  </div>
                 </div>
-              </div>
 
-            </motion.div>
+              </motion.div>
 
-            <motion.div  animate={animation2} className={styles['category-section']}>
-              <div className={`${styles['maths-banner']} ${styles.banner}`}>
+              <motion.div animate={animation2} className={styles['category-section']}>
+                <div className={`${styles['maths-banner']} ${styles.banner}`}>
 
-                <div className={styles['banner-content-container']}>
-                  <img alt=''className={styles['img-category']} src='/static/home/maths_home.svg'></img>
-                  <h1>Mathematics</h1>
-                  <p>Learn the fundamentals in the natural language of the universe itself and discover great mathematical ability.</p>
-                  <Link href='/mathematics'><button className={styles['field-btn']}>Jump in!</button></Link>
+                  <div className={styles['banner-content-container']}>
+                    <img alt='' className={styles['img-category']} src='/static/home/maths_home.svg'></img>
+                    <h1>Mathematics</h1>
+                    <p>Learn the fundamentals in the natural language of the universe itself and discover great mathematical ability.</p>
+                    <Link href='/mathematics'><button className={styles['field-btn']}>Jump in!</button></Link>
+                  </div>
                 </div>
-              </div>
 
-            </motion.div>
+              </motion.div>
 
-            <motion.div animate={animation3} className={styles['category-section']}>
-              <div className={`${styles['comp-banner']} ${styles.banner}`}>
-                <div className={styles['banner-content-container']}>
-                  <img alt=''className={styles['img-category']} src='/static/home/comp_sci_home.svg'></img>
+              <motion.div animate={animation3} className={styles['category-section']}>
+                <div className={`${styles['comp-banner']} ${styles.banner}`}>
+                  <div className={styles['banner-content-container']}>
+                    <img alt='' className={styles['img-category']} src='/static/home/comp_sci_home.svg'></img>
 
-                  <h1>Computer Science</h1>
-                  <p>Discover the true power of technology and learn various coding techniques, IT skills and applied math.</p>
-                  <p><strong>Coming soon!</strong></p>
-                  {/* <Link href='/computer-science'><button className={styles['field-btn']}>Jump in!</button></Link> */}
+                    <h1>Computer Science</h1>
+                    <p>Discover the true power of technology and learn various coding techniques, IT skills and applied math.</p>
+                    <Link href='/computer-science'><button className={styles['field-btn']}>Jump in!</button></Link>
 
+                    {/* <Link href='/computer-science'><button className={styles['field-btn']}>Jump in!</button></Link> */}
+
+                  </div>
                 </div>
-              </div>
 
-            </motion.div>
-          </div>
+              </motion.div>
+            </div>
           </motion.div>
         </section>
 

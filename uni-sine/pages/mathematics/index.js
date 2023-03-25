@@ -3,23 +3,35 @@ import Selection from '../../components/page-construction/Selection'
 import styles from '../../styles/Content.module.css'
 import { useEffect, useState } from 'react'
 import fs from 'fs/promises'
+import path from 'path'
 
-export async function getStaticProps() {
-    let paths1 = await fs.readdir('../uni-sine/pages/mathematics')
-    let paths = paths1.map((e, i) =>
-        e.replace(/\.[^\/.]+$/, "")
 
-    ).filter(e => e != `index`)
+export async function getServerSideProps({ }) {
+    const paths1 = await fs.readdir('../uni-sine/pages/mathematics')
+    const paths = paths1
+      .map((e) => e.replace(/\.[^\/.]+$/, ''))
+      .filter((e) => e !== 'index')
+  
+    const formattedData = await Promise.all(
+      paths.map(async (e) => {
+        const response = await fetch(`http://localhost:3000/mathematics/${e}`)
+        const data = await response.text()
+        return { [e]: data }
+      })
+    )
+  
     return {
-        props: {
-            paths
-        }
+      props: {
+        pageData: formattedData,
+      },
     }
-}
+  }
+  
 
-export default function Maths({ paths }) {
+export default function Maths({ pageData }) {
 
-    const [currentDir, setCurrentDir] = useState(null)
+
+    const currentDir = '/mathematics'
     const [algebraTopic, setAlgebraTopic] = useState(null)
     const [graphingTopic, setGraphingTopic] = useState(null)
     const [trigonometryTopic, setTrigonometryTopic] = useState(null)
@@ -31,7 +43,6 @@ export default function Maths({ paths }) {
 
 
     useEffect(() => {
-        setCurrentDir(window.location.pathname);
         setAlgebraTopic(document.getElementById('algebra-topic-wrapper').children.length > 0)
         setGraphingTopic(document.getElementById('graphing-topic-wrapper').children.length > 0)
         setTrigonometryTopic(document.getElementById('trigonometry-topic-wrapper').children.length > 0)
@@ -43,7 +54,6 @@ export default function Maths({ paths }) {
         setNoResults(Array.from(collection).some(e => e.tagName === 'H2'))
 
     })
-    
     const [documentsContentListArray, setList] = useState([
         {
             title: 'Laws of exponents',
@@ -144,29 +154,15 @@ export default function Maths({ paths }) {
         // },
     ])
 
-    const [data, setData] = useState([])
-    const [isLoading, setLoading] = useState(false)
+ 
     const [searchTerm, setSearchTerm] = useState(null)
 
     function searchQuery(e) {
-        // fetch all pages available in maths and store all the html data locally for the client
         setSearchTerm(e.target.value)
-        if (!(data.length > 0)) {
-            setLoading(true)
-            paths.forEach(e => {
-                fetch(`http://localhost:3000/${currentDir}/${e}`)
-                    .then(r => r.text())
-                    .then((data) => {
-                        setData(oldArray => [...oldArray, { [e]: data }])
-                        setLoading(false)
-                    })
-            })
-        }
-
 
     }
-
     function displayTopic(topic) {
+        
         return documentsContentListArray.map((a, i) => {
             // User search functionality
 
@@ -181,7 +177,7 @@ export default function Maths({ paths }) {
                         description={documentsContentListArray[i].description} />
                 } else {
                     // loop through fetched data, check if the path of current topic looped through is equal to the to path in data
-                    data.forEach(e => Object.keys(e).forEach((key, index) => {
+                    pageData.forEach(e => Object.keys(e).forEach((key, index) => {
                         if (e[key].toLowerCase().includes(searchTerm.toLowerCase())) {
                             if (a.path == key) return check = true
                         }

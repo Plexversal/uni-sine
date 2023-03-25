@@ -4,7 +4,7 @@
   background: radial-gradient(circle at bottom right, #200047 0%, #496C6C 42%, #496C6C 100%);
   backdrop-filter:blur(100px);
   width: 100%;
-  min-height: 1080px;
+  min-height: 880px;
   padding: 0px 0px 20px;
   color: #fff;
   background-size: cover;
@@ -48,7 +48,7 @@
 }
 .header > div > h1 {
   margin: 0;
-  font-size: 2.5em !important;
+  font-size: 2.5em;
   color: #FF006B;
 }
 .header > div > p {
@@ -58,7 +58,7 @@
 }
 
 
-.header > div > a {
+.acc-btn {
   padding: 10px 50px;
   border-radius: 999px;
   font-weight: 500;
@@ -66,6 +66,30 @@
   font-size: 1.3em;
   margin: 0px 10px;
   cursor: pointer;
+}
+
+.signed-in-info{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.signed-in-info > h1 {
+  font-size: 1.6em;
+  color: white;
+  font-weight: 500;
+  margin: 0;
+}
+
+.signed-in-actions > a {
+  color: #FF006B;
+  font-weight: 400;
+  margin-left: 10px;
+}
+
+.signed-in-actions > a:hover {
+  text-decoration: underline;
 }
 
 .explore-btn {
@@ -78,7 +102,7 @@
   background: none;
   color: white;
   cursor: pointer;
-  margin-top: 100px;
+  margin-top: 20px;
   font-family: inherit;
   transition: all .3s;
 
@@ -158,32 +182,59 @@
   flex-basis: 1;
   justify-content: center;
   align-items: center;
-  transform: translate(0, -16rem);
+  transform: translate(0, -11rem);
 }
 .info-bubble {
   border-radius: 3rem;
   background: white;
   box-shadow: 17px 16px 38px 5px rgba(0,0,0,0.1);
-  padding: 80px;
+  padding: 80px 100px;
   margin: 20px 0;
   width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.info-bubble img {
+  filter: drop-shadow(16px 19px 16px rgba(0, 0, 0, 0.151));
+  border-radius: 30px;
+  width: 350px;
+
+}
+.info-bubble-img-no-style {
+  filter: drop-shadow(-16px -12px 20px rgba(0, 0, 0, 0.1)) !important;
+  border-radius: 0 !important;
 }
 
 .info-bubble > div > h1 {
   font-size: 3em !important;
   font-weight: 500;
-  margin: 0;
+  margin-top: 0;
 }
-
+.info-bubble > div > ul {
+  padding-left: 25px;
+}
+.info-bubble > div > ul > li {
+  margin: 10px 0;
+  font-size: 1.2em;
+  color: #535353;
+}
+.info-bubble > div > p {
+  font-size: 1.2em;
+  color: #535353;
+}
 .price-section > h1 {
   text-align: center;
   color: #fff;
   font-weight: 500;
 }
 
+
 .price-section {
   background: #000;
-  padding: 200px 0;
+  padding: 200px 20px;
 }
 
 .plan-options-container {
@@ -268,7 +319,7 @@
 }
 
 .container section h1 {
-  font-size: 4em;
+  font-size: 3.8em;
 }
 
 .head-content-container {
@@ -395,29 +446,39 @@
   font-size: 1.5em;
 }
 
-@media (max-width: 1500px)  {
-  .landing-section-content {
+@media (max-width: 1600px)  {
+  .landing-section-content > div > h1 {
+    font-size: 3.5em;
+  }
+  .home-img-1 {
+    width: 90px;
+  }
 
-    margin: 0 50px 100px 50px;
+  .home-img-2 {
+    width: 300px;
+  }
+
+  .home-img-3 {
+    width: 400px;
+  }
+}
+
+@media (max-width: 1500px)  {
+
+  .landing-section-content {
+    gap: 30px;
+    margin: 200px 50px
+  }
+  .landing-section-content > div > h1{
+    font-size: 3.3em;
 
   }
-  
 
   .landing-section-top {
     margin: 0 50px;
   }
 
-  .home-img-1 {
-    width: 100px;
-  }
 
-  .home-img-2 {
-    width: 250px;
-  }
-
-  .home-img-3 {
-    width: 475px;
-  }
   .section-three {
     padding: 0 50px 100px 50px;
   }
@@ -428,10 +489,39 @@
 
 }
 
+@media (max-width: 1200px) {
+  .home-img-1 {
+    width: 80px;
+  }
+
+  .home-img-2 {
+    width: 270px;
+  }
+
+  .home-img-3 {
+    width: 370px;
+  }
+
+  .explore-btn {
+    margin-top: 20px;
+  }
+
+  .info-bubble {
+      width: 800px;
+
+  }
+  .info-bubble > div > h1 {
+    font-size: 2em !important;
+}
+  .info-bubble > img{
+   width: 300px;
+}
+}
+
 @media (max-width: 1000px)  {
   .landing-section-content {
     flex-direction: column;
-    margin: 0 50px 100px 50px;
+    gap: 100px;
   }
 
   .section-three {
@@ -445,27 +535,98 @@
   .section-three-content-sub div h1 {
     font-size: 3em;
   }
-  .landing-section-top > h1 {
-    font-size: 3.3em !important;
+
+  .landing-section {
+    height: 1400px;
+  }
+
+  .home-img-1 {
+    width: 100px;
+  }
+
+  .home-img-2 {
+    width: 310px;
+  }
+
+  .home-img-3 {
+    width: 400px;
+  }
+
+  .info-bubble {
+    width: 600px;
+    padding: 40px 40px;
+  }
+  .info-bubble > div > h1 {
+    font-size: 1.8em !important;
+  }
+  .info-bubble > img{
+  width: 250px;
+  }
+  .info-bubble > div > ul > li {
+
+    font-size: 1em;
+  }
+  .info-bubble > div > p {
+    font-size: 1em;
+  }
+
+  .price-section {
+    padding: 100px 20px;
+  }
+
+  .plan-options-container {
+    flex-direction: column;
+    gap: 40px
+  }
+  .plan-options-container > div:nth-child(2) {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 800px) {
+  .header {
+    padding: 15px 20px;
+  }
+
+  .header > div > h1 {
+    font-size: 2em;
+  }
+  .acc-btn {
+    padding: 10px 30px;
+    font-size: 1em;
+    margin: 0;
+    margin-left: 12px;
+  }
+}
+
+@media (max-width: 600px)  { 
+  .info-bubble {
+    width: 380px;
+    padding: 30px 20px;
+    flex-direction: column;
+    border-radius: 30px;
+  }
+
+  .info-bubble img {
+    order: 1;
+  }
+  .container section h1 {
+    font-size: 3.2em;
   }
 
 }
 
 @media (max-width: 600px)  {
   .home-img-1 {
-    width: 100px;
-    height: 150px;
+    width: 80px;
   }
 
   .home-img-2 {
-    width: 200px;
-    height: 200px;
+    width: 220px;
   }
 
   .home-img-3 {
-    width: 250px;
-    height: 350px;
-    grid-column: 2/-2;
+    width: 270px;
   }
   .section-three-content-sub img {
     width: 300px;
@@ -476,5 +637,60 @@
   }
   .section-three-content-sub div h1 {
     font-size: 2em;
+  }
+}
+
+
+@media (max-width: 420px)  {
+  .landing-section {
+    height: 1000px;
+  } 
+  .landing-section-content {
+    margin: 100px 30px;
+  }
+  .landing-section-content >div > h1 {
+    font-size: 2.8em;
+  }
+  .landing-section-content >div > p {
+    font-size: 1.2em;
+  }
+  .info-bubble {
+    width: 300px;
+    padding: 20px 20px;
+    flex-direction: column;
+  }
+  .home-img-1 {
+    width: 60px;
+  }
+
+  .home-img-2 {
+    width: 200px;
+  }
+
+  .home-img-3 {
+    width: 230px;
+  }
+  .info-bubble img {
+    width: 200px;
+  }
+  .header {
+    padding: 15px 10px;
+  }
+
+  .header > div > h1 {
+    font-size: 1.5em;
+  }
+  .acc-btn {
+    padding: 10px 15px;
+  }
+
+  .info-bubbles-section {
+    transform: translate(0, -6rem);
+  }
+
+  .plan-options-container > div {
+    padding: 20px;
+    width: 300px;
+    height: 400px;
   }
 }

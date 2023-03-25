@@ -1,18 +1,21 @@
 import Nav from "./Nav";
 import Footer from './Footer'
-
+import SidePanel from "./SidePanel";
+import styles from '../../styles/Layout.module.css'
 const Layout = ({ children }) => {
-
-
     return (
         <>
-        <Nav />
-            <main>
-                {children}
-            </main>
-        <Footer />
+            <Nav />
+            <div className={styles.container}>
+                <SidePanel />
+                <main className={styles.main}>
+                    {children}
+                    <Footer />
+
+                </main>
+            </div>
         </>
     )
 }
 
-export default Layout
+export default Layout;

@@ -166,7 +166,7 @@ function P5Graph(props) {
     </div> : <></>}
     {
     props?.showFunction ? 
-        <p>
+        <p className='exclude-fast-read'>
             
             <strong>
               y = {Math.sign(funcA) == 0 ? `` :
