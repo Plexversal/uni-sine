@@ -7,7 +7,7 @@ const Unauthorized = () => {
     return (
         <div>
             <p>{router.query.errorDescription || `There was an error signing you in, please try again later.`}</p>
-            <a href='/'>Return home</a>
+            <Link href='/'>Return home</Link>
         </div>
     )
 };

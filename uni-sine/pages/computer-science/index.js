@@ -12,12 +12,14 @@ export default function CompScience({  }) {
   
     useEffect(() => {
       const fetchData = async () => {
-        const response = await fetch(`/api/pageData?currentRoute=${router.route}`);
+        console.log(`/api/page-data?currentRoute=${router.route}&absoluteURL=${`${window.location.protocol}//${window.location.host}${router.route}`}`)
+        const response = await fetch(`/api/page-data?currentRoute=${router.route}&absoluteURL=${`${window.location.protocol}//${window.location.host}${router.route}`}`);
         const data = await response.json();
         setPageData(data);
+        console.log(data)
       };
       fetchData();
-      console.log(router.route)
+      console.log('fetched')
     }, [router.route]);
 
 

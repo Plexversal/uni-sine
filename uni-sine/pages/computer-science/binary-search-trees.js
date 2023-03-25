@@ -44,7 +44,7 @@ function BST() {
                     </ol>
                     <p>These properties ensure that BSTs have an ordered structure, which allows for efficient searching, insertion, and deletion operations.</p>
                     <h2>Searching in a Binary Search Tree</h2>
-                    <p>To search for an element in a BST, start at the root node and follow the tree structure based on the element's value:</p>
+                    <p>To search for an element in a BST, start at the root node and follow the tree structure based on the element&apos;s value:</p>
                     <ol>
                         <li>If the element is equal to the value of the current node, the search is successful.</li>
                         <li>If the element is less than the value of the current node, move to the left child.</li>

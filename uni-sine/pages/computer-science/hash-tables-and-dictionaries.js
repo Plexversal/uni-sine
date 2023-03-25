@@ -53,7 +53,7 @@ function HashTables() {
                         <li>Open addressing: This method uses a process called probing to find an alternative index for the colliding key. A common approach is linear probing, which searches for the next available index in a linear fashion.</li>
                     </ol>
                     <h2>Code Example: JavaScript Dictionary</h2>
-                    <p>In JavaScript, dictionaries are implemented using the built-in <strong>Map</strong> object. Here's a simple example of using a JavaScript dictionary:</p>
+                    <p>In JavaScript, dictionaries are implemented using the built-in <strong>Map</strong> object. Here&apos;s a simple example of using a JavaScript dictionary:</p>
                     <CodeBlock
                     language="cpp"
                     code={`// Create a new dictionary
@@ -75,9 +75,9 @@ console.log(dictionary.has('cherry')); // Output: true
 
 // Get the number of items in the dictionary
 console.log(dictionary.size); // Output: 2`}/>
-                    <p>This example demonstrates basic operations on a JavaScript dictionary, such as insertion, retrieval, deletion, checking for a key's existence, and finding the size of the dictionary. It is important to note that the underlying implementation of the <strong>Map</strong> object may vary between JavaScript engines, but most modern engines use a variant of hash tables for efficient performance.</p>
+                    <p>This example demonstrates basic operations on a JavaScript dictionary, such as insertion, retrieval, deletion, checking for a key&apos;s existence, and finding the size of the dictionary. It is important to note that the underlying implementation of the <strong>Map</strong> object may vary between JavaScript engines, but most modern engines use a variant of hash tables for efficient performance.</p>
                     <h2>Custom Hash Table Implementation</h2>
-                    <p>While JavaScript's built-in <strong>Map</strong> object provides a convenient and efficient way to work with dictionaries, it's also possible to create a custom hash table implementation to understand the underlying concepts better. Here's a simple example of a custom hash table in JavaScript:</p>
+                    <p>While JavaScript&apos;s built-in <strong>Map</strong> object provides a convenient and efficient way to work with dictionaries, it&apos;s also possible to create a custom hash table implementation to understand the underlying concepts better. Here's a simple example of a custom hash table in JavaScript:</p>
                     <CodeBlock
                     language="cpp"
                     code={`class HashTable {

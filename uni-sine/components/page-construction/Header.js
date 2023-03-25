@@ -1,9 +1,9 @@
 import React from "react"
 import { useUser } from '@auth0/nextjs-auth0/client';
 import styles from '../../styles/Home.module.css'
-
+import Link from "next/link";
 const Header = (props) => {
-  const { user, error, isLoading } = useUser();
+    const { user, error, isLoading } = useUser();
 
     return (
         <header className={styles['header']}>
@@ -18,16 +18,20 @@ const Header = (props) => {
                             <h1>{user.name}</h1>
 
                             <div className={styles['signed-in-actions']}>
-                                <a href='/account'>Manage Account</a>
-                                <a href='/api/auth/logout'>Logout</a>
+                                <Link href='/account'>Manage Account</Link>
+                                <Link href='/api/auth/logout'>Logout</Link>
                             </div>
 
 
                         </div>
                         :
                         <>
-                            <a href='/api/auth/login' className={`${styles['join-link']} ${styles['acc-btn']}`}>Join</a>
-                            <a href='/api/auth/login' className={`${styles['sign-in-link']} ${styles['acc-btn']}`}>Sign in</a>
+                            <Link href='/api/auth/login' passHref>
+                                <a className={`${styles['join-link']} ${styles['acc-btn']}`}>Join</a>
+                            </Link>
+                            <Link href='/api/auth/login' passHref>
+                                <a className={`${styles['sign-in-link']} ${styles['acc-btn']}`}>Sign in</a>
+                            </Link>
                         </>
                 }
 

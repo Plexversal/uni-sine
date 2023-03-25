@@ -23,147 +23,11 @@ export default function Home(props) {
     threshold: .1
   })
 
-  const [ref2, inViewS3] = useInView({
-    triggerOnce: true,
-    threshold: .1
-  })
-  const [ref3, inViewS4] = useInView({
-    triggerOnce: true,
-    threshold: .1
-  })
-
-  const [ref4, inViewS5] = useInView({
-    triggerOnce: true,
-    threshold: .1
-  })
-
-
   const animation = useAnimation()
   const animation2 = useAnimation()
   const animation3 = useAnimation()
-  const animation4 = useAnimation()
   const animation5 = useAnimation()
-  const animation6 = useAnimation()
-  const animation7 = useAnimation()
-  const animation8 = useAnimation()
-  const animation9 = useAnimation()
-  const animation10 = useAnimation()
-  const animation11 = useAnimation()
 
-  useEffect(() => {
-    if (inViewS3) {
-      animation10.start({
-        scale: 1,
-        opacity: 1,
-        transition: {
-          type: 'spring',
-          damping: '20',
-          stiffness: '80'
-        },
-        x: '0'
-      })
-      animation11.start({
-        scale: 1,
-        opacity: 1,
-        transition: {
-
-          type: 'spring',
-          damping: '20',
-          stiffness: '80'
-        },
-        x: '0'
-      })
-    }
-    if (!inViewS3) {
-      animation10.start({
-        x: '-100vw',
-        opacity: 0,
-
-      })
-      animation11.start({
-        x: '+100vw',
-        opacity: 0,
-
-
-      })
-    }
-  }, [inViewS5])
-
-  useEffect(() => {
-    if (inViewS3) {
-      animation8.start({
-        scale: 1,
-        opacity: 1,
-        transition: {
-          type: 'spring',
-          damping: '20',
-          stiffness: '80'
-        },
-        x: '0'
-      })
-      animation9.start({
-        scale: 1,
-        opacity: 1,
-        transition: {
-          type: 'spring',
-          damping: '20',
-          stiffness: '80'
-        },
-        x: '0'
-      })
-    }
-    if (!inViewS3) {
-      animation8.start({
-        x: '-100vw',
-        opacity: 0,
-
-      })
-      animation9.start({
-        x: '+100vw',
-        opacity: 0,
-
-
-      })
-    }
-  }, [inViewS4])
-
-  useEffect(() => {
-    if (inViewS3) {
-      animation6.start({
-        scale: 1,
-        opacity: 1,
-        transition: {
-          type: 'spring',
-          damping: '20',
-          stiffness: '80'
-        },
-        x: '0'
-      })
-      animation7.start({
-        scale: 1,
-        opacity: 1,
-        transition: {
-          type: 'spring',
-          damping: '20',
-          stiffness: '80'
-        },
-        x: '0'
-      })
-    }
-    if (!inViewS3) {
-      animation6.start({
-        x: '-100vw',
-        opacity: 0,
-
-      })
-      animation7.start({
-        x: '+100vw',
-        opacity: 0,
-
-
-      })
-    }
-  }, [inViewS3])
 
   useEffect(() => {
 
@@ -199,16 +63,6 @@ export default function Home(props) {
         },
 
       })
-      animation4.start({
-        scale: '10'
-      })
-      // animation5.start({
-      //   clipPath: 'circle(150% at 0% 50%)',
-      //   transition: {
-      //     duration: 1,
-
-      //   }
-      // })
     }
 
     if (!inViewS2) {
@@ -224,12 +78,6 @@ export default function Home(props) {
         opacity: 0,
         y: -60
       })
-      animation4.start({
-        scale: '0'
-      })
-      // animation5.start({
-      //   clipPath: 'circle(10% at 0% 50%)'
-      // })
     }
   }, [inViewS2])
 

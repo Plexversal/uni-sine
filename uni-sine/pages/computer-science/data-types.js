@@ -59,7 +59,7 @@ function DataTypes() {
           </ol>
           <p>[image: A table illustrating each non-primitive data type with examples]</p>
           <h3>Example</h3>
-          <p>Let's consider a simple example of using data types in a program. Suppose we are creating a program to store information about students, including their name, age, and grade point average (GPA).</p>
+          <p>Let&apos;s consider a simple example of using data types in a program. Suppose we are creating a program to store information about students, including their name, age, and grade point average (GPA).</p>
           <p>In a C++ program, we might define a structure to represent a student as follows:</p>
           <CodeBlock
             language="cpp"
@@ -69,7 +69,7 @@ function DataTypes() {
     float GPA;
 };`}
           />
-          <p>Here, we are using a combination of primitive and non-primitive data types. The 'name' attribute is a string, the 'age' attribute is an integer, and the 'GPA' attribute is a float.</p>
+          <p>Here, we are using a combination of primitive and non-primitive data types. The &apos;name&apos; attribute is a string, the &apos;age&apos; attribute is an integer, and the &apos;GPA&apos; attribute is a float.</p>
           <p>To create a new instance of a student and assign values to its attributes, we can write the following code:</p>
           <CodeBlock
             language="cpp"
@@ -83,7 +83,7 @@ student1.GPA = 3.5;`}
           <h2>Type Casting and Type Conversion</h2>
           <p>In programming, it is often necessary to convert a value from one data type to another. This process is called type casting or type conversion. There are two main types of type conversion: implicit and explicit.</p>
           <ol >
-            <li>Implicit Type Conversion: Also known as "type promotion" or "type coercion," implicit type conversion occurs when the compiler automatically converts one data type to another without the programmer's intervention. This typically occurs when performing operations between different data types, such as adding an integer and a float.</li>
+            <li>Implicit Type Conversion: Also known as "type promotion" or "type coercion," implicit type conversion occurs when the compiler automatically converts one data type to another without the programmer&apos;s intervention. This typically occurs when performing operations between different data types, such as adding an integer and a float.</li>
           </ol>
           <h3>Example:</h3>
           <CodeBlock
@@ -104,7 +104,7 @@ int num2 = 3;
 
 int result = static_cast<int>(num1) + num2; // num1 is explicitly converted to an integer`}
           />
-          <p>It's important to be cautious when performing type conversions, as they can lead to data loss or unexpected behaviour if not handled correctly. For example, converting a floating-point number to an integer will truncate the decimal portion of the value, potentially causing a loss of precision.</p>
+          <p>It&apos;s important to be cautious when performing type conversions, as they can lead to data loss or unexpected behaviour if not handled correctly. For example, converting a floating-point number to an integer will truncate the decimal portion of the value, potentially causing a loss of precision.</p>
           <h2>Choosing the Right Data Type</h2>
           <p>Selecting the appropriate data type for a given piece of information is an essential aspect of programming. When choosing a data type, consider the following factors:</p>
           <ul >

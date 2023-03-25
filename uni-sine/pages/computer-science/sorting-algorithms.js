@@ -48,7 +48,7 @@ function SortingAlgorithms() {
           </ol>
           <h2>Standard Sorting Algorithm in Most Programming Languages</h2>
           <p>Many programming languages, such as Python, Java, and C++, use the Timsort algorithm as the default sorting algorithm. Timsort is a hybrid sorting algorithm derived from merge sort and insertion sort. It takes advantage of runs (already ordered subsequences) in the input data and is adaptive, stable, and performs well on real-world data.</p>
-          <p>Sorting algorithm complexities can be expressed using Big O notation, which describes the upper bound of the algorithm's growth rate. The most common complexities are:</p>
+          <p>Sorting algorithm complexities can be expressed using Big O notation, which describes the upper bound of the algorithm&apos;s growth rate. The most common complexities are:</p>
           <ol start="1">
             <li>
               O(n^2): Quadratic complexity, typical for elementary sorting algorithms such as bubble sort, insertion sort, and selection sort. These algorithms perform well for small datasets but become inefficient as the dataset size increases.
@@ -69,12 +69,12 @@ function SortingAlgorithms() {
           <img alt='' src="/static/comp/sorting-algorithms/image003.png" className={styles['equation']}></img>
 
           <h2>Fastest Type of Sorting Algorithm: Quicksort</h2>
-          <p>Quicksort is a highly efficient and widely used sorting algorithm, which employs a divide-and-conquer strategy. It works by selecting a 'pivot' element from the array and partitioning the other elements into two groups: those less than or equal to the pivot and those greater than the pivot. The process is then recursively applied to the sub-arrays, eventually resulting in a sorted array.</p>
-          <p>The average-case time complexity of quicksort is O(n*log(n)), where n is the number of elements in the array. The O-notation, also known as Big O notation, represents the upper bound of an algorithm's growth rate. It is used to describe the performance or complexity of an algorithm as a function of input size.</p>
-          <p>To understand how the O(n*log(n)) complexity comes into play for quicksort, let's consider a specific example:</p>
+          <p>Quicksort is a highly efficient and widely used sorting algorithm, which employs a divide-and-conquer strategy. It works by selecting a &apos;pivot&apos; element from the array and partitioning the other elements into two groups: those less than or equal to the pivot and those greater than the pivot. The process is then recursively applied to the sub-arrays, eventually resulting in a sorted array.</p>
+          <p>The average-case time complexity of quicksort is O(n*log(n)), where n is the number of elements in the array. The O-notation, also known as Big O notation, represents the upper bound of an algorithm&apos;s growth rate. It is used to describe the performance or complexity of an algorithm as a function of input size.</p>
+          <p>To understand how the O(n*log(n)) complexity comes into play for quicksort, let&apos;s consider a specific example:</p>
           <p>Suppose we have an array of 8 elements: [5, 3, 9, 1, 6, 8, 2, 7]</p>
-          <p>In each step, quicksort will partition the array around the pivot, and for simplicity, let's assume the pivot selection always results in a balanced partition (i.e., the pivot element is the median). After each partition, the array will be split into two halves, and quicksort will be applied recursively to both halves.</p>
-          <p>Here's how the array will be partitioned in each step (with pivot elements in parentheses):</p>
+          <p>In each step, quicksort will partition the array around the pivot, and for simplicity, let&apos;s assume the pivot selection always results in a balanced partition (i.e., the pivot element is the median). After each partition, the array will be split into two halves, and quicksort will be applied recursively to both halves.</p>
+          <p>Here&apos;s how the array will be partitioned in each step (with pivot elements in parentheses):</p>
           <ol >
             <li>[5, 3, (1), 6, 8, 2, 7, 9]</li>
             <li>[(1), 5, 3, 6, 8, 2, 7, 9] -&gt; [(1), 3, 5, (2), 7, 8, 6, 9]</li>
@@ -91,7 +91,7 @@ function SortingAlgorithms() {
             <li>O(n^2) implies that the number of comparisons grows quadratically with the input size. Algorithms with this complexity, such as Bubble Sort or Insertion Sort, tend to be less efficient for large datasets.</li>
             <li>O(n) implies that the number of comparisons grows linearly with the input size. Linear-time algorithms, such as Counting Sort (for specific cases) or Radix Sort, can be more efficient for certain types of data.</li>
           </ul>
-          <p>Comparing different algorithms' complexities helps in understanding which one may perform better for a specific problem or dataset.</p>
+          <p>Comparing different algorithms&apos; complexities helps in understanding which one may perform better for a specific problem or dataset.</p>
           <h3>Example quicksort code in JavaScript:</h3>
           <CodeBlock
             language="javascript"
