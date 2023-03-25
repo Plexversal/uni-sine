@@ -294,7 +294,7 @@ export default function Home(props) {
 
                     <h1>Computer Science</h1>
                     <p>Discover the true power of technology and learn various coding techniques, IT skills and applied math.</p>
-                    <Link href='/computer-science'><button className={styles['field-btn']}>Jump in!</button></Link>
+                    <Link passHref href='/computer-science'><button className={styles['field-btn']}>Jump in!</button></Link>
 
                     {/* <Link href='/computer-science'><button className={styles['field-btn']}>Jump in!</button></Link> */}
 

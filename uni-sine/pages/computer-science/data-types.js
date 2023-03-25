@@ -83,7 +83,7 @@ student1.GPA = 3.5;`}
           <h2>Type Casting and Type Conversion</h2>
           <p>In programming, it is often necessary to convert a value from one data type to another. This process is called type casting or type conversion. There are two main types of type conversion: implicit and explicit.</p>
           <ol >
-            <li>Implicit Type Conversion: Also known as "type promotion" or "type coercion," implicit type conversion occurs when the compiler automatically converts one data type to another without the programmer&apos;s intervention. This typically occurs when performing operations between different data types, such as adding an integer and a float.</li>
+            <li>Implicit Type Conversion: Also known as &quot;type promotion&quot; or &quot;type coercion,&quot; implicit type conversion occurs when the compiler automatically converts one data type to another without the programmer&apos;s intervention. This typically occurs when performing operations between different data types, such as adding an integer and a float.</li>
           </ol>
           <h3>Example:</h3>
           <CodeBlock
@@ -94,7 +94,7 @@ float num2 = 3.2;
 float result = num1 + num2; // num1 is implicitly converted to a float`}
           />
           <ol start={2}>
-            <li>Explicit Type Conversion: Also known as "type casting" or "type demotion," explicit type conversion is when the programmer explicitly converts a value from one data type to another. This is typically done using a casting operator.</li>
+            <li>Explicit Type Conversion: Also known as &quot;type casting&quot; or &quot;type demotion,&quot; explicit type conversion is when the programmer explicitly converts a value from one data type to another. This is typically done using a casting operator.</li>
           </ol>
           <h3>Example:</h3>
           <CodeBlock
