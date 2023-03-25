@@ -10,57 +10,29 @@ import { Analytics } from '@vercel/analytics/react';
 // component which wraps all the pages
 function MyApp({ Component, pageProps, router }) {
 
-  if (router.pathname == `/`) return (
-    <>
-      <ErrorBoundary>
-        <UserProvider>
-          <Head>
-            <title>uni-sine</title>
-          </Head>
-          <Component {...pageProps} />
-          <Analytics />
-          <Footer />
-        </UserProvider>
-      </ErrorBoundary>
-    </>
-  )
-
-  else return (
+  return (
     <ErrorBoundary>
       <UserProvider>
-        <Layout>
-          <ErrorBoundary>
+        <Head>
+          <title>uni-sine</title>
+        </Head>
+        {router.pathname === '/' ? (
+          <>
             <Component {...pageProps} />
             <Analytics />
-          </ErrorBoundary>
-        </Layout>
+            <Footer />
+          </>
+        ) : (
+          <Layout>
+            <ErrorBoundary>
+              <Component {...pageProps} />
+              <Analytics />
+            </ErrorBoundary>
+          </Layout>
+        )}
       </UserProvider>
     </ErrorBoundary>
-  )
+  );
 }
-
-  // return (
-  //   <ErrorBoundary>
-  //     <UserProvider>
-  //       <Head>
-  //         <title>uni-sine</title>
-  //       </Head>
-  //       {router.pathname === '/' ? (
-  //         <>
-  //           <Component {...pageProps} />
-  //           <Analytics />
-  //           <Footer />
-  //         </>
-  //       ) : (
-  //         <Layout>
-  //           <ErrorBoundary>
-  //             <Component {...pageProps} />
-  //             <Analytics />
-  //           </ErrorBoundary>
-  //         </Layout>
-  //       )}
-  //     </UserProvider>
-  //   </ErrorBoundary>
-  // );
 
 export default MyApp
