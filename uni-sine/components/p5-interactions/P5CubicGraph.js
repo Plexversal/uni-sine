@@ -102,8 +102,6 @@ function P5Graph(props) {
 
       p5.beginShape()
       p5.stroke('#06A')
-      //console.log(b*pixelScale + c)
-      //console.log(typeof(c))
       for (let x = 10; x > -10; x -= 0.1) {
         let ycubic = (a * Math.pow(x, 3)) + (b * Math.pow(x, 2)) + (c * x) + d
 

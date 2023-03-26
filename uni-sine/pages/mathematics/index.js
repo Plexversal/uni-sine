@@ -2,36 +2,23 @@ import SecondaryBanner from '../../components/page-construction/SecondaryBanner'
 import Selection from '../../components/page-construction/Selection'
 import styles from '../../styles/Content.module.css'
 import { useEffect, useState } from 'react'
-import fs from 'fs/promises'
-import path from 'path'
+import { useRouter } from 'next/router'
 
+export default function Maths({  }) {
 
-export async function getServerSideProps({ }) {
-    const paths1 = await fs.readdir('../uni-sine/pages/mathematics')
-    const paths = paths1
-      .map((e) => e.replace(/\.[^\/.]+$/, ''))
-      .filter((e) => e !== 'index')
+    const router = useRouter();
+    const [pageData, setPageData] = useState([]);
   
-    const formattedData = await Promise.all(
-      paths.map(async (e) => {
-        const response = await fetch(`http://localhost:3000/mathematics/${e}`)
-        const data = await response.text()
-        return { [e]: data }
-      })
-    )
-  
-    return {
-      props: {
-        pageData: formattedData,
-      },
-    }
-  }
-  
-
-export default function Maths({ pageData }) {
+    useEffect(() => {
+      const fetchData = async () => {
+        const response = await fetch(`/api/page-data?currentRoute=${router.route}&absoluteURL=${`${window.location.protocol}//${window.location.host}${router.route}`}`);
+        const data = await response.json();
+        setPageData(data);
+      };
+      fetchData();
+    }, [router.route]);
 
 
-    const currentDir = '/mathematics'
     const [algebraTopic, setAlgebraTopic] = useState(null)
     const [graphingTopic, setGraphingTopic] = useState(null)
     const [trigonometryTopic, setTrigonometryTopic] = useState(null)
@@ -172,7 +159,7 @@ export default function Maths({ pageData }) {
                 // check if search term is present, if not, show all topics
                 if (searchTerm == null || searchTerm == 0) {
                     return <Selection key={i}
-                        link={`${currentDir}/${documentsContentListArray[i].title.toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}
+                        link={`${router.route}/${documentsContentListArray[i].title.toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}
                         title={documentsContentListArray[i].title}
                         description={documentsContentListArray[i].description} />
                 } else {
@@ -186,7 +173,7 @@ export default function Maths({ pageData }) {
                     if (a.title.toLowerCase().includes(searchTerm.toLowerCase()) || check) {
 
                         return <Selection key={i}
-                            link={`${currentDir}/${documentsContentListArray[i].title.toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}
+                            link={`${router.route}/${documentsContentListArray[i].title.toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}
                             title={documentsContentListArray[i].title}
                             description={documentsContentListArray[i].description}
                         />

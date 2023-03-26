@@ -19,14 +19,14 @@ function MyApp({ Component, pageProps, router }) {
         {router.pathname === '/' ? (
           <>
             <Component {...pageProps} />
-            <Analytics />
+            {/* <Analytics /> */}
             <Footer />
           </>
         ) : (
           <Layout>
             <ErrorBoundary>
               <Component {...pageProps} />
-              <Analytics />
+              {/* <Analytics /> */}
             </ErrorBoundary>
           </Layout>
         )}

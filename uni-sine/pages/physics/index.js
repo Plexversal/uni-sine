@@ -3,32 +3,22 @@ import SecondaryBanner from '../../components/page-construction/SecondaryBanner'
 import Selection from '../../components/page-construction/Selection'
 import styles from '../../styles/Content.module.css'
 import { useEffect, useState } from 'react'
-import fs from 'fs/promises'
+import { useRouter } from 'next/router'
 
-export async function getServerSideProps() {
-    const paths1 = await fs.readdir('../uni-sine/pages/physics')
-    const paths = paths1
-      .map((e) => e.replace(/\.[^\/.]+$/, ''))
-      .filter((e) => e !== 'index')
+export default function Physics({  }) {
+
+    const router = useRouter();
+    const [pageData, setPageData] = useState([]);
   
-    const formattedData = await Promise.all(
-      paths.map(async (e) => {
-        const response = await fetch(`http://localhost:3000/physics/${e}`)
-        const data = await response.text()
-        return { [e]: data }
-      })
-    )
-  
-    return {
-      props: {
-        pageData: formattedData,
-      },
-    }
-  }
+    useEffect(() => {
+      const fetchData = async () => {
+        const response = await fetch(`/api/page-data?currentRoute=${router.route}&absoluteURL=${`${window.location.protocol}//${window.location.host}${router.route}`}`);
+        const data = await response.json();
+        setPageData(data);
+      };
+      fetchData();
+    }, [router.route]);
 
-export default function Physics({ pageData }) {
-
-    const currentDir = '/physics'
     const [forcesTopic, setForcesTopic] = useState(null)
     const [particlesTopic, setParticlesTopic] = useState(null)
     const [noResults, setNoResults] = useState(false)
@@ -106,7 +96,7 @@ export default function Physics({ pageData }) {
                 // check if search term is present, if not, show all topics
                 if (searchTerm == null || searchTerm == 0) {
                     return <Selection key={i}
-                        link={`${currentDir}/${documentsContentListArray[i].title.toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}
+                        link={`${router.route}/${documentsContentListArray[i].title.toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}
                         title={documentsContentListArray[i].title}
                         description={documentsContentListArray[i].description} />
                 } else {
@@ -120,7 +110,7 @@ export default function Physics({ pageData }) {
                     if (a.title.toLowerCase().includes(searchTerm.toLowerCase()) || check) {
 
                         return <Selection key={i}
-                            link={`${currentDir}/${documentsContentListArray[i].title.toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}
+                            link={`${router.route}/${documentsContentListArray[i].title.toLowerCase().replace(/[^a-zA-Z ]/g, "").replace(/[ *]/g, "-")}`}
                             title={documentsContentListArray[i].title}
                             description={documentsContentListArray[i].description}
                         />

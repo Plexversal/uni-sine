@@ -2,7 +2,6 @@ import SecondaryBanner from '../../components/page-construction/SecondaryBanner'
 import Selection from '../../components/page-construction/Selection'
 import styles from '../../styles/Content.module.css'
 import { useEffect, useState } from 'react'
-import path from 'path'
 import { useRouter } from 'next/router'
 
 export default function CompScience({  }) {
@@ -12,14 +11,11 @@ export default function CompScience({  }) {
   
     useEffect(() => {
       const fetchData = async () => {
-        console.log(`/api/page-data?currentRoute=${router.route}&absoluteURL=${`${window.location.protocol}//${window.location.host}${router.route}`}`)
         const response = await fetch(`/api/page-data?currentRoute=${router.route}&absoluteURL=${`${window.location.protocol}//${window.location.host}${router.route}`}`);
         const data = await response.json();
         setPageData(data);
-        console.log(data)
       };
       fetchData();
-      console.log('fetched')
     }, [router.route]);
 
 
