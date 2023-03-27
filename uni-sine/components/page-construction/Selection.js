@@ -4,7 +4,7 @@ import styles from '../../styles/Selection.module.css'
 
 function Selection(props) {
     return (
-    <Link href={props.link}><a className={styles['selection-container']}>
+    <Link legacyBehavior href={props.link}><a className={styles['selection-container']}>
         <h2>{props.title}</h2>
         <p>{props.description}</p>
     </a></Link>

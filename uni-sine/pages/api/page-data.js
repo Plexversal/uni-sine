@@ -3,6 +3,7 @@ import path from "path";
 
 export default async function handler(req, res) {
     if(!req.query.absoluteURL && !req.query.currentRoute) return  res.status(400).json({ error: 'invalid parameters' });
+    console.log(process.cwd())
     try {
     const currentRoute = req.query.currentRoute;
     const paths1 = await fs.readdir(path.join(process.cwd(), "pages", currentRoute));

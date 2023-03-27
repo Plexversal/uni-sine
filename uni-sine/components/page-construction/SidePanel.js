@@ -23,7 +23,7 @@ const SidePanel = () => {
                 <div className={`${styles['topics']} ${styles['side-panel-content-container']}`}>
                     <ul>
                         <li>
-                            <Link href="/">
+                            <Link legacyBehavior href="/">
                                 <a>
                                     <div>
                                         <span><BiCalculator /></span>Calculators
@@ -33,7 +33,7 @@ const SidePanel = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/">
+                            <Link legacyBehavior href="/">
                                 <a>
                                     <div>
                                         <span><BiHome /></span>Home
@@ -43,7 +43,7 @@ const SidePanel = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/mathematics">
+                            <Link legacyBehavior href="/mathematics">
                                 <a>
                                     <div>
                                         <span><BiMath /></span>Mathematics
@@ -53,7 +53,7 @@ const SidePanel = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/physics">
+                            <Link legacyBehavior href="/physics">
                                 <a>
                                     <div>
                                         <span><BiAtom /></span>Physics
@@ -63,7 +63,7 @@ const SidePanel = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/computer-science">
+                            <Link legacyBehavior href="/computer-science">
                                 <a>
                                     <div>
                                         <span><BiCodeBlock /></span>Computer Science
@@ -84,7 +84,7 @@ const SidePanel = () => {
                                 <FastRead />
                         </li>
                         <li>
-                            <Link href="/">
+                            <Link legacyBehavior href="/">
                                 <a>
                                     <div>
                                         <span><BiSupport /></span>Support

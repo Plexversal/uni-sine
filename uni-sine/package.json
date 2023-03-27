@@ -13,11 +13,11 @@
     "@vercel/analytics": "^0.1.11",
     "copy-to-clipboard": "^3.3.3",
     "framer-motion": "^4.1.17",
-    "next": "12.1.0",
+    "next": "^13.2.4",
     "nextjs-redirect": "^6.0.1",
     "p5": "^1.4.1",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-icons": "^4.3.1",
     "react-intersection-observer": "^9.4.0",
     "react-modal": "^3.16.1",
@@ -27,6 +27,6 @@
   },
   "devDependencies": {
     "eslint": "8.11.0",
-    "eslint-config-next": "12.1.0"
+    "eslint-config-next": "^13.2.4"
   }
 }
