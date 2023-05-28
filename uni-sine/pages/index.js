@@ -15,7 +15,7 @@ export const getServerSideProps = ({ query }) => ({
 });
 
 export default function Home(props) {
-  const [userData, setUser] = useState();
+  const [userData, setUser] = useState(null);
   const [isAuth0Loading, setIsAuth0Loading] = useState(true);
 
   useEffect(() => {
@@ -24,8 +24,10 @@ export default function Home(props) {
       try {
         const response = await fetch(`/api/auth0/auth0-user`);
         const data = await response.json();
-        if (!data) {
-          throw new Error("Error loading user data");
+        if (!data || data.error) {
+          setIsAuth0Loading(false);
+
+          return
         }
         setUser(data);
 
@@ -252,8 +254,8 @@ export default function Home(props) {
               </div>
               {
                 isAuth0Loading ? <LoadingIcon /> : <>{
-                  userData?.app_metadata?.is_premium ? <div>You are already subscribed!</div> : 
-                  <button onClick={startCheckout}>Buy Subscription</button> 
+                  userData != null ? userData?.app_metadata?.is_premium ? <div>You are already subscribed!</div> : 
+                  <button onClick={startCheckout}>Buy Subscription</button> :  <Link href={'/login'}>Sign Up</Link>
                 }</>
               }
             </div>

@@ -16,7 +16,9 @@ const GravitationalPotential = (props) => {
         const response = await fetch(`/api/auth0/auth0-user`);
         const data = await response.json();
         if (!data) {
-          throw new Error("Error loading user data");
+          setIsLoading(false);
+         return;
+
         }
         setUser(data);
 
