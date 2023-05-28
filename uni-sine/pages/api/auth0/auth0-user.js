@@ -4,7 +4,8 @@ export default withApiAuthRequired(async function handler(req, res) {
     const session = await getSession(req, res);
     if (!session) {
         // No session found
-        res.status(401).end('Unauthorized');
+        res.status(401).json({error: 'Unauthorized'});
+        res.end()
         return;
     }
     try {
