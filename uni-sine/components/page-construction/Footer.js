@@ -8,16 +8,15 @@ export default function Footer() {
                     <h4>LEGAL</h4>
                     <Link href='/privacy-policy'>Privacy Policy</Link>
                     <Link href='/privacy-policy'>Cookie Policy</Link>
+                    <Link href='/terms-of-use'>Terms of Use</Link>
+
                 </div>
                 <div>
                     <h4>INFO</h4>
-                    <a>Pricing</a>
+                    <Link href='/#prices'>Pricing</Link>
                     <a>About Us</a>
                 </div>
-                <div>
-                    <h4>ATTRIBUTES</h4>
-                    <a></a>
-                </div>
+
             </div>
             <p><strong>Uni-Sine</strong> Copyright ©</p>
         </footer>)

@@ -6,7 +6,7 @@
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
   background-color: white;
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 4px;
   outline: none;
   /* max-width: 400px;
@@ -29,6 +29,7 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0);
   transition: background-color 0.3s ease;
+  z-index: 999;
 }
 
 .overlay-open {
@@ -36,11 +37,73 @@
 }
 
 .close-button {
-  position: absolute;
+
   top: 0.5rem;
   right: 0.5rem;
   background-color: transparent;
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 100px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid;
+  margin-bottom: 20px;
+}
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.2em;
+}
+.account-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.account-list li {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.account-list li > * {
+  margin: 5px 0;
+}
+
+.account-btn,
+.subscription-link,
+.logout {
+  width: 200px;
+  background: rgb(15, 15, 15);
+  text-align: center;
+  border: 2px solid rgb(15, 15, 15);
+  padding: 8px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all .3s;
+  font-weight: 500;
+  color: white;
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
+.account-btn:hover,
+.subscription-link:hover,
+.logout:hover {
+  background: rgb(255, 255, 255);
+  color: black;
+}
+
+.logout {
+  background: #fc8484;
+  border: 2px solid #fc8484;
+
 }

@@ -2,17 +2,23 @@ import Path from "../../components/page-construction/Path"
 import SecondaryBanner from '../../components/page-construction/SecondaryBanner'
 import styles from '../../styles/Page.module.css'
 import React, { useEffect, useState } from "react"
-
+import KeplersThirdLaw from "../../components/calculators/KeplersThirdLaw"
 function KTL() {
     let [dom, setDom] = useState([])
 
 
-    useEffect(() => { 
-        var elems = document.body.getElementsByTagName("p");
-        for(var i=0;i < elems.length; i++){
-            setDom(a => [...a, elems[i].textContent])
-         }
-    }, []) 
+    useEffect(() => {
+        const getParagraphText = () => {
+            const elems = document.body.getElementsByTagName('p');
+            for (let i = 0; i < elems.length; i++) {
+                setDom(a => [...a, elems[i].textContent]);
+            }
+        };
+
+        if (typeof window !== 'undefined') {
+            getParagraphText();
+        }
+    }, [])
 
     function minsToRead() {
         let text = dom.join(' ')
@@ -25,6 +31,7 @@ function KTL() {
             <Path />
             <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
+                    <KeplersThirdLaw />
                     <h2>Kepler&apos;s third law</h2>
                     <p>Kepler&rsquo;s third law indicates a direct relationship between a planets orbital period and the radius of the orbit. Specifically given by:</p>
 

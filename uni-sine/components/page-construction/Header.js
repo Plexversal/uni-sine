@@ -1,11 +1,17 @@
-import React from "react"
+import React, { useRef } from "react"
 import { useUser } from '@auth0/nextjs-auth0/client';
 import styles from '../../styles/Home.module.css'
 import Link from "next/link";
 import Image from 'next/image'
+import AccountModal from "./AccountModal";
 const Header = (props) => {
     const { user, error, isLoading } = useUser();
-    console.log(user)
+    const userAccountModalRef = useRef();
+
+    const handleUserAccountButtonClick = () => {
+      userAccountModalRef.current.handleButtonClick();
+    };
+  
     return (
         <header className={styles['header']}>
             <div className={styles['logo']}>
@@ -16,12 +22,13 @@ const Header = (props) => {
                 {
                     !isLoading && user ?
                         <div className={styles['signed-in-info']}>
-                            <Image height={50} width={50} src={user?.picture}></Image>
 
                             <div className={styles['signed-in-actions']}>
-                                <Link href='/account'>Manage Account</Link>
+                                <a onClick={handleUserAccountButtonClick}>Manage Account</a>
+                                <AccountModal ref={userAccountModalRef} />
                                 <Link href='/api/auth/logout'>Logout</Link>
                             </div>
+                            <Image height={50} width={50} src={user?.picture}></Image>
 
 
                         </div>

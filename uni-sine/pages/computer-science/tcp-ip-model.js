@@ -41,6 +41,8 @@ function DataTypes() {
             >
                 <div className={styles["article-container"]}>
                     <h1>TCP/IP Model</h1>
+                    <img alt='tcp/ip model vs osi model' src="/static/comp/tcp/tcpip.png" className={styles['equation']}></img>
+
                     <p>
                         The Transmission Control Protocol/Internet Protocol (TCP/IP) model is a set of communication protocols used in computer networks. It is the foundation of the modern Internet and provides a framework for how data should be transmitted, routed, and received across networks. The TCP/IP model consists of four layers, each responsible for specific functions in the networking process.
                     </p>
@@ -67,13 +69,11 @@ function DataTypes() {
                         <strong>Link Layer:</strong> The Link Layer is responsible for providing physical connectivity and transferring data between network devices on the same local network. This layer includes protocols such as Ethernet, Wi-Fi, and PPP that define how data is formatted and transmitted over physical media.
                     </p>
                     {/* Add an image of the TCP/IP model here */}
-                    <img src="" alt="TCP/IP Model Diagram" />
                     <h2>Why We Need a Networking Model</h2>
                     <p>In the early days of computer networking, specifically during the 1960s and 1970s, companies created proprietary networks that were incompatible with each other. This made communication between devices from different manufacturers challenging. The development of standardized networking models, such as the TCP/IP model (developed in the 1970s) and the OSI model (developed in the late 1970s and early 1980s), helped establish a set of rules and protocols that enabled seamless communication between devices, regardless of the manufacturer.</p>
                     <p>The OSI (Open Systems Interconnection) model, on the other hand, is a seven-layer reference model developed by the International Organization for Standardization (ISO). Although the OSI model is not used as extensively in practice, it remains an important framework for understanding and teaching the various components of computer networking.</p>
                     <p>The choice of the TCP/IP model over the OSI model is mainly due to its simpler structure, practicality, and the fact that it was the first widely-adopted networking model. The TCP/IP model&apos;s development was closely tied to the early internet, and as the internet grew in popularity, the TCP/IP model became the standard for network communication.</p>
                     <p>You could consider adding an image that illustrates the layers of the TCP/IP model and the OSI model side-by-side to help readers understand the differences between the two models. This would also provide a visual representation of the structure of each model, making the concept easier to grasp.</p>
-                    <img src="" alt="image comparing the layers of the TCP/IP model and the OSI model" />
                     <p>Both models have contributed to the evolution of computer networking standards, allowing for efficient communication between devices today.</p>
                     <h2>How the TCP/IP Model Works</h2>
                     <p>

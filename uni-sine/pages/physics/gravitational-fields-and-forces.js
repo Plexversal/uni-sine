@@ -2,17 +2,24 @@ import Path from "../../components/page-construction/Path"
 import SecondaryBanner from '../../components/page-construction/SecondaryBanner'
 import styles from '../../styles/Page.module.css'
 import React, { useEffect, useState } from "react"
+import GravitationalForce from "../../components/calculators/GravitationalForce"
 
 function GF() {
     let [dom, setDom] = useState([])
 
 
-    useEffect(() => { 
-        var elems = document.body.getElementsByTagName("p");
-        for(var i=0;i < elems.length; i++){
-            setDom(a => [...a, elems[i].textContent])
-         }
-    }, []) 
+    useEffect(() => {
+        const getParagraphText = () => {
+            const elems = document.body.getElementsByTagName('p');
+            for (let i = 0; i < elems.length; i++) {
+                setDom(a => [...a, elems[i].textContent]);
+            }
+        };
+
+        if (typeof window !== 'undefined') {
+            getParagraphText();
+        }
+    }, [])
 
     function minsToRead() {
         let text = dom.join(' ')
@@ -25,6 +32,7 @@ function GF() {
             <Path />
             <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
+                    <GravitationalForce />
                     <h2>Gravitational force equation</h2>
                     <p>Gravitational fields are relevant when there are bodies of mass. You can work out different things with the force of gravity and when objects are placed within the gravitational field of a mass.</p>
                     <p>Using Newton&rsquo;s law of gravitation, you can work out a <strong>vector</strong> value of the attraction between to masses, generally this applies to masses that are uniform spheres as the equation requires the radius to calculate. You can presume large objects such planets are uniform spheres.</p>

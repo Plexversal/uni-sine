@@ -1,5 +1,4 @@
 .page-wrapper {
-    position: relative;
     margin-top: 25px;
 }
 
@@ -35,6 +34,7 @@
 .checkbox-container {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 
@@ -43,6 +43,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .p5-sketch-details {
@@ -50,7 +51,16 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    text-align: center;
+    width: 100%;
+    background-color: #303030;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    color: white;
+    
+}
+
+.p5-sketch-details > div {
+    padding: 10px;
 }
 
 .p5-normal-sketch-details > * {
@@ -65,12 +75,16 @@
     width: fit-content;
     justify-self: center;
     align-self: center;
+    max-width: min-content;
+    position: relative;
 }
 
 #custom-triangle {
     touch-action: none;
 }
-
+.misc-options {
+    text-align: center;
+}
 .p5-options {
     display: flex;
     flex-direction: row;
@@ -173,7 +187,7 @@
 .selections-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+
 }
 
 .bottom-options {

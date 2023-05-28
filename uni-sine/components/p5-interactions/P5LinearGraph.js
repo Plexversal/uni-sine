@@ -1,15 +1,43 @@
-import Link from 'next/link'
 import React, { useEffect, useState, } from "react"
 import dynamic from 'next/dynamic'
 import styles from '../../styles/Page.module.css'
+import calcStyles from "../../styles/Calculators.module.css";
 
+import LoadingIcon from "../page-construction/LoadingIcon";
+import startCheckout from "../page-construction/StartCheckout";
 // this Sketch function is required to allow client side rendering only as window will not be present server side
 const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
   ssr: false,
 })
 
 function P5Graph(props) {
+  const [userData, setUser] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const [noPremium, setNoPremium] = useState(false);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(`/api/auth0/auth0-user`);
+        const data = await response.json();
+        if (!data) {
+          throw new Error("Error loading user data");
+        }
+        setUser(data);
+
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  const checkPremium = () => {
+    if(!props.custom) return
+    setNoPremium(true);
+  };
   // props = showIntercepts, showControls, showFunction, a, b, c
   let b, c
   let [windowWidth, setWindowWidth] = useState(500)
@@ -133,7 +161,17 @@ function P5Graph(props) {
 
     p5.resizeCanvas(width, height);
   }
-  return (<><br></br><div className={styles['p5-container']}>
+  return (<>{
+    isLoading ? <LoadingIcon /> : 
+    <><br></br><div onClick={userData?.app_metadata?.is_premium ? null : checkPremium} className={styles['p5-container']}>
+                {noPremium ? (
+              <div className={calcStyles["no-premium-overlay"]}>
+                <h1>You need premium to use this feature</h1>
+                <button onClick={startCheckout}>Buy Premium</button>
+              </div>
+            ) : (
+              <></>
+            )}
   <div className={styles['p5-sketch-details']}>
     {props.showControls ?     <div className={styles['p5-selection-range']}>
       <div>
@@ -164,7 +202,8 @@ function P5Graph(props) {
     <Sketch setup={setup} draw={draw} 
           windowResized={windowResized}
           />
-  </div><br></br></>)
+  </div><br></br></>
+  }</>)
 
 
 }

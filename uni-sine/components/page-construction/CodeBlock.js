@@ -21,15 +21,15 @@ const CodeBlock = ({ code, language = "cpp" }) => {
   };
 
   const copyButtonStyle = {
-    position: "absolute",
-    top: "0.5rem",
-    right: "0.5rem",
     backgroundColor: "#333",
     color: "white",
     borderRadius: "3px",
     padding: "0.25rem 0.5rem",
     cursor: "pointer",
-    fontSize: "0.9em"
+    fontSize: "0.9em",
+    marginBottom: "10px",
+    width: "fit-content",
+    marginTop: "5px"
   };
 
   return (

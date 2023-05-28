@@ -8,12 +8,18 @@ function BNE() {
     let [dom, setDom] = useState([])
 
 
-    useEffect(() => { 
-        var elems = document.body.getElementsByTagName("p");
-        for(var i=0;i < elems.length; i++){
-            setDom(a => [...a, elems[i].textContent])
-         }
-    }, []) 
+    useEffect(() => {
+        const getParagraphText = () => {
+            const elems = document.body.getElementsByTagName('p');
+            for (let i = 0; i < elems.length; i++) {
+                setDom(a => [...a, elems[i].textContent]);
+            }
+        };
+
+        if (typeof window !== 'undefined') {
+            getParagraphText();
+        }
+    }, [])
 
     function minsToRead() {
         let text = dom.join(' ')

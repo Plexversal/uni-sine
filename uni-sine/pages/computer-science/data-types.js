@@ -9,12 +9,18 @@ function DataTypes() {
   let [dom, setDom] = useState([])
 
 
-  useEffect(() => {
-    var elems = document.body.getElementsByTagName("p");
-    for (var i = 0; i < elems.length; i++) {
-      setDom(a => [...a, elems[i].textContent])
-    }
-  }, [])
+    useEffect(() => {
+        const getParagraphText = () => {
+            const elems = document.body.getElementsByTagName('p');
+            for (let i = 0; i < elems.length; i++) {
+                setDom(a => [...a, elems[i].textContent]);
+            }
+        };
+
+        if (typeof window !== 'undefined') {
+            getParagraphText();
+        }
+    }, [])
 
   function minsToRead() {
     let text = dom.join(' ')
@@ -38,26 +44,101 @@ function DataTypes() {
           <h1>Data Types</h1>
           <p>Data types are an essential concept in computer science, as they define the kind of data that can be stored, processed, and manipulated within a programming language. Data types are classified into two main categories: primitive and non-primitive (also known as composite or complex) data types.</p>
           <h2>Primitive Data Types</h2>
+        
           <p>Primitive data types are the fundamental building blocks of a programming language, providing the most basic types of data. They include:</p>
+          <table className="MsoTableGrid" border="1" cellSpacing="0" cellPadding="0"> 
+                    <tbody><tr>
+                        <td width="200" valign="top">
+                            <p className={styles["MsoNormal"]}><strong>Type </strong></p>
+                        </td>
+                        <td width="200" valign="top">
+                            <p className={styles["MsoNormal"]}>Integer</p>
+                        </td>
+                        <td width="200" valign="top">  
+                            <p className={styles["MsoNormal"]}>Float</p>
+                        </td>
+                        <td width="200" valign="top">  
+                            <p className={styles["MsoNormal"]}>Character</p>
+                        </td>
+                        <td width="200" valign="top">  
+                            <p className={styles["MsoNormal"]}>Boolean</p>
+                        </td>
+                    </tr>
+                        <tr >
+                            <td width="200" valign="top" >
+                                <p className={styles["MsoNormal"]} ><strong>Example</strong></p>
+                            </td>
+                            <td width="200" valign="top">
+                                <p className={styles["MsoNormal"]} >100</p>
+                            </td>
+                            <td width="200" valign="top">
+                                <p className={styles["MsoNormal"]} >3.14
+                                </p>
+                            </td>
+                            <td width="200" valign="top">
+                                <p className={styles["MsoNormal"]} >T
+                                </p>
+                            </td>
+                            <td width="200" valign="top">  
+                            <p className={styles["MsoNormal"]}>TRUE</p>
+                        </td>
+                            
+                        </tr>
+                    </tbody></table>
           <ol >
             <li>Integer (int): Represents whole numbers, both positive and negative. The size of an integer depends on the programming language and the platform it is running on.</li>
             <li>Float (float): Represents floating-point numbers, which are numbers with decimal points. They are used to store values that require a higher level of precision, such as measurements and currency.</li>
-            <li>Double (double): Similar to the float data type, but with twice the precision, allowing for even more accurate decimal values.</li>
             <li>Character (char): Represents a single character, such as a letter, number, or symbol. Characters are typically stored using ASCII or Unicode encoding.</li>
             <li>Boolean (bool): Represents a true or false value, used for logical operations and decision-making within a program.</li>
           </ol>
-          <p>[image: A table illustrating each primitive data type with examples]</p>
+
           <h2>Non-Primitive Data Types</h2>
           <p>Non-primitive data types are more complex, often built using combinations of primitive data types. They include:</p>
+          <table className="MsoTableGrid" border="1" cellSpacing="0" cellPadding="0"> 
+                    <tbody><tr>
+                        <td width="200" valign="top">
+                            <p className={styles["MsoNormal"]}><strong>Type </strong></p>
+                        </td>
+                        <td width="200" valign="top">
+                            <p className={styles["MsoNormal"]}>Array</p>
+                        </td>
+                        <td width="200" valign="top">  
+                            <p className={styles["MsoNormal"]}>String</p>
+                        </td>
+                        <td width="200" valign="top">  
+                            <p className={styles["MsoNormal"]}>Object</p>
+                        </td>
+                        <td width="200" valign="top">  
+                            <p className={styles["MsoNormal"]}>Pointer</p>
+                        </td>
+                    </tr>
+                        <tr >
+                            <td width="200" valign="top" >
+                                <p className={styles["MsoNormal"]} ><strong>Example</strong></p>
+                            </td>
+                            <td width="200" valign="top">
+                                <p className={styles["MsoNormal"]} >[0, 1, 10, &quot;hello&quot;]</p>
+                            </td>
+                            <td width="200" valign="top">
+                                <p className={styles["MsoNormal"]} >&apos;hello world&apos;
+                                </p>
+                            </td>
+                            <td width="200" valign="top">
+                                <p className={styles["MsoNormal"]} >{"{ name: 'john' }"}
+                                </p>
+                            </td>
+                            <td width="200" valign="top">  
+                            <p className={styles["MsoNormal"]}>0002</p>
+                        </td>
+                            
+                        </tr>
+                    </tbody></table>
           <ol >
             <li>Arrays: An array is a collection of elements, all of the same data type, stored in a contiguous block of memory. Arrays are useful for storing and manipulating large amounts of data, such as lists and matrices.</li>
             <li>Strings: A string is a sequence of characters, often used to represent text. In most programming languages, strings are treated as an array of characters.</li>
-            <li>Structures: A structure is a custom data type that allows the programmer to group related data together. Structures can contain elements of different data types and are commonly used to represent records or objects within a program.</li>
             <li>Classes and Objects: In object-oriented programming languages, such as Java and C++, classes are used to define the structure and behavior of objects. Objects are instances of classes and can contain both data (attributes) and functions (methods) that operate on that data.</li>
             <li>Pointers: A pointer is a special data type that holds the memory address of another value. Pointers are useful for managing memory, working with arrays, and implementing complex data structures such as linked lists and trees.</li>
-            <li>Enumerations: An enumeration is a user-defined data type consisting of a set of named integer constants. Enumerations are useful for representing sets of related values, such as days of the week or directions.</li>
           </ol>
-          <p>[image: A table illustrating each non-primitive data type with examples]</p>
           <h3>Example</h3>
           <p>Let&apos;s consider a simple example of using data types in a program. Suppose we are creating a program to store information about students, including their name, age, and grade point average (GPA).</p>
           <p>In a C++ program, we might define a structure to represent a student as follows:</p>

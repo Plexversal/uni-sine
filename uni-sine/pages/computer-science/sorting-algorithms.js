@@ -9,12 +9,18 @@ function SortingAlgorithms() {
   let [dom, setDom] = useState([])
 
 
-  useEffect(() => {
-    var elems = document.body.getElementsByTagName("p");
-    for (var i = 0; i < elems.length; i++) {
-      setDom(a => [...a, elems[i].textContent])
-    }
-  }, [])
+    useEffect(() => {
+        const getParagraphText = () => {
+            const elems = document.body.getElementsByTagName('p');
+            for (let i = 0; i < elems.length; i++) {
+                setDom(a => [...a, elems[i].textContent]);
+            }
+        };
+
+        if (typeof window !== 'undefined') {
+            getParagraphText();
+        }
+    }, [])
 
   function minsToRead() {
     let text = dom.join(' ')
@@ -37,7 +43,6 @@ function SortingAlgorithms() {
         <div className={styles['article-container']}>
           <h1>Sorting Algorithms</h1>
           <p>Sorting algorithms are a fundamental part of computer science and are essential for organizing and managing data efficiently. The choice of the appropriate sorting algorithm is crucial because it can significantly impact the performance of an application.</p>
-          <p>Importance of Choosing the Correct Sorting Algorithm</p>
           <p>Selecting the correct sorting algorithm depends on various factors, such as:</p>
           <ol >
             <li>Size of the dataset: Some algorithms work well with small datasets, while others are more efficient with larger datasets.</li>

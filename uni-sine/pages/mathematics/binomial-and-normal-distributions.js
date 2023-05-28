@@ -253,22 +253,22 @@ function Distributions() {
                             </ol>
                         </li>
                     </ol>
-                    <img alt=''src="/static/maths/probability/image100.png" className={styles['equation']}></img>
+                    <img alt='X ~ B(250, 0.43)'src="/static/maths/probability/image100.png" className={styles['equation']}></img>
                     
                    
                         <p><strong>a)</strong> We can convert the binomial distribution to a normal distribution using the np and npq substitution for mean and variance:</p>
-                        <img alt=''src="/static/maths/probability/image101.png" className={styles['equation']}></img>
-                        <img alt=''src="/static/maths/probability/image102.png" className={styles['equation']}></img>
+                        <img alt='Y ~ N((250 * 0.43), (250 * 0.43 * 0.57))'src="/static/maths/probability/image101.png" className={styles['equation']}></img>
+                        <img alt='Y ~ N(107.5, 61.275)'src="/static/maths/probability/image102.png" className={styles['equation']}></img>
                     
                     <p>The probability given will need to use a continuity correction:</p>
-                    <img alt=''src="/static/maths/probability/image103.png" className={styles['equation']}></img>
+                    <img alt='P(X > 105) = P(X > 105.5)'src="/static/maths/probability/image103.png" className={styles['equation']}></img>
 
                     <p>We can convert to Z value and work out the normal distribution for this probability:</p>
-                    <img alt=''src="/static/maths/probability/image104.png" className={styles['equation']}></img>
+                    <img alt='Z = (105.5 - 107.5)/sqrt(61.275) = -0.2555'src="/static/maths/probability/image104.png" className={styles['equation']}></img>
 
                     <p>We can now input this as the upper bound and -100 as the lower bound on the calculator, this will give probability less than that value so to find more than this value we can subtract from 1:</p>
-                    <img alt=''src="/static/maths/probability/image105.png" className={styles['equation']}></img>
-                    <img alt=''src="/static/maths/probability/image106.png" className={styles['equation']}></img>
+                    <img alt='P(X < 105.5) = 0.3992'src="/static/maths/probability/image105.png" className={styles['equation']}></img>
+                    <img alt='P(X > 105.5) = 1 - 0.3992 = 0.6008'src="/static/maths/probability/image106.png" className={styles['equation']}></img>
 
 
                 </div>

@@ -2,18 +2,24 @@ import Path from "../../components/page-construction/Path"
 import SecondaryBanner from '../../components/page-construction/SecondaryBanner'
 import styles from '../../styles/Page.module.css'
 import React, { useEffect, useState } from "react"
-
+import ElectricField from "../../components/calculators/ElectricFields"
 function EF() {
 
     let [dom, setDom] = useState([])
 
 
-    useEffect(() => { 
-        var elems = document.body.getElementsByTagName("p");
-        for(var i=0;i < elems.length; i++){
-            setDom(a => [...a, elems[i].textContent])
-         }
-    }, []) 
+    useEffect(() => {
+        const getParagraphText = () => {
+            const elems = document.body.getElementsByTagName('p');
+            for (let i = 0; i < elems.length; i++) {
+                setDom(a => [...a, elems[i].textContent]);
+            }
+        };
+
+        if (typeof window !== 'undefined') {
+            getParagraphText();
+        }
+    }, [])
 
     function minsToRead() {
         let text = dom.join(' ')
@@ -28,6 +34,8 @@ function EF() {
             <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
                     <h2>Electric Field Equations</h2>
+                    <ElectricField />
+
                     <p>Electric fields relate to objects that have charge, when an object has charge it has an electric field, much like an object with mass has a gravitational field. When another charged object is placed in and electric field it will experience a non-contact force.</p>
                     <p>Opposite charges attract and the same charges repel, just like a standard north pole and south pole magnet.</p>
                     <p>You can calculate the force of attraction or repulsion using coulombs law, which is similar to the force of gravity but has a few changes.</p>
@@ -39,7 +47,7 @@ function EF() {
                     <p>The value of k is coulomb&rsquo;s constant and can be calculated just by inputting the values into a calculator.</p>
                     <p>&epsilon;<sub>0</sub>is the permittivity of free space and is equal to 8.85418782 x 10<sup>-12</sup> m<sup>-3</sup> kg<sup>-1</sup> s<sup>4</sup> A<sup>2</sup></p>
                     <p>So, with this we can work out the rest as we know pi and the others are just whole numbers:</p>
-                    <img alt=''src="/static/physics/electric-fields/image003.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/physics/electric-fields/image001-fix.png" className={styles['equation']}></img>
                     <p>Using all this information we can work out the force acting between two charges.</p>
                     <h2>Electric potential and work</h2>
                     <p>Electric potential is simply defined as the electric potential energy per unit charge and is in the units of volts. It can be calculated as kinetic energy in Joules divided by charge in Coulombs. Volts in this case would then be Joules per Coulomb. Potential energy is denoted with the letter V</p>
@@ -106,16 +114,16 @@ function EF() {
                     <p>We know the general formula for absolute electric potential in a radial field of an electric charge:</p>
                     <img alt=''src="/static/physics/electric-fields/image023.png" className={styles['equation']}></img>
                     <p>We know that the potential is going to be the same as what we just calculated, the charge to be 82 x 1.9 x 10<sup>-19</sup> and we know k to be 9.988 x 10<sup>9</sup>.</p>
-                    <img alt=''src="/static/physics/electric-fields/image024.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/physics/electric-fields/image002-fix.png" className={styles['equation']}></img>
                     <p>So now we can solve for r, which is the closest distance the particles get to each other:</p>
-                    <img alt=''src="/static/physics/electric-fields/image025.png" className={styles['equation']}></img>
-                    <img alt=''src="/static/physics/electric-fields/image026.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/physics/electric-fields/image003-fix.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/physics/electric-fields/image004-fix.png" className={styles['equation']}></img>
                     <ol type="a" start={3}>
                         <li>For part C, this is quite simple now as we have all the values we need from the previous parts. We just input the 2 charges of each particle and the distance into the electric force equation for the magnitude and determine if its negative or positive for the direction.</li>
                     </ol>
                     <img alt=''src="/static/physics/electric-fields/image001.png" className={styles['equation']}></img>
-                    <img alt=''src="/static/physics/electric-fields/image027.png" className={styles['equation']}></img>
-                    <img alt=''src="/static/physics/electric-fields/image028.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/physics/electric-fields/image005-fix.png" className={styles['equation']}></img>
+                    <img alt=''src="/static/physics/electric-fields/image006-fix.png" className={styles['equation']}></img>
                     <p>As the 2 electric fields are positive then the alpha particle will repel and so the direction is away from the Lead atom.</p>
 
                 </div>

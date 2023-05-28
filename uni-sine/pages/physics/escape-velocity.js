@@ -2,17 +2,23 @@ import Path from "../../components/page-construction/Path"
 import SecondaryBanner from '../../components/page-construction/SecondaryBanner'
 import styles from '../../styles/Page.module.css'
 import React, { useEffect, useState } from "react"
-
+import EscapeVelocity from "../../components/calculators/EscapeVelocity"
 function EV() {
     let [dom, setDom] = useState([])
 
 
-    useEffect(() => { 
-        var elems = document.body.getElementsByTagName("p");
-        for(var i=0;i < elems.length; i++){
-            setDom(a => [...a, elems[i].textContent])
-         }
-    }, []) 
+    useEffect(() => {
+        const getParagraphText = () => {
+            const elems = document.body.getElementsByTagName('p');
+            for (let i = 0; i < elems.length; i++) {
+                setDom(a => [...a, elems[i].textContent]);
+            }
+        };
+
+        if (typeof window !== 'undefined') {
+            getParagraphText();
+        }
+    }, [])
 
     function minsToRead() {
         let text = dom.join(' ')
@@ -25,6 +31,7 @@ function EV() {
             <Path />
             <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}> 
+                <EscapeVelocity />
                     <h2>Escape velocity equation</h2>
                     <p>There is an equation to work out escape velocity of a gravitational field, which is how fast a mass must travel to escape the field. When the equation gives the object negative potential energy it has escaped the gravitational field.</p>
                     <p>This is deriving the escape velocity from equations we have looked at before and using kinetic energy equation:</p>
@@ -37,7 +44,7 @@ function EV() {
                     <p>We can work out the escape velocity of earth using the escape velocity equation. For this example, we will ignore air resistance but for any given mass the escape velocity can be worked out as the following (units will be included during working out to show how the various units cancel and have a more comprehensible view):</p>
                     <p>G (gravitational constant) = 6.67408 x 10<sup>-11</sup> m<sup>3 </sup>kg<sup>-1 </sup>s<sup>-2</sup></p>
                     <p>r (radius of Earth/distance from centre of mass to surface) = 6371 km</p>
-                    <p>M (mass of Earth) = 5.9722 x 10<sup>24 </sup>kg</p>
+                    <p>M (mass of Earth) = 5.9722 x 10<sup>24</sup>kg</p>
                     <img alt=''src="/static/physics/escape-velocity/image076.png" className={styles['equation']}></img>
                     <p>Input the values we have into the standard equation and multiply r by 1000 to get meters as G is also using meters:</p>
                     <img alt=''src="/static/physics/escape-velocity/image077.png" className={styles['equation']}></img>

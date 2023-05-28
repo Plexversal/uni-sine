@@ -2,17 +2,41 @@ import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useAnimation } from 'framer-motion'
-import { useUser } from '@auth0/nextjs-auth0/client';
+
 import Script from 'next/script'
 import PricingPage  from '../components/page-construction/Payment'
 import Header from '../components/page-construction/Header'
+import startCheckout from '../components/page-construction/StartCheckout'
+import LoadingIcon from '../components/page-construction/LoadingIcon'
 export const getServerSideProps = ({ query }) => ({
   props: query
 });
 
 export default function Home(props) {
+  const [userData, setUser] = useState();
+  const [isAuth0Loading, setIsAuth0Loading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsAuth0Loading(true);
+      try {
+        const response = await fetch(`/api/auth0/auth0-user`);
+        const data = await response.json();
+        if (!data) {
+          throw new Error("Error loading user data");
+        }
+        setUser(data);
+
+        setIsAuth0Loading(false);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const [ref, inViewS2] = useInView({
     triggerOnce: true,
@@ -187,7 +211,7 @@ export default function Home(props) {
           <div className={styles['info-bubble']}>
             <img src='/static/home/interactive-comps.gif' />
             <div>
-              <h1>30+ Different visual calculators</h1>
+              <h1>14+ Interactive calculators</h1>
               <p>Go beyond a standard calculator with a variety of visual graphing and algebra calculators specially designed for helping you learn faster</p>
             </div>
 
@@ -197,56 +221,50 @@ export default function Home(props) {
               <h1>High level math explained for any skill level</h1>
               <p>We know not everyone can pick up math easily, that&apos;s why we make every effort to show and derive every step.</p>
             </div>
-            <img className={styles['info-bubble-img-no-style']} src='/static/home/math-visual-4.png' />
+            <img className={styles['info-bubble-img-no-style']} src='/static/home/home-img-3.png' />
           </div>
           <div className={styles['info-bubble']}>
-            <img src='/static/home/unique-questions.gif' />
+            <img className={styles['info-bubble-img-no-style']} src='/static/home/home-img-4.png' />
             <div>
               <h1>Built for A-levels and ACT&apos;s</h1>
               <ul>
                 <li>Improve your chances of scoring higher in A-levels, ACT&apos;s or SAT&apos;s</li>
-                <li>Information has been sourced specially around the grading exam boards of these tests such as AQA and OCR</li>
+                <li>Information has been specially sourced around the grading exam boards of these tests such as AQA and OCR</li>
               </ul>
             </div>
           </div>
 
         </section>
-        <section className={styles['price-section']}>
+        <section id='prices' className={styles['price-section']}>
           {/* <PricingPage /> */}
           <h1>Choose a plan</h1>
           <div className={styles['plan-options-container']}>
+
             <div>
               <div>
                 <p>Billed Monthly</p>
                 <h2>{props.country == 'GB' ? `£` : `$`}10 / month</h2>
                 <ul className={styles['feature-list']}>
-                  <li>Full access to all interactive components and calculators</li>
+                  <li>Full access to all current and future interactive components and calculators</li>
                   <li>Access to all premium and university level pages</li>
                   <li>Email support</li>
                 </ul>
               </div>
-              <a>Sign up</a>
-            </div>
-            <div>
-              <div>
-                <p>Billed Yearly</p>
-                <h2>{props.country == 'GB' ? `£` : `$`}8 / month</h2>
-                <ul className={styles['feature-list']}>
-                  <li>Full access to all interactive components and calculators</li>
-                  <li>Access to all premium and university level pages</li>
-                  <li>Email support</li>
-                </ul>
-              </div>
-              <a>Sign up</a>
+              {
+                isAuth0Loading ? <LoadingIcon /> : <>{
+                  userData?.app_metadata?.is_premium ? <div>You are already subscribed!</div> : 
+                  <button onClick={startCheckout}>Buy Subscription</button> 
+                }</>
+              }
             </div>
             <div>
               <div>
                 <p>Education</p>
                 <h2>{props.country == 'GB' ? `£` : `$`} Custom</h2>
                 <p>For education institutions looking to get access for multiple students.</p>
-                <p>We are want everyone to have the best access to education and are happy to work with schools and colleges</p>
+                <p>We are want everyone to have the best access to education and are happy to work with schools and colleges to give all students a valid subscription at a discounted price.</p>
               </div>
-              <a>Contact</a>
+              <a href={'/contact'}>Contact</a>
             </div>
           </div>
         </section>

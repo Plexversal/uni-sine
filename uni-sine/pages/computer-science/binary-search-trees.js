@@ -42,6 +42,8 @@ function BST() {
             >
                 <div className={styles['article-container']}>
                     <h1>Binary Search Trees</h1>
+                    <img alt='Binary search tree example' src="/static/comp/BST/BST.png" className={styles['equation']}></img>
+
                     <p>A binary search tree (BST) is a data structure that stores elements in a hierarchical manner. Each node in the tree has at most two children, a left child and a right child. BSTs have the following properties:</p>
                     <ol>
                         <li>The value of the left child is less than the value of its parent.</li>
@@ -71,10 +73,15 @@ function BST() {
                     <p>To delete an element from a BST, follow these steps:</p>
                     <ol>
                         <li>Search for the element in the BST.</li>
-                        <li>If the element is found, determine which of the following cases applies:</li>
+                        <li>If the element is found, determine which of the following cases applies:
+                          <ol type="a">
+                            <li>The node has no children: Simply remove the node.</li>
+                            <li>The node has one child: Replace the node with its child.</li>
+                            <li>The node has two children: Find the in-order predecessor (the maximum value in the left subtree) or the in-order successor (the minimum value in the right subtree), replace the node with the predecessor or successor, and delete the predecessor or successor.</li>
+                          </ol>
+                        </li>
                     </ol>
 
-                        <p>a) The node has no children: Simply remove the node. b) The node has one child: Replace the node with its child. c) The node has two children: Find the in-order predecessor (the maximum value in the left subtree) or the in-order successor (the minimum value in the right subtree), replace the node with the predecessor or successor, and delete the predecessor or successor.</p>
 
                     <p>The time complexity of deletion in a BST is O(h), with best and worst cases similar to searching and insertion.</p>
                     <h2>Balancing a Binary Search Tree</h2>
@@ -84,8 +91,7 @@ function BST() {
                         <li>Red-Black Trees: Red-black trees are another type of self-balancing binary search tree that uses a colour property for each node to ensure that the tree remains approximately balanced.</li>
                     </ol>
                     <p>Both AVL trees and red-black trees guarantee that the height of the tree is O(log n), ensuring optimal performance for searching, insertion, and deletion operations.</p>
-                    <p>In conclusion, binary search trees are a versatile and efficient data</p>
-                    <p>structure for storing and managing ordered data. They provide efficient searching, insertion, and deletion operations, especially when balanced. However, it is essential to maintain the balance of the tree to ensure optimal performance.</p>
+
                     <h2>Traversal of a Binary Search Tree</h2>
                     <p>Traversing a BST involves visiting each node in a specific order. There are three common types of tree traversal:</p>
                     <ol>
@@ -94,21 +100,22 @@ function BST() {
                         <li>Post-order traversal: Visit the left subtree, the right subtree, and then the current node. This traversal method is useful for deleting nodes or evaluating expressions in a tree structure.</li>
                     </ol>
                     <h3>Example</h3>
-                    <p>Consider the following binary search tree:</p>
-                    <p>[Insert an image of a BST with the following elements: 50, 30, 70, 20, 40, 60, 80]</p>
+                    <p>Consider the following binary search tree from the start:</p>
+                    <img alt='' src="/static/comp/BST/BST.png" className={styles['equation']}></img>
+
                     <ol>
                         <li>In-order traversal: 20, 30, 40, 50, 60, 70, 80</li>
                         <li>Pre-order traversal: 50, 30, 20, 40, 70, 60, 80</li>
                         <li>Post-order traversal: 20, 40, 30, 60, 80, 70, 50</li>
                     </ol>
-                    <p>Applications of Binary Search Trees</p>
+                    <h2>Applications of Binary Search Trees</h2>
                     <p>Binary search trees have various applications in computer science, including:</p>
                     <ol>
                         <li>Symbol tables: BSTs can be used to implement symbol tables in compilers and interpreters for programming languages.</li>
                         <li>Databases: Database management systems use tree-based data structures like B-trees, which are generalizations of binary search trees, for efficient storage and retrieval of data.</li>
                         <li>Game AI: BSTs can be used to model game states and search for optimal moves in game artificial intelligence.</li>
                     </ol>
-                    <h2>Exmaple BST in JS</h2>
+                    <h2>Exmaple Binary Search Tree in JavaScript</h2>
                     <CodeBlock language="javascript" code={`// TreeNode class representing each node in the BST
 class TreeNode {
   constructor(value) {

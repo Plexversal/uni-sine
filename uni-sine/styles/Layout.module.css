@@ -7,3 +7,8 @@
     margin-top: 60px; /* Push the main content down by the nav height */
     flex-grow: 1;
 }
+
+.content-wrapper {
+    min-height: 100vh;
+    position: relative;
+}

@@ -7,16 +7,16 @@ import { useRouter } from 'next/router'
 export default function Maths({  }) {
 
     const router = useRouter();
-    const [pageData, setPageData] = useState([]);
+    // const [pageData, setPageData] = useState([]);
   
-    useEffect(() => {
-      const fetchData = async () => {
-        const response = await fetch(`/api/page-data?currentRoute=${router.route}&absoluteURL=${`${window.location.protocol}//${window.location.host}${router.route}`}`);
-        const data = await response.json();
-        setPageData(data);
-      };
-      fetchData();
-    }, [router.route]);
+    // useEffect(() => {
+    //   const fetchData = async () => {
+    //     const response = await fetch(`/api/page-data?currentRoute=${router.route}&absoluteURL=${`${window.location.protocol}//${window.location.host}${router.route}`}`);
+    //     const data = await response.json();
+    //     setPageData(data);
+    //   };
+    //   fetchData();
+    // }, [router.route]);
 
 
     const [algebraTopic, setAlgebraTopic] = useState(null)
@@ -164,12 +164,12 @@ export default function Maths({  }) {
                         description={documentsContentListArray[i].description} />
                 } else {
                     // loop through fetched data, check if the path of current topic looped through is equal to the to path in data
-                    pageData.forEach(e => Object.keys(e).forEach((key, index) => {
-                        if (e[key].toLowerCase().includes(searchTerm.toLowerCase())) {
-                            if (a.path == key) return check = true
-                        }
-                    })
-                    )
+                    // pageData.forEach(e => Object.keys(e).forEach((key, index) => {
+                    //     if (e[key].toLowerCase().includes(searchTerm.toLowerCase())) {
+                    //         if (a.path == key) return check = true
+                    //     }
+                    // })
+                    // )
                     if (a.title.toLowerCase().includes(searchTerm.toLowerCase()) || check) {
 
                         return <Selection key={i}

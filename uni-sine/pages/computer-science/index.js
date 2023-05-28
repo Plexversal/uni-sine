@@ -7,21 +7,22 @@ import { useRouter } from 'next/router'
 export default function CompScience({  }) {
 
     const router = useRouter();
-    const [pageData, setPageData] = useState([]);
+    // const [pageData, setPageData] = useState([]);
   
-    useEffect(() => {
-      const fetchData = async () => {
-        const response = await fetch(`/api/page-data?currentRoute=${router.route}&absoluteURL=${`${window.location.protocol}//${window.location.host}${router.route}`}`);
-        const data = await response.json();
-        setPageData(data);
-      };
-      fetchData();
-    }, [router.route]);
+    // useEffect(() => {
+    //   const fetchData = async () => {
+    //     const response = await fetch(`/api/page-data?currentRoute=${router.route}&absoluteURL=${`${window.location.protocol}//${window.location.host}${router.route}`}`);
+    //     const data = await response.json();
+    //     setPageData(data);
+    //   };
+    //   fetchData();
+    // }, [router.route]);
 
 
     const [dataTopic, setDataTopic] = useState(null)
     const [programmingTopic, setProgrammingTopic] = useState(null)
     const [networkingTopic, setNetworkingTopic] = useState(null)
+    const [hardwareTopic, setHardwareTopic] = useState(null)
 
 
     const [noResults, setNoResults] = useState(false)
@@ -31,6 +32,8 @@ export default function CompScience({  }) {
         setDataTopic(document.getElementById('data-topic-wrapper').children.length > 0)
         setProgrammingTopic(document.getElementById('programming-topic-wrapper').children.length > 0)
         setNetworkingTopic(document.getElementById('networking-topic-wrapper').children.length > 0)
+        setHardwareTopic(document.getElementById('hardware-topic-wrapper').children.length > 0)
+
         let collection = document.getElementById('middle-content-container').children
         setNoResults(Array.from(collection).some(e => e.tagName === 'H2'))
 
@@ -55,6 +58,18 @@ export default function CompScience({  }) {
             path: 'sorting-algorithms'
         },
         {
+            title: 'Functions and Scope',
+            description: 'Understand how functional programming works by using blocks of code to create highly complex algorithms and sequences.',
+            category: 'Programming',
+            path: 'functions-and-scope'
+        },
+        {
+            title: 'Conditional and Logical statements',
+            description: 'See how to program decision making and how code can take a path of execution based on true or false statements.',
+            category: 'Programming',
+            path: 'conditional-and-logical-statements'
+        },
+        {
             title: 'Hash tables and dictionaries',
             description: 'Understand the math and code behind hash tables and how data is handled using these coding techniques as well as the use of dictionaries.',
             category: 'Data principles and databases',
@@ -65,6 +80,36 @@ export default function CompScience({  }) {
             description: 'Explore the TCP/IP model, its layered architecture, and its crucial role in modern computer networking, enabling flexibility, scalability, and reliability.',
             category: 'Networking',
             path: 'tcp-ip-model'
+        },
+        {
+            title: 'TLS/SSL Encryption',
+            description: 'See how the nature of Math can help to encrypt data online and protect people when authenticating and transmitting sensitive data.',
+            category: 'Networking',
+            path: 'tls-ssl-encryption'
+        },
+        {
+            title: 'How the internet works',
+            description: 'Basic understanding of how a network of computers around the world can form the basis for the most dependant information and communication service',
+            category: 'Networking',
+            path: 'the-internet'
+        },
+        {
+            title: 'Central Processing Unit',
+            description: 'Learn the mathematical process involved within a CPU and the constituent parts that make it up. See how CPU\'s interact with other computer components.',
+            category: 'Hardware',
+            path: 'central-processing-unit'
+        },
+        {
+            title: 'Random Access Memory',
+            description: 'See how RAM can store temporary data to quickly access and be processed by a CPU and how RAM is physically read from the smallest level.',
+            category: 'Hardware',
+            path: 'random-access-memory'
+        },
+        {
+            title: 'Storage Devices',
+            description: 'Learn how data can be stored permanently when there is a loss of power and the physics behind reading and writing data.',
+            category: 'Hardware',
+            path: 'storage-devices'
         },
     ])
 
@@ -91,12 +136,12 @@ export default function CompScience({  }) {
                         description={documentsContentListArray[i].description} />
                 } else {
                     // loop through fetched data, check if the path of current topic looped through is equal to the to path in data
-                    pageData.forEach(e => Object.keys(e).forEach((key, index) => {
-                        if (e[key].toLowerCase().includes(searchTerm.toLowerCase())) {
-                            if (a.path == key) return check = true
-                        }
-                    })
-                    )
+                    // pageData.forEach(e => Object.keys(e).forEach((key, index) => {
+                    //     if (e[key].toLowerCase().includes(searchTerm.toLowerCase())) {
+                    //         if (a.path == key) return check = true
+                    //     }
+                    // })
+                    // )
                     if (a.title.toLowerCase().includes(searchTerm.toLowerCase()) || check) {
 
                         return <Selection key={i}
@@ -139,6 +184,10 @@ export default function CompScience({  }) {
                             {networkingTopic ? <h2 id='networking-topic-title'>Networking</h2> : <></>}
                             <div id='networking-topic-wrapper' className={styles['middle-content-wrapper']}>
                                 {displayTopic('Networking')}
+                            </div>
+                            {hardwareTopic ? <h2 id='hardware-topic-title'>Hardware</h2> : <></>}
+                            <div id='hardware-topic-wrapper' className={styles['middle-content-wrapper']}>
+                                {displayTopic('Hardware')}
                             </div>   
                         </div>
                 

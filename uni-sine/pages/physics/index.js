@@ -8,16 +8,16 @@ import { useRouter } from 'next/router'
 export default function Physics({  }) {
 
     const router = useRouter();
-    const [pageData, setPageData] = useState([]);
+    // const [pageData, setPageData] = useState([]);
   
-    useEffect(() => {
-      const fetchData = async () => {
-        const response = await fetch(`/api/page-data?currentRoute=${router.route}&absoluteURL=${`${window.location.protocol}//${window.location.host}${router.route}`}`);
-        const data = await response.json();
-        setPageData(data);
-      };
-      fetchData();
-    }, [router.route]);
+    // useEffect(() => {
+    //   const fetchData = async () => {
+    //     const response = await fetch(`/api/page-data?currentRoute=${router.route}&absoluteURL=${`${window.location.protocol}//${window.location.host}${router.route}`}`);
+    //     const data = await response.json();
+    //     setPageData(data);
+    //   };
+    //   fetchData();
+    // }, [router.route]);
 
     const [forcesTopic, setForcesTopic] = useState(null)
     const [particlesTopic, setParticlesTopic] = useState(null)
@@ -78,6 +78,18 @@ export default function Physics({  }) {
             category: 'Forces',
             path: 'escape-velocity'
         },
+        {
+            title: 'Gravitational Potential',
+            description: 'Explore the inner workings of gravitational potential and how a mass body has energy based on its surrounding gravitational field',
+            category: 'Forces',
+            path: 'gravitational-potential'
+        },
+        {
+            title: 'Binding energy and mass defect',
+            description: 'Understand Einstein\'s energy equation and how all atoms contain large amounts of energy which can be converted in a variety of ways',
+            category: 'Particles',
+            path: 'binding-energy-and-mass-defect'
+        },
     ])
 
     const [searchTerm, setSearchTerm] = useState(null)
@@ -101,12 +113,12 @@ export default function Physics({  }) {
                         description={documentsContentListArray[i].description} />
                 } else {
                     // loop through fetched data, check if the path of current topic looped through is equal to the to path in data
-                    pageData.forEach(e => Object.keys(e).forEach((key, index) => {
-                        if (e[key].toLowerCase().includes(searchTerm.toLowerCase())) {
-                            if (a.path == key) return check = true
-                        }
-                    })
-                    )
+                    // pageData.forEach(e => Object.keys(e).forEach((key, index) => {
+                    //     if (e[key].toLowerCase().includes(searchTerm.toLowerCase())) {
+                    //         if (a.path == key) return check = true
+                    //     }
+                    // })
+                    // )
                     if (a.title.toLowerCase().includes(searchTerm.toLowerCase()) || check) {
 
                         return <Selection key={i}
@@ -131,7 +143,7 @@ export default function Physics({  }) {
 
     return (
         <>
-            <SecondaryBanner title='Physics' search={searchComponent} subheader={`${documentsContentListArray.length} Articles · Updated 25/06/2022`} />
+            <SecondaryBanner title='Physics' search={true ? searchComponent : <div>Loading</div>} subheader={`${documentsContentListArray.length} Articles · Updated 25/06/2022`} />
             <div className={styles['content-container']}>
                 {!noResults ? <h2>No topics match search criteria</h2> : <></>}
 

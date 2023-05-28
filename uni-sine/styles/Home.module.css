@@ -71,8 +71,8 @@
 .signed-in-info{
   display: flex;
   justify-content: center;
-  flex-direction: column;
-  align-items: flex-end;
+  flex-direction: row;
+  align-items: center;
 }
 
 .signed-in-info > h1 {
@@ -81,11 +81,20 @@
   font-weight: 500;
   margin: 0;
 }
-
+.signed-in-actions { 
+  display: flex; 
+  flex-direction: column; 
+  direction: rtl;
+  margin-right: 10px;
+}
 .signed-in-actions > a {
-  color: #FF006B;
-  font-weight: 400;
+  color: #ffffff;
+  font-weight: 200;
   margin-left: 10px;
+  font-size: 1.1em;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  width: fit-content;
 }
 
 .signed-in-actions > a:hover {
@@ -204,7 +213,7 @@
 
 }
 .info-bubble-img-no-style {
-  filter: drop-shadow(-16px -12px 20px rgba(0, 0, 0, 0.1)) !important;
+  filter: none !important;
   border-radius: 0 !important;
 }
 
@@ -258,9 +267,8 @@
 }
 
 
-.plan-options-container > div:nth-child(2) {
-  transform: scale(1.15);
-}
+
+.plan-options-container > div > button,
 .plan-options-container > div > a {
   width: 100%;
   background: none;
@@ -271,7 +279,9 @@
   cursor: pointer;
   transition: all .3s;
   font-weight: 500;
+  font-family: inherit;
 }
+.plan-options-container > div > button:hover,
 .plan-options-container > div > a:hover {
   background: #000;
   color: white;
@@ -577,9 +587,6 @@
   .plan-options-container {
     flex-direction: column;
     gap: 40px
-  }
-  .plan-options-container > div:nth-child(2) {
-    transform: scale(1);
   }
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from '../../styles/SidePanel.module.css'
 import Link from "next/link";
 import { BsChevronDoubleLeft, BsChevronDoubleRight } from 'react-icons/bs'
@@ -9,11 +9,22 @@ import AccountModal from "./AccountModal";
 
 const SidePanel = () => {
     const [isOpen, setIsOpen] = useState(true);
+
+    useEffect(() => {
+        window.innerWidth < 600 ? setIsOpen(false) : null
+    }, [])
+
     const toggleSidePanel = () => {
         setIsOpen(!isOpen);
+
     };
 
+    const userAccountModalRef = useRef();
 
+    const handleUserAccountButtonClick = () => {
+      userAccountModalRef.current.handleButtonClick();
+    };
+  
     return (
         <div className={`${styles['side-panel']} ${isOpen ? styles.open : styles.closed}`}>
             <button onClick={toggleSidePanel} className={styles['toggle-panel']}>
@@ -23,7 +34,7 @@ const SidePanel = () => {
                 <div className={`${styles['topics']} ${styles['side-panel-content-container']}`}>
                     <ul>
                         <li>
-                            <Link legacyBehavior href="/">
+                            <Link legacyBehavior href="/calculators">
                                 <a>
                                     <div>
                                         <span><BiCalculator /></span>Calculators
@@ -78,13 +89,21 @@ const SidePanel = () => {
                 <div className={`${styles['account']} ${styles['side-panel-content-container']}`}>
                     <ul>
                         <li>
-                            <AccountModal />
+                            <a onClick={handleUserAccountButtonClick}>
+                                <div>
+                                    <span>
+                                        <GrUserSettings />
+                                    </span>
+                                    Account
+                                </div>
+                            </a>
+                            <AccountModal ref={userAccountModalRef} />
                         </li>
                         <li>
-                                <FastRead />
+                            <FastRead />
                         </li>
                         <li>
-                            <Link legacyBehavior href="/">
+                            <Link legacyBehavior href="/contact">
                                 <a>
                                     <div>
                                         <span><BiSupport /></span>Support

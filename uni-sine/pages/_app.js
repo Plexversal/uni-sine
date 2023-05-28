@@ -1,8 +1,6 @@
 import '../styles/globals.css'
 import Layout from '../components/page-construction/Layout'
-import Script from 'next/script'
 import Head from 'next/head'
-import FastRead from '../components/page-construction/FastRead'
 import Footer from '../components/page-construction/Footer'
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import ErrorBoundary from '../components/page-construction/ErrorBoundary'

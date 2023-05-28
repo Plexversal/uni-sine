@@ -2,7 +2,10 @@ import Link from 'next/link'
 import React, { useEffect, useState, } from "react"
 import dynamic from 'next/dynamic'
 import styles from '../../styles/Page.module.css'
+import calcStyles from "../../styles/Calculators.module.css";
 
+import LoadingIcon from "../page-construction/LoadingIcon";
+import startCheckout from "../page-construction/StartCheckout";
 // this Sketch function is required to allow client side rendering only as window will not be present server side
 const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
   ssr: false,
@@ -10,7 +13,33 @@ const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
 
 
 function P5Trig(props) {
+  const [userData, setUser] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const [noPremium, setNoPremium] = useState(false);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(`/api/auth0/auth0-user`);
+        const data = await response.json();
+        if (!data) {
+          throw new Error("Error loading user data");
+        }
+        setUser(data);
+
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  const checkPremium = () => {
+    if(!props.custom) return
+    setNoPremium(true);
+  };
   let [windowWidth, setWindowWidth] = useState(500)
   let [pixelScale, setPixelScale] = useState(50)
 
@@ -199,7 +228,14 @@ function P5Trig(props) {
 
 
     p5.pop();
-
+    if(props.custom) {
+      for (var x = 0; x < width / pixelScale; x++) {
+        p5.strokeWeight(0.1)
+        p5.line(x * pixelScale, 0, x * pixelScale, height)
+        p5.strokeWeight(0.1)
+        p5.line(0, x * pixelScale, width, x * pixelScale)
+      }
+    }
   };
 
   const mousePressed = (p5) => {
@@ -253,15 +289,23 @@ function P5Trig(props) {
     p5.resizeCanvas(width, height);
   }
 
-  return (<>
+  return (<>{
+    isLoading ? <LoadingIcon /> : <>
     <br></br>
-    <div className={styles['p5-container']} >
+    <div onClick={userData?.app_metadata?.is_premium ? null : checkPremium} className={styles['p5-container']} >
+    {noPremium ? (
+              <div className={calcStyles["no-premium-overlay"]}>
+                <h1>You need premium to use this feature</h1>
+                <button onClick={startCheckout}>Buy Premium</button>
+              </div>
+            ) : (
+              <></>
+            )}
       {props.custom === true ?
         <>
-          <h1>Generate Random Problem</h1>
           <div className={styles['p5-options']} style={{ width: width }}>
-            <div>
-              <button className={styles['button-input']} id='randomise-btn' type="button" name="randomise" onClick={randomise}>Random Problem</button>
+            <div className={styles['misc-options']}>
+              <button className={styles['button-input']} id='randomise-btn' type="button" name="randomise" onClick={userData?.app_metadata?.is_premium ? randomise : null}>Random Problem</button>
               <div className={styles['checkbox-container']}>
                 <div>Degrees</div>
                 <div>
@@ -322,7 +366,8 @@ function P5Trig(props) {
           mouseDragged={props.custom ? mouseDragged : null}
           mouseReleased={props.custom ? mouseReleased : null} /></span>
     </div>
-    <br></br></>)
+    <br></br></>
+  }</>)
 
 
 }

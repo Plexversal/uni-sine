@@ -2,13 +2,43 @@ import Link from 'next/link'
 import React, { useEffect, useState, } from "react"
 import dynamic from 'next/dynamic'
 import styles from '../../styles/Page.module.css'
+import calcStyles from "../../styles/Calculators.module.css";
 
+import LoadingIcon from "../page-construction/LoadingIcon";
+import startCheckout from "../page-construction/StartCheckout";
 // this Sketch function is required to allow client side rendering only as window will not be present server side
 const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
   ssr: false,
 })
 
 function P5Graph(props) {
+  const [userData, setUser] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  const [noPremium, setNoPremium] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch(`/api/auth0/auth0-user`);
+        const data = await response.json();
+        if (!data) {
+          throw new Error("Error loading user data");
+        }
+        setUser(data);
+
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  const checkPremium = () => {
+    if(!props.custom) return
+    setNoPremium(true);
+  };
   let a, b, c, d
 
   const [funcA, setFuncA] = useState(a) 
@@ -157,33 +187,43 @@ function P5Graph(props) {
 
     p5.resizeCanvas(width, height);
   }
-  return (<><br></br><div className={styles['p5-container']}>
-  <div className={styles['p5-sketch-details']}>
-    {props.showControls ?     <div className={styles['p5-selection-range']}>
-      <div>
-        <input id='function-a' type="range" step={1} min="1" max="20" onChange={onChnageA}></input>
-        <div id='function-a-label'>scale = {funcA}</div>
-      </div>
-      <div>
-        <input id='function-b' type="range" min="-9" max="9" step={0.1}  onChange={onChnageB}></input>
-        <div id='function-b-label'>number = {funcB}</div>
-      </div>
-      <div>
-        <input id='function-c' type="range" step={0.001} min="0.005" max="10" onChange={onChnageC}></input>
-        <div id='function-c-label'>base = {funcC}</div>
-      </div>
-        <div className={styles['checkbox-container']}>
-          <div>ln: </div>
-          <input className={styles['input-switch']} type="checkbox" id="lnSwitch" />
-          <label className={styles['input-switch-label']} htmlFor="lnSwitch">Toggle</label>
+  return (<>{
+    isLoading ? <LoadingIcon /> : <><br></br><div onClick={userData?.app_metadata?.is_premium ? null : checkPremium} className={styles['p5-container']}>
+                      {noPremium ? (
+              <div className={calcStyles["no-premium-overlay"]}>
+                <h1>You need premium to use this feature</h1>
+                <button onClick={startCheckout}>Buy Premium</button>
+              </div>
+            ) : (
+              <></>
+            )}
+    <div className={styles['p5-sketch-details']}>
+      {props.showControls ?     <div className={styles['p5-selection-range']}>
+        <div>
+          <input id='function-a' type="range" step={1} min="1" max="20" onChange={onChnageA}></input>
+          <div id='function-a-label'>scale = {funcA}</div>
         </div>
-    </div> : <></>}
-    {props?.showFunction ? <p className='exclude-fast-read'><strong>y = {funcA} log<sub>{lnOn ? `e` : funcC}</sub>(x + {funcB})</strong></p> : <></>}
- 
-  </div>
-
-    <Sketch setup={setup} draw={draw} windowResized={windowResized}/>
-  </div><br></br></>)
+        <div>
+          <input id='function-b' type="range" min="-9" max="9" step={0.1}  onChange={onChnageB}></input>
+          <div id='function-b-label'>number = {funcB}</div>
+        </div>
+        <div>
+          <input id='function-c' type="range" step={0.001} min="0.005" max="10" onChange={onChnageC}></input>
+          <div id='function-c-label'>base = {funcC}</div>
+        </div>
+          <div className={styles['checkbox-container']}>
+            <div>ln: </div>
+            <input className={styles['input-switch']} type="checkbox" id="lnSwitch" />
+            <label className={styles['input-switch-label']} htmlFor="lnSwitch">Toggle</label>
+          </div>
+      </div> : <></>}
+      {props?.showFunction ? <p className='exclude-fast-read'><strong>y = {funcA} log<sub>{lnOn ? `e` : funcC}</sub>(x + {funcB})</strong></p> : <></>}
+   
+    </div>
+  
+      <Sketch setup={setup} draw={draw} windowResized={windowResized}/>
+    </div><br></br></>
+  }</>)
 
 
 }

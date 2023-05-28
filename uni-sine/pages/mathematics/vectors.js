@@ -2,7 +2,7 @@ import Path from "../../components/page-construction/Path"
 import SecondaryBanner from '../../components/page-construction/SecondaryBanner'
 import styles from '../../styles/Page.module.css'
 import React, { useEffect, useState } from "react"
-
+import P5Vectors from "../../components/p5-interactions/P5Vectors"
 
 function Vectors() {
 
@@ -33,6 +33,7 @@ function Vectors() {
             <Path />
             <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
+                    <P5Vectors/>
                     <h2>Vector notation</h2>
 
                     <p>A vector is a quantity in mathematics that has both magnitude and direction. An arrow pointing in a certain direction is a common way to depict a vector, with the length of the arrow denoting the magnitude of the vector.</p>

@@ -14,7 +14,7 @@ function Nav(props) {
     return (
         <div className={styles['banner-container']}>
              <Head>
-                <title>Uni-Sine: {props.title}</title>
+                <title>{`Uni-Sine: ${props.title}`}</title>
             </Head>
             <div className={styles['banner-main-content']}>
                 <div className={styles["banner-content"]}>
