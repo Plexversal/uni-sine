@@ -281,6 +281,7 @@
   font-weight: 500;
   font-family: inherit;
   -webkit-appearance: none;
+  color: #000;
 
 }
 .plan-options-container > div > button:hover,

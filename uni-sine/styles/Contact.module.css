@@ -144,11 +144,12 @@
     cursor: pointer;
     transition: all .2s ease-out;
     -webkit-appearance: none;
+    color: black;
   }
   
   .contact-form-content input[type=submit]:hover {
     background: #db0188;;
-    color: rgb(9, 6, 184);
+    color: black;
     transform: scale(1.05);
     -webkit-transform: scale(1.05);
     -webkit-appearance: none;
