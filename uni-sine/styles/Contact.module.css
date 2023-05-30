@@ -145,6 +145,7 @@
     transition: all .2s ease-out;
     -webkit-appearance: none;
     color: black;
+    font-weight: 400;
   }
   
   .contact-form-content input[type=submit]:hover {
