@@ -280,11 +280,15 @@
   transition: all .3s;
   font-weight: 500;
   font-family: inherit;
+  -webkit-appearance: none;
+
 }
 .plan-options-container > div > button:hover,
 .plan-options-container > div > a:hover {
   background: #000;
   color: white;
+  -webkit-appearance: none;
+
 }
 .feature-list {
   list-style: none; 

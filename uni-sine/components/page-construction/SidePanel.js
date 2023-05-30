@@ -35,7 +35,7 @@ const SidePanel = () => {
                     <ul>
                         <li>
                             <Link legacyBehavior href="/calculators">
-                                <a>
+                                <a onClick={() => window.innerWidth < 600 ? setIsOpen(false) : null}>
                                     <div>
                                         <span><BiCalculator /></span>Calculators
                                     </div>
@@ -45,7 +45,7 @@ const SidePanel = () => {
                         </li>
                         <li>
                             <Link legacyBehavior href="/">
-                                <a>
+                                <a onClick={() => window.innerWidth < 600 ? setIsOpen(false) : null}>
                                     <div>
                                         <span><BiHome /></span>Home
                                     </div>
@@ -55,7 +55,7 @@ const SidePanel = () => {
                         </li>
                         <li>
                             <Link legacyBehavior href="/mathematics">
-                                <a>
+                                <a onClick={() => window.innerWidth < 600 ? setIsOpen(false) : null}>
                                     <div>
                                         <span><BiMath /></span>Mathematics
                                     </div>
@@ -65,7 +65,7 @@ const SidePanel = () => {
                         </li>
                         <li>
                             <Link legacyBehavior href="/physics">
-                                <a>
+                                <a onClick={() => window.innerWidth < 600 ? setIsOpen(false) : null}>
                                     <div>
                                         <span><BiAtom /></span>Physics
                                     </div>
@@ -75,7 +75,7 @@ const SidePanel = () => {
                         </li>
                         <li>
                             <Link legacyBehavior href="/computer-science">
-                                <a>
+                                <a onClick={() => window.innerWidth < 600 ? setIsOpen(false) : null}>
                                     <div>
                                         <span><BiCodeBlock /></span>Computer Science
                                     </div>
@@ -104,7 +104,7 @@ const SidePanel = () => {
                         </li>
                         <li>
                             <Link legacyBehavior href="/contact">
-                                <a>
+                                <a onClick={() => window.innerWidth < 600 ? setIsOpen(false) : null}>
                                     <div>
                                         <span><BiSupport /></span>Support
                                     </div>
