@@ -4,9 +4,8 @@
     border-radius: 10px;
     border: 2px solid rgb(95, 95, 95);
     align-self: center;
-    width: 100%;
-    min-width: 100%;
     position: relative;
+    width: 500px;
 }
 
 .container h1 {
@@ -188,7 +187,6 @@
     transform: translate(-50%, -50%) scale(0);
     transition: transform 1s;
     z-index: 100;
-    min-width: 600px;
     padding: 20px;
 }
 
@@ -251,15 +249,13 @@
 
 @media (max-width: 1080px) {
     .container {
-        max-width: 500px;
+        width: 300px;
     }
     .calculator-content-container {
         flex-direction: column;
         /* max-width: 500px; */
     }
-    .calculator-modal {
-        min-width: 90%;
-    }
+
 }
 
 @media (max-width: 600px) {}
