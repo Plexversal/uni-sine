@@ -255,7 +255,7 @@ export default function Home(props) {
               {
                 isAuth0Loading ? <LoadingIcon /> : <>{
                   userData != null ? userData?.app_metadata?.is_premium ? <div>You are already subscribed!</div> : 
-                  <button onClick={startCheckout}>Buy Subscription</button> :  <Link href={'/login'}>Sign Up</Link>
+                  <button onClick={startCheckout}>Buy Subscription</button> :  <Link href={'/api/auth/login'}>Sign Up</Link>
                 }</>
               }
             </div>
