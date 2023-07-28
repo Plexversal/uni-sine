@@ -24,6 +24,9 @@
   margin: 200px 150px;
 }
 
+.landing-section-content * {
+  display: inline-block;
+}
 .landing-section-content > div > h1 {
   font-weight: 500;
   margin: 0;
@@ -32,7 +35,9 @@
 .landing-section-content > div > p {
   font-size: 1.5em;
   color: #b8b8b8;
+  margin: 0.9rem 0;
 }
+
 
 .header {
   display: flex;
@@ -56,7 +61,6 @@
   color: #C7C7C7;
   font-size: 1.2em;
 }
-
 
 .acc-btn {
   padding: 10px 50px;
@@ -101,13 +105,14 @@
   text-decoration: underline;
 }
 
-.explore-btn {
+.explore-btn,
+.calculators-btn {
   border: 5px solid #00FFC2;
   padding: 10px 50px;
   border-radius: 999px;
   font-weight: 500;
   font-size: 1.3em;
-  margin: 0px 10px;
+  margin: 10px 10px;
   background: none;
   color: white;
   cursor: pointer;
@@ -117,9 +122,14 @@
 
 }
 
-.explore-btn:hover{
+.calculators-btn {
+  border: 5px solid rgb(253, 120, 120);
+}
+
+.explore-btn:hover,
+.calculators-btn:hover {
   box-shadow: 4px 4px 8px -2px rgba(0,0,0,0.1);
-  transform: scale(1.2) !important;
+  transform: scale(1.05) !important;
   border: 5px solid #ffffff;
 
 } 
@@ -609,6 +619,12 @@
     margin: 0;
     margin-left: 12px;
   }
+  
+.home-btn-wrapper {
+  display: flex;
+  flex-direction: column; 
+  width: fit-content;
+}
 }
 
 @media (max-width: 600px)  { 

@@ -123,7 +123,10 @@ export default function Home(props) {
               <h1>All the knowledge you need in one place</h1>
               <p>Uni-Sine Learning is an online learning platform designed to help you learn through visual and interactive tools.</p>
               <p>Need to pass your exams? Or perhaps just curious about the world. This is the place to learn. </p>
-              <motion.button onClick={scrollClick} transition={{ repeat: Infinity, repeatDelay: 1 }} animate={{ scale: [1, 1.1, 1.2, 1, 1] }} className={styles['explore-btn']}>Explore Topics</motion.button>
+              <div className={styles['home-btn-wrapper']}>
+              <btn onClick={scrollClick} className={styles['explore-btn']}>Explore Topics</btn>
+              <Link href={'/calculators'} className={styles['calculators-btn']}>Open calculators</Link>
+              </div>
             </div>
 
             <div className={styles['image-container']}>
