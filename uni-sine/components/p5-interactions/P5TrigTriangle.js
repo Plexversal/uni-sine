@@ -78,9 +78,8 @@ function P5Trig(props) {
   let increase = false
   let showBubbles = props.custom
   let A, B, C, a, b, c
-
-
-
+  const threshold = 0.3; // or whatever value you want
+  const snapRange = 0.3; 
   const randomise = () => {
     showBubbles = false
 
@@ -129,7 +128,6 @@ function P5Trig(props) {
     p5.createCanvas(width, height).parent(canvasParentRef)
     p5.stroke('#000000')
 
-
   };
 
   const draw = (p5) => {
@@ -141,29 +139,6 @@ function P5Trig(props) {
     C = Math.acos((Math.pow(a, 2) + Math.pow(b, 2) - Math.pow(c, 2)) / (2 * a * b))
     B = Math.acos((Math.pow(a, 2) + Math.pow(c, 2) - Math.pow(b, 2)) / (2 * a * c))
     A = Math.acos((Math.pow(b, 2) + Math.pow(c, 2) - Math.pow(a, 2)) / (2 * b * c))
-    let area = parseFloat(0.5 * a * b * Math.sin(C)).toFixed(2)
-
-
-    let v1 = p5.createVector(point1x * pixelScale, point1y * pixelScale)
-    let v2 = p5.createVector(point2x * pixelScale, point2y * pixelScale)
-    let v3 = p5.createVector(point3x * pixelScale, point3y * pixelScale)
-
-    let va = p5.constructor.Vector.sub(v1, v3)
-    let vb = p5.constructor.Vector.sub(v1, v2)
-
-    let v4 = p5.createVector(point1x * pixelScale + 1, point1y * pixelScale)
-    let v5 = p5.createVector(point2x * pixelScale, point1y * pixelScale)
-    let v6 = p5.createVector()
-
-
-    let vc = p5.constructor.Vector.sub(v1, v2)
-    let vd = p5.constructor.Vector.sub(v1, v5)
-
-    let angleEnd = vb.angleBetween(va)
-    let angleStart = vd.angleBetween(vc)
-
-
-
     p5.background('#fff');
     p5.stroke('black')
     p5.translate(0, height)
@@ -193,7 +168,6 @@ function P5Trig(props) {
       p5.ellipse(point2x * pixelScale, point2y * pixelScale, selectRadius)
       p5.ellipse(point3x * pixelScale, point3y * pixelScale, selectRadius)
 
-
       p5.push()
       p5.scale(1, -1); // reverse the global flip
       p5.strokeWeight(1);
@@ -202,19 +176,19 @@ function P5Trig(props) {
       p5.noStroke()
       p5.fill('#000')
       p5.text('Click to drag', (point3x * pixelScale) - 50, -(point3y * pixelScale) - 25)
+
       p5.pop()
-
-
-
     }
 
     p5.push();
     p5.scale(1, -1); // reverse the global flip
     p5.strokeWeight(1);
     p5.textStyle(p5.BOLD)
-
     p5.textSize(17);
     p5.noStroke()
+    p5.fill('#000')
+
+    p5.text(`Area: ${parseFloat(0.5 * a * b * Math.sin(C)).toFixed(2)}`, (0.5 * pixelScale), -(9.5 * pixelScale))
 
     p5.fill('#ec9c33') // side text color
     if (!(document.getElementById('hideSideA')?.checked == true && props.custom) && (props.showSidea || props.custom))
@@ -261,23 +235,80 @@ function P5Trig(props) {
   }
 
   const mouseDragged = (p5) => {
-    if (movePoint1 == true && p5.mouseY < width - 20 && p5.mouseY > 20 && p5.mouseX < width - 20 && p5.mouseX > 20) {
-      point1x = p5.mouseX / pixelScale
-      point1y = (height - p5.mouseY) / pixelScale
-      showBubbles = false
-
-    } else if (movePoint2 == true && p5.mouseY < width - 20 && p5.mouseY > 20 && p5.mouseX < width - 20 && p5.mouseX > 20) {
-      point2x = p5.mouseX / pixelScale
-      point2y = (height - p5.mouseY) / pixelScale
-      showBubbles = false
-
-    } else if (movePoint3 == true && p5.mouseY < width - 20 && p5.mouseY > 20 && p5.mouseX < width - 20 && p5.mouseX > 20) {
-      point3x = p5.mouseX / pixelScale
-      point3y = (height - p5.mouseY) / pixelScale
-      showBubbles = false
-
+    if (!document.getElementById('disableSnapping')?.checked == true && props.custom) {
+      if (movePoint1 == true && p5.mouseY < height - threshold && p5.mouseY > threshold && p5.mouseX < width - threshold && p5.mouseX > threshold) {
+        point1x = p5.mouseX / pixelScale;
+        point1y = (height - p5.mouseY) / pixelScale;
+        showBubbles = false;
+      } else if (movePoint2 == true && p5.mouseY < height - threshold && p5.mouseY > threshold && p5.mouseX < width - threshold && p5.mouseX > threshold) {
+        point2x = p5.mouseX / pixelScale;
+        point2y = (height - p5.mouseY) / pixelScale;
+        showBubbles = false;
+      } else if (movePoint3 == true && p5.mouseY < height - threshold && p5.mouseY > threshold && p5.mouseX < width - threshold && p5.mouseX > threshold) {
+        point3x = p5.mouseX / pixelScale;
+        point3y = (height - p5.mouseY) / pixelScale;
+        showBubbles = false;
+      }
+    } else {
+    
+    if (movePoint1 == true && p5.mouseY < height - threshold && p5.mouseY > threshold && p5.mouseX < width - threshold && p5.mouseX > threshold) {
+      if (Math.abs((p5.mouseX / pixelScale) - point2x) <= snapRange) {
+        point1x = point2x;
+      } else if (Math.abs((p5.mouseX / pixelScale) - point3x) <= snapRange) {
+        point1x = point3x;
+      } else {
+        point1x = p5.mouseX / pixelScale;
+      }
+  
+      if (Math.abs((height - p5.mouseY) / pixelScale - point2y) <= snapRange) {
+        point1y = point2y;
+      } else if (Math.abs((height - p5.mouseY) / pixelScale - point3y) <= snapRange) {
+        point1y = point3y;
+      } else {
+        point1y = (height - p5.mouseY) / pixelScale;
+      }
+      showBubbles = false;
+  
+    } else if (movePoint2 == true && p5.mouseY < height - threshold && p5.mouseY > threshold && p5.mouseX < width - threshold && p5.mouseX > threshold) {
+      if (Math.abs((p5.mouseX / pixelScale) - point1x) <= snapRange) {
+        point2x = point1x;
+      } else if (Math.abs((p5.mouseX / pixelScale) - point3x) <= snapRange) {
+        point2x = point3x;
+      } else {
+        point2x = p5.mouseX / pixelScale;
+      }
+  
+      if (Math.abs((height - p5.mouseY) / pixelScale - point1y) <= snapRange) {
+        point2y = point1y;
+      } else if (Math.abs((height - p5.mouseY) / pixelScale - point3y) <= snapRange) {
+        point2y = point3y;
+      } else {
+        point2y = (height - p5.mouseY) / pixelScale;
+      }
+      showBubbles = false;
+  
+    } else if (movePoint3 == true && p5.mouseY < height - threshold && p5.mouseY > threshold && p5.mouseX < width - threshold && p5.mouseX > threshold) {
+      if (Math.abs((p5.mouseX / pixelScale) - point1x) <= snapRange) {
+        point3x = point1x;
+      } else if (Math.abs((p5.mouseX / pixelScale) - point2x) <= snapRange) {
+        point3x = point2x;
+      } else {
+        point3x = p5.mouseX / pixelScale;
+      }
+  
+      if (Math.abs((height - p5.mouseY) / pixelScale - point1y) <= snapRange) {
+        point3y = point1y;
+      } else if (Math.abs((height - p5.mouseY) / pixelScale - point2y) <= snapRange) {
+        point3y = point2y;
+      } else {
+        point3y = (height - p5.mouseY) / pixelScale;
+      }
+      showBubbles = false;
     }
   }
+  }
+  
+  
 
   const mouseReleased = (p5) => {
     movePoint1 = false
@@ -314,6 +345,13 @@ function P5Trig(props) {
                   <input className={styles['input-switch']} type="checkbox" id="degrees" />
                   <label className={styles['input-switch-label']} htmlFor="degrees">Toggle</label>
                 </div>
+
+
+              </div>
+              <div className={styles['checkbox-container']}>
+                  <div>Snapping</div>
+                  <input defaultChecked={true} className={styles['input-switch']} type="checkbox" id="disableSnapping" />
+                  <label className={styles['input-switch-label']} htmlFor="disableSnapping">Toggle</label>
               </div>
             </div>
             <div className={styles['selections-container']} id='angle-container'>
