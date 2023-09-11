@@ -4,9 +4,9 @@
     border-radius: 10px;
     border: 2px solid rgb(95, 95, 95);
     align-self: center;
-    width: 100%;
-    min-width: 100%;
     position: relative;
+    width: 100%;
+    min-width: 700px;
 }
 
 .container h1 {
@@ -217,7 +217,6 @@
     transform: translate(-50%, -50%) scale(0);
     transition: transform 1s;
     z-index: 100;
-    min-width: 600px;
     padding: 20px;
 }
 
@@ -297,10 +296,9 @@
         min-width: 0;
     }
     .container {
-        width: 300px;
+        min-width: 0;
     }
     .calculator-content-container {
         flex-direction: column;
     }
-
 }

@@ -111,9 +111,10 @@ function freeCheck(modal) {
                 .sort((a, b) => Number(modalMap[b].isFree) - Number(modalMap[a].isFree))
                 .sort((a, b) => Number(modalMap[b].isPopular) - Number(modalMap[a].isPopular))
                 .map((modalName, i) => (
-                    <div>
-                                        <button
+                    <div 
                     key={i}
+                    >
+                                        <button
                     className={`${styles["open-calculator-btn"]} 
                                 ${modalMap[modalName].isPopular ? styles["popular-btn"] : ""} 
                                 ${modalMap[modalName].isFree ? styles["free-btn"] : ""}`}

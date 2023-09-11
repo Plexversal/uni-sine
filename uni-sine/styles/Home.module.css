@@ -101,7 +101,8 @@
   text-decoration: underline;
 }
 
-.explore-btn {
+.explore-btn,
+.calculators-btn {
   border: 5px solid #00FFC2;
   padding: 10px 50px;
   border-radius: 999px;
