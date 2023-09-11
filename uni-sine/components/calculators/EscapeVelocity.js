@@ -31,13 +31,11 @@ const EscapeVelocity = (props) => {
     fetchData();
   }, []);
   
-  const checkPremium = () => {
-    setNoPremium(true);
-  };
 
-    const [coefficient, setCoefficient] = useState("5.9722");
-    const [powerOfTen, setPowerOfTen] = useState("24");
-    const [radius, setRadius] = useState("6371000");
+
+    const [coefficient, setCoefficient] = useState("");
+    const [powerOfTen, setPowerOfTen] = useState("");
+    const [radius, setRadius] = useState("");
     const [gravitationalConstant, setGravitationalConstant] = useState("6.67430e-11");
     const [escapeVelocity, setEscapeVelocity] = useState(null);
     const [useKm, setUseKm] = useState(false);
@@ -50,18 +48,10 @@ const EscapeVelocity = (props) => {
   
     const displayedEscapeVelocity = useKm ? escapeVelocity / 1000 : escapeVelocity;
   
-    return (<>{
-      isLoading ? <LoadingIcon /> : <>
+    return (<>
       
-      <div onClick={userData?.app_metadata?.is_premium ? null : checkPremium} className={styles['container']}>
-      {noPremium ? (
-            <div className={styles["no-premium-overlay"]}>
-              <h1>You need premium to use this feature</h1>
-              <button onClick={startCheckout}>Buy Premium</button>
-            </div>
-          ) : (
-            <></>
-          )}
+      <div  className={styles['container']}>
+
         <h1>Escape Velocity Calculator</h1>
       <div className={styles["calculator-content-container"]}>
         <div className={`${styles['calculator-content']} ${styles["user-inputs-container"]}`}>
@@ -91,11 +81,7 @@ const EscapeVelocity = (props) => {
             />
           </div>
 
-          <button className={styles['user-input-btn']} onClick={                
-              userData?.app_metadata?.is_premium
-                            ? calculateEscapeVelocity
-                            : null
-                        }>Calculate Escape Velocity</button>
+          <button className={styles['user-input-btn']} onClick={calculateEscapeVelocity }>Calculate Escape Velocity</button>
         </div>
         <div className={styles["result-container"]}>
           {escapeVelocity !== null && (
@@ -114,8 +100,7 @@ const EscapeVelocity = (props) => {
       </div>
 
     
-      </>
-    }</>);
+      </>);
   };
   
   export default EscapeVelocity;

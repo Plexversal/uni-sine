@@ -3,36 +3,7 @@ import styles from '../../styles/Calculators.module.css';
 import LoadingIcon from "../page-construction/LoadingIcon";
 import startCheckout from "../page-construction/StartCheckout";
 const KeplersThirdLaw = (props) => {
-  const [userData, setUser] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [noPremium, setNoPremium] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      
-      setIsLoading(true);
-      try {
-        const response = await fetch(`/api/auth0/auth0-user`);
-        const data = await response.json();
-        if (!data) {
-          setIsLoading(false);
-         return;
-
-        }
-        setUser(data);
-
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-  
-  const checkPremium = () => {
-    setNoPremium(true);
-  };
   const [option, setOption] = useState('time');
   const [radius, setRadius] = useState(null);
   const [radiusPowerOfTen, setRadiusPowerOfTen] = useState(null);
@@ -65,22 +36,12 @@ const KeplersThirdLaw = (props) => {
     const radiusKilometers = radiusMeters / 1000; // Convert radius from meters to kilometers
     setResult(radiusKilometers);
   };
-  
-  
+
 
   return (<>
-  {
-    isLoading ? <LoadingIcon /> : 
-    
-    <div onClick={userData?.app_metadata?.is_premium ? null : checkPremium} className={styles['container']}>
-               {noPremium ? (
-    <div className={styles["no-premium-overlay"]}>
-      <h1>You need premium to use this feature</h1>
-      <button onClick={startCheckout}>Buy Premium</button>
-    </div>
-  ) : (
-    <></>
-  )}
+  
+    <div className={styles['container']}>
+             
       <h1>Kepler&apos;s Third Law Calculator</h1>
       <div className={styles["calculator-content-container"]}>
 
@@ -141,7 +102,7 @@ const KeplersThirdLaw = (props) => {
               /></sup> </div>
               
             </div>
-            <button className={styles['user-input-btn']} onClick={userData?.app_metadata?.is_premium ? calculateTime : null}>Calculate Time</button>
+            <button className={styles['user-input-btn']} onClick={calculateTime}>Calculate Time</button>
 
             </>
           ) : (
@@ -155,7 +116,7 @@ const KeplersThirdLaw = (props) => {
                 onChange={(e) => setTime(parseFloat(e.target.value))}
               /></div>
             </div>
-            <button className={styles['user-input-btn']} onClick={userData?.app_metadata?.is_premium ? calculateRadius : null}>Calculate Radius</button>
+            <button className={styles['user-input-btn']} onClick={calculateRadius}>Calculate Radius</button>
 
             </>
           )}
@@ -188,7 +149,7 @@ const KeplersThirdLaw = (props) => {
       </div>
     </div>
   
-  }</>);
+  </>);
 };
 
 export default KeplersThirdLaw;

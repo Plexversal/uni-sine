@@ -1,37 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../styles/Calculators.module.css";
-import LoadingIcon from "../page-construction/LoadingIcon";
-import startCheckout from "../page-construction/StartCheckout";
+
 const ElectricField = (props) => {
-  const [userData, setUser] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [noPremium, setNoPremium] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch(`/api/auth0/auth0-user`);
-        const data = await response.json();
-        if (!data) {
-          setIsLoading(false);
-         return;
-
-        }
-        setUser(data);
-
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const checkPremium = () => {
-    setNoPremium(true);
-  };
   const [option, setOption] = useState("force");
   const [charge, setCharge] = useState(null);
   const [chargePowerOfTen, setChargePowerOfTen] = useState(null);
@@ -47,6 +18,7 @@ const ElectricField = (props) => {
 
   const handleOptionChange = (e) => {
     setOption(e.target.value);
+    setResult(null);
   };
 
   const calculateForce = () => {
@@ -72,21 +44,11 @@ const ElectricField = (props) => {
 
   return (
     <>
-      {isLoading ? (
-        <LoadingIcon />
-      ) : (
+      
         <div
-          onClick={userData?.app_metadata?.is_premium ? null : checkPremium}
           className={styles["container"]}
         >
-          {noPremium ? (
-            <div className={styles["no-premium-overlay"]}>
-              <h1>You need premium to use this feature</h1>
-              <button onClick={startCheckout}>Buy Premium</button>
-            </div>
-          ) : (
-            <></>
-          )}
+
           <h1>Electric Field Calculator</h1>
           <div className={styles["calculator-content-container"]}>
             <div className={styles["user-inputs-container"]}>
@@ -199,10 +161,7 @@ const ElectricField = (props) => {
                     </div>
                     <button
                       className={styles["user-input-btn"]}
-                      onClick={
-                        userData?.app_metadata?.is_premium
-                          ? calculateForce
-                          : null
+                      onClick={calculateForce
                       }
                     >
                       Calculate Force
@@ -294,10 +253,7 @@ const ElectricField = (props) => {
                     {option === "radial" ? (
                       <button
                         className={styles["user-input-btn"]}
-                        onClick={
-                          userData?.app_metadata?.is_premium
-                            ? calculateRadialField
-                            : null
+                        onClick={calculateRadialField
                         }
                       >
                         Calculate Radial Field
@@ -305,10 +261,7 @@ const ElectricField = (props) => {
                     ) : (
                       <button
                         className={styles["user-input-btn"]}
-                        onClick={
-                          userData?.app_metadata?.is_premium
-                            ? calculateUniformField
-                            : null
+                        onClick={calculateUniformField
                         }
                       >
                         Calculate Uniform Field
@@ -335,7 +288,7 @@ const ElectricField = (props) => {
             </div>
           </div>
         </div>
-      )}
+      
     </>
   );
 };

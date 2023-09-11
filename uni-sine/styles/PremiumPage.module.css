@@ -1,0 +1,139 @@
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin: 20px 20px;
+}
+
+.btn-wrapper {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 50px;
+    margin: 100px 0;
+    justify-content: center;
+
+}
+
+.open-questions-btn,
+.open-calculator-btn {
+    color: black;
+    padding: 30px;
+    cursor: pointer;
+    background-color: rgb(120, 122, 253);
+    box-shadow: 4px 4px 0px #43baff;
+    border: 2px solid rgb(0, 0, 0);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 1.3em;
+    transition: all .3s;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.open-questions-btn:hover,
+.open-questions-btn:focus
+ {
+    box-shadow: 10px 10px 0px #43baff;
+    transform: scale(1.13);
+}
+
+.open-calculator-btn {
+    background-color: rgb(253, 120, 120) !important;
+    box-shadow: 4px 4px 0px #ffae43;
+}
+
+.open-calculator-btn:hover,
+.open-calculator-btn:focus {
+    box-shadow: 10px 10px 0px #ffae43;
+    transform: scale(1.13);
+}
+
+.example-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.2em;
+    gap: 50px;
+}
+
+.example-info img {
+    width: 350px;
+}
+
+.example-info > div {
+    max-width: 400px;
+}
+
+.questions-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 1s;
+    z-index: 5;
+    padding: 20px;
+    overscroll-behavior: contain;
+}
+
+
+.calculator-modal.open,
+.questions-modal.open {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.close-calculator-btn {
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    transition: all .3s;
+    font-weight: 500;
+    font-size: 1.1em;
+    color: rgb(255, 255, 255);
+    width: fit-content;
+
+}
+
+.close-calculator-btn:hover {
+    color: rgb(206, 33, 114);
+}
+
+.close-calculator-btn:focus {
+    outline: none;
+}
+
+.calculator-modal,
+.questions-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 1s;
+    z-index: 5;
+    padding: 20px;
+    overscroll-behavior: contain;
+}
+
+@media screen and (max-width: 1000px) {
+    .example-info {
+      flex-direction: column;
+      font-size: 1em;
+    }
+    .btn-wrapper {
+      align-items: center;
+      justify-content: center;
+    }
+    .example-info img {
+      width: 280px;
+    }
+  
+  }
+
+  @media (max-width: 800px) {
+    .calculator-modal {
+        width: 90%;
+        min-width: 0;
+    }
+}
+

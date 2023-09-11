@@ -1,11 +1,7 @@
-import Link from 'next/link'
 import React, { useEffect, useState, } from "react"
 import dynamic from 'next/dynamic'
 import styles from '../../styles/Page.module.css'
-import calcStyles from "../../styles/Calculators.module.css";
 
-import LoadingIcon from "../page-construction/LoadingIcon";
-import startCheckout from "../page-construction/StartCheckout";
 // this Sketch function is required to allow client side rendering only as window will not be present server side
 const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
   ssr: false,
@@ -13,55 +9,28 @@ const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
 
 
 function P5Trig(props) {
-  const [userData, setUser] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [noPremium, setNoPremium] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch(`/api/auth0/auth0-user`);
-        const data = await response.json();
-        if (!data) {
-          setIsLoading(false);
-         return;
-
-        }
-        setUser(data);
-
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-  const checkPremium = () => {
-    if(!props.custom) return
-    setNoPremium(true);
-  };
   let [windowWidth, setWindowWidth] = useState(500)
-  let [pixelScale, setPixelScale] = useState(50)
-
-
+  let [pixelScale, setPixelScale] = useState(25)
+  const [isReady, setIsReady] = useState(false);
 
   const resizeCheck = () => {
-    if (window.innerWidth > 500 && window.innerWidth < 625) {
-      setWindowWidth(375)
-      setPixelScale(40)
-    } else if (window.innerWidth <= 510) {
-      setWindowWidth(250)
-      setPixelScale(25)
+    
+    if (window.innerWidth < 625) {
+      setWindowWidth(350)
+    
     } else {
       setWindowWidth(500)
-      setPixelScale(50)
     }
   }
   useEffect(() => {
     resizeCheck()
+    setIsReady(true);
+    if(!props.custom) {
+      setPixelScale(50)
+    }
   }, [])
+
   //let windowWidth = window.innerWidth
   let movePoint1 = false
   let movePoint2 = false
@@ -215,7 +184,14 @@ function P5Trig(props) {
 
     p5.textSize(17);
     p5.noStroke()
+    p5.fill('#000')
 
+    const absoluteY = height * -470 / 500; // y = height * (y value at 500) / 500
+    const absoluteX = width * 10 / 500; // x = width * (x value at 500) / 500
+
+    if(props.custom) p5.text(`Area: ${parseFloat(0.5 * a * b * Math.sin(C)).toFixed(2)}`, absoluteX, absoluteY)
+    p5.stroke('#ffffff');
+    p5.strokeWeight(4);
     p5.fill('#ec9c33') // side text color
     if (!(document.getElementById('hideSideA')?.checked == true && props.custom) && (props.showSidea || props.custom))
       p5.text(`a${props.hidea ? `` : ': ' + parseFloat(p5.dist(point1x, point1y, point3x, point3y).toFixed(2))}`, ((point3x * pixelScale + point1x * pixelScale) / 2), -(((point3y * pixelScale + point1y * pixelScale) / 2)));
@@ -226,8 +202,6 @@ function P5Trig(props) {
     if (!(document.getElementById('hideAngleA')?.checked == true && props.custom) && (props.showAngleA || props.custom)) p5.text(`A${props.hideA ? `` : ': ' + parseFloat((document.getElementById('degrees')?.checked && props.custom) ? A * (180 / Math.PI) : A).toFixed(2)}`, (point2x * pixelScale), -(point2y * pixelScale))
     if (!(document.getElementById('hideAngleB')?.checked == true && props.custom) && (props.showAngleB || props.custom)) p5.text(`B${props.hideB ? `` : ': ' + parseFloat((document.getElementById('degrees')?.checked && props.custom) ? B * (180 / Math.PI) : B).toFixed(2)}`, (point3x * pixelScale), -(point3y * pixelScale))
     if (!(document.getElementById('hideAngleC')?.checked == true && props.custom) && (props.showAngleC || props.custom)) p5.text(`C${props.hideC ? `` : ': ' + parseFloat((document.getElementById('degrees')?.checked && props.custom) ? C * (180 / Math.PI) : C).toFixed(2)}`, (point1x * pixelScale), -(point1y * pixelScale))
-
-
 
     p5.pop();
     if(props.custom) {
@@ -291,23 +265,15 @@ function P5Trig(props) {
     p5.resizeCanvas(width, height);
   }
 
-  return (<>{
-    isLoading ? <LoadingIcon /> : <>
+  return (<>
     <br></br>
-    <div onClick={userData?.app_metadata?.is_premium ? null : checkPremium} className={styles['p5-container']} >
-    {noPremium ? (
-              <div className={calcStyles["no-premium-overlay"]}>
-                <h1>You need premium to use this feature</h1>
-                <button onClick={startCheckout}>Buy Premium</button>
-              </div>
-            ) : (
-              <></>
-            )}
+    <div className={styles['p5-container']} >
+
       {props.custom === true ?
         <>
           <div className={styles['p5-options']} style={{ width: width }}>
             <div className={styles['misc-options']}>
-              <button className={styles['button-input']} id='randomise-btn' type="button" name="randomise" onClick={userData?.app_metadata?.is_premium ? randomise : null}>Random Problem</button>
+              <button className={styles['button-input']} id='randomise-btn' type="button" name="randomise" onClick={ randomise}>Random Problem</button>
               <div className={styles['checkbox-container']}>
                 <div>Degrees</div>
                 <div>
@@ -316,6 +282,7 @@ function P5Trig(props) {
                 </div>
               </div>
             </div>
+            <div className={styles['main-trig-options']}>
             <div className={styles['selections-container']} id='angle-container'>
               <div className={styles['checkbox-container']}>
                 <div>Hide angle A</div>
@@ -353,13 +320,16 @@ function P5Trig(props) {
               </div>
 
             </div>
+            </div>
+
 
 
           </div>
         </>
         : <></>}
 
-      <span id={props.custom ? styles[`custom-triangle`] : null}>
+      {
+        isReady && <span id={props.custom ? styles[`custom-triangle`] : null}>
         <Sketch
           setup={setup}
           draw={draw}
@@ -367,9 +337,10 @@ function P5Trig(props) {
           mousePressed={props.custom ? mousePressed : null}
           mouseDragged={props.custom ? mouseDragged : null}
           mouseReleased={props.custom ? mouseReleased : null} /></span>
+      }
     </div>
     <br></br></>
-  }</>)
+  )
 
 
 }

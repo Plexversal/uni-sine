@@ -10,32 +10,7 @@ const GravitationalForce = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [noPremium, setNoPremium] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      
-      setIsLoading(true);
-      try {
-        const response = await fetch(`/api/auth0/auth0-user`);
-        const data = await response.json();
-        if (!data) {
-          setIsLoading(false);
-         return;
 
-        }
-        setUser(data);
-
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-  
-  const checkPremium = () => {
-    setNoPremium(true);
-  };
 
     const [massCoefficient, setMassCoefficient] = useState("5.9722");
     const [powerOfTen, setPowerOfTen] = useState("24");
@@ -58,18 +33,9 @@ const GravitationalForce = (props) => {
     };
   
     return (
-      <>{
-        isLoading ? <LoadingIcon /> : 
-        
-      <div  onClick={userData?.app_metadata?.is_premium ? null : checkPremium} className={styles['container']}>
-              {noPremium ? (
-            <div className={styles["no-premium-overlay"]}>
-              <h1>You need premium to use this feature</h1>
-              <button onClick={startCheckout}>Buy Premium</button>
-            </div>
-          ) : (
-            <></>
-          )}
+      <>
+      <div className={styles['container']}>
+             
       <h1>Gravitational Force Calculator</h1>
     <div className={styles["calculator-content-container"]}>
       <div className={styles["user-inputs-container"]}>
@@ -119,7 +85,7 @@ const GravitationalForce = (props) => {
           onChange={(e) => setPowerOfTen2(parseFloat(e.target.value))}
           /></sup>
         </div>
-        <button className={styles['user-input-btn']} onClick={ userData?.app_metadata?.is_premium ? calculateGravitationalForce : null}>Calculate Gravitational Force</button>
+        <button className={styles['user-input-btn']} onClick={calculateGravitationalForce}>Calculate Gravitational Force</button>
 
       </div>
       </div>
@@ -132,8 +98,7 @@ const GravitationalForce = (props) => {
       </div>
     </div>
     </div>
-
-      }</>
+</>
     );
   };
   

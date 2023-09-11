@@ -70,8 +70,9 @@ function Trig() {
                     <ol start={1}>
                         <li>Find the missing angle theta in radians for the below triangle:</li>
                     </ol>
-                    <P5Trig {...{point1x: 2.27, point1y: 2, point2x: 8.27, point2y: 2, point3x: 2.27, point3y: 7, 
-                        showSidea: false, showSideb: true, showSidec: true, showAngleA: false, showAngleB: true, showAngleC: false, hideB: true }}/>
+
+                    <img alt=''src="/static/maths/trig/trig_1.png" className={styles['equation']}></img>
+
                     <p>Firstly, we can identify the sides relative to the angle.</p>
                     <p>Hypotenuse = side c as it is <strong>opposite the right angle</strong> and we know the value to be 7.81.</p>
                     <p>Opposite side = side b as it is <strong>opposite the missing angle</strong>, and we know the value to be 6.</p>
@@ -86,8 +87,8 @@ function Trig() {
                     <ol start={2}>
                         <li>Find the value for side c for the below right-angled triangle:</li>
                     </ol>
-                    <P5Trig {...{point1x: 6, point1y: 1.9475, point2x: 1, point2y: 1.9475, point3x: 6, point3y: 6.4475, 
-                    showSidea: true, showSideb: true, showSidec: true, showAngleA: false, showAngleB: false, showAngleC: false, hidec: true }}/>
+
+                    <img alt=''src="/static/maths/trig/trig_2.png" className={styles['equation']}></img>
 
                     <p>This question has one missing side so we can use the Pythagorean theorem to work out the missing side:</p>
                     <img alt=''src="/static/maths/trig/image007.png" className={styles['equation']}></img>
@@ -101,8 +102,8 @@ function Trig() {
                     <ol start={3}>
                         <li>Find the value for side b for the below triangle:</li>
                     </ol>
-                    <P5Trig {...{point1x: 7.2, point1y: 7, point2x: 7.2, point2y: 2.2, point3x: 1.2, point3y: 7, 
-                    showSidea: true, showSideb: true, showSidec: false, showAngleA: true, showAngleB: false, showAngleC: false, hideb: true}}/>
+
+                    <img alt=''src="/static/maths/trig/trig_3.png" className={styles['equation']}></img>
 
                     <p>There is only one side given in this question so it rules out the ability to use the Pythagorean theorem as that would leave 2 missing variables and we need to solve for one.</p>
                     <p>We have an angle given in the triangle as well as one side. The side given is the opposite side as it is <strong>opposite</strong> the given angle.</p>
@@ -174,8 +175,8 @@ function Trig() {
                     <ol>
                         <li>Find the value for side length a in the below triangle:</li>
                     </ol>
-                    <P5Trig {...{point1x: 2.03, point1y: 3.4075, point2x: 7.77, point2y: 2.6475, point3x: 4.85, point3y: 6.9075,
-                    showSidea: true, showSideb: true, showSidec: false, showAngleA: true, showAngleB: true, showAngleC: false, hidea: true }}/>
+
+                    <img alt=''src="/static/maths/trig/trig_4.png" className={styles['equation']}></img>
 
                     <p>Firstly, we can identify what rule to use based on the missing sides and given sides/angles. In this example, we have side b, angle B and angle A. So, we can use the sine rule to workout side a:</p>
                     <img alt=''src="/static/maths/trig/image001edit (1).png" className={styles['equation']}></img>
@@ -185,8 +186,8 @@ function Trig() {
                     <ol start="2">
                         <li>Find the value for angle C in the below triangle:</li>
                     </ol>
-                    <P5Trig {...{point1x: 8.19, point1y: 6.8075, point2x: 5.05, point2y: 2.4475, point3x: 1.23, point3y: 4.0275,
-                    showSidea: false, showSideb: true, showSidec: true, showAngleA: false, showAngleB: true, showAngleC: false, hideC: true }}/>
+
+                    <img alt=''src="/static/maths/trig/trig_5.png" className={styles['equation']}></img>
 
                     <p>Identifying the sides and angles given, we can see that we have side c which is opposite the angle and we also have side b with its corresponding angle B.</p>
                     <p>Using this information, we can substitute the values:</p>
@@ -239,8 +240,8 @@ function Trig() {
                     <ol>
                         <li>Find the missing angle in the below triangle:</li>
                     </ol>
-                    <P5Trig {...{point1x: 1.31, point1y: 5.5275, point2x: 8.87, point2y: 2.7275, point3x: 5.25, point3y: 6.8875,
-                    showSidea: true, showSideb: true, showSidec: true, showAngleA: false, showAngleB: false, showAngleC: true, hideC: true }}/>
+
+                    <img alt=''src="/static/maths/trig/trig_6.png" className={styles['equation']}></img>
 
                     <p>We have been given the sides <strong>between</strong> a missing angle and <strong>all</strong> sides are given. So, we know we can use the cosine rule to work out the missing angle.</p>
                     <p>The formula requires just the sides to work out this angle. Side c in the formula would be the side <strong>opposite</strong> the missing angle so now we can substitute knowing these facts:</p>
@@ -253,8 +254,8 @@ function Trig() {
                     <ol start={2}>
                         <li >Find the missing side in the below triangle:</li>
                     </ol>
-                    <P5Trig {...{point1x: 1.31, point1y: 5.5275, point2x: 1.71, point2y: 1.7675, point3x: 8.15, point3y: 8.1075,
-                    showSidea: true, showSideb: true, showSidec: true, showAngleA: true, showAngleB: false, showAngleC: false, hidea: true  }}/>
+
+                    <img alt=''src="/static/maths/trig/trig_7.png" className={styles['equation']}></img>
                     
                     <p>In this triangle with have values for side b and c but not a, however this does not change the equation. Because the sides and angles do not correlate with the equation. Angle A is between sides b and c and so we can use the equation as normal to solve for side a:</p>
                     <img alt=''src="/static/maths/trig/image001edit (15).png" className={styles['equation']}></img>

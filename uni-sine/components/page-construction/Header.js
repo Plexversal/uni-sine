@@ -4,14 +4,12 @@ import styles from '../../styles/Home.module.css'
 import Link from "next/link";
 import Image from 'next/image'
 import AccountModal from "./AccountModal";
-const Header = (props) => {
-    const { user, error, isLoading } = useUser();
+const Header = ({ user }) => {
     const userAccountModalRef = useRef();
 
     const handleUserAccountButtonClick = () => {
       userAccountModalRef.current.handleButtonClick();
     };
-  
     return (
         <header className={styles['header']}>
             <div className={styles['logo']}>
@@ -20,15 +18,15 @@ const Header = (props) => {
             </div>
             <div className={styles['account-actions']}>
                 {
-                    !isLoading && user ?
+                    user ?
                         <div className={styles['signed-in-info']}>
 
                             <div className={styles['signed-in-actions']}>
                                 <a onClick={handleUserAccountButtonClick}>Manage Account</a>
-                                <AccountModal ref={userAccountModalRef} />
-                                <Link href='/api/auth/logout'>Logout</Link>
+                                <AccountModal ref={userAccountModalRef} user={user} />
+                                <a href={`/api/auth/logout`} className={styles.logout}>Logout</a>
                             </div>
-                            <Image height={50} width={50} src={user?.picture}></Image>
+                            <Image height={50} width={50} src={user.picture}></Image>
 
 
                         </div>

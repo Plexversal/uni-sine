@@ -8,32 +8,7 @@ const GravitationalPotential = (props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [noPremium, setNoPremium] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      
-      setIsLoading(true);
-      try {
-        const response = await fetch(`/api/auth0/auth0-user`);
-        const data = await response.json();
-        if (!data) {
-          setIsLoading(false);
-         return;
 
-        }
-        setUser(data);
-
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-  
-  const checkPremium = () => {
-    setNoPremium(true);
-  };
 
     const [option, setOption] = useState('potential');
     const [mass, setMass] = useState(null);
@@ -49,6 +24,7 @@ const GravitationalPotential = (props) => {
 
     const handleOptionChange = (e) => {
         setOption(e.target.value);
+        setResult(null);
     };
 
     const calculatePotential = () => {
@@ -67,17 +43,9 @@ const GravitationalPotential = (props) => {
     };
 
     return (
-            <>{
-                isLoading ? <LoadingIcon /> : 
-                <div onClick={userData?.app_metadata?.is_premium ? null : checkPremium} className={styles['container']}>
-                {noPremium ? (
-  <div className={styles["no-premium-overlay"]}>
-    <h1>You need premium to use this feature</h1>
-    <button onClick={startCheckout}>Buy Premium</button>
-  </div>
-) : (
-  <></>
-)}
+            <>
+                <div className={styles['container']}>
+              
   <h1>Gravitational Potential Calculator</h1>
   <div className={styles["calculator-content-container"]}>
       <div className={styles["user-inputs-container"]}>
@@ -147,9 +115,9 @@ const GravitationalPotential = (props) => {
                       /></sup>
                   </div>
                   {option === 'potential' ? (
-                      <button className={styles['user-input-btn']} onClick={userData?.app_metadata?.is_premium ? calculatePotential : null}>Calculate Potential</button>
+                      <button className={styles['user-input-btn']} onClick={calculatePotential}>Calculate Potential</button>
                   ) : (
-                      <button className={styles['user-input-btn']} onClick={userData?.app_metadata?.is_premium ? calculatePotentialEnergy : null }>Calculate Potential Energy</button>
+                      <button className={styles['user-input-btn']} onClick={calculatePotentialEnergy }>Calculate Potential Energy</button>
                   )}
               </div>
           </div>
@@ -166,7 +134,7 @@ const GravitationalPotential = (props) => {
           </div>
       </div>
   </div>
-            }</>
+            </>
         );
     };
     

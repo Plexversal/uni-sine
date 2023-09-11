@@ -3,16 +3,49 @@
     padding-left: "1rem";
     border-radius: "5px";
     font-size: "1.1em";
-    position: relative;
 }
 
 .copy-btn {
-    background-color: #333;
+    background-color: #5e5c5c;
     color: white;
     border-radius: 3px;
     padding: 0.25rem 0.5rem;
     cursor: pointer;
-    font-size: 0.9em;
-    outline: none;
-    border: none;
+    font-size: 0.8em;
+    width: fit-content;
+    margin: 6px;
+    align-self: end;
+  }
+  .copy-btn:hover {
+    background-color: #444444;
+  }
+
+.code-block-container {
+    background-color: #1e1e1e;
+    padding-left: 1rem;
+    border-radius: 5px;
+    font-size: 1.1em;
+    display: flex;
+    flex-direction: column;
+    
 }
+
+.code-block-container pre {
+    margin: 0;
+    scrollbar-width: thin;
+    scrollbar-color: #000 transparent;
+}
+
+.code-block-container pre::-webkit-scrollbar{
+    color: white;
+    background-color: #00000060;
+    width: 5px;
+    height: 8px; 
+    border: 1px solid #747272;
+    border-radius: 10px;
+}
+
+.code-block-container pre::-webkit-scrollbar-thumb {
+    background-color: #6b6b6b;
+    border-radius: 5px;
+  }

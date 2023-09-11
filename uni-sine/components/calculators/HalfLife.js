@@ -3,38 +3,8 @@ import styles from '../../styles/Calculators.module.css';
 import LoadingIcon from "../page-construction/LoadingIcon";
 import startCheckout from "../page-construction/StartCheckout";
 const HalfLife = (props) => {
-  const [userData, setUser] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [noPremium, setNoPremium] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      
-      setIsLoading(true);
-      try {
-        const response = await fetch(`/api/auth0/auth0-user`);
-        const data = await response.json();
-        if (!data) {
-          setIsLoading(false);
-         return;
-
-        }
-        setUser(data);
-
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-  
-  const checkPremium = () => {
-    setNoPremium(true);
-  };
   const [powerOfTen, setPowerOfTen] = useState("1");
-
 
   const [initialCount, setInitialCount] = useState(0)
   const [decayTime, setDecayTime] = useState(0)
@@ -49,6 +19,9 @@ const HalfLife = (props) => {
   const [selectedValue, setSelectedValue] = useState('Lambda');
   const handleRadioChange = (e) => {
     setSelectedValue(e.target.value);
+    setHalfLifeValue(null);
+    setLambdaValue(null);
+    setParticleCount(null);
   };
 
   useEffect(() => {
@@ -71,17 +44,9 @@ const HalfLife = (props) => {
     setParticleCount((initialCount*Math.pow((Math.E), -((lambdaValue*Math.pow(10, powerOfTen))*decayTime))));
   };
   return (
-    <>{
-      isLoading ? <LoadingIcon /> : 
-      <div onClick={userData?.app_metadata?.is_premium ? null : checkPremium} className={styles['container']}>
-         {noPremium ? (
-    <div className={styles["no-premium-overlay"]}>
-      <h1>You need premium to use this feature</h1>
-      <button onClick={startCheckout}>Buy Premium</button>
-    </div>
-  ) : (
-    <></>
-  )}
+    <>
+      <div  className={styles['container']}>
+        
         <h1>Half-Life Calculator</h1>
         <div className={styles["calculator-content-container"]}>
           <div className={styles["user-inputs-container"]}>
@@ -128,7 +93,7 @@ const HalfLife = (props) => {
               />
   
               </div>
-            <button className={styles['user-input-btn']} onClick={userData?.app_metadata?.is_premium ? calculateLambda : null}>Calculate Decay Constant</button>
+            <button className={styles['user-input-btn']} onClick={calculateLambda}>Calculate Decay Constant</button>
   
             </div> : <></>}
             {showHalfLife ? <div  className={styles['calculator-content']}>
@@ -147,7 +112,7 @@ const HalfLife = (props) => {
               onChange={(e) => setPowerOfTen(parseFloat(e.target.value))}
               /></sup>
               </div>
-            <button className={styles['user-input-btn']} onClick={userData?.app_metadata?.is_premium ? calculateHalfLife : null}>Calculate Half-life</button>
+            <button className={styles['user-input-btn']} onClick={calculateHalfLife}>Calculate Half-life</button>
   
             </div>  : <></>}
             {showCount ? <div className={styles['calculator-content']}>
@@ -179,7 +144,7 @@ const HalfLife = (props) => {
                 type="number"
                 onChange={(e) => setDecayTime(parseFloat(e.target.value))}
               /></div>
-            <button className={styles['user-input-btn']} onClick={userData?.app_metadata?.is_premium ? calculateParticleCount : null}>Calculate Particle Count</button>
+            <button className={styles['user-input-btn']} onClick={calculateParticleCount}>Calculate Particle Count</button>
   
             </div>: <></>}
   
@@ -205,7 +170,7 @@ const HalfLife = (props) => {
       </div>
   
     
-    }</>
+    </>
   );
 };
 

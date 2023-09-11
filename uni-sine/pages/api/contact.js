@@ -106,7 +106,6 @@ export default async function handler(req, response) {
       }
     }).catch(error => {
       return response.status(500).json({status: '500', message: `error: Internal server error (support internal)`})
-      console.error('There was an error!', error);
   });
 
 
@@ -157,7 +156,6 @@ export default async function handler(req, response) {
     }
   }).catch(error => {
     return response.status(500).json({status: '500', message: `error: Internal server error (user internal)`})
-    console.error('There was an error!', error);
 });
 
 

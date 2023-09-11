@@ -13,6 +13,7 @@
   width: 90%; */
   opacity: 0;
   transition: all 0.3s ease;
+  z-index: 999;
 }
 
 .modal-open {
@@ -106,4 +107,47 @@
   background: #fc8484;
   border: 2px solid #fc8484;
 
+}
+
+.feature-list {
+  list-style: none; 
+  padding: 0;
+  margin: 0 20px;
+}
+
+.feature-list li {
+  margin: 20px 0;
+  background-image: url('/static/home/checkmark.svg');
+  background-repeat: no-repeat;
+  padding-left: 30px;
+  background-position: 0 50%;
+}
+
+.buy-premium-btn {
+  width: 100%;
+  background: rgb(15, 15, 15);
+  text-align: center;
+  border: 2px solid rgb(15, 15, 15);
+  padding: 8px 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all .3s;
+  font-weight: 500;
+  color: white;
+  text-align: center;
+  width: 100%;
+  display: block;
+  
+}
+
+.buy-premium-btn:hover {
+  background: rgb(255, 255, 255);
+  color: black;
+}
+
+@media (max-width: 600px) {
+  .Modal,
+  .modal-initial {
+    width: 80%;
+  }
 }

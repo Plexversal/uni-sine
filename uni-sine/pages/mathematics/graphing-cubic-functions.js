@@ -2,7 +2,7 @@ import Path from "../../components/page-construction/Path"
 import SecondaryBanner from '../../components/page-construction/SecondaryBanner'
 import styles from '../../styles/Page.module.css'
 import React, { useEffect, useState } from "react"
-import P5Graph from '../../components/p5-interactions/P5CubicGraph'
+import P5Graph from '../../components/p5-interactions/P5customGraph'
 
 
 function Cubics() {
@@ -34,7 +34,7 @@ function Cubics() {
             <Path />
             <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
-                    <P5Graph {...{showControls: true, showFunction: true, showIntercepts: true, custom: true}}/>
+                    <P5Graph {...{preset: 'cubic'}}/>
                     <h2>Properties of Cubic&rsquo;s</h2>
                     <p>Cubic functions are identified by the fact that have an x term which is cubed. The general format for a cubic equation is:</p>
                     <img alt=''src="/static/maths/cubic-equations/image001.png" className={styles['equation']}></img>
@@ -85,11 +85,11 @@ function Cubics() {
 
                     <p>You may also choose points closest to the nearest integer of the min and max points. So, in this case x = 4 and x = 0. We already had x = 0 so x = 1 could work too.</p>
                     <p>So, plotting the points gives the following:</p>
-                    <P5Graph {...{points: [{x:3.8,y:-4.2}, {x:0,y:4}, {x:0.9,y:8.05}], noLine: true}}/>
+                    <img alt=''src="/static/maths/cubic-equations/cubic_1.png" className={styles['equation']}></img>
 
 
                     <p>Connecting the graph should result in the following cubic:</p>
-                    <P5Graph {...{points: [{x:3.8,y:-4.2}, {x:0,y:4}, {x:0.9,y:8.05}], a: 1, b: -7, c: 10, d: 4, noLine: false}}/>
+                    <img alt=''src="/static/maths/cubic-equations/cubic_2.png" className={styles['equation']}></img>
 
                     
                     <h2>Saddle point</h2>
@@ -115,7 +115,7 @@ function Cubics() {
                     <img alt=''src="/static/maths/cubic-equations/image019.png" className={styles['equation']}></img>
 
                     <p>You could use additional points such as -2 and 2 for more accuracy or even fractional x values but this should be enough to graph:</p>
-                    <P5Graph {...{points: [{x:-1,y:2}, {x:1,y:4}, {x:0,y:3}], a: 1, b: 0, c: 0, d: 3}}/>
+                    <img alt=''src="/static/maths/cubic-equations/cubic_3.png" className={styles['equation']}></img>
                     
                     <h2>Factorised form</h2>
                     <p>Graph the equation: f(x) = (x + 2)<sup>3</sup></p>
@@ -151,7 +151,7 @@ function Cubics() {
 
                     <p>When x = -1, y = 1</p>
                     <p>We should now have enough points to graph the equation, you could plot more using the same method for better accuracy.</p>
-                    <P5Graph {...{points: [{x:-3,y:-1}, {x:-1,y:1}, {x:-2,y:0}], a: 1, b: +6, c: 12, d: 8, noLine: false}}/>
+                    <img alt=''src="/static/maths/cubic-equations/cubic_4.png" className={styles['equation']}></img>
 
                     
        

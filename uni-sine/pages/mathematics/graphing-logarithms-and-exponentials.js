@@ -2,7 +2,7 @@ import Path from "../../components/page-construction/Path"
 import SecondaryBanner from '../../components/page-construction/SecondaryBanner'
 import styles from '../../styles/Page.module.css'
 import React, { useEffect, useState } from "react"
-import P5Graph from "../../components/p5-interactions/P5LogsGraph"
+import P5Graph from "../../components/p5-interactions/P5CustomGraph"
 
 
 
@@ -37,13 +37,14 @@ function GraphExp() {
                 <div className={styles['article-container']}>
 
                     <h2 >Properties of logarithmic graphs</h2>
-                    <P5Graph {...{ ln: false, showControls: true, showFunction: true, custom: true}}/>
+                    <P5Graph {...{ preset: 'log'}}/>
                     <p>Logarithmic and exponential graphs are related because a logarithmic graph can be used to show the inverse relationship between a variable and its logarithm.</p>
                     <p>The two graphs are related in that the logarithmic graph is the inverse of the exponential graph. This means that when one graph increases, the other decreases.</p>
                     <p>Graphs of logs and exponentials are symmetrical along the line of y = x as they are inverse functions of each other.</p>
                     <p>Graphs of log<sub>a</sub>(x) have a vertical asymptote approaching y = 0 and so never touches or cross the y axis.</p>
                     <p>Graphs of a<sup>x</sup> have a horizontal asymptote approaching x = 0 and so never touches or crosses the x axis.</p>
-                    <P5Graph {...{ ln: false, a: 1, b: 0, c: 2, extra: true}}/>
+                    <img alt=''src="/static/maths/logs/logs_1.png" className={styles['equation']}></img>
+
                     <p>In order to graph log functions, you can simply take a value of y and input into the equation given and create points to form a sketch.</p>
                     <p>For example, sketching log<sub>2</sub>(x) would have the following points:</p>
                     
@@ -113,7 +114,8 @@ function GraphExp() {
                     <img alt=''src="/static/maths/logs/image054.png" className={styles['equation']}></img>
 
                     <p>Now we have enough points to sketch a graph:</p>
-                    <P5Graph {...{ ln: false, a: 1, b: 0, c: 2, points: [{x: 0.5, y: -1}, {x: 1, y: 0}, {x: 2, y: 1}, {x: 3, y: 1.585}, {x: 4, y: 2}, {x: 1, y: 0},]}}/>
+                    <img alt=''src="/static/maths/logs/logs_2.png" className={styles['equation']}></img>
+
 
                     <h3>Example</h3>
                     <p>Sketch the graph of the following equation:</p>
@@ -179,7 +181,8 @@ function GraphExp() {
                     <img alt=''src="/static/maths/logs/image065.png" className={styles['equation']}></img>
 
                     <p>Now sketch the graph with intercepts and plotted points:</p>
-                    <P5Graph {...{ ln: true, a: 2, b: 3, points: [{x: -1, y: 1.4}, {x: 1, y: 2.77}, {x: 2, y: 3.2}, {x: 0, y: 2.2}, {x: -2, y: 0},]}}/>
+                    <img alt=''src="/static/maths/logs/logs_3.png" className={styles['equation']}></img>
+
 
                 </div>
 

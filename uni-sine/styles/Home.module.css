@@ -117,7 +117,12 @@
 
 }
 
-.explore-btn:hover{
+.calculators-btn {
+  border: 5px solid #43baff;
+}
+
+.explore-btn:hover,
+.calculators-btn:hover {
   box-shadow: 4px 4px 8px -2px rgba(0,0,0,0.1);
   transform: scale(1.2) !important;
   border: 5px solid #ffffff;
@@ -280,11 +285,18 @@
   transition: all .3s;
   font-weight: 500;
   font-family: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+  color: #000;
+
 }
 .plan-options-container > div > button:hover,
 .plan-options-container > div > a:hover {
   background: #000;
   color: white;
+  -webkit-appearance: none;
+  appearance: none;
+
 }
 .feature-list {
   list-style: none; 
@@ -454,6 +466,64 @@
 
 .privacy-container h2{
   font-size: 1.5em;
+}
+
+.FAQ-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 100px 0;
+  
+}
+.FAQ-section h1 {
+  font-size: 2.5em;
+  margin: 0.5em;
+}
+
+.FAQ-container {
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 20px;
+  width: 80%;
+}
+
+.FAQ-question {
+  border-bottom: 1px solid #d4d4d4;
+  padding: 10px 0;  
+}
+
+.FAQ-question h2 {
+  cursor: pointer;
+}
+
+
+.FAQ-question:last-child {
+  border-bottom: none;
+}
+
+.FAQ-question ul li {
+  margin: 10px 0;
+  font-size: 1.2em;
+  color: #535353;
+}
+.FAQ-question p {
+  font-size: 1.2em;
+  color: #535353;
+}
+.arrow-select {
+  cursor: pointer;
+}
+.FAQ-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.4s ease-out;
+}
+
+.FAQ-content.open {
+  max-height: 300px;
+  opacity: 1;
 }
 
 @media (max-width: 1600px)  {
@@ -701,3 +771,4 @@
     height: 400px;
   }
 }
+

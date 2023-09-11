@@ -1,11 +1,7 @@
-import Link from 'next/link'
 import React, { useEffect, useState, } from "react"
 import dynamic from 'next/dynamic'
 import styles from '../../styles/Page.module.css'
-import calcStyles from "../../styles/Calculators.module.css";
 
-import LoadingIcon from "../page-construction/LoadingIcon";
-import startCheckout from "../page-construction/StartCheckout";
 // this Sketch function is required to allow client side rendering only as window will not be present server side
 const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
   ssr: false,
@@ -13,34 +9,6 @@ const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
 
 function P5Graph(props) {
 
-  const [userData, setUser] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [noPremium, setNoPremium] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch(`/api/auth0/auth0-user`);
-        const data = await response.json();
-        if (!data) {
-          setIsLoading(false);
-         return;
-
-        }
-        setUser(data);
-
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-  const checkPremium = () => {
-    setNoPremium(true);
-  };
   let a = 0
 
   const [funcA, setFuncA] = useState(a) 
@@ -49,6 +17,7 @@ function P5Graph(props) {
   let [pixelScalex, setPixelScalex] = useState(100)
   let [pixelScaley, setPixelScaley] = useState(400)
 
+  const [isReady, setIsReady] = useState(false);
 
   function erf(x) {
 
@@ -93,21 +62,22 @@ let height = windowWidth
     }
   }
   useEffect(() => {
-    return resizeCheck()
+    resizeCheck()
+    setIsReady(true);
   }, [])
+
   const resizeCheck = () => {
+    
     if (window.innerWidth < 625) {
-      setWindowWidth(250)
-      setPixelScale(25)
+      setWindowWidth(350)
+      setPixelScale(12.5)
       setPixelScalex(50)
       setPixelScaley(200)
     } else {
       setWindowWidth(500)
-      setPixelScale(50)
-      setPixelScalex(100)
-      setPixelScaley(400)
     }
   }
+
   const draw = (p5) => {
 
     p5.background('#FFF');
@@ -186,15 +156,16 @@ let height = windowWidth
       //p5.text(t, 3, 200 * -t + 5);
 
     }
+    const absoluteX = width * -220 / 500; // x = width * (x value at 500) / 500
+    const absoluteY1 = height * -220 / 500; // y = height * (y value at 500) / 500
+    const absoluteY2 = height * -190 / 500; // y = height * (y value at 500) / 500
+
     p5.textSize(18);
     p5.stroke('#000')
     p5.fill('#000')
-    p5.text(`\u03BC = 0`, -220, -220)
-    p5.text(`\u03C3 = 1`, -220, -190)
-
-
-
-
+    p5.text(`\u03BC = 0`, absoluteX, absoluteY1)
+    p5.text(`\u03C3 = 1`, absoluteX, absoluteY2)
+    
     p5.pop();
     
   };
@@ -203,22 +174,13 @@ let height = windowWidth
 
     p5.resizeCanvas(width, height);
   }
-  return (<>{
-    isLoading ? <LoadingIcon /> : 
-    <><br></br><div onClick={userData?.app_metadata?.is_premium ? null : checkPremium} className={styles['p5-container']}>
-                            {noPremium ? (
-              <div className={calcStyles["no-premium-overlay"]}>
-                <h1>You need premium to use this feature</h1>
-                <button onClick={startCheckout}>Buy Premium</button>
-              </div>
-            ) : (
-              <></>
-            )}
+  return (
+    <><br></br><div className={styles['p5-container']}>
   <div className={styles['p5-sketch-details']}>
     {props.showControls ? <div className={styles['p5-selection-range']}>
       <div>
-        <input id='function-a' type="range" step="0.0001" min="-3" max="3" onChange={onChangeA}></input>
-        <div id='function-a-label'>X = {<input id='function-text' step="0.05" min="-99" max="99" value={funcA} onKeyDown={enforceMinMax} onChange={onChangeText}></input>}</div>
+        <input placeholder='X' value={funcA} id='function-a' type="range" step="0.0001" min="-3" max="3" onChange={onChangeA}></input>
+        <div id='function-a-label'>{<input id='function-text' step="0.05" min="-99" max="99" value={funcA} onKeyDown={enforceMinMax} onChange={onChangeText}></input>}</div>
       </div>
     </div> : <></>}
     {props?.showFunction ? <p className='exclude-fast-read'>P(X &#60; {funcA}) (area) = <strong>{
@@ -229,9 +191,11 @@ let height = windowWidth
  
   </div>
 
-    <Sketch setup={setup} draw={draw} windowResized={windowResized}/>
+    {
+      isReady && <Sketch setup={setup} draw={draw} windowResized={windowResized}/>
+    }
   </div><br></br></>
-  }</>)
+  )
 
 
 }
