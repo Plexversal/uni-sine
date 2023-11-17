@@ -35,7 +35,7 @@ function Trig() {
             <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
                     <h1>Fundamental Trigonometry</h1>
-                    <P5Trig {...{custom: true}}/>
+
 
                     <h2>Right-angled triangles</h2>
                     <p>Right angled triangles have at least one 90-degree angle and the formulas used to calculate missing angles or sides in these triangles are specific to right-angled triangles only.</p>
@@ -264,7 +264,7 @@ function Trig() {
                     <img alt=''src="/static/maths/trig/image001edit (18).png" className={styles['equation']}></img>
 
                     <h2>Trigonometric identities</h2>
-                    <p>Trigonometric identities equate different Pythagorean where they are true for any value, which make it an identity. They help break down different trigonometric functions into known functions.</p>
+                    <p>Trigonometric identities equate different Pythagorean equations where they are true for any value, which make it an identity. They help break down different trigonometric functions into known functions.</p>
                     <p>The fundamental identities to know are the following:</p>
                     <p><strong>Reciprocals:</strong></p>
                     <img alt=''src="/static/maths/trig/image066.png" className={styles['equation']}></img>

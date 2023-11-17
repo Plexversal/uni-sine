@@ -37,7 +37,7 @@ function GraphExp() {
                 <div className={styles['article-container']}>
 
                     <h2 >Properties of logarithmic graphs</h2>
-                    <P5Graph {...{ preset: 'log'}}/>
+
                     <p>Logarithmic and exponential graphs are related because a logarithmic graph can be used to show the inverse relationship between a variable and its logarithm.</p>
                     <p>The two graphs are related in that the logarithmic graph is the inverse of the exponential graph. This means that when one graph increases, the other decreases.</p>
                     <p>Graphs of logs and exponentials are symmetrical along the line of y = x as they are inverse functions of each other.</p>

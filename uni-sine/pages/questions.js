@@ -7,6 +7,7 @@ import SecondaryBanner from "../components/page-construction/SecondaryBanner";
 import QuestionsModal from "../components/questions/QuestionsModal";
 import BuyPremiumModal from "../components/page-construction/PremiumModal";
 import LoadingIcon from "../components/page-construction/LoadingIcon";
+import PercentIcon from "../components/page-construction/PercentageIcon";
 
 const Backdrop = ({ onClick }) => (
   <div className={contentStyles.backdrop} onClick={onClick}></div>
@@ -17,6 +18,8 @@ export default function Questions({ user }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [openCalculator, setOpenCalculator] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isStatsLoading, setIsStatsLoading] = useState(false);
+
   const [questionData, setQuestionData] = useState(null);
   const [percent, setPercent] = useState(0);
   const radius = 18;
@@ -24,7 +27,7 @@ export default function Questions({ user }) {
   const offset = ((100 - percent) / 100) * circumference;
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true);
+      setIsStatsLoading(true);
 
       try {
         const [userQuestionStats] = await Promise.allSettled([
@@ -37,14 +40,12 @@ export default function Questions({ user }) {
           userQuestionStats.status === "rejected" ||
           response.status !== 200
         ) {
-          setIsLoading(false);
           throw new Error("No user question data found");
         }
 
         const questionData = await response.json();
 
         if (!questionData) {
-          setIsLoading(false);
           throw new Error("No user question data found");
         } else {
           setQuestionData(questionData);
@@ -53,10 +54,11 @@ export default function Questions({ user }) {
           );
 
           setPercent(percent || 0);
-          setIsLoading(false);
         }
       } catch (error) {
         console.error("Unexpected error:", error);
+      } finally {
+        setIsStatsLoading(false)
       }
     };
 
@@ -145,7 +147,7 @@ export default function Questions({ user }) {
                     questions.
                   </p>
                 </div>
-                <img src="/static/home/interactive-comps.gif" />
+                <img className={styles['description-gif']} src="/static/home/questions.gif" />
               </div>
               <div className={styles["btn-wrapper"]}>
                 {Object.keys(calculatorsMap)
@@ -165,74 +167,18 @@ export default function Questions({ user }) {
                   ))}
               </div>
               <h1>Stats</h1>
-              {isLoading ? (
+
+              {isStatsLoading ? (
                 <LoadingIcon />
               ) : (
                 <>
                   {questionData ? (
                     <div className={questionsStyles["end-screen-content"]}>
-                      <div className={questionsStyles.circleContainer}>
-                        <svg
-                          viewBox={`0 0 ${2 * radius + radius * (3.8 / 18)} ${
-                            2 * radius + radius * (3.8 / 18)
-                          }`}
-                          className={questionsStyles.circularChart}
-                        >
-                          <path
-                            className={questionsStyles.circleBg}
-                            d={`
-                          M${radius + (radius * (3.8 / 18)) / 2} ${
-                              radius + (radius * (3.8 / 18)) / 2 - radius
-                            }
-                          a ${radius} ${radius} 0 0 1 0 ${2 * radius}
-                          a ${radius} ${radius} 0 0 1 0 ${-2 * radius}
-                      `}
-                          />
-                          <path
-                            className={questionsStyles.circle}
-                            d={`
-                          M${radius + (radius * (3.8 / 18)) / 2} ${
-                              radius + (radius * (3.8 / 18)) / 2 - radius
-                            }
-                          a ${radius} ${radius} 0 0 1 0 ${2 * radius}
-                          a ${radius} ${radius} 0 0 1 0 ${-2 * radius}
-                      `}
-                            style={{
-                              strokeDasharray: circumference,
-                              strokeDashoffset: offset,
-                              stroke:
-                                percent > 50
-                                  ? "#73c3c6"
-                                  : percent > 25
-                                  ? "orange"
-                                  : "red",
-                            }}
-                          />
-                          <text
-                            x={radius + (radius * (3.8 / 18)) / 2}
-                            y={radius + (radius * (3.8 / 18)) / 2 - 5}
-                            style={{ fontSize: `${0.5 * (radius / 26)}em` }}
-                            className={questionsStyles.percentage}
-                            transform={`rotate(180, ${
-                              radius + (radius * (3.8 / 18)) / 2
-                            }, ${radius + (radius * (3.8 / 18)) / 2})`}
-                          >
-                            {percent}%
-                          </text>
-                          <text
-                            x={radius + (radius * (3.8 / 18)) / 2}
-                            y={radius + (radius * (3.8 / 18)) / 2 + 5}
-                            style={{ fontSize: `${0.3 * (radius / 30)}em` }}
-                            className={questionsStyles.percentage}
-                            transform={`rotate(180, ${
-                              radius + (radius * (3.8 / 18)) / 2
-                            }, ${radius + (radius * (3.8 / 18)) / 2})`}
-                          >
-                            Overall score
-                          </text>
-                        </svg>
-                      </div>
+                      <PercentIcon {...{percent, text: 'Overall score'}}/>
+                      
                       <div>
+                      <p style={{color: 'grey'}}><i>Stats are based on your first question attempt</i></p>
+
                         <p>
                           <span>Total questions answered:</span>{" "}
                           <strong>{questionData.totalQuestions}</strong>

@@ -34,7 +34,7 @@ function EF() {
             <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
                     <h2>Electric Field Equations</h2>
-                    <ElectricField />
+
 
                     <p>Electric fields relate to objects that have charge, when an object has charge it has an electric field, much like an object with mass has a gravitational field. When another charged object is placed in and electric field it will experience a non-contact force.</p>
                     <p>Opposite charges attract and the same charges repel, just like a standard north pole and south pole magnet.</p>

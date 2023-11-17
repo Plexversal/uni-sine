@@ -4,7 +4,7 @@ import {
     withApiAuthRequired,
     getSession
 } from "@auth0/nextjs-auth0";
-import { schemaComp, schemaPhysics, schemaMath, mathSubtopic, physicsSubtopic, compSubtopic } from '../../../lib/schemaConstants'
+import { schemaComp, schemaPhysics, schemaMath, mathSubtopic, physicsSubtopic, compSubtopic, aiFunction } from '../../../lib/schemaConstants'
 
 export default withApiAuthRequired(async function handler(req, res) {
     
@@ -60,19 +60,20 @@ export default withApiAuthRequired(async function handler(req, res) {
                 const chatCompletion = await openai.chat.completions.create({
                     messages: [
                         { role: "system", content: "You are a programming assistant with the sole purpose to output question data for a database and provide no other context, your responses should be in json only without new lines or additional spaces in the json response" },
-                        { role: "user", content: `Create 2 easy, 3 medium and 2 hard ${req.query.topic} questions for a total of 7 questions, based on the following topics ${randomTopicSelection}, meaning one question per topic, that would be suitable for ${level} students. An example question would be: ${example}. Produce the answer in text, 3 wrong answers and 1 correct answer. Each question should include supporting media in Latex format for MathJax to process with the mediaType "equation". The json schema is below. Produce your response in this similar format. All answers that are equation based should use MathJax type formatting to be parsed by MathJax library. Do not include any new line characters in the response such as ("\\n") or excessive spacing. Ensure the json complies with parsing, making sure equation backslahes are double \n ${schemaMath}.` }
+                        { role: "user", content: `Create 2 easy, 3 medium and 2 hard ${req.query.topic} questions for a total of 7 questions. Based on the following topics ${randomTopicSelection}, meaning one question per topic, that would be suitable for ${level} students. An example question would be: ${example}. Produce the answer in text, 3 wrong answers and 1 correct answer. Each question should include supporting media in Latex format for MathJax library. All answers that are equation based should use MathJax type formatting to be parsed by MathJax library. Do not include any new line characters in the response such as ("\\n") or excessive spacing. Ensure the json complies with parsing, making sure equation backslahes are double. You MUST stick to the schema, do not add key names or modify the object structure.` }
                     ],
                     model: "gpt-4",
                     temperature: 0.3,
+                    functions: [aiFunction]
                 });
 
                 try {
-                  let parsed = JSON.parse(chatCompletion.choices[0].message.content)
+                  let parsed = JSON.parse(chatCompletion.choices[0].message.function_call.arguments)
                   return res.status(200).json({message: "Questions fetched and parsed", chat: parsed, parsed: true});
                 
                 } catch (error) {
                   if(chatCompletion) {
-                    return res.status(200).json({message: "Questions fetched but not parsed", chat: chatCompletion.choices[0].message.content, error: error.message, parsed: false});
+                    return res.status(200).json({message: "Questions fetched but not parsed", chat: chatCompletion.choices[0].message.function_call.arguments, error: error.message, parsed: false});
 
                   } else {
                     return res.status(500).json({message: 'failed to get any AI chat data', error: error.message})
@@ -94,19 +95,20 @@ export default withApiAuthRequired(async function handler(req, res) {
           const chatCompletion = await openai.chat.completions.create({
               messages: [
                   { role: "system", content: "You are a programming assistant with the sole purpose to output question data for a database and provide no other context, your responses should be in json only without new lines or additional spaces in the json response" },
-                  { role: "user", content: `Create 4 easy, 4 medium and 2 hard ${req.query.topic} questions for a total of 10 questions, based on the following topics ${randomTopicSelection}, meaning one question per topic, that would be suitable for ${level} students. An example question would be: ${example}. Produce the answer in text, 3 wrong answers and 1 correct answer. Each question should include supporting media in Latex format for MathJax to process with the mediaType "equation". The json schema is below. Produce your response in this similar format. All answers that are equation based should use MathJax type formatting to be parsed by MathJax library. Do not include any new line characters in the response such as ("\\n") or excessive spacing. Ensure the json complies with parsing, making sure equation backslahes are double \n ${schemaPhysics}.` }
+                  { role: "user", content: `Create 4 easy, 4 medium and 2 hard ${req.query.topic} questions for a total of 10 questions. Based on the following topics ${randomTopicSelection}, meaning one question per topic, that would be suitable for ${level} students. An example question would be: ${example}. Produce the answer in text, 3 wrong answers and 1 correct answer. Each question should include supporting media in Latex format for MathJax. All answers that are equation based should use MathJax type formatting to be parsed by MathJax library. Try to make the questions various and some that include mathematical ability to work out. Do not include any new line characters in the response such as ("\\n") or excessive spacing.` }
               ],
               model: "gpt-4",
-              temperature: 0.4,
+              temperature: 0.3,
+              functions: [aiFunction]
           });
 
           try {
-            let parsed = JSON.parse(chatCompletion.choices[0].message.content)
+            let parsed = JSON.parse(chatCompletion.choices[0].message.function_call.arguments)
             return res.status(200).json({message: "Questions fetched and parsed", chat: parsed, parsed: true});
           
           } catch (error) {
             if(chatCompletion) {
-              return res.status(200).json({message: "Questions fetched but not parsed", chat: chatCompletion.choices[0].message.content, error: error.message, parsed: false});
+              return res.status(200).json({message: "Questions fetched but not parsed", chat: chatCompletion.choices[0].message.function_call.arguments, error: error.message, parsed: false});
 
             } else {
               return res.status(500).json({message: 'failed to get any AI chat data', error: error.message})
@@ -128,19 +130,20 @@ export default withApiAuthRequired(async function handler(req, res) {
           const chatCompletion = await openai.chat.completions.create({
               messages: [
                   { role: "system", content: "You are a programming assistant with the sole purpose to output question data for a database and provide no other context, your responses should be in json only without new lines or additional spaces in the json response" },
-                  { role: "user", content: `Create 3 easy, 3 medium and 2 hard ${req.query.topic} questions for a total of 8 questions, based on the following topics ${randomTopicSelection}, do not reuse a topic provided each question must be unique, it should be suitable for ${level} students. An example question would be: ${example}. Produce the answer in text, 3 wrong answers and 1 correct answer. Each question should include supporting media in Latex format for MathJax to process with the mediaType "equation". The json schema is below. Produce your response in this similar format. All answers that are equation based should use MathJax type formatting to be parsed by MathJax library. Do not include any new line characters in the response such as ("\\n") or excessive spacing. Ensure the json complies with parsing, making sure equation backslahes are double \n ${schemaComp}.` }
+                  { role: "user", content: `Create 3 easy, 3 medium and 2 hard ${req.query.topic} questions for a total of 8 questions. Do not add or modify key names only the content based on the following topics ${randomTopicSelection}, do not reuse a topic provided each question must be unique, it should be suitable for ${level} students. An example question would be: ${example}. Produce the answer in text, 3 wrong answers and 1 correct answer. All answers that are equation based should use MathJax type formatting to be parsed by MathJax library. Do not include any new line characters in the response such as ("\\n") or excessive spacing.` }
               ],
               model: "gpt-4",
               temperature: 0.4,
+              functions: [aiFunction]
           });
 
           try {
-            let parsed = JSON.parse(chatCompletion.choices[0].message.content)
+            let parsed = JSON.parse(chatCompletion.choices[0].message.function_call.arguments)
             return res.status(200).json({message: "Questions fetched and parsed", chat: parsed, parsed: true});
           
           } catch (error) {
             if(chatCompletion) {
-              return res.status(200).json({message: "Questions fetched but not parsed", chat: chatCompletion.choices[0].message.content, error: error.message, parsed: false});
+              return res.status(200).json({message: "Questions fetched but not parsed", chat: chatCompletion.choices[0].message.function_call.arguments, error: error.message, parsed: false});
 
             } else {
               return res.status(500).json({message: 'failed to get any AI chat data', error: error.message})

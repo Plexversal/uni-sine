@@ -102,7 +102,8 @@
 }
 
 .explore-btn,
-.calculators-btn {
+.calculators-btn,
+.link-page-btn {
   border: 5px solid #00FFC2;
   padding: 10px 50px;
   border-radius: 999px;
@@ -115,6 +116,14 @@
   margin-top: 20px;
   font-family: inherit;
   transition: all .3s;
+  display: inline-block;
+
+}
+
+.link-page-btn {
+
+  border: 5px solid #3b3b3b;
+  color: #00000098;
 
 }
 
@@ -123,12 +132,18 @@
 }
 
 .explore-btn:hover,
-.calculators-btn:hover {
+.calculators-btn:hover  {
   box-shadow: 4px 4px 8px -2px rgba(0,0,0,0.1);
-  transform: scale(1.2) !important;
+  transform: scale(1.15) !important;
   border: 5px solid #ffffff;
 
 } 
+.link-page-btn:hover {
+  box-shadow: 4px 4px 8px -2px rgba(0,0,0,0.1);
+  transform: scale(1.1) !important;
+  background: #000;
+  color: white;
+}
 .join-link {
   border: 5px solid #FF006B;
   color: #FF006B;
@@ -548,7 +563,7 @@
 
   .landing-section-content {
     gap: 30px;
-    margin: 200px 50px
+    margin: 150px 50px
   }
   .landing-section-content > div > h1{
     font-size: 3.3em;

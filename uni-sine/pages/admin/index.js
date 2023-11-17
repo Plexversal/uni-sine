@@ -40,10 +40,10 @@ function Admin(props) {
           <button onClick={() => setActiveComponent('manageAi')}>Manage AI Integration</button>
         </li>
         <li>
-          <button onClick={() => setActiveComponent('manageUsers')}>Manage Users</button>
+          <button disabled onClick={() => setActiveComponent('manageUsers')}>Manage Users</button>
         </li>
         <li>
-          <button onClick={() => setActiveComponent('viewQuestions')}>View Questions</button>
+          <button disabled onClick={() => setActiveComponent('viewQuestions')}>View Questions</button>
         </li>
       </ul>
       </div>

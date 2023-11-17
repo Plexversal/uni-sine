@@ -9,7 +9,6 @@ const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
 
 function P5Trig(props) {
   let [pixelScale, setPixelScale] = useState(22)
-  console.log(props)
   let width = 300
   let height = 300
   let vertices = computeVertices(props.sideA, props.sideB, props.sideC);
@@ -79,14 +78,14 @@ function P5Trig(props) {
     p5.strokeWeight(3);
     p5.fill('#ec9c33') // side text color
     if (!(document.getElementById('hideSideA')?.checked == true && props.custom) && (props.showSidea || props.custom))
-      p5.text(`a${props.hideSideA ? `` : ': ' + parseFloat(p5.dist(point1x, point1y, point3x, point3y).toFixed(2))}`, ((point3x * pixelScale + point1x * pixelScale) / 2), -(((point3y * pixelScale + point1y * pixelScale) / 2)));
-    if (!(document.getElementById('hideSideB')?.checked == true && props.custom) && (props.showSideb || props.custom)) p5.text(`b${props.hideSideB ? `` : ': ' + parseFloat(p5.dist(point1x, point1y, point2x, point2y).toFixed(2))}`, ((point1x * pixelScale + point2x * pixelScale) / 2), -(((point1y * pixelScale + point2y * pixelScale) / 2)));
-    if (!(document.getElementById('hideSideC')?.checked == true && props.custom) && (props.showSidec || props.custom)) p5.text(`c${props.hideSideC ? `` : ': ' + parseFloat(p5.dist(point2x, point2y, point3x, point3y).toFixed(2))}`, ((point2x * pixelScale + point3x * pixelScale) / 2), -(((point2y * pixelScale + point3y * pixelScale) / 2)));
+      p5.text(`a${props.hideSideA ? `` : ': ' + parseFloat(p5.dist(point1x, point1y, point3x, point3y).toFixed(3))}`, ((point3x * pixelScale + point1x * pixelScale) / 2), -(((point3y * pixelScale + point1y * pixelScale) / 2)));
+    if (!(document.getElementById('hideSideB')?.checked == true && props.custom) && (props.showSideb || props.custom)) p5.text(`b${props.hideSideB ? `` : ': ' + parseFloat(p5.dist(point1x, point1y, point2x, point2y).toFixed(3))}`, ((point1x * pixelScale + point2x * pixelScale) / 2), -(((point1y * pixelScale + point2y * pixelScale) / 2)));
+    if (!(document.getElementById('hideSideC')?.checked == true && props.custom) && (props.showSidec || props.custom)) p5.text(`c${props.hideSideC ? `` : ': ' + parseFloat(p5.dist(point2x, point2y, point3x, point3y).toFixed(3))}`, ((point2x * pixelScale + point3x * pixelScale) / 2), -(((point2y * pixelScale + point3y * pixelScale) / 2)));
 
     p5.fill('#ec3333')  // angle text color
-    if (!(document.getElementById('hideAngleA')?.checked == true && props.custom) && (props.showAngleA || props.custom)) p5.text(`A${props.hideAngleA ? `` : ': ' + parseFloat((document.getElementById('degrees')?.checked && props.custom) ? A * (180 / Math.PI) : A).toFixed(2)}`, (point2x * pixelScale), -(point2y * pixelScale))
-    if (!(document.getElementById('hideAngleB')?.checked == true && props.custom) && (props.showAngleB || props.custom)) p5.text(`B${props.hideAngleB ? `` : ': ' + parseFloat((document.getElementById('degrees')?.checked && props.custom) ? B * (180 / Math.PI) : B).toFixed(2)}`, (point3x * pixelScale), -(point3y * pixelScale))
-    if (!(document.getElementById('hideAngleC')?.checked == true && props.custom) && (props.showAngleC || props.custom)) p5.text(`C${props.hideAngleC ? `` : ': ' + parseFloat((document.getElementById('degrees')?.checked && props.custom) ? C * (180 / Math.PI) : C).toFixed(2)}`, (point1x * pixelScale), -(point1y * pixelScale))
+    if (!(document.getElementById('hideAngleA')?.checked == true && props.custom) && (props.showAngleA || props.custom)) p5.text(`A${props.hideAngleA ? `` : ': ' + parseFloat((document.getElementById('degrees')?.checked && props.custom) ? A * (180 / Math.PI) : A).toFixed(3)}`, (point2x * pixelScale), -(point2y * pixelScale))
+    if (!(document.getElementById('hideAngleB')?.checked == true && props.custom) && (props.showAngleB || props.custom)) p5.text(`B${props.hideAngleB ? `` : ': ' + parseFloat((document.getElementById('degrees')?.checked && props.custom) ? B * (180 / Math.PI) : B).toFixed(3)}`, (point3x * pixelScale), -(point3y * pixelScale))
+    if (!(document.getElementById('hideAngleC')?.checked == true && props.custom) && (props.showAngleC || props.custom)) p5.text(`C${props.hideAngleC ? `` : ': ' + parseFloat((document.getElementById('degrees')?.checked && props.custom) ? C * (180 / Math.PI) : C).toFixed(3)}`, (point1x * pixelScale), -(point1y * pixelScale))
 
     p5.pop();
 

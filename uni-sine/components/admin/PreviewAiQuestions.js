@@ -267,7 +267,7 @@ export default function PreviewAiQuestions(props) {
             <strong>00:00</strong>
           </p>
         </div>
-        <div className={`${styles["questions-body-container"]} ${questionData[difficulty][index].answerType == 'text' ? styles["text-based-question"] : ``}`}>
+        <div className={`${styles["questions-body-container"]} ${questionData[difficulty][index]?.answerType == 'text' ? styles["text-based-question"] : ``}`}>
           <div>
             <div className={styles["questions-content"]}>
               <p>{questionData[difficulty][index].question}</p>

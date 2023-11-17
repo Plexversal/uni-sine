@@ -32,7 +32,7 @@ function BI() {
             <Path />
             <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}> 
-                    < BindingEnergy />
+
                     <h2>Binding energy in MeV</h2>
                     <p>Binding energy, usually measured in MeV, is the energy that is used to split an atom apart. The mass defect within an atom is the mass converted into energy to keep the nucleus together under the repelling force of the positively charged protons.</p>
                     <p>Binding energy is calculated using the values of an isotopes relative atomic mass, this is using the principles of E = mc<sup>2</sup> by converting mass values into energy values of MeV.</p>

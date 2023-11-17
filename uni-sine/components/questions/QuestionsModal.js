@@ -8,6 +8,7 @@ import Graph from "../dynamic-media/Graph";
 import Vector from "../dynamic-media/Vector";
 import Timer from "../page-construction/Timer";
 import MathJaxContent from "../page-construction/MathJaxContent";
+import PercentIcon from "../page-construction/PercentageIcon";
 
 const MathQuestions = (props) => {
   const confettiRef = useRef(null);
@@ -585,67 +586,7 @@ const MathQuestions = (props) => {
                     <h3>Results</h3>
                   </div>
                   <div className={styles["end-screen-content"]}>
-                    <div className={styles.circleContainer}>
-                      <svg
-                        viewBox={`0 0 ${2 * radius + radius * (3.8 / 18)} ${
-                          2 * radius + radius * (3.8 / 18)
-                        }`}
-                        className={styles.circularChart}
-                      >
-                        <path
-                          className={styles.circleBg}
-                          d={`
-                            M${radius + (radius * (3.8 / 18)) / 2} ${
-                            radius + (radius * (3.8 / 18)) / 2 - radius
-                          }
-                            a ${radius} ${radius} 0 0 1 0 ${2 * radius}
-                            a ${radius} ${radius} 0 0 1 0 ${-2 * radius}
-                        `}
-                        />
-                        <path
-                          className={styles.circle}
-                          d={`
-                            M${radius + (radius * (3.8 / 18)) / 2} ${
-                            radius + (radius * (3.8 / 18)) / 2 - radius
-                          }
-                            a ${radius} ${radius} 0 0 1 0 ${2 * radius}
-                            a ${radius} ${radius} 0 0 1 0 ${-2 * radius}
-                        `}
-                          style={{
-                            strokeDasharray: circumference,
-                            strokeDashoffset: offset,
-                            stroke:
-                              percent > 50
-                                ? "#73c3c6"
-                                : percent > 25
-                                ? "orange"
-                                : "red",
-                          }}
-                        />
-                        <text
-                          x={radius + (radius * (3.8 / 18)) / 2}
-                          y={radius + (radius * (3.8 / 18)) / 2 - 5}
-                          style={{ fontSize: `${0.5 * (radius / 26)}em` }}
-                          className={styles.percentage}
-                          transform={`rotate(180, ${
-                            radius + (radius * (3.8 / 18)) / 2
-                          }, ${radius + (radius * (3.8 / 18)) / 2})`}
-                        >
-                          {percent}%
-                        </text>
-                        <text
-                          x={radius + (radius * (3.8 / 18)) / 2}
-                          y={radius + (radius * (3.8 / 18)) / 2 + 5}
-                          style={{ fontSize: `${0.3 * (radius / 30)}em` }}
-                          className={styles.percentage}
-                          transform={`rotate(180, ${
-                            radius + (radius * (3.8 / 18)) / 2
-                          }, ${radius + (radius * (3.8 / 18)) / 2})`}
-                        >
-                          First Attempt Score
-                        </text>
-                      </svg>
-                    </div>
+                    <PercentIcon {...{percent, text: 'First attempt score'}}/>
                     <div>
                       <p>
                         <span>Predicted level:</span>{" "}

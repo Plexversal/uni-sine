@@ -34,7 +34,7 @@ function Cubics() {
             <Path />
             <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
-                    <P5Graph {...{preset: 'cubic'}}/>
+
                     <h2>Properties of Cubic&rsquo;s</h2>
                     <p>Cubic functions are identified by the fact that have an x term which is cubed. The general format for a cubic equation is:</p>
                     <img alt=''src="/static/maths/cubic-equations/image001.png" className={styles['equation']}></img>

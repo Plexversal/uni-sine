@@ -36,7 +36,6 @@ function Linear() {
                 <div className={styles['article-container']}>
                     <h2>Properties of linear function graphs</h2>
 
-                    <P5Graph  {...{preset: 'linear'}}/>
                     <p >Linear equations are the simplest of equations to graph. When you see the terms linear, it means practically means constant rate and so you can imagine this graph as a straight-line graph.</p>
                     <p >There are some terms that one should know when graphing equations:</p>
                     <p ><strong>Y-intercept:</strong> This is related to when the line on the graph crosses a point where the X component is 0, the Y value at this point is the Y-intercept.</p>

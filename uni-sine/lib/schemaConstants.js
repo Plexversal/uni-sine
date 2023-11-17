@@ -1,3 +1,105 @@
+export const aiFunction = {
+  "name": "getQuestions",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "easy": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "question": {
+              "type": "string",
+              "description": "A randomly generation question"
+            },
+            "answers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string", 
+                    "description": "an answer to the question, one should be correct, 3 should be not be correct"
+                  },
+                  "isCorrect": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "isAnswersEquation": {
+              "type": "boolean",
+              "description": "wether or not the answers use mathjax content"
+            }
+          }
+        }
+      },
+      "medium": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "question": {
+              "type": "string",
+              "description": "A randomly generation question"
+            },
+            "answers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string", 
+                    "description": "an answer to the question, one should be correct, 3 should be not be correct"
+                  },
+                  "isCorrect": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "isAnswersEquation": {
+              "type": "boolean",
+              "description": "wether or not the answers use mathjax content"
+            }
+          }
+        }
+      },
+      "hard": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "question": {
+              "type": "string",
+              "description": "A randomly generation question"
+            },
+            "answers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string", 
+                    "description": "an answer to the question, one should be correct, 3 should be not be correct"
+                  },
+                  "isCorrect": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "isAnswersEquation": {
+              "type": "boolean",
+              "description": "wether or not the answers use mathjax content"
+            }
+          }
+        }
+      },
+    }
+  }
+}
+
 export const schema = `{
     "easy": [
       {

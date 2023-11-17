@@ -22,8 +22,6 @@ const CodeBlock = ({ code, language = "cpp", showCopy = true }) => {
         </div>
       )}
       <DynamicSyntaxHighlighter
-        wrapLines={true}
-        wrapLongLines={true}
         showLineNumbers={true}
         language={language}
         style={vs2015}

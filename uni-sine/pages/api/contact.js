@@ -7,19 +7,29 @@ export default async function handler(req, response) {
     const gSecret = process.env.CAPTCHA_TOKEN;
     const gResponse = req.body.token;
   
-    await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${gSecret}&response=${gResponse}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json',
-      "Accept-Encoding": "identity" },
-    }).then(
-      res => res.json()
-      ).then(data => 
-        {
-          if(!data.success) return response.status(422).json({status: '422', message: `error: failed Google captcha`})
-        }) .catch(err => {
-            console.error(err)
-            return response.status(500).json({status: '500', message: `error: Internal server error`})
-           })
+    await fetch(
+      `https://www.google.com/recaptcha/api/siteverify?secret=${gSecret}&response=${gResponse}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept-Encoding": "identity",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.success)
+          return response
+            .status(422)
+            .json({ status: "422", message: `error: failed Google captcha` });
+      })
+      .catch((err) => {
+        console.error(err);
+        return response
+          .status(500)
+          .json({ status: "500", message: `error: Internal server error` });
+      });
   
   
     if(!req.body.name) return response.status(400).json({status: '400', message: 'error: No \'name\' provided in request.'})

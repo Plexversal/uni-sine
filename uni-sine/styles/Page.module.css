@@ -271,6 +271,16 @@
     color: blue;
 }
 
+.show-options-btn {
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #7e0a0a;
+    color: white;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
 @media (max-width: 1000px) {
     .article-container {
         width: 80vw;
@@ -284,7 +294,7 @@
     }
     .misc-options {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
     }
 
     .main-trig-options {

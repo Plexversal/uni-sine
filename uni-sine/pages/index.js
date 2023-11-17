@@ -5,6 +5,7 @@ import { useInView } from 'react-intersection-observer'
 import { useEffect, useState } from 'react'
 import { useAnimation } from 'framer-motion'
 import {BsFillCaretDownFill, BsFillCaretRightFill} from 'react-icons/bs'
+import {BiLinkExternal} from 'react-icons/bi'
 import Script from 'next/script'
 import Header from '../components/page-construction/Header'
 import startCheckout from '../components/page-construction/StartCheckout'
@@ -103,8 +104,8 @@ export default function Home({ user, ...props }) {
               <p>Uni-Sine Learning is an online learning platform designed to help you learn through visual and interactive tools.</p>
               <p>Need to pass your exams? Or perhaps just curious about the world. This is the place to learn. </p>
               <div className={styles['home-btn-wrapper']}>
-              <button onClick={scrollClick} className={styles['explore-btn']}>Explore Topics</button>
-              <Link href={'/questions'} className={styles['calculators-btn']}>Practice Questions</Link>
+              <button onClick={scrollClick} className={styles['explore-btn']}>Free Topics</button>
+              <Link href={'/courses'} className={styles['calculators-btn']}>Explore Courses</Link>
               </div>
             </div>
 
@@ -188,8 +189,9 @@ export default function Home({ user, ...props }) {
                 <li>Generate unlimited, unique practice questions</li>
                 <li>Tools designed with hard coded math for accurate results</li>
               </ul>
+              <Link href={'/questions'} className={styles['link-page-btn']}> Questions</Link>
             </div>
-            <img src='/static/home/unique-questions.gif' />
+            <img src='/static/home/questions.gif' />
 
           </div>
           <div className={styles['info-bubble']}>
@@ -197,6 +199,8 @@ export default function Home({ user, ...props }) {
             <div>
               <h1>14+ Interactive calculators</h1>
               <p>Go beyond a standard calculator with a variety of visual graphing and algebra calculators specially designed for helping you learn faster</p>
+              <Link href={'/calculators'} className={styles['link-page-btn']}>Calculators</Link>
+
             </div>
 
           </div>

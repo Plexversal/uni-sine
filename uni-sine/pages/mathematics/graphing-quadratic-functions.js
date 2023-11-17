@@ -36,7 +36,6 @@ function Quadratic() {
                 <div className={styles['article-container']}>
 
                     <h2 >Properties of quadratic graphs</h2>
-                    <P5Graph  {...{preset: 'quadratic'}}/>
 
                     <p >Quadratic equations can easily be identified as an x term is always squared. The general format for a quadratic equation is:</p>
                     <img alt=''src="/static/maths/quadratic-equations/image001.png" className={styles['equation']}></img>

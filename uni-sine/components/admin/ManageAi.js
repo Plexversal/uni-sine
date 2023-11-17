@@ -6,153 +6,16 @@ import PreviewAiQuestions from "./PreviewAiQuestions";
 import CodeBlock from "../page-construction/CodeBlock";
 import { trigMedia, graphMedia, compMedia } from "../../lib/mediaCreationLogic";
 function ManageAi({ user }) {
-  const [aiResponse, setAiResponse] = useState({
-    easy: [{
-    answers: [{
-    isCorrect: true,
-    text: "(-0.5, 5, 2)"
-  }, {
-    isCorrect: false,
-    text: "(0.5, 6, 2)"
-  }, {
-    isCorrect: false,
-    text: "(-0.5, -5, -2)"
-  }, {
-    isCorrect: false,
-    text: "(0.5, -5, 2)"
-  }],
-    isAnswersEquation: false,
-    media: null,
-    mediaType: "no media",
-    question: "Find the coordinates of the midpoint of the line segment joining the points (4, 2, 7) and (-5, 8, -3).",
-    requiresMedia: false
-  }, {
-    answers: [{
-    isCorrect: true,
-    text: "f(x) = | x - 4 |"
-  }, {
-    isCorrect: false,
-    text: "f(x) = | x + 2 |"
-  }, {
-    isCorrect: false,
-    text: "f(x) = | x - 2 | + 2"
-  }, {
-    isCorrect: false,
-    text: "f(x) = | x - 2 | - 2"
-  }],
-    isAnswersEquation: true,
-    media: null,
-    mediaType: "no media",
-    question: "Transfer the function \(f(x) = | x - 2 |\) 2 units to the right.",
-    requiresMedia: false
-  }],
-    hard: [{
-    answers: [{
-    isCorrect: true,
-    text: "After applying the cevian theorem and simplifying, the equation holds."
-  }, {
-    isCorrect: false,
-    text: "After applying the cevian theorem, it does not simplify to the given equation."
-  }, {
-    isCorrect: false,
-    text: "The cevian theorem cannot be used in this situation."
-  }, {
-    isCorrect: false,
-    text: "It is impossible to confirm without knowing the specific triangle."
-  }],
-    isAnswersEquation: false,
-    media: null,
-    mediaType: "no media",
-    question: "In triangle ABC, cevians AD, BE, and CF intersect at the centroid G. Show that \[EF = 2GD.\]",
-    requiresMedia: false
-  }, {
-    answers: [{
-    isCorrect: true,
-    text: "\(x = \pi/2, 5\pi/6, 7\pi/6\)"
-  }, {
-    isCorrect: false,
-    text: "\(x = \pi/6, \pi/2, 7\pi/6\)"
-  }, {
-    isCorrect: false,
-    text: "\(x = \pi/6, 3\pi/2, 7\pi/6\)"
-  }, {
-    isCorrect: false,
-    text: "\(x = \pi/6, \pi/2, 3\pi/2\)"
-  }],
-    isAnswersEquation: true,
-    media: null,
-    mediaType: "no media",
-    question: "Solve the trigonometric equation \(2 \sin^2x - \sin x - 1 = 0\) where \(0 \leq x \leq 2\pi\).",
-    requiresMedia: false
-  }],
-    medium: [{
-    answers: [{
-    isCorrect: true,
-    text: "\(x - 3y + 2z - 3 = 0\)"
-  }, {
-    isCorrect: false,
-    text: "\(x + 3y - 2z + 3 = 0\)"
-  }, {
-    isCorrect: false,
-    text: "\(3x - y + 2z - 3 = 0\)"
-  }, {
-    isCorrect: false,
-    text: "\(3x + y - 2z + 3 = 0\)"
-  }],
-    isAnswersEquation: true,
-    media: null,
-    mediaType: "no media",
-    question: "Find the equation of the plane containing the points (1, 2, 3), (0, -1, 4), and (1, 1, 1).",
-    requiresMedia: false
-  }, {
-    answers: [{
-    isCorrect: true,
-    text: "Base case and induction step proven correct"
-  }, {
-    isCorrect: false,
-    text: "Base case correct, induction step incorrect"
-  }, {
-    isCorrect: false,
-    text: "Base case incorrect, induction step correct"
-  }, {
-    isCorrect: false,
-    text: "Base case and induction step incorrect"
-  }],
-    isAnswersEquation: false,
-    media: null,
-    mediaType: "no media",
-    question: "Prove by induction that for all natural numbers n, \(1^3 + 2^3 + 3^3 + \ldots + n^3 = (1 + 2 + 3 + \ldots + n)^2\).",
-    requiresMedia: false
-  }, {
-    answers: [{
-    isCorrect: true,
-    text: "No explicit solution, only numerical methods"
-  }, {
-    isCorrect: false,
-    text: "y = x + 1"
-  }, {
-    isCorrect: false,
-    text: "y = x^2 + 2"
-  }, {
-    isCorrect: false,
-    text: "\(y = x^2 + 1\)"
-  }],
-    isAnswersEquation: true,
-    media: null,
-    mediaType: "no media",
-    question: "Solve for y in the differential equation: \(\frac{dy}{dx} = x^2 + y^2\)",
-    requiresMedia: false
-  }]
-  });
+  const [aiResponse, setAiResponse] = useState(null);
   const [mediaQuestions, setMediaQuestions] = useState({
     easy: [],
     medium: [],
     hard: []
   })
   const [isLoading, setIsLoading] = useState(false);
-  const [success, setSuccess] = useState(true);
+  const [success, setSuccess] = useState(null);
   const [date, setDate] = useState("");
-  const [topic, setTopic] = useState("comp");
+  const [topic, setTopic] = useState("");
   const [rerenderKey, setRerenderKey] = useState("")
 
   const schema = {
@@ -171,8 +34,9 @@ function ManageAi({ user }) {
       const request = await fetch(`/api/db/getAiQuestions?topic=${topic}`);
       const result = await request.json();
 
-      if (request.status === 200 && result.chat) {
+      if (request.status === 200 && result) {
         // try parsing
+
         if (result.error) console.log(result.error);
         if (result.parsed) {
           setAiResponse(result.chat);
@@ -234,6 +98,12 @@ function ManageAi({ user }) {
         const result = await response.json();
         if (response.ok) {
           alert("Question processed successfully!");
+          setMediaQuestions({
+            easy: [],
+            medium: [],
+            hard: []
+          })
+          setAiResponse(null)
         } else {
           alert(result.error.message || "An error occurred.");
         }
@@ -367,6 +237,7 @@ function ManageAi({ user }) {
                       </button>
                     </div>
                     <PreviewAiQuestions key={rerenderKey} {...{ questions: aiResponse }} />
+                    
                     {
                       mediaQuestions.easy.length > 0 && 
                       <>
@@ -379,10 +250,12 @@ function ManageAi({ user }) {
                     </>
 
                     }
+                    <div className={styles['code-block-wrapper']}>
                     <CodeBlock
                       code={JSON.stringify(aiResponse, null, 4)}
                       language="json"
                     />
+                    </div>
                   </>
                 ) : (
                   <>

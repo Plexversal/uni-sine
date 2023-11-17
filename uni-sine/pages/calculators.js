@@ -11,6 +11,7 @@ import GravitationalForce from '../components/calculators/GravitationalForce'
 import GravitationalPotential from '../components/calculators/GravitationalPotential'
 import HalfLife from '../components/calculators/HalfLife'
 import KeplersThirdLaw from '../components/calculators/KeplersThirdLaw'
+import CodeEditor from '../components/calculators/CodeEditor'
 // p5 calculators
 import P5NormalDistribution from '../components/p5-interactions/P5NormalDistribution'
 import P5TrigTriangle from '../components/p5-interactions/P5TrigTriangle'
@@ -67,14 +68,13 @@ function searchComponent() {
   </div>)
 }
 
-  const calculatorsMap = {
-    'Binding Energy Calculator': <BindingEnergy {...{onClose: handleCloseCalculator}}/>,
-    'Electric Force Calculator': <ElectricFields {...{onClose: handleCloseCalculator}}/>,
-    'Escape Velocity Calculator': <EscapeVelocity {...{onClose: handleCloseCalculator}}/>,
-    'Gravitational Force Calculator': <GravitationalForce {...{onClose: handleCloseCalculator}}/>,
-    'Gravitational Potential Calculator': <GravitationalPotential {...{onClose: handleCloseCalculator}}/>,
-    'Keplers Third Law Calculator': <KeplersThirdLaw />,
-    'Half Life Calculator': <HalfLife {...{onClose: handleCloseCalculator}}/>,
+
+
+  const compCalcs = {
+    'Code Editor': <CodeEditor />
+  }
+
+  const mathCalcs = {
     'Cubic Graph': <P5CustomGraph {...{onClose: handleCloseCalculator, preset: 'cubic'}} />,
     'Linear Graph': <P5CustomGraph {...{onClose: handleCloseCalculator, preset: 'linear'}} />,
     'Logarithmic Graph': <P5CustomGraph {...{onClose: handleCloseCalculator, preset: 'log'}} />,
@@ -83,10 +83,26 @@ function searchComponent() {
     'Trigonometry Calculator': <P5TrigTriangle {...{onClose: handleCloseCalculator, custom: true}}/>,
     'Vectors Calculator': <P5Vectors {...{onClose: handleCloseCalculator}}/>,
     'Custom Graph': <P5CustomGraph {...{onClose: handleCloseCalculator}}/>,
+  }
+
+  const physicsCalcs = {
+    'Binding Energy Calculator': <BindingEnergy {...{onClose: handleCloseCalculator}}/>,
+    'Electric Force Calculator': <ElectricFields {...{onClose: handleCloseCalculator}}/>,
+    'Escape Velocity Calculator': <EscapeVelocity {...{onClose: handleCloseCalculator}}/>,
+    'Gravitational Force Calculator': <GravitationalForce {...{onClose: handleCloseCalculator}}/>,
+    'Gravitational Potential Calculator': <GravitationalPotential {...{onClose: handleCloseCalculator}}/>,
+    'Keplers Third Law Calculator': <KeplersThirdLaw />,
+    'Half Life Calculator': <HalfLife {...{onClose: handleCloseCalculator}}/>,
+  }
+
+  const calculatorsMap = {
+    ...compCalcs,
+    ...mathCalcs,
+    ...physicsCalcs
   };
 
 function popularCheck (calculator) {
-  return calculator === 'Custom Graph' || calculator === 'Trigonometry Calculator';
+  return calculator === 'Custom Graph' || calculator === 'Trigonometry Calculator' || calculator === 'Code Editor';
 }
 
 function freeCheck(calculator) {
@@ -105,7 +121,7 @@ function freeCheck(calculator) {
             <SecondaryBanner
               title="Calculators, graphs and interactions"
               search={true ? searchComponent : <div>Loading</div>}
-              subheader={`Premium members only`}
+              subheader={`Variety of tools, calculators and graphs. Premium members only`}
             />
             <div className={styles["content-wrapper"]}>
             <div className={styles["example-info"]}>
@@ -115,12 +131,14 @@ function freeCheck(calculator) {
                   Take advantage of our powerful math tools for generating
                   graphs, equations and general problem solving
                 </p>
-                <p>SORT BY CATEGORY</p>
               </div>
-              <img src="/static/home/interactive-comps.gif" />
+              <img className={styles['description-gif']} src="/static/home/interactive-comps.gif" />
             </div>
-            <div className={styles["btn-wrapper"]}>
-              {Object.keys(calculatorsMap)
+            <div className={styles['calculator-category-container']}>
+            <div className={styles['calculator-category']}>
+              <h3>Math Calculators</h3>
+              <div className={styles["btn-wrapper"]}>
+              {Object.keys(mathCalcs)
                 .filter((calculatorName) =>
                   calculatorName
                     .toLowerCase()
@@ -149,6 +167,76 @@ function freeCheck(calculator) {
                     {calculatorName}
                   </button>
                 ))}
+              </div>
+            </div>
+            <div className={styles['calculator-category']}>
+              <h3>Physics Calculators</h3>
+              <div className={styles["btn-wrapper"]}>
+              {Object.keys(physicsCalcs)
+                .filter((calculatorName) =>
+                  calculatorName
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase())
+                )
+                .sort((a, b) => Number(freeCheck(b)) - Number(freeCheck(a)))
+                .sort(
+                  (a, b) => Number(popularCheck(b)) - Number(popularCheck(a))
+                )
+                .map((calculatorName, i) => (
+                  <button
+                    key={i}
+                    className={`${styles["open-calculator-btn"]} 
+                                    ${
+                                      popularCheck(calculatorName)
+                                        ? styles["popular-btn"]
+                                        : ""
+                                    } 
+                                    ${
+                                      freeCheck(calculatorName)
+                                        ? styles["free-btn"]
+                                        : ""
+                                    }`}
+                    onClick={() => handleOpenCalculator(calculatorName)}
+                  >
+                    {calculatorName}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className={styles['calculator-category']}>
+              <h3>Computer Science Tools</h3>
+              <div className={styles["btn-wrapper"]}>
+              {Object.keys(compCalcs)
+                .filter((calculatorName) =>
+                  calculatorName
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase())
+                )
+                .sort((a, b) => Number(freeCheck(b)) - Number(freeCheck(a)))
+                .sort(
+                  (a, b) => Number(popularCheck(b)) - Number(popularCheck(a))
+                )
+                .map((calculatorName, i) => (
+                  <button
+                    key={i}
+                    className={`${styles["open-calculator-btn"]} 
+                                    ${
+                                      popularCheck(calculatorName)
+                                        ? styles["popular-btn"]
+                                        : ""
+                                    } 
+                                    ${
+                                      freeCheck(calculatorName)
+                                        ? styles["free-btn"]
+                                        : ""
+                                    }`}
+                    onClick={() => handleOpenCalculator(calculatorName)}
+                  >
+                    {calculatorName}
+                  </button>
+                ))}
+              </div>
+            </div>
             </div>
             {openCalculator && (
               <div
