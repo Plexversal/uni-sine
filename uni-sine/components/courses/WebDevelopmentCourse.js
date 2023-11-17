@@ -7,7 +7,7 @@ import {BsFillXCircleFill, BsFillCheckCircleFill} from 'react-icons/bs'
 import CodeEditor from "../page-construction/CodeEditor";
 import LevWorker from '../../workers/levenshtein.worker'
 import PercentIcon from "../page-construction/PercentageIcon";
-import QuestionElement from "./questionElement";
+import QuestionElement from "./QuestionElement";
 import { cleanCSS, cleanHTML, cleanJS } from "../../lib/cleanFunctions";
 import * as dedent from 'dedent-js'
 function WebDevCourse(props) {

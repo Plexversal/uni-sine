@@ -3,7 +3,7 @@ import LoadingIcon from "../page-construction/LoadingIcon";
 import styles from "../../styles/Courses.module.css";
 import {BsFillXCircleFill, BsFillCheckCircleFill} from 'react-icons/bs'
 import PercentIcon from "../page-construction/PercentageIcon";
-import QuestionElement from "./questionElement";
+import QuestionElement from "./QuestionElement";
 import MathJaxContent from '../page-construction/MathJaxContent'
 export default function NuclearEnergyCourse (props) {
   const [isLoading, setIsLoading] = useState(false);

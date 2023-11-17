@@ -3,7 +3,7 @@ import LoadingIcon from "../page-construction/LoadingIcon";
 import styles from "../../styles/Courses.module.css";
 import {BsFillXCircleFill, BsFillCheckCircleFill} from 'react-icons/bs'
 import PercentIcon from "../page-construction/PercentageIcon";
-import QuestionElement from "./questionElement";
+import QuestionElement from "./QuestionElement";
 import Trig from '../dynamic-media/Trig'
 export default function TrigCourse (props) {
   const [isLoading, setIsLoading] = useState(false);
