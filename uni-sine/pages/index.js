@@ -197,7 +197,7 @@ export default function Home({ user, ...props }) {
           <div className={styles['info-bubble']}>
             <img src='/static/home/interactive-comps.gif' />
             <div>
-              <h1>14+ Interactive calculators</h1>
+              <h1>15+ Interactive calculators</h1>
               <p>Go beyond a standard calculator with a variety of visual graphing and algebra calculators specially designed for helping you learn faster</p>
               <Link href={'/calculators'} className={styles['link-page-btn']}>Calculators</Link>
 
@@ -241,7 +241,7 @@ export default function Home({ user, ...props }) {
                   <li>Full access to all current and future interactive components and calculators</li>
                   <li>Access unique practice questions that refresh weekly</li>
                   <li>Access to all premium and university level pages</li>
-                  <li>Email support</li>
+                  <li>Access to all courses current and future</li>
                 </ul>
               </div>
               {
