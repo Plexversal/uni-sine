@@ -96,14 +96,14 @@ return (
             {router.pathname === '/' ? (
               <>
                 <Component {...pageProps} user={user} />
-                {/* <Analytics /> */}
+                <Analytics />
                 <Footer />
               </>
             ) : (
               <Layout user={user} isLoading={isLoading}>
                 <ErrorBoundary>
                   <Component {...pageProps} user={user} isLoading={isLoading} />
-                  {/* <Analytics /> */}
+                  <Analytics />
                 </ErrorBoundary>
               </Layout>
             )}
