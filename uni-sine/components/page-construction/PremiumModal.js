@@ -59,7 +59,7 @@ const BuyPremiumModal = forwardRef((showOverlay, ref) => {
               <li>Daily exam style Questions</li>
               <li>Access to all Courses</li>
             </ul>
-            <a href='/auth/login' className={styles['buy-premium-btn']} onClick={startCheckout}>Login</a>
+            <a href='/api/auth/login' className={styles['buy-premium-btn']} onClick={startCheckout}>Login</a>
 
             <button className={styles['buy-premium-btn']} onClick={startCheckout}>Buy Premium</button>
 
