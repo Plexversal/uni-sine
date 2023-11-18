@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import styles from '../../styles/UserAccountModal.module.css'; // Reusing your styles
 import { GrFormClose } from 'react-icons/gr';
 import startCheckout from './StartCheckout';
+import Link from 'next/link';
 
 Modal.setAppElement('#__next');
 
@@ -59,7 +60,7 @@ const BuyPremiumModal = forwardRef((showOverlay, ref) => {
               <li>Daily exam style Questions</li>
               <li>Access to all Courses</li>
             </ul>
-            <a href='/api/auth/login' className={styles['buy-premium-btn']} onClick={startCheckout}>Login</a>
+            <Link href='/api/auth/login' className={styles['buy-premium-btn']} onClick={startCheckout}>Login</Link>
 
             <button className={styles['buy-premium-btn']} onClick={startCheckout}>Buy Premium</button>
 
