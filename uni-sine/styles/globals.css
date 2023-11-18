@@ -28,8 +28,18 @@ button {
   align-self: center;
   max-width: fit-content;
   height: auto;
+  touch-action: none;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+.CtxtMenu_ContextMenu {
+  display: none !important;
 }
 
+.disable-touch-action {
+  touch-action: none;
+}
 @font-face {
   font-family: 'Balto';
   src: url('/static/font/Balto-Light.eot');

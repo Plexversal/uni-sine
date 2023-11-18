@@ -21,6 +21,7 @@
 .footer div > div {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .footer div > div h1{
@@ -38,4 +39,14 @@
 .footer div div a:hover {
     color: #dfdfdf;
     
+}
+
+@media (max-width: 500px) {
+    .footer a {
+        font-size: 0.9em;
+    }
+    .footer  > div h1 {
+        font-size: 0.9em;
+        
+    }
 }

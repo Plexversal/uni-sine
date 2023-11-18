@@ -30,6 +30,7 @@
 .closed {
     width: 35px;
     min-width: 45px;
+    
 }
 
 .open {
@@ -86,6 +87,31 @@
     margin-right: 10px;
 }
 
+.premium-list {
+    border-top: 1px solid rgba(128, 128, 128, 0.384);
+}
+
+.premium-list li a {
+    background: linear-gradient(90deg, #ff00f3, #5b7bfc, #ff00c4);
+    background-size: 400%;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: animate 20s linear infinite;
+    color: black;
+    }
+
+@keyframes animate {
+
+    0% {
+        background-position: 0%;
+    }
+    100% {
+        background-position: 400%;
+    }
+
+}
+
 .toggle-panel {
     position: absolute;
     right: 0;
@@ -103,6 +129,7 @@
     padding: 5px;
     -webkit-appearance: none;
     color: black;
+    
 }
 
 .toggle-panel:hover {

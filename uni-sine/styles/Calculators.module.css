@@ -5,7 +5,9 @@
     border: 2px solid rgb(95, 95, 95);
     align-self: center;
     position: relative;
-    width: 500px;
+    width: 100%;
+    min-width: 700px;
+    max-height: 90vh;
 }
 
 .container h1 {
@@ -150,9 +152,6 @@
     display: block;
 }
 
-.content-container {
-    margin: 80px 80px;
-}
 
 .btn-wrapper {
     display: inline-flex;
@@ -160,19 +159,25 @@
     align-items: center;
     gap: 50px;
     margin: 20px 0;
+    padding: 80px;
 }
 
 .open-calculator-btn {
+    position: relative;
+    color: black;
     padding: 30px;
-    border: 2px solid rgb(0, 0, 0);
     cursor: pointer;
     background-color: rgb(253, 120, 120);
     box-shadow: 4px 4px 0px #ffae43;
+    border: 2px solid rgb(0, 0, 0);
     font-family: inherit;
     font-weight: 600;
-    transition: all .3s;
     font-size: 1.3em;
+    transition: all .3s;
+    appearance: none;
+    -webkit-appearance: none;
 }
+
 
 .open-calculator-btn:hover,
 .open-calculator-btn:focus {
@@ -194,15 +199,6 @@
     transform: translate(-50%, -50%) scale(1);
 }
 
-.backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 50;
-}
 
 .no-premium-overlay {
     position: absolute;
@@ -247,15 +243,37 @@
     transform: scale(1.1);
 }
 
-@media (max-width: 1080px) {
-    .container {
-        width: 300px;
-    }
-    .calculator-content-container {
-        flex-direction: column;
-        /* max-width: 500px; */
-    }
+.close-calculator-btn {
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    transition: all .3s;
+    font-weight: 500;
+    font-size: 1.1em;
+    color: rgb(255, 255, 255);
+    width: fit-content;
 
 }
 
-@media (max-width: 600px) {}
+.close-calculator-btn:hover {
+    color: rgb(206, 33, 114);
+}
+
+.close-calculator-btn:focus {
+    outline: none;
+}
+
+
+@media (max-width: 800px) {
+    .calculator-modal {
+        width: 90%;
+        min-width: 0;
+    }
+    .container {
+        min-width: 0;
+    }
+    .calculator-content-container {
+        flex-direction: column;
+    }
+}

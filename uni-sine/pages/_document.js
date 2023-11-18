@@ -7,10 +7,12 @@ export default function Document() {
 
     <link rel="shortcut icon" href="/static/logo.png" type="image/x-icon"/>
     <link rel="apple-touch-icon" type="image/x-icon" href="/static/logo.png"/>
+    <meta property="og:image" content="/static/home/home-img-4.png"></meta>
     <meta name="theme-color" content="white"/>
-    <meta name="viewport" content="width=device-width,minimum-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="Learn the fundamentals of Physics, Maths and Computer science in a single place."/>
     <meta name="image" content="/static/logo.png"/>
+
     {/* 
     <link rel="manifest" href="/manifest.json"/>
     

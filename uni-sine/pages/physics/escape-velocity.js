@@ -31,7 +31,7 @@ function EV() {
             <Path />
             <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}> 
-                <EscapeVelocity />
+
                     <h2>Escape velocity equation</h2>
                     <p>There is an equation to work out escape velocity of a gravitational field, which is how fast a mass must travel to escape the field. When the equation gives the object negative potential energy it has escaped the gravitational field.</p>
                     <p>This is deriving the escape velocity from equations we have looked at before and using kinetic energy equation:</p>

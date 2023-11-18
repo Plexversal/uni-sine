@@ -31,7 +31,7 @@ function ED() {
             <Path />
             <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}> 
-                <HalfLife />
+
                     <h2>Half-life equation</h2>
                     <p>The decay of a single radioactive isotope cannot be predicted individually and is considered to be completely random. However, with an initial set amount of radioactive substance, we can calculate the time taken for how much of that substance has decayed into half of its original amount, this is called half-life.</p>
                     <p>The equation for calculating half-life is: </p>

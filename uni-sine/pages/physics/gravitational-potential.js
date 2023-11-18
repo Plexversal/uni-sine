@@ -34,7 +34,7 @@ function GP() {
             <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
                     <h2>Gravitational potential</h2>
-                    <GravitationalPotential />
+
                     <p>Gravitational potential is related to the amount energy a mass has based on its location within a gravitational field.</p>
                     <p>Gravitational potential is generally denoted by the letter V, the equations closely match electric field potential energy too.</p>
                     <p>Gravitational potential can be calculated by:</p>

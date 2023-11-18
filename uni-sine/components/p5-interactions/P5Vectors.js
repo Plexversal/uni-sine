@@ -1,11 +1,8 @@
-import Link from 'next/link'
+
 import React, { useEffect, useState, } from "react"
 import dynamic from 'next/dynamic'
 import styles from '../../styles/Page.module.css'
-import calcStyles from "../../styles/Calculators.module.css";
 
-import LoadingIcon from "../page-construction/LoadingIcon";
-import startCheckout from "../page-construction/StartCheckout";
 // this Sketch function is required to allow client side rendering only as window will not be present server side
 const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
   ssr: false,
@@ -13,36 +10,9 @@ const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
 
 function P5Vectors(props) {
   
-  const [userData, setUser] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [noPremium, setNoPremium] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch(`/api/auth0/auth0-user`);
-        const data = await response.json();
-        if (!data) {
-          setIsLoading(false);
-         return;
-
-        }
-        setUser(data);
-
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-  const checkPremium = () => {
-    setNoPremium(true);
-  };
   let [windowWidth, setWindowWidth] = useState(500)
   let [pixelScale, setPixelScale] = useState(25)
+  const [isReady, setIsReady] = useState(false);
 
   let movePoint1 = false
   let width = windowWidth
@@ -53,19 +23,22 @@ function P5Vectors(props) {
   let selectRadius = 30
   let increase = false
 
+
   const setup = (p5, canvasParentRef) => {
+    
     p5.createCanvas(width, height).parent(canvasParentRef)
     p5.stroke('#000000')
-
   };
+  
   useEffect(() => {
-    return resizeCheck()
+    resizeCheck()
+    setIsReady(true);
   }, [])
 
   const resizeCheck = () => {
     
     if (window.innerWidth < 625) {
-      setWindowWidth(250)
+      setWindowWidth(350)
       setPixelScale(12.5)
     
     } else {
@@ -173,13 +146,20 @@ function P5Vectors(props) {
 
     }
   }
+
+    const absoluteX = width * -220 / 500; // x = width * (x value at 500) / 500
+    const absoluteY1 = height * -230 / 500; // y = height * (y value at 500) / 500
+    const absoluteY2 = height * -210 / 500;
+    const absoluteY3 = height * -190 / 500;
+  
     p5.strokeWeight(0);
     p5.textSize(14);
     p5.stroke('#000')
     p5.fill('#000')
-    p5.text(`Magnitude: ${!document.getElementById('hideMag')?.checked ? (userVector.mag().toFixed(2)) : `****`}`, -220, -230)
-    p5.text(`Direction: ${!document.getElementById('hideDir')?.checked ? (document.getElementById('degrees')?.checked ? (userVector.heading() * (180/Math.PI)).toFixed(2) : userVector.heading().toFixed(2)) : `****`}`, -220, -210)
-    p5.text(`a = i: ${!document.getElementById('hideAxis')?.checked ? point1x : `****`}, j: ${!document.getElementById('hideAxis')?.checked ? point1y : `****`}`, -220, -190)
+    p5.text(`Magnitude: ${!document.getElementById('hideMag')?.checked ? (userVector.mag().toFixed(2)) : `****`}`, absoluteX, absoluteY1);
+    p5.text(`Direction: ${!document.getElementById('hideDir')?.checked ? (document.getElementById('degrees')?.checked ? (userVector.heading() * (180/Math.PI)).toFixed(2) : userVector.heading().toFixed(2)) : `****`}`, absoluteX, absoluteY2);
+    p5.text(`a = i: ${!document.getElementById('hideAxis')?.checked ? point1x : `****`}, j: ${!document.getElementById('hideAxis')?.checked ? point1y : `****`}`, absoluteX, absoluteY3);
+    
 
     p5.pop();
   };
@@ -249,17 +229,8 @@ function P5Vectors(props) {
     }
   }
 
-  return (<>
-  {
-    isLoading ? <LoadingIcon /> : <><br></br><div  onClick={userData?.app_metadata?.is_premium ? null : checkPremium} className={styles['p5-container']}>
-                                  {noPremium ? (
-              <div className={calcStyles["no-premium-overlay"]}>
-                <h1>You need premium to use this feature</h1>
-                <button onClick={startCheckout}>Buy Premium</button>
-              </div>
-            ) : (
-              <></>
-            )}
+  return ( <><br></br><div className={styles['p5-container']}>
+                                
             <div className={styles['p5-options']} style={{ width: width }}>
               <div className={styles['misc-options']}>
                 <button className={styles['button-input']} id='randomise-btn' type="button" name="randomise" onClick={randomise}>Random Problem</button>
@@ -271,6 +242,7 @@ function P5Vectors(props) {
                   </div>
                 </div>
               </div>
+
               <div className={styles['selections-container']} id='angle-container'>
                 <div className={styles['checkbox-container']}>
                   <div>Hide Magnitude</div>
@@ -294,15 +266,17 @@ function P5Vectors(props) {
   
             </div>
   
-      <Sketch setup={setup}
+      {
+        isReady && <Sketch setup={setup}
         draw={draw}
         windowResized={windowResized}
         mousePressed={mousePressed }
         mouseDragged={mouseDragged }
         mouseReleased={mouseReleased}
       />
+      }
     </div><br></br></>
-  }</>)
+  )
 
 
 }

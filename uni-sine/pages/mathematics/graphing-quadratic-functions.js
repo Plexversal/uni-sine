@@ -2,7 +2,7 @@ import Path from "../../components/page-construction/Path"
 import SecondaryBanner from '../../components/page-construction/SecondaryBanner'
 import styles from '../../styles/Page.module.css'
 import React, { useEffect, useState } from "react"
-import P5Graph from  '../../components/p5-interactions/P5QuadraticGraph'
+import P5Graph from  '../../components/p5-interactions/P5CustomGraph'
 
 
 function Quadratic() {
@@ -36,7 +36,6 @@ function Quadratic() {
                 <div className={styles['article-container']}>
 
                     <h2 >Properties of quadratic graphs</h2>
-                    <P5Graph  {...{showControls: true, showFunction: true, showIntercepts: true, custom: true}}/>
 
                     <p >Quadratic equations can easily be identified as an x term is always squared. The general format for a quadratic equation is:</p>
                     <img alt=''src="/static/maths/quadratic-equations/image001.png" className={styles['equation']}></img>
@@ -108,7 +107,7 @@ function Quadratic() {
                     <p >So right now, we have 3 points we can put on a graph which are the following:</p>
                     <img alt=''src="/static/maths/quadratic-equations/image026.png" className={styles['equation']}></img>
                     <p >On a graph it looks like this:</p>
-                    <P5Graph  {...{showControls: false, showFunction: true, showIntercepts: true, a: 1, b: -5, c: 4, noLine: true}}/>
+                    <img alt=''src="/static/maths/quadratic-equations/quad_1.png" className={styles['equation']}></img>
 
                     <p ><strong>Step 4) find some more points</strong></p>
                     <p >The last step is quite simple. All you have to do is choose at least 2 values where is x is close to the minimum x we found earlier and you could use the x-intercepts we found for reference as well. They don&rsquo;t have to be fractions like the x value; we can pick any integer.</p>
@@ -131,7 +130,8 @@ function Quadratic() {
                     <p >This is more than enough to draw the graph but you can keep choosing more x values if you want a more accurate graph but it will probably go off the page as the graph gets big quite quickly.</p>
                     <p >So here are the points on the graph:</p>
                     <p >Now all that is left to do is sketch the curve through these points:</p>
-                    <P5Graph  {...{showControls: false, showFunction: false, showIntercepts: true, a: 1, b: -5, c: 4}}/>
+                    <img alt=''src="/static/maths/quadratic-equations/quad_2.png" className={styles['equation']}></img>
+
                     <p >And that&rsquo;s it! It may seem like a lot of steps but if you remember the 4 steps from before in short form and practice sketching graphs with these rules it will be easy to remember. A lot of this requires visually understanding a graph and why it creates a curve too.</p>
 
                 </div>

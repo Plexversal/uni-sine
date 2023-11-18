@@ -1,0 +1,417 @@
+.courses-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+    background-color: rgb(228, 228, 228);
+    position: sticky;
+    top: 0; 
+    z-index: 7;
+    font-weight: 500;
+}
+
+.container {
+    background: rgb(250, 249, 249);
+    overflow: hidden;
+    border-radius: 10px;
+    align-self: center;
+    position: relative;
+    color: rgb(73, 73, 73);
+}
+
+
+.courses-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgb(228, 228, 228);
+}
+
+.courses-bottom button {
+    margin: 0 10px;
+    font-family: inherit;
+    font-size: 1em;
+    padding: 10px;
+    background: rgb(59, 59, 59);
+    outline: none;
+    border: 1px solid rgb(156, 156, 156);
+    cursor: pointer;
+    transition: all .1s;
+    color: white;
+    font-weight: 300;
+    border-radius: 5px;
+}
+
+.courses-bottom button:hover,
+.courses-bottom input[type="submit"]:hover {
+    background: rgb(73, 73, 73);
+}
+
+.courses-content {
+    max-height: 70vh;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.courses-content > div {
+    display: flex;
+    gap: 2em;
+    align-items: center;
+
+}
+
+.courses-content img {
+    width: 350px;
+}
+
+.course-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.course-content p {
+    margin: 0;
+}
+.course-content h2 {
+    margin: 5px 0;
+}
+.course-item-list {
+    list-style: none;
+    counter-reset: hex-counter;
+    position: relative;
+    margin: 15px 0;
+    text-align: right; 
+    padding: 0;
+
+}
+
+.course-item-list > li {
+    margin: 10px 0;
+    font-size: 1.1em;
+    font-weight: 500;
+    position: relative;
+    margin-bottom: 10px;
+    padding-left: 80px; 
+    z-index: 1;
+    position: relative;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.course-item-list > li:hover {
+    text-decoration: underline;
+    color: rgb(0, 0, 0);
+
+}
+
+.course-item-list > li::before {
+    counter-increment: hex-counter;
+    content: attr(data-content);
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+    font-weight: bold;
+    background-color: rgb(192, 214, 206);
+    color: #000;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    z-index: 2;
+    font-size: 0.8em; 
+}
+
+.course-item-list > li[data-done="true"]::before {
+    background-color: rgb(53, 223, 158); /* background color for checkmark */
+  }
+
+.course-item-list > li::after {
+    content: "";
+    position: absolute;
+    left: 12px; 
+    bottom: -25px;  
+    width: 2px;
+    height: calc(100% + 25px - 12.5px);
+    background-color: black;
+    z-index: 0;
+}
+
+.course-item-list > li:last-child::after {
+    display: none;
+}
+
+.media-content {
+    max-width: 50%;
+}
+.text-content {
+    max-width: 100%;
+
+}
+.text-content code:not(pre > code),
+.text-content-opposite code:not(pre > code) {
+    
+    font-weight: 600;
+    font-size: 1.2em;
+    background: rgb(231, 231, 231);
+    border-radius: 5px;
+}
+.html-preview {
+    box-shadow: 0 4px 12px 0 rgba(0,0,0,.2);
+    border-radius: 2px;
+    width: 100%;
+    height: 300px;
+    margin: 0 10px;
+    border: 5px solid rgb(161, 161, 161);
+}
+
+.text-content-opposite {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.code-snippets {
+    align-self: flex-start;
+}
+.code-snippets ol li {
+    margin: 10px 0;
+}
+
+.questions-answer-list {
+    list-style-type: none;
+    padding-left: 0;
+    display: flex;
+  }
+  
+  .questions-answer-list li {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    border: 1px solid transparent; 
+    cursor: pointer; 
+    transition: border 0.2s, background-color 0.2s;
+    white-space: normal;
+    border-radius: 20px;
+    margin: 8px 0;
+    
+  }
+  
+  .questions-answer-list li:hover {
+    border: 1px solid #4a644a; 
+    background-color: rgba(51, 141, 51, 0.1);
+  }
+  
+  .questions-answer-list li input[type="radio"], 
+  .questions-answer-list li label {
+    cursor: pointer; 
+  }
+  
+  .questions-answer-list li input[type="radio"] {
+    appearance: none;
+    min-width: 20px;
+    min-height: 20px;
+    border: 1px solid #aaa;
+    border-radius: 50%;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+    margin-right: 10px;
+    position: relative;
+  }
+  
+  .questions-answer-list li input[type="radio"]:checked {
+    background: #4CAF50; 
+    border-color: #4CAF50;
+  }
+  
+  .questions-answer-list li input[type="radio"]:checked::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 50%;
+  }
+  
+
+  .questions-answer-list li input[type="radio"]:checked ~ li {
+    border: 1px solid #4CAF50;
+  }
+
+.correct-answer-text {
+    margin: 20px 0;
+    text-align: center;
+    display: block;
+
+}
+
+.review-text {
+    text-align: center;
+    justify-content: space-between;
+}
+
+.review-container {
+    gap: 2em;
+}
+.review-questions-completed,
+.review-container,
+.review-percent-container{
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.review-questions-completed {
+    gap: 1em
+}
+
+.media-content img {
+    width: 300px;
+}
+.media-table {
+    margin: 20px 0;
+}
+.media-table tbody tr td {
+    text-align: center;
+}
+.no-style-list-container ul {
+    list-style: none;
+    padding: 0;
+}
+.answer-input {
+    border: 2px solid rgb(128, 128, 128);
+    border-radius: 3px;
+    width: 200px;
+    height: 30px;
+    font-size: 1em;
+    background: #e0e0e0;
+    transition: all ease 0.3s;
+}
+
+.answer-input:focus {
+    background: #fffdec;
+    border: 2px solid rgb(41, 41, 41);
+}
+
+.correct-text {
+    margin: 10px 0;
+    font-weight: 500;
+    color: rgb(35, 212, 49);
+}
+.incorrect-text {
+    margin: 10px 0;
+    font-weight: 500;
+    color: rgb(212, 35, 44);
+}
+.option-div {
+    display: inline-block;
+    min-width: 75px;
+    width: fit-content;
+    padding: 0 10px;
+    height: 75px;
+    text-align: center;
+    line-height: 75px; /* This will vertically center the text */
+    cursor: pointer;
+    border: 2px solid grey;
+    margin: 5px 10px;
+    transition: all 0.3s ease;
+  }
+  
+  .option-div.selected {
+    border: 2px solid rgb(90, 171, 182);
+    background-color: #f0f0f0;
+    transform: scale(1.15);
+  }
+  
+.review-standard-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@keyframes shake {
+    0% {
+      transform: scale(0);
+    }
+  
+    50% {
+      transform: scale(1);
+    }
+  
+    55%, 85% {
+      transform: translate3d(-1px, 0, 0) scale(1);
+    }
+  
+    60%, 80% {
+      transform: translate3d(2px, 0, 0) scale(1);
+    }
+  
+    65%, 75% {
+      transform: translate3d(-4px, 0, 0) scale(1);
+    }
+  
+    70% {
+      transform: translate3d(4px, 0, 0) scale(1);
+    }
+  
+    100% {
+      transform: scale(1);
+    }
+  }
+
+@keyframes scaler {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+.correct-answer-span {
+    font-size: 1.2em;
+    color: green;
+    animation: scaler 0.5s cubic-bezier(.36,.07,.19,.97) both;
+
+}
+.incorrect-answer-span {
+    font-size: 1.2em;
+    color: red;
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+  
+
+@media (max-width: 1000px) {
+    .courses-content > div {
+        flex-direction: column;
+    }
+    .media-content {
+        max-width: 100%;
+    }
+    .courses-content {
+        padding: 20px;
+    }
+    .text-content-opposite {
+        flex-direction: column;
+    }
+    .questions-answer-list  {
+        flex-direction: column;
+        font-size: 0.9em;
+    }
+    .review-container {
+        flex-direction: column;
+    }
+
+    .course-item-list > li {
+        font-size: 0.9em;
+        padding-left: 40px; 
+    }
+}

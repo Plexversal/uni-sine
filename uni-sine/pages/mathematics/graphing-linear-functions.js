@@ -2,7 +2,7 @@ import Path from "../../components/page-construction/Path"
 import SecondaryBanner from '../../components/page-construction/SecondaryBanner'
 import styles from '../../styles/Page.module.css'
 import React, { useEffect, useState } from "react"
-import P5Graph from  '../../components/p5-interactions/P5LinearGraph'
+import P5Graph from  '../../components/p5-interactions/P5CustomGraph'
 
 
 function Linear() {
@@ -36,7 +36,6 @@ function Linear() {
                 <div className={styles['article-container']}>
                     <h2>Properties of linear function graphs</h2>
 
-                    <P5Graph  {...{showControls: true, showFunction: true, showIntercepts: false, a: 0, b: 5, c: -3, custom: true}}/>
                     <p >Linear equations are the simplest of equations to graph. When you see the terms linear, it means practically means constant rate and so you can imagine this graph as a straight-line graph.</p>
                     <p >There are some terms that one should know when graphing equations:</p>
                     <p ><strong>Y-intercept:</strong> This is related to when the line on the graph crosses a point where the X component is 0, the Y value at this point is the Y-intercept.</p>
@@ -94,7 +93,7 @@ function Linear() {
                     </div>
                     <p >This equation is in the form y = mx + b and so we know that the slope is going to be 3 (m) and the y intercept will be 7.</p>
                     <p >The slope is 3/1 and so that means you can go 3 units up the y axis and 1 unit across to get to the next point. So doing this will present the following graph:</p>
-                    <P5Graph  {...{showControls: false, showFunction: false, showIntercepts: false, a: 0, b: 3, c: 7}}/>
+                    <img alt=''src="/static/maths/linear-equations/linear_1.png" className={styles['equation']}></img>
 
                     <div >
                         <ol start={4}>
@@ -110,7 +109,7 @@ function Linear() {
                     <img alt=''src="/static/maths/linear-equations/image018.png" className={styles['equation']}></img>
 
                     <p >Now we have the values for both intercepts, we can draw the line connecting these points:&nbsp;</p>
-                    <P5Graph  {...{showControls: false, showFunction: false, showIntercepts: false, a: 0, b: 1/2, c: -2}}/>
+                    <img alt=''src="/static/maths/linear-equations/linear_2.png" className={styles['equation']}></img>
 
 
 

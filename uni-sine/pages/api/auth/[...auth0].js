@@ -1,5 +1,13 @@
 import { handleAuth, handleCallback } from '@auth0/nextjs-auth0';
 
+
+function getBaseUrl(req) {
+  const protocol = req.headers['x-forwarded-proto'] || 'http';
+  const host = req.headers['x-forwarded-host'] || req.headers.host;
+  return `${protocol}://${host}`;
+}
+
+
 export default handleAuth({
     async callback(req, res) {
         try {
@@ -9,19 +17,30 @@ export default handleAuth({
                 res.redirect(
                   `${process.env.AUTH0_ISSUER_BASE_URL}/v2/logout?${new URLSearchParams({
                     client_id: process.env.AUTH0_CLIENT_ID,
-                    returnTo: `${process.env.AUTH0_BASE_URL}/`,
+                    returnTo: `${getBaseUrl(req)}/error/unauthorized?errorDescription=${encodeURIComponent(error.cause.errorDescription)}`,
                   })}`
                 )
 
             } else {
-                res.redirect(
+                if(error.cause.errorDescription.includes(`verify your email`)) {
+                  res.redirect(
                     `${process.env.AUTH0_ISSUER_BASE_URL}/v2/logout?${new URLSearchParams({
                       client_id: process.env.AUTH0_CLIENT_ID,
-                      returnTo: `${process.env.AUTH0_BASE_URL}/`,
+                      returnTo: `${getBaseUrl(req)}/error/unauthorized?errorDescription=${encodeURIComponent(`Unknown login error`)}`,
                     })}`
                   )
+                } else {
+                  res.redirect(
+                    `${process.env.AUTH0_ISSUER_BASE_URL}/v2/logout?${new URLSearchParams({
+                      client_id: process.env.AUTH0_CLIENT_ID,
+                     returnTo: `${getBaseUrl(req)}/error/unauthorized?errorDescription=${encodeURIComponent(`Unknown login error`)}`,
+                    })}`
+                  )
+                }
+
             }
             res.end();
         }
     }
 });
+

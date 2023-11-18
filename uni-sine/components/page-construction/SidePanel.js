@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styles from '../../styles/SidePanel.module.css'
 import Link from "next/link";
-import { BsChevronDoubleLeft, BsChevronDoubleRight } from 'react-icons/bs'
-import { BiChevronRight, BiCalculator, BiHome, BiMath, BiAtom, BiCodeBlock, BiSupport } from 'react-icons/bi'
+import { BsChevronDoubleLeft, BsChevronDoubleRight,  } from 'react-icons/bs'
+import { BiChevronRight, BiCalculator, BiHome, BiMath, BiAtom, BiCodeBlock, BiSupport, BiFontFamily, BiSlider, BiBook } from 'react-icons/bi'
 import { GrUserSettings } from 'react-icons/gr'
 import FastRead from './FastRead';
 import AccountModal from "./AccountModal";
 
-const SidePanel = () => {
+const SidePanel = ({ user }) => {
     const [isOpen, setIsOpen] = useState(true);
 
     useEffect(() => {
@@ -33,16 +33,6 @@ const SidePanel = () => {
             <div className={`${styles['side-panel-content']} ${isOpen ? styles['show-content'] : styles['hide-content']}`}>
                 <div className={`${styles['topics']} ${styles['side-panel-content-container']}`}>
                     <ul>
-                        <li>
-                            <Link legacyBehavior href="/calculators">
-                                <a onClick={() => window.innerWidth < 600 ? setIsOpen(false) : null}>
-                                    <div>
-                                        <span><BiCalculator /></span>Calculators
-                                    </div>
-                                    <BiChevronRight />
-                                </a>
-                            </Link>
-                        </li>
                         <li>
                             <Link legacyBehavior href="/">
                                 <a onClick={() => window.innerWidth < 600 ? setIsOpen(false) : null}>
@@ -84,6 +74,38 @@ const SidePanel = () => {
                             </Link>
                         </li>
                     </ul>
+                    <ul className={styles['premium-list']}>
+                        <li>
+                            <Link legacyBehavior href="/questions">
+                                <a onClick={() => window.innerWidth < 600 ? setIsOpen(false) : null}>
+                                    <div>
+                                        <span><BiFontFamily /></span>Practice questions
+                                    </div>
+                                    <BiChevronRight />
+                                </a>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link legacyBehavior href="/calculators">
+                                <a onClick={() => window.innerWidth < 600 ? setIsOpen(false) : null}>
+                                    <div>
+                                        <span><BiCalculator /></span>Calculators
+                                    </div>
+                                    <BiChevronRight />
+                                </a>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link legacyBehavior href="/courses">
+                                <a onClick={() => window.innerWidth < 600 ? setIsOpen(false) : null}>
+                                    <div>
+                                        <span><BiBook /></span>Courses
+                                    </div>
+                                    <BiChevronRight />
+                                </a>
+                            </Link>
+                        </li>
+                    </ul>
 
                 </div>
                 <div className={`${styles['account']} ${styles['side-panel-content-container']}`}>
@@ -97,7 +119,7 @@ const SidePanel = () => {
                                     Account
                                 </div>
                             </a>
-                            <AccountModal ref={userAccountModalRef} />
+                            <AccountModal ref={userAccountModalRef} user={user} />
                         </li>
                         <li>
                             <FastRead />
@@ -112,6 +134,19 @@ const SidePanel = () => {
                                 </a>
                             </Link>
                         </li>
+                        {
+                            user?.app_metadata?.is_admin ? (
+                                <li>
+                                <Link legacyBehavior href="/admin">
+                                    <a onClick={() => window.innerWidth < 600 ? setIsOpen(false) : null}>
+                                        <div>
+                                            <span><BiSlider /></span>Admin
+                                        </div>
+                                        <BiChevronRight />
+                                    </a>
+                                </Link>
+                            </li>) : null
+                        }
                     </ul>
                 </div>
             </div>

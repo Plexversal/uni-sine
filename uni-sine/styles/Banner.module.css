@@ -2,7 +2,7 @@
     padding: 15px 30px;
     background: #292a30;
     color: white;
-    height: 250px;
+    min-height: 250px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -39,14 +39,27 @@
     font-size: medium;
     color: #ffffffc7;
 }
-
-.social-link-fb svg:hover {
-    fill: #4267B2;
+.banner-main-content li a svg {
+    transition: all ease 0.2s;
+}
+.social-link-tt svg:hover {
+    fill: #ff0050;
 }
 
 .social-link-tw svg:hover {
     fill: #1DA1F2;
 }
+
+.social-link-yt svg:hover {
+    fill: #FF0000;
+}
+
+@media (max-width: 1000px) {
+    .banner-main-content h1 {
+        font-size: 1.5em;
+    }
+}
+
 
 @media (max-width: 600px) {
     .banner-container {
@@ -61,5 +74,8 @@
     .banner-main-content {
 
         padding: 0 !important;
+    }
+    .banner-main-content h1 {
+        font-size: 1.5em;
     }
 }

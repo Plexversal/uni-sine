@@ -12,10 +12,18 @@ export default function Footer() {
 
                 </div>
                 <div>
+                    <h4>LINKS</h4>
+                    <Link href='/courses'>Courses</Link>
+                    <Link href='/calculators'>Calculators and tools</Link>
+                    <Link href='/questions'>Practice Questions</Link>
+
+                </div>
+                <div>
                     <h4>INFO</h4>
                     <Link href='/#prices'>Pricing</Link>
                     <a>About Us</a>
                 </div>
+
 
             </div>
             <p><strong>Uni-Sine</strong> Copyright ©</p>

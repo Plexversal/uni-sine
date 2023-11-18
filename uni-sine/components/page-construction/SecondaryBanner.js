@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import styles from '../../styles/Banner.module.css'
 import Link from 'next/link'
-import {BsFacebook, BsTwitter, BsYoutube} from 'react-icons/bs'
+import {BsFacebook, BsTwitter, BsYoutube, BsTiktok} from 'react-icons/bs'
 import Head from "next/head"
 function Nav(props) {
 
@@ -29,15 +29,21 @@ function Nav(props) {
                         <BsTwitter size='1.5rem'/></a>
                     </li>
                     <li>
-                        <a className={styles['social-link-fb']} rel="noreferrer" target='_blank'
-                        href={`https://www.facebook.com/profile.php?id=100089927042311`}
-                        aria-label="Share to Facebook">
+                        <a className={styles['social-link-tt']} rel="noreferrer" target='_blank'
+                        href={`https://www.tiktok.com/@unisinesocial`}
+                        aria-label="Uni-Sine Tiktok">
 
-                        <BsFacebook size='1.5rem' />
+                        <BsTiktok size='1.5rem' />
                         </a>
                     </li>
                     <li>
+                        <a className={styles['social-link-yt']} rel="noreferrer" target='_blank'
+                        href={`https://www.tiktok.com/@unisinesocial`}
+                        aria-label="Uni-Sine Tiktok">
+
                         <BsYoutube size='1.5rem'/>
+
+                        </a>
                     </li>
                 </ul>
             </div>

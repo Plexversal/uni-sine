@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import React, { useEffect, useState, } from "react"
 import dynamic from 'next/dynamic'
 import styles from '../../styles/Page.module.css'
@@ -16,6 +15,7 @@ function P5Trig(props) {
   const [userData, setUser] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [noPremium, setNoPremium] = useState(false);
+  const [showOptions, setShowOptions] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,15 +48,12 @@ function P5Trig(props) {
 
 
   const resizeCheck = () => {
-    if (window.innerWidth > 500 && window.innerWidth < 625) {
-      setWindowWidth(375)
-      setPixelScale(40)
-    } else if (window.innerWidth <= 510) {
-      setWindowWidth(250)
+    if (window.innerWidth <= 510) {
+      setWindowWidth(300)
       setPixelScale(25)
     } else {
       setWindowWidth(500)
-      setPixelScale(50)
+      setPixelScale(35)
     }
   }
   useEffect(() => {
@@ -190,7 +187,7 @@ function P5Trig(props) {
     p5.noStroke()
     p5.fill('#000')
 
-    p5.text(`Area: ${parseFloat(0.5 * a * b * Math.sin(C)).toFixed(2)}`, (0.5 * pixelScale), -(9.5 * pixelScale))
+p5.text(`Area: ${parseFloat(0.5 * a * b * Math.sin(C)).toFixed(2)}`, 20, -(height - 20))
 
     p5.fill('#ec9c33') // side text color
     if (!(document.getElementById('hideSideA')?.checked == true && props.custom) && (props.showSidea || props.custom))
@@ -327,17 +324,11 @@ function P5Trig(props) {
   return (<>{
     isLoading ? <LoadingIcon /> : <>
     <br></br>
-    <div onClick={userData?.app_metadata?.is_premium ? null : checkPremium} className={styles['p5-container']} >
-    {noPremium ? (
-              <div className={calcStyles["no-premium-overlay"]}>
-                <h1>You need premium to use this feature</h1>
-                <button onClick={startCheckout}>Buy Premium</button>
-              </div>
-            ) : (
-              <></>
-            )}
+    <div className={styles['p5-container']} >
       {props.custom === true ?
         <>
+          <button className={styles['show-options-btn']} onClick={() => showOptions ? setShowOptions(false) : setShowOptions(true)}>{showOptions ? 'Hide Options' : 'Show Options'}</button>
+          {showOptions ?           
           <div className={styles['p5-options']} style={{ width: width }}>
             <div className={styles['misc-options']}>
               <button className={styles['button-input']} id='randomise-btn' type="button" name="randomise" onClick={userData?.app_metadata?.is_premium ? randomise : null}>Random Problem</button>
@@ -395,7 +386,7 @@ function P5Trig(props) {
             </div>
 
 
-          </div>
+          </div> : <></>}
         </>
         : <></>}
 

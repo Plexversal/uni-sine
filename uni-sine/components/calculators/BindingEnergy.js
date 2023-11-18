@@ -3,31 +3,7 @@ import styles from "../../styles/Calculators.module.css";
 import startCheckout from "../page-construction/StartCheckout";
 import LoadingIcon from "../page-construction/LoadingIcon";
 const BindingEnergy = (props) => {
-  const [userData, setUser] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [noPremium, setNoPremium] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch(`/api/auth0/auth0-user`);
-        const data = await response.json();
-        if (!data) {
-          setIsLoading(false);
-         return;
-
-        }
-        setUser(data);
-
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   const [powerOfTen, setPowerOfTen] = useState(null);
   const [speedOfLight, setSpeedOfLight] = useState("299792458");
@@ -48,9 +24,7 @@ const BindingEnergy = (props) => {
   const calculateBindingEnergyJoules = () => {
     setJoules(mass * Math.pow(10, powerOfTen) * Math.pow(speedOfLight, 2));
   };
-  const checkPremium = () => {
-    setNoPremium(true);
-  };
+
   useEffect(() => {
     setShowJoules(selectedValue == "Joules");
     setShowMev(selectedValue == "MeV");
@@ -58,27 +32,13 @@ const BindingEnergy = (props) => {
 
   return (
     <>
-      {isLoading ? (
-        <LoadingIcon />
-      ) : (
-        <>
+
           <div
-            onClick={userData?.app_metadata?.is_premium ? null : checkPremium}
             className={styles["container"]}
           >
-            {noPremium ? (
-              <div className={styles["no-premium-overlay"]}>
-                <h1>You need premium to use this feature</h1>
-                <button onClick={startCheckout}>Buy Premium</button>
-              </div>
-            ) : (
-              <></>
-            )}
             <h1>Binding Energy Calculator</h1>
             <div
-              className={`${styles["calculator-content-container"]} ${
-                noPremium ? styles["no-premium"] : ``
-              }`}
+              className={`${styles["calculator-content-container"]}`}
             >
               <div className={styles["user-inputs-container"]}>
                 <div className={styles["option-container"]}>
@@ -118,11 +78,7 @@ const BindingEnergy = (props) => {
                     </div>
                     <button
                       className={styles["user-input-btn"]}
-                      onClick={
-                        userData?.app_metadata?.is_premium
-                          ? calculateBindingEnergyMev
-                          : null
-                      }
+                      onClick={calculateBindingEnergyMev}
                     >
                       Calculate Binding Energy
                     </button>
@@ -153,9 +109,7 @@ const BindingEnergy = (props) => {
                     <button
                       className={styles["user-input-btn"]}
                       onClick={
-                        userData?.app_metadata?.is_premium
-                          ? calculateBindingEnergyJoules
-                          : null
+                        calculateBindingEnergyJoules
                       }
                     >
                       Calculate Binding Energy
@@ -192,8 +146,6 @@ const BindingEnergy = (props) => {
             </div>
           </div>
         </>
-      )}
-    </>
   );
 };
 

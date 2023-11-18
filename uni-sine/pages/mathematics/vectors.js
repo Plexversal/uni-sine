@@ -33,7 +33,7 @@ function Vectors() {
             <Path />
             <article itemScope itemType="http://schema.org/Article" id='article' className={styles['page-wrapper']}>
                 <div className={styles['article-container']}>
-                    <P5Vectors/>
+
                     <h2>Vector notation</h2>
 
                     <p>A vector is a quantity in mathematics that has both magnitude and direction. An arrow pointing in a certain direction is a common way to depict a vector, with the length of the arrow denoting the magnitude of the vector.</p>

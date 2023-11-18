@@ -1,12 +1,10 @@
 // components/UserAccountModal.js
-import { useUser } from '@auth0/nextjs-auth0/client';
 import { useRouter } from 'next/router';
-import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
+import { useState, forwardRef, useImperativeHandle } from 'react';
 import Modal from 'react-modal';
 import styles from '../../styles/UserAccountModal.module.css';
-import { GrUserSettings, GrFormClose, GrLogout } from 'react-icons/gr';
+import { GrFormClose  } from 'react-icons/gr';
 import Router from 'next/router';
-import Link from 'next/link';
 import { loadStripe } from '@stripe/stripe-js';
 Modal.setAppElement('#__next');
 
@@ -15,9 +13,8 @@ const AccountModal = forwardRef((props, ref) => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
-  const { user, isLoading, error } = useUser()
+  //const { user, isLoading, error } = useUser()
   const [loadingProfile, setLoadingProfile] = useState(true)
-  const [userData, setUser] = useState()
   const router = useRouter();
 
   const closeModal = () => {
@@ -33,28 +30,19 @@ const AccountModal = forwardRef((props, ref) => {
   };
 
   const handleButtonClick = async () => {
-    if (!user && !isLoading) {
+    if (!props.user) {
       const currentUrl = window.location.pathname;
       const returnTo = encodeURIComponent(currentUrl);
       router.push(`/api/auth/login?returnTo=${returnTo}`);
     } else {
       try {
-        const response = await fetch(`/api/auth0/auth0-user`);
-        const data = await response.json();
-        if (!data) {
-          throw new Error('Error loading user data');
-        }
-        setUser(data);
         setLoadingProfile(false);
         setModalIsOpen(true);
-
       } catch (error) {
         throw error
       }
     }
   };
-
-  
 
   useImperativeHandle(ref, () => ({
     handleButtonClick,
@@ -64,21 +52,20 @@ const AccountModal = forwardRef((props, ref) => {
   };
 
   const handleManageSubscriptionClick = async () => {
-    // The user's Stripe Customer ID should be stored somewhere in your application state
     const response = await fetch('/api/payment/create-manage-sub-session', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        stripeCustomerId: userData?.app_metadata?.stripe_customer_id,
+        stripeCustomerId: props.user?.app_metadata?.stripe_customer_id,
       }),
     });
     const { url } = await response.json();
     window.location.assign(url);
   }
 
-  if (userData) {
+  if (props.user) {
 
     const changePassword = async (e) => {
       e.preventDefault()
@@ -102,7 +89,7 @@ const AccountModal = forwardRef((props, ref) => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          stripeCustomerId: userData?.app_metadata?.stripe_customer_id,
+          stripeCustomerId: props.user?.app_metadata?.stripe_customer_id,
         }),
       });
   
@@ -138,20 +125,20 @@ const AccountModal = forwardRef((props, ref) => {
                 <ul className={styles['account-list']}>
                   <li>
                     <div><strong>Email</strong></div>
-                    <div>{userData.email}</div>
+                    <div>{props.user.email}</div>
 
                   </li>
                   <li>
                     <div><strong>Sign in method</strong></div>
-                    <div>{userData.identities[0].provider}</div>
+                    <div>{props.user.identities[0].provider}</div>
                   </li>
                   <li>
                     <div><strong>Password</strong></div>
-                    {userData.identities[0].isSocial ? <div>Change your password on your social account</div> : <a className={`${styles['account-btn']} ${styles['change-password-btn']}`} onClick={changePassword}>Change Password</a>}
+                    {props.user.identities[0].isSocial ? <div>Change your password on your social account</div> : <a className={`${styles['account-btn']} ${styles['change-password-btn']}`} onClick={changePassword}>Change Password</a>}
                   </li>
 
                   {
-                    userData?.app_metadata?.is_premium ?
+                    props.user?.app_metadata?.is_premium ?
                       <li>
                         <div><strong>Subscription</strong></div>
                         <div><a className={styles['subscription-link']} onClick={handleManageSubscriptionClick}>Manage Subscription</a></div>
@@ -162,7 +149,7 @@ const AccountModal = forwardRef((props, ref) => {
                         <div ><button className={styles['subscription-link']} onClick={startCheckout}>Buy Premium</button></div>
                       </li>
                   }
-                  <Link legacyBehavior href={`/api/auth/logout`}><a className={styles.logout}>Logout</a></Link>
+                  <a href={`/api/auth/logout`} className={styles.logout}>Logout</a>
                 </ul>
               </div>
             }
@@ -170,7 +157,7 @@ const AccountModal = forwardRef((props, ref) => {
         </div>
       </>
     )
-  } else if (!userData) {
+  } else if (!props.user) {
     return <></>
   }
 });
