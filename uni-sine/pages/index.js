@@ -235,7 +235,7 @@ export default function Home({ user, ...props }) {
               <div>
                 <p>Billed Monthly</p>
                 {
-                  user != null && <h2>Only {(user?.app_metadata.region == 'NA' || user?.app_metadata.region == 'SA') ? '$15' : '£10'} / month!</h2>
+                  user != null ? <h2>Only {(user?.app_metadata.region == 'NA' || user?.app_metadata.region == 'SA') ? '$15' : '£10'} / month!</h2> : <h2>Only £10 / month!</h2>
                 }
                 <ul className={styles['feature-list']}>
                   <li>Full access to all current and future interactive components and calculators</li>
@@ -255,7 +255,7 @@ export default function Home({ user, ...props }) {
               <div>
                 <p>Education</p>
                 {
-                  user != null && <h2>{(user?.app_metadata?.region == 'NA' || user?.app_metadata?.region == 'SA') ? '$' : '£' } Custom</h2>
+                  user != null ? <h2>{(user?.app_metadata?.region == 'NA' || user?.app_metadata?.region == 'SA') ? '$' : '£' } Custom</h2> : <h2>£ Custom</h2>
                 }
                 <p>For education institutions looking to get access for multiple students.</p>
                 <p>We are want everyone to have the best access to education and are happy to work with schools and colleges to give all students a valid subscription at a discounted price.</p>
