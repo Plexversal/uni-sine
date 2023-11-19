@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function Timer({ setTimeValue }) {
+function Timer() {
   const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
@@ -8,7 +8,7 @@ function Timer({ setTimeValue }) {
       setSeconds(prevSeconds => prevSeconds + 1);
     }, 1000);
 
-    return () => clearInterval(interval); 
+    return () => clearInterval(interval);
   }, []);
 
   const formatTime = () => {
@@ -17,16 +17,12 @@ function Timer({ setTimeValue }) {
     const remainingSeconds = seconds % 60;
 
     if (hours > 0) {
-        return `${hours}:${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+      return `${hours}:${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
     }
     return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
   };
 
-  useEffect(() => {
-    setTimeValue(formatTime());
-  }, [seconds]);
-
-  return formatTime();
+  return <span>{formatTime()}</span>;
 }
 
 export default Timer;

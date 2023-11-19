@@ -382,7 +382,7 @@ const MathQuestions = (props) => {
                       </span>
                     </p>
                     <p>
-                      {/* <strong>{<Timer setTimeValue={setTimeValue} />}</strong> */}
+                    <strong><Timer /></strong>
                     </p>
                   </div>
                   <div className={`${styles["questions-body-container"]} ${questionData[difficulty][index].answerType == 'text' ? styles["text-based-question"] : ``}`}>
