@@ -21,7 +21,7 @@ function Nav(props) {
                     <h1>{props.title}</h1>
                     <p className={styles.subheader}>{props.subheader}</p>
                 </div>
-                <ul>
+                {/* <ul>
                     <li>
                         <a className={styles['social-link-tw']} rel="noreferrer" target='_blank' 
                         href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out ${URL}!`)}`}
@@ -45,7 +45,7 @@ function Nav(props) {
 
                         </a>
                     </li>
-                </ul>
+                </ul> */}
             </div>
         
             {props.search?.()}
