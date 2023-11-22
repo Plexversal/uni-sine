@@ -60,6 +60,7 @@ export default async function handler(req, res) {
           { id: customer.metadata.auth0_user_id },
           { is_premium: true }
         );
+        sendEmail()
       } else if (event.data.object.status == "canceled" || event.data.object.status == "deleted") { // the misspelling of canceled is correct according to stripe for some reason
         await auth0.updateAppMetadata(
           { id: customer.metadata.auth0_user_id },
@@ -67,7 +68,7 @@ export default async function handler(req, res) {
         );
       }
       // send email
-      if (event.type === "customer.subscription.created") {
+      async function sendEmail() {
         const msal = require("@azure/msal-node");
 
         const msalConfig = {
