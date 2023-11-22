@@ -43,6 +43,7 @@ export default withApiAuthRequired(async function handler(req, res) {
         mode: 'subscription',
         success_url: `${req.headers.origin}/calculators`,
         cancel_url: `${req.headers.origin}/`,
+        allow_promotion_codes: true
     });
 
     res.json({
