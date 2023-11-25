@@ -46,7 +46,7 @@ const EquationNotepad = (props) => {
 
         {
           equationList.map((v, i) => (
-          <div className={styles['equation-list']}>
+          <div key={i} className={styles['equation-list']}>
             <MathJaxContent key={i} content={`$$ ${v} $$`} />
             <button onClick={() => removeEquation(i)}>x</button>
           </div>
