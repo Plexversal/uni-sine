@@ -264,10 +264,71 @@
     outline: none;
 }
 
+.equation-notepad {
+    background: white;
+    padding: 20px;
+    min-width: 700px;
+    max-width: 80vw;
+    text-align: center;
+    border-radius: 6px;
+    max-height: 70vh;
+    overflow-y: auto;
 
+}
+.equation-inputs {
+    display: flex;
+    gap: 1em;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+.equation-inputs button {
+    width: 40px;
+    border-radius: 5px;
+    border: 1px solid rgb(85, 85, 85);
+    background: rgb(53, 52, 52);
+    color: white;
+    font-size: 1.5em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.equation-inputs button:hover {
+    background: rgb(146, 145, 145);
+
+}
+.equation-inputs input[type=text] {
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid rgb(85, 85, 85);
+    background: rgb(209, 209, 209);
+    font-family: inherit;
+}
+.equation-list {
+    display: flex;
+    justify-content: space-between;
+    margin: 8px 0;
+    align-items: center;
+}
+
+.equation-list button {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    font-size: 1.1em;
+}
 @media (max-width: 800px) {
     .calculator-modal {
         width: 90%;
+        min-width: 0;
+    }
+    .equation-notepad {
+        width: 90vw;
         min-width: 0;
     }
     .container {

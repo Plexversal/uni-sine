@@ -12,6 +12,7 @@ import GravitationalPotential from '../components/calculators/GravitationalPoten
 import HalfLife from '../components/calculators/HalfLife'
 import KeplersThirdLaw from '../components/calculators/KeplersThirdLaw'
 import CodeEditor from '../components/calculators/CodeEditor'
+import EquationNotepad from "../components/calculators/EquationNotepad";
 // p5 calculators
 import P5NormalDistribution from '../components/p5-interactions/P5NormalDistribution'
 import P5TrigTriangle from '../components/p5-interactions/P5TrigTriangle'
@@ -83,6 +84,7 @@ function searchComponent() {
     'Trigonometry Calculator': <P5TrigTriangle {...{onClose: handleCloseCalculator, custom: true}}/>,
     'Vectors Calculator': <P5Vectors {...{onClose: handleCloseCalculator}}/>,
     'Custom Graph': <P5CustomGraph {...{onClose: handleCloseCalculator}}/>,
+    'Equation Notepad': <EquationNotepad />
   }
 
   const physicsCalcs = {
