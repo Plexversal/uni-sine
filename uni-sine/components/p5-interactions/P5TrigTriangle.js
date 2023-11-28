@@ -191,14 +191,14 @@ p5.text(`Area: ${parseFloat(0.5 * a * b * Math.sin(C)).toFixed(2)}`, 20, -(heigh
 
     p5.fill('#ec9c33') // side text color
     if (!(document.getElementById('hideSideA')?.checked == true && props.custom) && (props.showSidea || props.custom))
-      p5.text(`a${props.hidea ? `` : ': ' + parseFloat(p5.dist(point1x, point1y, point3x, point3y).toFixed(1))}`, ((point3x * pixelScale + point1x * pixelScale) / 2), -(((point3y * pixelScale + point1y * pixelScale) / 2)));
-    if (!(document.getElementById('hideSideB')?.checked == true && props.custom) && (props.showSideb || props.custom)) p5.text(`b${props.hideb ? `` : ': ' + parseFloat(p5.dist(point1x, point1y, point2x, point2y).toFixed(1))}`, ((point1x * pixelScale + point2x * pixelScale) / 2), -(((point1y * pixelScale + point2y * pixelScale) / 2)));
-    if (!(document.getElementById('hideSideC')?.checked == true && props.custom) && (props.showSidec || props.custom)) p5.text(`c${props.hidec ? `` : ': ' + parseFloat(p5.dist(point2x, point2y, point3x, point3y).toFixed(1))}`, ((point2x * pixelScale + point3x * pixelScale) / 2), -(((point2y * pixelScale + point3y * pixelScale) / 2)));
+      p5.text(`a${props.hidea ? `` : ': ' + parseFloat(p5.dist(point1x, point1y, point3x, point3y).toFixed(2))}`, ((point3x * pixelScale + point1x * pixelScale) / 2), -(((point3y * pixelScale + point1y * pixelScale) / 2)));
+    if (!(document.getElementById('hideSideB')?.checked == true && props.custom) && (props.showSideb || props.custom)) p5.text(`b${props.hideb ? `` : ': ' + parseFloat(p5.dist(point1x, point1y, point2x, point2y).toFixed(2))}`, ((point1x * pixelScale + point2x * pixelScale) / 2), -(((point1y * pixelScale + point2y * pixelScale) / 2)));
+    if (!(document.getElementById('hideSideC')?.checked == true && props.custom) && (props.showSidec || props.custom)) p5.text(`c${props.hidec ? `` : ': ' + parseFloat(p5.dist(point2x, point2y, point3x, point3y).toFixed(2))}`, ((point2x * pixelScale + point3x * pixelScale) / 2), -(((point2y * pixelScale + point3y * pixelScale) / 2)));
 
     p5.fill('#ec3333')  // angle text color
-    if (!(document.getElementById('hideAngleA')?.checked == true && props.custom) && (props.showAngleA || props.custom)) p5.text(`A${props.hideA ? `` : ': ' + parseFloat((document.getElementById('degrees')?.checked && props.custom) ? A * (180 / Math.PI) : A).toFixed(1)}`, (point2x * pixelScale), -(point2y * pixelScale))
-    if (!(document.getElementById('hideAngleB')?.checked == true && props.custom) && (props.showAngleB || props.custom)) p5.text(`B${props.hideB ? `` : ': ' + parseFloat((document.getElementById('degrees')?.checked && props.custom) ? B * (180 / Math.PI) : B).toFixed(1)}`, (point3x * pixelScale), -(point3y * pixelScale))
-    if (!(document.getElementById('hideAngleC')?.checked == true && props.custom) && (props.showAngleC || props.custom)) p5.text(`C${props.hideC ? `` : ': ' + parseFloat((document.getElementById('degrees')?.checked && props.custom) ? C * (180 / Math.PI) : C).toFixed(1)}`, (point1x * pixelScale), -(point1y * pixelScale))
+    if (!(document.getElementById('hideAngleA')?.checked == true && props.custom) && (props.showAngleA || props.custom)) p5.text(`A${props.hideA ? `` : ': ' + parseFloat((document.getElementById('degrees')?.checked && props.custom) ? A * (180 / Math.PI) : A).toFixed(2)}`, (point2x * pixelScale), -(point2y * pixelScale))
+    if (!(document.getElementById('hideAngleB')?.checked == true && props.custom) && (props.showAngleB || props.custom)) p5.text(`B${props.hideB ? `` : ': ' + parseFloat((document.getElementById('degrees')?.checked && props.custom) ? B * (180 / Math.PI) : B).toFixed(2)}`, (point3x * pixelScale), -(point3y * pixelScale))
+    if (!(document.getElementById('hideAngleC')?.checked == true && props.custom) && (props.showAngleC || props.custom)) p5.text(`C${props.hideC ? `` : ': ' + parseFloat((document.getElementById('degrees')?.checked && props.custom) ? C * (180 / Math.PI) : C).toFixed(2)}`, (point1x * pixelScale), -(point1y * pixelScale))
 
 
 

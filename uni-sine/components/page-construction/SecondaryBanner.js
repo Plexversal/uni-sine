@@ -8,7 +8,7 @@ function Nav(props) {
     const [URL, setURL] = useState(null)
     useEffect(() =>{
         setURL(document.URL)
-    })
+    }, [])
 
     
     return (
