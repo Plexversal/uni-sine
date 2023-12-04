@@ -9,6 +9,7 @@ import Vector from "../dynamic-media/Vector";
 import Timer from "../page-construction/Timer";
 import MathJaxContent from "../page-construction/MathJaxContent";
 import PercentIcon from "../page-construction/PercentageIcon";
+import CodeBlock from '../page-construction/CodeBlock'
 
 const MathQuestions = (props) => {
   const confettiRef = useRef(null);
@@ -472,9 +473,13 @@ const MathQuestions = (props) => {
                               }}
                             />
                           </>
-                        ) : questionData[difficulty][index].mediaType ==
-                        "codeblock" ? (CodeBlock({code: questionData[difficulty][index].media, language: 'js', showCopy: false})) 
-                        : null}
+                        ) : questionData[difficulty][index].mediaType === "codeblock" ? (
+                          <CodeBlock
+                            code={questionData[difficulty][index].media}
+                            language="js"
+                            showCopy={false}
+                          />
+                        ) : null}
                       </div>
                       {!questionData[difficulty][index].answerType ? (
                         <ul

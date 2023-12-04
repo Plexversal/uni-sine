@@ -33,6 +33,7 @@ function ManageAi({ user }) {
     try {
       const request = await fetch(`/api/db/getAiQuestions?topic=${topic}`);
       const result = await request.json();
+      console.log(result)
 
       if (request.status === 200 && result) {
         // try parsing

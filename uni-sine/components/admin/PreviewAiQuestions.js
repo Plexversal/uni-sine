@@ -347,9 +347,13 @@ export default function PreviewAiQuestions(props) {
                     }}
                   />
                 </>
-              ) : questionData[difficulty][index].mediaType ==
-              "codeblock" ? (CodeBlock({code: questionData[difficulty][index].media, language: 'js', showCopy: false})) 
-              : null}
+              ) : questionData[difficulty][index].mediaType === "codeblock" ? (
+                <CodeBlock
+                  code={questionData[difficulty][index].media}
+                  language="js"
+                  showCopy={false}
+                />
+              ) : null}
             </div>
             {!questionData[difficulty][index].answerType ? (
               <ul

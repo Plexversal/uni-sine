@@ -194,50 +194,50 @@ export function graphMedia() {
   const a = Math.floor(Math.random() * 6) + 1;
   const b = Math.floor(Math.random() * 16) - 5;
   const c = Math.floor(Math.random() * 6) - 5;
-  let question = `Find the equation f(x) from the graph below.`;
-  let media = `${a}x^2 ${b < 0 ? "-" : "+"} ${Math.abs(b)}x ${
-    c < 0 ? "-" : "+"
-  } ${Math.abs(c)}`;
-
+  
+  const formatTerm = (coeff, variable = '') => {
+    if (coeff === 0) return '';
+    const sign = coeff > 0 ? '+' : '-';
+    const absCoeff = Math.abs(coeff);
+    return ` ${sign} ${absCoeff === 1 && variable ? '' : absCoeff}${variable}`;
+  };
+  
+  let media = `${a}x^2${formatTerm(b, 'x')}${formatTerm(c)}`;
+  
   // Generate incorrect equations
   const incorrectEquations = [];
-  for (let i = 0; i < 4; i++) {
-    const aDeviation = (Math.random() < 0.5 ? -1 : 1) * 0.5;
-    const bDeviation = Math.random() < 0.5 ? -1 : 1;
-    const cDeviation = Math.random() < 0.5 ? -1 : 1;
-    incorrectEquations.push(
-      `${a + aDeviation}x^2 ${b + bDeviation < 0 ? "-" : "+"} ${Math.abs(
-        b + bDeviation
-      )}x ${c + cDeviation < 0 ? "-" : "+"} ${Math.abs(c + cDeviation)}`
-    );
+  while (incorrectEquations.length < 3) {
+    const aDeviation = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
+    const bDeviation = Math.floor(Math.random() * 3) - 1;
+    const cDeviation = Math.floor(Math.random() * 3) - 1;
+  
+    const newEquation = `${a + aDeviation}x^2${formatTerm(b + bDeviation, 'x')}${formatTerm(c + cDeviation)}`;
+  
+    // Check for duplicates
+    if (newEquation !== media && !incorrectEquations.includes(newEquation)) {
+      incorrectEquations.push(newEquation);
+    }
   }
-
+  
   let questionData = {
-    question: question,
+    question: `Find the equation f(x) from the graph below.`,
     answers: [
       {
         text: `\\(y = ${media}\\)`,
         isCorrect: true,
       },
-      {
-        text: `\\(y = ${incorrectEquations[0]}\\)`,
+      ...incorrectEquations.map(equation => ({
+        text: `\\(y = ${equation}\\)`,
         isCorrect: false,
-      },
-      {
-        text: `\\(y = ${incorrectEquations[1]}\\)`,
-        isCorrect: false,
-      },
-      {
-        text: `\\(y = ${incorrectEquations[2]}\\)`,
-        isCorrect: false,
-      },
+      })),
     ],
     requiresMedia: true,
     isAnswersEquation: true,
     mediaType: "graph",
     media: media,
   };
-
+  
+  
   let question2 = `Find the equation f(x) from the graph below.`;
   let coefficient1 = Math.round(Math.random() * 5);
   let coefficient2 = Math.round(Math.random() * 5);
