@@ -114,7 +114,7 @@ export default function Questions({ user }) {
     "Daily Math Questions": (
       <QuestionsModal {...{ onClose: handleCloseCalculator, topic: "math" }} />
     ),
-    "Daily Programming questions": (
+    "Daily Computer Science questions": (
       <QuestionsModal
         {...{ onClose: handleCloseCalculator, topic: "comp", user: user }}
       />

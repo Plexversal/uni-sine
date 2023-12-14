@@ -86,7 +86,7 @@ export default withApiAuthRequired(async function handler(req, res) {
           const randomTopicSelection = physicsSubtopic.sort(() => 0.5 - Math.random()).slice(0, 10).join(', ');
   
           let level = 'A-level'
-          let example = `A car travels at 100 km h^-1 on a motorway. What is an estimate of its kinetic energy?`
+          let example = `High-energy electrons with a de brogile wavelength of 3.00 fm are diffraacted by a carbon-12 nucleus (radius = 2.7 * 10^-15m). Estimaste the angle at which the first minimum appears on the electron beam's diffraction pattern.`
 
           const openai = new OpenAI({
               apiKey: process.env.OPENAI_API_KEY,
@@ -95,7 +95,7 @@ export default withApiAuthRequired(async function handler(req, res) {
           const chatCompletion = await openai.chat.completions.create({
               messages: [
                   { role: "system", content: "You are a programming assistant with the sole purpose to output question data for a database and provide no other context, your responses should be in json only without new lines or additional spaces in the json response" },
-                  { role: "user", content: `Create 4 easy, 4 medium and 2 hard ${req.query.topic} questions for a total of 10 questions. Based on the following topics ${randomTopicSelection}, meaning one question per topic, that would be suitable for ${level} students. An example question would be: ${example}. Produce the answer in text, 3 wrong answers and 1 correct answer. Each question should include supporting media in Latex format for MathJax. All answers that are equation based should use MathJax type formatting to be parsed by MathJax library. Try to make the questions various and some that include mathematical ability to work out. Do not include any new line characters in the response such as ("\\n") or excessive spacing.` }
+                  { role: "user", content: `Create 4 easy, 4 medium and 2 hard ${req.query.topic} questions for a total of 10 questions. Based on the following topics ${randomTopicSelection}, meaning one question per topic, that would be suitable for ${level} students. An example question would be: ${example}. Its important to Make the questions vary with some questions requiring mathematical ability to work out. Produce the answer in text, 3 wrong answers and 1 correct answer. Each question should include supporting media in Latex format for MathJax. All answers that are equation based should use MathJax type formatting to be parsed by MathJax library. Do not include any new line characters in the response such as ("\\n") or excessive spacing.` }
               ],
               model: "gpt-4",
               temperature: 0.3,
@@ -121,7 +121,7 @@ export default withApiAuthRequired(async function handler(req, res) {
           const randomTopicSelection = compSubtopic.sort(() => 0.5 - Math.random()).slice(0, 8).join(', ');
   
           let level = 'A-level'
-          let example = `What is the starting equation used in the Diffie-Hellman key exchange?`
+          let example = `If the execution of an asynchronous function takes 30 seconds to return a response, how long will it take for subsequent code to execute?`
 
           const openai = new OpenAI({
               apiKey: process.env.OPENAI_API_KEY,

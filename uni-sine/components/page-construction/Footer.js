@@ -21,7 +21,7 @@ export default function Footer() {
                 <div>
                     <h4>INFO</h4>
                     <Link href='/#prices'>Pricing</Link>
-                    <a>About Us</a>
+                    <Link href='/about'>About us</Link>
                 </div>
 
 
