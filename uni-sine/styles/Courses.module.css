@@ -53,6 +53,7 @@
     max-height: 70vh;
     padding: 40px;
     overflow-y: auto;
+    position: relative;
 }
 
 .courses-content > div {
@@ -337,6 +338,8 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+
 
 @keyframes shake {
     0% {

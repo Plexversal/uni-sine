@@ -2,7 +2,7 @@ import Nav from "./Nav";
 import Footer from './Footer'
 import SidePanel from "./SidePanel";
 import styles from '../../styles/Layout.module.css'
-
+import AiChat from "./AiChat";
 
 const Layout = ({user, isLoading, children }) => {
     return (
@@ -15,6 +15,7 @@ const Layout = ({user, isLoading, children }) => {
                     <Footer />
 
                 </main>
+                <AiChat />
             </div>
         </>
     )

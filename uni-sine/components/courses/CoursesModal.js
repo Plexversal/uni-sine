@@ -72,13 +72,16 @@ function CoursesModal(props) {
             <p>{props.courseName}</p>
           </div>
           <div className={styles["courses-content"]}>
+
             {CourseComponent ? 
             
             <CourseComponent {...{currentSection, setCurrentSection, courseName: props.courseName}} /> : <div>Error loading content</div>}
+
           </div>
           <div className={styles["courses-bottom"]}>
             <div>
               <button onClick={handleClose}>Close</button>
+              <button>Ask Ai</button>
             </div>
               {
                 changedSection && <LoadingIcons.TailSpin stroke="grey" width={50} height={30} />

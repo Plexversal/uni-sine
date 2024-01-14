@@ -101,7 +101,7 @@ export default function Home({ user, ...props }) {
           <div className={styles['landing-section-content']}>
             <div className={styles['landing-left']}>
               <h1>All the knowledge you need in one place</h1>
-              <p>Uni-Sine Learning is an online learning platform designed to help you learn through visual and interactive tools.</p>
+              <p>Uni-Sine Learning is an online learning platform designed to help you learn through <strong>visual and interactive tools</strong>, Advanced <strong>AI inegration</strong> and <strong>specialized courses</strong>.</p>
               <p>Need to pass your exams? Or perhaps just curious about the world. This is the place to learn. </p>
               <div className={styles['home-btn-wrapper']}>
               <button onClick={scrollClick} className={styles['explore-btn']}>Free Topics</button>
@@ -182,24 +182,11 @@ export default function Home({ user, ...props }) {
         </section>
 
         <section className={styles['info-bubbles-section']}>
-          <div className={styles['info-bubble']}>
+        <div className={styles['info-bubble']}>
+            <img src='/static/home/ai.gif' />
             <div>
-              <h1>Unique Practice questions</h1>
-              <ul>
-                <li>Generate unlimited, unique practice questions</li>
-                <li>Tools designed with hard coded math for accurate results</li>
-              </ul>
-              <Link href={'/questions'} className={styles['link-page-btn']}> Questions</Link>
-            </div>
-            <img src='/static/home/questions.gif' />
-
-          </div>
-          <div className={styles['info-bubble']}>
-            <img src='/static/home/interactive-comps.gif' />
-            <div>
-              <h1>15+ Interactive calculators</h1>
-              <p>Go beyond a standard calculator with a variety of visual graphing and algebra calculators specially designed for helping you learn faster</p>
-              <Link href={'/calculators'} className={styles['link-page-btn']}>Calculators</Link>
+              <h1>Advanced AI Integration</h1>
+              <p>Use the power of AI to help advance your knowledge and reword content that is preferrable to your reading style.</p>
 
             </div>
 
@@ -216,12 +203,37 @@ export default function Home({ user, ...props }) {
 
           </div>
           <div className={styles['info-bubble']}>
+          <img src='/static/home/questions.gif' />
+
+            <div>
+              <h1>Unique Practice questions</h1>
+              <ul>
+                <li>Generate unlimited, unique practice questions</li>
+                <li>Tools designed with hard coded math for accurate results</li>
+              </ul>
+              <Link href={'/questions'} className={styles['link-page-btn']}> Questions</Link>
+            </div>
+
+          </div>
+          <div className={styles['info-bubble']}>
+            <div>
+              <h1>15+ Interactive calculators</h1>
+              <p>Go beyond a standard calculator with a variety of visual graphing and algebra calculators specially designed for helping you learn faster</p>
+              <Link href={'/calculators'} className={styles['link-page-btn']}>Calculators</Link>
+
+            </div>
+            <img src='/static/home/interactive-comps.gif' />
+
+          </div>
+
+          <div className={styles['info-bubble']}>
           <img className={styles['info-bubble-img-no-style']} src='/static/home/home-img-3.png' />
 
             <div>
               <h1>High level math explained for any skill level</h1>
               <p>We know not everyone can pick up math easily, that&apos;s why we make every effort to show and derive every step.</p>
             </div>
+
           </div>
 
 

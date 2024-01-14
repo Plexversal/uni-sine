@@ -43,9 +43,8 @@ export default function Privacy() {
                     <p>You may choose to restrict the collection or use of your personal information in the following ways:</p>
                     <ul>
                         <li>whenever you are asked to fill in a form on the website, look for the box that you can click to indicate that you do not want the information to be used by anybody for direct marketing purposes</li>
-                        <li>if you have</li>
+                        <li>if you have previously agreed to us using your personal information for direct marketing purposes, you may change your mind at any time by writing to or emailing us at privacy@uni-sine.com.</li>
                     </ul>
-                    <p>previously agreed to us using your personal information for direct marketing purposes, you may change your mind at any time by writing to or emailing us at privacy@uni-sine.com.</p>
                     <p>We will not sell, distribute or lease your personal information to third parties unless we have your permission or are required by law to do so. We may use your personal information to send you promotional information about third parties which we think you may find interesting if you tell us that you wish this to happen.</p>
                     <p>You may request details of personal information which we hold about you under the General Data Protection Regulations. If you would like a copy of the information held on you please write to privacy@uni-sine.com.</p>
                     <p>If you believe that any information we are holding on you is incorrect or incomplete, please write to or email us as soon as possible, at the above address. We will promptly correct any information found to be incorrect.</p>
