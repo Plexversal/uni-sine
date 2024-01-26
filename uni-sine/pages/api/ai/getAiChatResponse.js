@@ -4,7 +4,7 @@ import {
     withApiAuthRequired,
     getSession
 } from "@auth0/nextjs-auth0";
-
+import { OpenAIStream, StreamingTextResponse } from 'ai';
 export default withApiAuthRequired(async function handler(req, res) {
     
     try {
@@ -73,22 +73,12 @@ export default withApiAuthRequired(async function handler(req, res) {
             messages: history.concat([{ role: "user", content: content }]),
             stream: true
         });
-
         
-        if (chatCompletion.response.ok) {
-            chatCompletion.response.body.on('data', (chunk) => {
-                res.write(chunk);
-            });
-        
-            chatCompletion.response.body.on('end', () => {
 
-                res.end();
-            });
+        const stream = OpenAIStream(chatCompletion);
 
-            
-        } else {
-            res.status(500).json({ message: 'Failed to get AI chat data' });
-        }
+        // Respond with the stream
+        return new StreamingTextResponse(stream);
         
     } catch (error) {
         console.error(error);

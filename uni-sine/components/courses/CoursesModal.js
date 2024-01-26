@@ -81,7 +81,6 @@ function CoursesModal(props) {
           <div className={styles["courses-bottom"]}>
             <div>
               <button onClick={handleClose}>Close</button>
-              <button>Ask Ai</button>
             </div>
               {
                 changedSection && <LoadingIcons.TailSpin stroke="grey" width={50} height={30} />
