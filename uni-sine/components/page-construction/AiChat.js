@@ -2,23 +2,19 @@ import React, { useState, useEffect, useRef } from 'react';
 import styles from '../../styles/Ai.module.css';
 import { GiArtificialIntelligence } from 'react-icons/gi';
 import { useChat } from 'ai/react'
+import { FaArrowAltCircleUp } from "react-icons/fa";
 
 export default function AiChat(props) {
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const [userChat, setUserChat] = useState('');
-  const [chatHistory, setChatHistory] = useState([]);
-  const [isRequesting, setIsRequesting] = useState(false);
   const chatContainerRef = useRef(null); 
   const [selectedText, setSelectedText] = useState('');
 
 
-  const { input, handleInputChange, handleSubmit, isLoading, messages, setInput, append, setMessages } = useChat({
+  const { input, handleInputChange, handleSubmit, isLoading, messages, setInput, append, setMessages, stop } = useChat({
     onResponse: (res) => {
       if (!res.ok) {
-        // Handle error response
         res.json().then(errorData => {
           const errorMessage = errorData.message || "An error occurred";
-          // Append the error message to the chat
           const updatedMessages = [...messages, { role: 'system', content: errorMessage }];
           setMessages(updatedMessages);
         });
@@ -49,15 +45,15 @@ export default function AiChat(props) {
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault(); // Prevent the default action to avoid newline in textarea
+      e.preventDefault(); 
       customSubmitHandler(e);
     }
   };
 
   const customSubmitHandler = async (e) => {
     e.preventDefault();
-    setInput('');  // Reset the input after successful submission
-    setSelectedText('');  // Reset selected text after submission
+    setInput(''); 
+    setSelectedText('');  
     let combinedMessageContent = input;
     if (selectedText) {
       combinedMessageContent += "\n\nUser provided additional context: " + selectedText;
@@ -70,8 +66,6 @@ export default function AiChat(props) {
       console.log(error)
     }
   };
-  
-  
 
   return (
     <>
@@ -94,7 +88,7 @@ export default function AiChat(props) {
             <h4>Ai Chat</h4>
             <button onClick={() => setMessages([])}>Clear Chat</button>
           </div>
-          {chatHistory.length <= 0 && 
+          {messages.length <= 0 && 
           <span style={{color: 'grey'}}><i>Tip: You can highlight text on the page to add additional context</i></span>
         }
       {messages.map((entry, index) => (
@@ -115,7 +109,8 @@ export default function AiChat(props) {
               <p>{selectedText}</p>
             </div>
           )}
-        <form onSubmit={customSubmitHandler}> {/* Just prevent default form submission */}
+        <form className={styles['ai-text']} onSubmit={customSubmitHandler}> {/* Just prevent default form submission */}
+          <div>
           <textarea
             onChange={handleInputChange}
             onKeyPress={handleKeyPress}
@@ -125,7 +120,14 @@ export default function AiChat(props) {
             placeholder="Ask AI for help."
             maxLength={3600}
           />
-        <input type='submit' value="Submit"/>
+        <button 
+          type="submit" 
+          className={styles['ai-submit']} 
+
+        >
+           <FaArrowAltCircleUp size={'15px'} color='white' />
+        </button>
+          </div>
             
         </form>
         </div>
