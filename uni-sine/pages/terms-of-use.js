@@ -1,10 +1,16 @@
 import React from "react";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
-
+import Head from "next/head";
 export default function Privacy() {
   return (
     <div className={`${styles["container"]} ${styles["privacy-container"]}`}>
+      <Head>
+        <meta
+          name="description"
+          content="Uni-Sine: Terms of Use policy sets out how you can use our service"
+        />
+      </Head>
       <article>
         <section className={styles["privacy-container"]}>
           <h1>Terms of Use</h1>
@@ -12,9 +18,11 @@ export default function Privacy() {
 
           <h2>1. Introduction</h2>
           <p>
-            Welcome to Uni-Sine. This Terms of Use agreement (&quot;Agreement&quot;) is
-            between you (&quot;you&quot;, &quot;your&quot;) and Uni-Sine (&quot;Uni-Sine&quot;, &quot;we&quot;, &quot;us&quot;,
-            &quot;our&quot;), the provider of this web application (&quot;Application&quot;).
+            Welcome to Uni-Sine. This Terms of Use agreement
+            (&quot;Agreement&quot;) is between you (&quot;you&quot;,
+            &quot;your&quot;) and Uni-Sine (&quot;Uni-Sine&quot;,
+            &quot;we&quot;, &quot;us&quot;, &quot;our&quot;), the provider of
+            this web application (&quot;Application&quot;).
           </p>
           <p>
             By using this Application, you agree to be bound by this Agreement.
@@ -63,9 +71,9 @@ export default function Privacy() {
 
           <h2>6. Account Termination</h2>
           <p>
-            We reserve the right to terminate or suspend any user&apos;s access to
-            our Application, without notice, for any reason, including violation
-            of these Terms of Use.
+            We reserve the right to terminate or suspend any user&apos;s access
+            to our Application, without notice, for any reason, including
+            violation of these Terms of Use.
           </p>
 
           <h2>7. Modifications</h2>
@@ -77,7 +85,10 @@ export default function Privacy() {
           <h2>8. Contact Us</h2>
           <p>
             If you have any questions regarding these Terms of Use, please&nbsp;
-             <Link style={{textDecoration: 'underline'}} href={'/contact'}>Contact Us</Link>.
+            <Link style={{ textDecoration: "underline" }} href={"/contact"}>
+              Contact Us
+            </Link>
+            .
           </p>
 
           <p>By using our Application, you agree to these Terms of Use.</p>

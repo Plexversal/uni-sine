@@ -9,9 +9,28 @@ import {BiLinkExternal} from 'react-icons/bi'
 import Script from 'next/script'
 import Header from '../components/page-construction/Header'
 import startCheckout from '../components/page-construction/StartCheckout'
-import LoadingIcon from '../components/page-construction/LoadingIcon'
+import Head from 'next/head'
+// import clientPromise from '../lib/connectDb'; 
 
-export default function Home({ user, ...props }) {
+
+// export async function getStaticProps() {
+//   const client = await clientPromise;
+//   const db = client.db('uni-sine_master_db'); 
+
+//   const bannerData = await db.collection('siteConfig') 
+//       .findOne({ _id: "siteBanner" });
+
+//   return {
+//       props: {
+//           banner: bannerData ? JSON.parse(JSON.stringify(bannerData.data)) : null,
+//       },
+//       revalidate: 60, // Regenerate the page every 60 seconds if there's a request
+//   };
+// }
+
+export default function Home({ user, isLoading, ...props }) {
+
+
 
   const [faqQuestionsOpen, setFaqQuestionsOpen] = useState([
     false,
@@ -92,10 +111,26 @@ export default function Home({ user, ...props }) {
 
   return (
     <>
+      <Head>
+          <meta
+          name="description"
+          content="Revise Physics, Maths and Computer science with the power of AI, Courses, Graphing Calculators and more."
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Uni-Sine: AI, Graph Calculators, Math and Comp Sci Courses" />
+        <meta name="twitter:site" content="@UniSineSocial"/>
+        <meta name="twitter:description" content="Revise Physics, Maths and Computer science with the power of AI, Courses, Graphing Calculators and more." />
+        <meta name="twitter:image" content="https://uni-sine.com/static/socials/800500_home.png" />
+
+        <meta property="og:title" content="Uni-Sine: AI, Graph Calculators, Math and Comp Sci Courses" />
+        <meta property="og:description" content="Revise Physics, Maths and Computer science with the power of AI, Courses, Graphing Calculators and more." />
+        <meta property="og:image" content="https://uni-sine.com/static/socials/800500_home.png" />
+      </Head>
+
         <Script src='https://js.stripe.com/v3/pricing-table.js' async={true} defer />
 
       <div className={styles.container}>
-        <Header {...{user: user}} />
+        <Header {...{user: user, isLoading: isLoading}} />
         <section className={styles['landing-section']}>
 
           <div className={styles['landing-section-content']}>
@@ -186,7 +221,7 @@ export default function Home({ user, ...props }) {
             <img src='/static/home/ai.gif' />
             <div>
               <h1>Advanced AI Integration</h1>
-              <p>Use the power of AI to help advance your knowledge and reword content that is preferrable to your reading style.</p>
+              <p>Use the power of AI, built with GPT-4, to help advance your knowledge and reword content that is preferrable to your reading style.</p>
 
             </div>
 
@@ -252,7 +287,7 @@ export default function Home({ user, ...props }) {
                 <ul className={styles['feature-list']}>
                   <li>Full access to all current and future interactive components and calculators</li>
                   <li>Access unique practice questions that refresh weekly</li>
-                  <li>Access to all premium and university level pages</li>
+                  <li>Access to AI chat built with OpenAI</li>
                   <li>Access to all courses current and future</li>
                 </ul>
               </div>
@@ -272,7 +307,7 @@ export default function Home({ user, ...props }) {
                 <p>For education institutions looking to get access for multiple students.</p>
                 <p>We are want everyone to have the best access to education and are happy to work with schools and colleges to give all students a valid subscription at a discounted price.</p>
               </div>
-              <a href={'/contact'}>Contact</a>
+              <Link href={'/contact'}>Contact</Link>
             </div>
           </div>
         </section>

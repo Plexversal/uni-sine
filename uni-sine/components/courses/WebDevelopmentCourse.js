@@ -946,7 +946,7 @@ function WebDevCourse(props) {
                     <h3>Final Questions</h3>
                     <div className={styles['review-questions-completed']}>
                       {
-                        userCourseData.questionsCompleted?.length > 0 ? userCourseData.questionsCompleted.map((e, i) => (
+                        userCourseData && userCourseData.questionsCompleted?.length > 0 ? userCourseData.questionsCompleted.map((e, i) => (
                           <div  key={i}> 
                             {e.isCorrect ? <BsFillCheckCircleFill color="#50C878" size={'2em'} /> : <BsFillXCircleFill color="#FF5733" size={'2em'} />}
                           </div>  

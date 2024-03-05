@@ -33,8 +33,10 @@ export default async function handler(req, res) {
         );
       return;
     }
-    if (event?.data?.object?.object == "subscription") {
-        console.log(event.data.object)
+    if (
+      event.type == "customer.subscription.created" ||
+      event.type == "customer.subscription.deleted"
+    ) {
       const stripeCustomerId = event.data.object.customer;
       const customer = await stripe.customers.retrieve(stripeCustomerId);
       const auth0UserId = customer.metadata.auth0_user_id;
@@ -55,19 +57,33 @@ export default async function handler(req, res) {
         return;
       }
 
-      if (event.data.object.status == "active") {
+      if(event.type == "customer.subscription.created") {
         await auth0.updateAppMetadata(
           { id: customer.metadata.auth0_user_id },
           { is_premium: true }
         );
-        sendEmail()
-      } else if (event.data.object.status == "canceled" || event.data.object.status == "deleted") { // the misspelling of canceled is correct according to stripe for some reason
+        sendEmail();
+        return res.status(200).send({
+          received: true,
+          type: 'subscription_creation'
+        });
+      } else if (event.type == "customer.subscription.deleted") {
         await auth0.updateAppMetadata(
           { id: customer.metadata.auth0_user_id },
           { is_premium: false }
         );
+        return res.status(200).send({
+          received: true,
+          type: 'subscription_deletion'
+        });
+      } else {
+        return res.status(500).send({
+          error: 'Invalid information relating to content of webhook, webhook settings need validating.'
+        })
       }
-      // send email
+
+
+
       async function sendEmail() {
         const msal = require("@azure/msal-node");
 
@@ -91,7 +107,6 @@ export default async function handler(req, res) {
         // start user confirm email
         const mailUser = {
           subject: `Welcome to Uni-Sine Premium!`,
-          //This "from" is optional if you want to send from group email. For this you need to give permissions in that group to send emails from it.
           from: {
             emailAddress: {
               address: "premium@uni-sine.com",
@@ -109,7 +124,7 @@ export default async function handler(req, res) {
             contentType: "html",
           },
         };
-    const bearer = `Bearer ${tokenInfo.accessToken}`;
+        const bearer = `Bearer ${tokenInfo.accessToken}`;
 
         const optionsUser = {
           method: "POST",
@@ -125,30 +140,27 @@ export default async function handler(req, res) {
         )
           .then((res) => {
             if (!res.ok) {
-              return res
-                .status(500)
-                .json({
-                  status: "500",
-                  message: `error: Internal server error: (user)`,
-                });
+              return res.status(500).json({
+                status: "500",
+                message: `error: Internal server error: (user)`,
+              });
             } else {
               return res.status(200).json({ name: "contact form sent" });
             }
           })
           .catch((error) => {
-            return res
-              .status(500)
-              .json({
-                status: "500",
-                message: `error: Internal server error (user internal)`,
-              });
+            return res.status(500).json({
+              status: "500",
+              message: `error: Internal server error (user internal)`,
+            });
           });
       }
+    } else {
+      return res.status(200).send({
+        received: true,
+        type: 'no_action'
+      });
     }
-
-    res.status(200).send({
-      received: true,
-    });
   } else {
     res.setHeader("Allow", "POST");
     res.status(405).end("Method Not Allowed");

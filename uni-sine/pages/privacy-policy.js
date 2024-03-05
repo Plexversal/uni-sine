@@ -1,5 +1,6 @@
 import React from "react";
 import styles from '../styles/Home.module.css'
+import Head from 'next/head'
 
 
 export default function Privacy() {
@@ -8,7 +9,12 @@ export default function Privacy() {
 
     return (
         <div className={`${styles['container']} ${styles['privacy-container']}`}>
-
+      <Head>
+        <meta
+          name="description"
+          content="Uni-Sine: Privacy Policy. What we collect and how we use your data."
+        />
+      </Head>
             <article>
                     <section className={styles['privacy-container']}>
                     <h1>Privacy Policy</h1>

@@ -1,0 +1,25 @@
+.offer-banner {
+    position: relative; 
+    text-align: center;
+    color: black;
+    background: rgb(236, 96, 120);
+    font-size: 1em;
+    padding: 5px;
+    padding-right: 30px; 
+}
+
+.offer-banner button {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-55%); 
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 1.4em;
+    cursor: pointer;
+}
+
+.offer-banner button:hover {
+    color: #ddd; 
+}

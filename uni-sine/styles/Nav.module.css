@@ -1,5 +1,4 @@
 #navbar {
-    padding: 15px 30px;
     background: #1f1f1f;
     color: rgb(255, 255, 255);
     border-image: linear-gradient(to right,#f02828,#e8d90a,#e80a0a); 
@@ -15,9 +14,11 @@
 
 }
 
-#navbar > * {
-    padding: 10px;
+.nav-content {
+    padding: 15px 30px !important;
+    
 }
+
 
 .nav-container {
     padding: 0 5pc 0 5pc !important;

@@ -59,6 +59,8 @@ const BuyPremiumModal = forwardRef((showOverlay, ref) => {
               <li>Premium calculators and tools</li>
               <li>Daily exam style Questions</li>
               <li>Access to all Courses</li>
+              <li>Access to AI chat</li>
+
             </ul>
             <Link href='/api/auth/login' className={styles['buy-premium-btn']} onClick={startCheckout}>Login</Link>
 

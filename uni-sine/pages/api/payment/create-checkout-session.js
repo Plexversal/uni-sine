@@ -41,7 +41,7 @@ export default withApiAuthRequired(async function handler(req, res) {
         }, ],
         customer: stripeCustomerId,
         mode: 'subscription',
-        success_url: `${req.headers.origin}/calculators`,
+        success_url: `${req.headers.origin}/subscribed`,
         cancel_url: `${req.headers.origin}/`,
         allow_promotion_codes: true
     });

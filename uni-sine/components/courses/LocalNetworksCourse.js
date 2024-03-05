@@ -576,7 +576,7 @@ export default function NuclearEnergyCourse (props) {
                   <h3>Final Questions</h3>
                   <div className={styles['review-questions-completed']}>
                     {
-                      userCourseData.questionsCompleted?.length > 0 ? userCourseData.questionsCompleted.map((e, i) => (
+                      userCourseData && userCourseData.questionsCompleted?.length > 0 ? userCourseData.questionsCompleted.map((e, i) => (
                         <div  key={i}> 
                           {e.isCorrect ? <BsFillCheckCircleFill color="#50C878" size={'2em'} /> : <BsFillXCircleFill color="#FF5733" size={'2em'} />}
                         </div>  
@@ -589,7 +589,7 @@ export default function NuclearEnergyCourse (props) {
                   <h3>Standard sections:</h3>
                   <div className={styles['review-standard-container']}>
                   {
-                      userCourseData.standardQuestions?.length > 0 ? userCourseData.standardQuestions.sort((a, b) => a.section - b.section).map((e, i) => (
+                      userCourseData && userCourseData.standardQuestions?.length > 0 ? userCourseData.standardQuestions.sort((a, b) => a.section - b.section).map((e, i) => (
                         <div style={{margin:'0 10px'}} key={i}> 
                           <p>Section <strong>{e.section}</strong> </p>
                           <div>{e.isCorrect ? <BsFillCheckCircleFill color="#50C878" size={'2em'} /> : <BsFillXCircleFill color="#FF5733" size={'2em'} />}</div>

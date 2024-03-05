@@ -8,6 +8,7 @@ import QuestionsModal from "../components/questions/QuestionsModal";
 import BuyPremiumModal from "../components/page-construction/PremiumModal";
 import LoadingIcon from "../components/page-construction/LoadingIcon";
 import PercentIcon from "../components/page-construction/PercentageIcon";
+import Head from "next/head";
 
 const Backdrop = ({ onClick }) => (
   <div className={contentStyles.backdrop} onClick={onClick}></div>
@@ -58,7 +59,7 @@ export default function Questions({ user }) {
       } catch (error) {
         console.error("Unexpected error:", error);
       } finally {
-        setIsStatsLoading(false)
+        setIsStatsLoading(false);
       }
     };
 
@@ -122,6 +123,12 @@ export default function Questions({ user }) {
   };
   return (
     <>
+      <Head>
+        <meta
+          name="description"
+          content="Daily practice and revision questions for maths, physics and computer science. Generates daily."
+        />
+      </Head>
       {!isLoading ? (
         <>
           {noPremium && (
@@ -147,7 +154,10 @@ export default function Questions({ user }) {
                     questions.
                   </p>
                 </div>
-                <img className={styles['description-gif']} src="/static/home/questions.gif" />
+                <img
+                  className={styles["description-gif"]}
+                  src="/static/home/questions.gif"
+                />
               </div>
               <div className={styles["btn-wrapper"]}>
                 {Object.keys(calculatorsMap)
@@ -174,10 +184,12 @@ export default function Questions({ user }) {
                 <>
                   {questionData ? (
                     <div className={questionsStyles["end-screen-content"]}>
-                      <PercentIcon {...{percent, text: 'Overall score'}}/>
-                      
+                      <PercentIcon {...{ percent, text: "Overall score" }} />
+
                       <div>
-                      <p style={{color: 'grey'}}><i>Stats are based on your first question attempt</i></p>
+                        <p style={{ color: "grey" }}>
+                          <i>Stats are based on your first question attempt</i>
+                        </p>
 
                         <p>
                           <span>Total questions answered:</span>{" "}

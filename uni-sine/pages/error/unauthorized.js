@@ -5,9 +5,9 @@ import Link from "next/link";
 const Unauthorized = () => {
     const router = useRouter()
     return (
-        <div>
+        <div style={{margin: '5em 0'}}>
             <p>{router.query.errorDescription || `There was an error signing you in, please try again later.`}</p>
-            <Link href='/'>Return home</Link>
+            <Link style={{textDecoration: 'underline'}} href='/'>Return home</Link>
         </div>
     )
 };

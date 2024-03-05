@@ -268,7 +268,8 @@
 }
 .review-questions-completed,
 .review-container,
-.review-percent-container{
+.review-percent-container, 
+.review-standard-container {
     display: flex;
     align-items: center;
     justify-content: center

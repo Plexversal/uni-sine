@@ -38,6 +38,12 @@ export default withApiAuthRequired(async function handler(req, res) {
         return;
     }
 
+    if(!data.app_metadata.is_premium ) {
+
+        res.status(401).json({message: "no premium"});
+        return;
+    }
+
     const client = await clientPromise;
     const db = client.db('uni-sine_master_db');
     const collection = db.collection('userReports');

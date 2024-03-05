@@ -6,35 +6,41 @@ import { UserProvider } from '@auth0/nextjs-auth0/client';
 import ErrorBoundary from '../components/page-construction/ErrorBoundary'
 import { Analytics } from '@vercel/analytics/react';
 import { useState, useEffect } from 'react';
-import {useUserRedirect} from '../hooks/useUserRedirect';
-import { useRouter } from 'next/router';
 import { useUser } from '@auth0/nextjs-auth0/client';
 
 
 function UserFetcher({ children }) {
-  const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const { user: authUser } = useUser();
+  const [customUser, setCustomUser] = useState(null);
+  const { user: authUser, isLoading: isAuthLoading } = useUser();
+  const [isFetchingCustomUser, setIsFetchingCustomUser] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`/api/auth0/auth0-user`);
-        const data = await response.json();
-        setUser(data);
-      } catch (error) {
-        console.error("Error:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
+    // When authUser changes, check its existence to manage custom user fetching
     if (authUser) {
+      setIsFetchingCustomUser(true); // Indicate custom user fetching starts
+      const fetchData = async () => {
+        try {
+          const response = await fetch(`/api/auth0/auth0-user`);
+          const data = await response.json();
+          setCustomUser(data);
+        } catch (error) {
+          console.error("Error fetching custom user data:", error);
+        } finally {
+          setIsFetchingCustomUser(false); // Indicate custom user fetching ends
+        }
+      };
       fetchData();
+    } else {
+      // If no authUser, no fetching is required, and custom user data should be cleared
+      setCustomUser(null);
+      setIsFetchingCustomUser(false); // Reset since there's no authUser to fetch data for
     }
   }, [authUser]);
 
-  return children({ user, isLoading });
+  // Combine loading states to control rendering
+  const isLoading = isAuthLoading || isFetchingCustomUser;
+
+  return children({ user: customUser, isLoading });
 }
 
 
@@ -58,6 +64,8 @@ function MyApp({ Component, pageProps, router }) {
                 inlineMath: [
                     ["$", "$"],
                     ["\\(", "\\)"],
+                    ["[", "]"],
+
                 ],
             },
             chtml: {
@@ -91,11 +99,11 @@ return (
         {({ user, isLoading }) => (
           <>
             <Head>
-              <title>uni-sine</title>
+              <title>Uni-Sine: AI, Graph Calculators, Math and Comp Sci Courses</title>
             </Head>
             {router.pathname === '/' ? (
               <>
-                <Component {...pageProps} user={user} />
+                <Component {...pageProps} user={user} isLoading={isLoading} />
                 <Analytics />
                 <Footer />
               </>

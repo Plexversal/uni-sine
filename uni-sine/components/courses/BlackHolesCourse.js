@@ -793,7 +793,7 @@ export default function BlackHoleCourse(props) {
                   <div>
                     <h3>Final Questions</h3>
                     <div className={styles["review-questions-completed"]}>
-                      {userCourseData.questionsCompleted?.length > 0 ? (
+                      {userCourseData && userCourseData.questionsCompleted?.length > 0 ? (
                         userCourseData.questionsCompleted.map((e, i) => (
                           <div key={i}>
                             {e.isCorrect ? (
@@ -814,7 +814,7 @@ export default function BlackHoleCourse(props) {
                   <div>
                     <h3>Standard sections:</h3>
                     <div className={styles["review-standard-container"]}>
-                      {userCourseData.standardQuestions?.length > 0 ? (
+                      {userCourseData && userCourseData.standardQuestions?.length > 0 ? (
                         userCourseData.standardQuestions
                           .sort((a, b) => a.section - b.section)
                           .map((e, i) => (

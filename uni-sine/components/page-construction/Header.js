@@ -4,7 +4,8 @@ import styles from '../../styles/Home.module.css'
 import Link from "next/link";
 import Image from 'next/image'
 import AccountModal from "./AccountModal";
-const Header = ({ user }) => {
+import OfferBanner from "./OfferBanner";
+const Header = ({ user, isLoading }) => {
     const userAccountModalRef = useRef();
 
     const handleUserAccountButtonClick = () => {
@@ -12,6 +13,10 @@ const Header = ({ user }) => {
     };
     return (
         <header className={styles['header']}>
+        <OfferBanner user={user} isLoading={isLoading}/>
+
+
+            <div className={styles['header-content']}>
             <div className={styles['logo']}>
                 <h1>Uni-Sine</h1>
                 <p>Learning</p>
@@ -42,6 +47,8 @@ const Header = ({ user }) => {
                 }
 
             </div>
+            </div>
+
         </header>
     )
 };

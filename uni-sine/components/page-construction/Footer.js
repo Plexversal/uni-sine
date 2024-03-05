@@ -22,10 +22,13 @@ export default function Footer() {
                     <h4>INFO</h4>
                     <Link href='/#prices'>Pricing</Link>
                     <Link href='/about'>About us</Link>
+                    <Link href='/contact'>Contact us</Link>
+
                 </div>
 
 
             </div>
-            <p><strong>Uni-Sine</strong> Copyright ©</p>
+            <p><strong>Uni-Sine</strong> Copyright © </p>
+            
         </footer>)
 } 

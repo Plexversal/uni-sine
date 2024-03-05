@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react"
 import styles from '../styles/PremiumPage.module.css'
 import contentStyles from '../styles/Content.module.css'
 import BuyPremiumModal from "../components/page-construction/PremiumModal";
+import Head from "next/head";
 
 // js calculators
 import BindingEnergy from '../components/calculators/BindingEnergy'
@@ -112,6 +113,12 @@ function freeCheck(calculator) {
 }
   return (
     <>
+    <Head>
+    <meta
+        name="description"
+        content="Graphing Calculators such as quadratic graph calculators, cubic calculators. Physics calculators such as half life calculator and gravitational force calculator. Math calculators such as trigonometry calculator. Also code editor."
+      />
+    </Head>
       {isLoading ? (
         <LoadingIcon />
       ) : (
@@ -130,8 +137,11 @@ function freeCheck(calculator) {
               <div>
                 <h2>A tool for any problem...</h2>
                 <p>
-                  Take advantage of our powerful math tools for generating
-                  graphs, equations and general problem solving
+                  Take advantage of our powerful math and graphing tools for generating
+                  graphs, equations and general problem solving. 
+                </p>
+                <p>
+                You can also use the <strong>AI chat</strong> at the bottom right for programming help or other difficult problems.
                 </p>
               </div>
               <img className={styles['description-gif']} src="/static/home/interactive-comps.gif" />
