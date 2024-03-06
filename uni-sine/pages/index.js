@@ -10,6 +10,7 @@ import Script from 'next/script'
 import Header from '../components/page-construction/Header'
 import startCheckout from '../components/page-construction/StartCheckout'
 import Head from 'next/head'
+import CookieBanner from '../components/page-construction/CookieBanner'
 // import clientPromise from '../lib/connectDb'; 
 
 
@@ -111,6 +112,7 @@ export default function Home({ user, isLoading, ...props }) {
 
   return (
     <>
+    <CookieBanner />
       <Head>
           <meta
           name="description"
