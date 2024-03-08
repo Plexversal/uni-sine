@@ -1,8 +1,11 @@
 import { loadStripe } from "@stripe/stripe-js";
 
+import { sendGTMEvent } from '@next/third-parties/google'
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
 export default async function startCheckout() {
+
+
   let userData;
 
   const fetchData = async () => {

@@ -6,6 +6,8 @@ import styles from '../../styles/UserAccountModal.module.css';
 import { GrFormClose  } from 'react-icons/gr';
 import Router from 'next/router';
 import { loadStripe } from '@stripe/stripe-js';
+import { sendGTMEvent } from '@next/third-parties/google'
+
 Modal.setAppElement('#__next');
 
 const AccountModal = forwardRef((props, ref) => {
@@ -66,6 +68,7 @@ const AccountModal = forwardRef((props, ref) => {
   }
 
   if (props.user) {
+    
 
     const changePassword = async (e) => {
       e.preventDefault()
@@ -83,6 +86,20 @@ const AccountModal = forwardRef((props, ref) => {
     }
 
     const startCheckout = async () => {
+      sendGTMEvent({event: 'start_checkout',
+      contents: {
+        content_type: "subscription",
+        content_name: "premium",
+        content_id: 1,
+        currency: ((props.user?.app_metadata.region === 'NA' || props.user?.app_metadata.region === 'SA') ? 'USD' : 'GBP'),
+        email: props.user.email,
+        external_id: props.user.user_id,
+        value: ((props.user?.app_metadata.region === 'NA' || props.user?.app_metadata.region === 'SA') ? 15 : 10)
+        
+      }
+
+
+  })
       const res = await fetch('/api/payment/create-checkout-session', {
         method: 'POST',
         headers: {

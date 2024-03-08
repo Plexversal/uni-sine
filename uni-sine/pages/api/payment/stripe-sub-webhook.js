@@ -25,7 +25,6 @@ export default async function handler(req, res) {
         process.env.STRIPE_SIGNING_KEY
       );
     } catch (err) {
-      console.log(`Webhook Error: ${err.message}`);
       res
         .status(400)
         .send(
@@ -72,11 +71,13 @@ export default async function handler(req, res) {
           { id: customer.metadata.auth0_user_id },
           { is_premium: false }
         );
+        console.log('deleted')
         return res.status(200).send({
           received: true,
           type: 'subscription_deletion'
         });
       } else {
+        
         return res.status(500).send({
           error: 'Invalid information relating to content of webhook, webhook settings need validating.'
         })
@@ -156,6 +157,7 @@ export default async function handler(req, res) {
           });
       }
     } else {
+
       return res.status(200).send({
         received: true,
         type: 'no_action'
