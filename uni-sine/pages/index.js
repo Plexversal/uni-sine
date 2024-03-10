@@ -11,6 +11,8 @@ import Header from '../components/page-construction/Header'
 import startCheckout from '../components/page-construction/StartCheckout'
 import Head from 'next/head'
 import CookieBanner from '../components/page-construction/CookieBanner'
+import { BsStars } from "react-icons/bs";
+
 // import clientPromise from '../lib/connectDb'; 
 
 
@@ -296,7 +298,7 @@ export default function Home({ user, isLoading, ...props }) {
               {
                 
                   user != null ? user?.app_metadata?.is_premium ? <div>You are already subscribed!</div> : 
-                  <button onClick={startCheckout}>Buy Subscription</button> :  <Link href={'/api/auth/login'}>Sign Up</Link>
+                  <button className={styles['subscription-link']} onClick={() => startCheckout(user)}><BsStars />Subscribe</button> :  <Link href={'/api/auth/login'}>Sign Up</Link>
                 
               }
             </div>

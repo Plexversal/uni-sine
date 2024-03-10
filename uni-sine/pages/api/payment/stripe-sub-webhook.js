@@ -71,7 +71,6 @@ export default async function handler(req, res) {
           { id: customer.metadata.auth0_user_id },
           { is_premium: false }
         );
-        console.log('deleted')
         return res.status(200).send({
           received: true,
           type: 'subscription_deletion'

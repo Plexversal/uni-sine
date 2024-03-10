@@ -99,7 +99,6 @@
 }
 
 .account-btn:hover,
-.subscription-link:hover,
 .logout:hover {
   background: rgb(255, 255, 255);
   color: black;
@@ -125,26 +124,20 @@
   background-position: 0 50%;
 }
 
-.buy-premium-btn {
-  width: 100%;
-  background: rgb(15, 15, 15);
-  text-align: center;
-  border: 2px solid rgb(15, 15, 15);
-  padding: 8px 0;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all .3s;
-  font-weight: 500;
-  color: white;
-  text-align: center;
-  width: 100%;
-  display: block;
-  font-size: 0.8em;
-  margin: 5px 0;
+.subscription-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; 
+  background: linear-gradient(90deg, #ff00f399, #a843fc99, #f13c8299, #ff00f399) !important;
+  font-size: 1em;
+  border: 1px solid rgb(248, 4, 138);
+  color: #ffffff;
+  transition: all .5s !important;
+  
 }
-
-.buy-premium-btn:hover {
-  background: rgb(255, 255, 255);
+.subscription-link:hover {
+  background: linear-gradient(90deg, #ff00f322, #a843fc22, #f13c8222, #ff00f322) !important;
   color: black;
 }
 

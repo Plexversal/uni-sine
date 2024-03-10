@@ -7,15 +7,14 @@ import { GrFormClose  } from 'react-icons/gr';
 import Router from 'next/router';
 import { loadStripe } from '@stripe/stripe-js';
 import { sendGTMEvent } from '@next/third-parties/google'
-
+import startCheckout from './StartCheckout';
+import { BsStars } from "react-icons/bs";
 Modal.setAppElement('#__next');
 
 const AccountModal = forwardRef((props, ref) => {
-  const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
-  //const { user, isLoading, error } = useUser()
   const [loadingProfile, setLoadingProfile] = useState(true)
   const router = useRouter();
 
@@ -85,35 +84,6 @@ const AccountModal = forwardRef((props, ref) => {
       }
     }
 
-    const startCheckout = async () => {
-      sendGTMEvent({event: 'start_checkout',
-      contents: {
-        content_type: "subscription",
-        content_name: "premium",
-        content_id: 1,
-        currency: ((props.user?.app_metadata.region === 'NA' || props.user?.app_metadata.region === 'SA') ? 'USD' : 'GBP'),
-        email: props.user.email,
-        external_id: props.user.user_id,
-        value: ((props.user?.app_metadata.region === 'NA' || props.user?.app_metadata.region === 'SA') ? 15 : 10)
-        
-      }
-
-
-  })
-      const res = await fetch('/api/payment/create-checkout-session', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          stripeCustomerId: props.user?.app_metadata?.stripe_customer_id,
-        }),
-      });
-  
-      const { sessionId } = await res.json();
-      const stripe = await stripePromise;
-      await stripe.redirectToCheckout({ sessionId });
-    };
 
     return (
       <>
@@ -158,12 +128,12 @@ const AccountModal = forwardRef((props, ref) => {
                     props.user?.app_metadata?.is_premium ?
                       <li>
                         <div><strong>Subscription</strong></div>
-                        <div><a className={styles['subscription-link']} onClick={handleManageSubscriptionClick}>Manage Subscription</a></div>
+                        <div><button className={styles['subscription-link']} onClick={handleManageSubscriptionClick}>Manage Subscription</button></div>
                       </li>
                       :
                       <li >
                         <div><strong>Subscription</strong></div>
-                        <div ><button className={styles['subscription-link']} onClick={startCheckout}>Buy Premium</button></div>
+                        <div className={styles['buy-premium-btn']} ><button className={styles['subscription-link']} onClick={() => startCheckout(props.user)}><BsStars />Subscribe</button></div>
                       </li>
                   }
                   <a href={`/api/auth/logout`} className={styles.logout}>Logout</a>

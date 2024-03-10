@@ -4,7 +4,6 @@ import styles from "../../styles/Page.module.css";
 import calcStyles from "../../styles/Calculators.module.css";
 
 import LoadingIcon from "../page-construction/LoadingIcon";
-import startCheckout from "../page-construction/StartCheckout";
 // this Sketch function is required to allow client side rendering only as window will not be present server side
 const Sketch = dynamic(() => import("react-p5").then((mod) => mod.default), {
   ssr: false,
@@ -176,14 +175,6 @@ function P5Graph(props) {
         <>
           <br></br>
           <div onClick={userData?.app_metadata?.is_premium ? null : checkPremium} className={styles["p5-container"]}>
-          {noPremium ? (
-              <div className={calcStyles["no-premium-overlay"]}>
-                <h1>You need premium to use this feature</h1>
-                <button onClick={startCheckout}>Buy Premium</button>
-              </div>
-            ) : (
-              <></>
-            )}
             <div className={styles["p5-sketch-details"]}>
               {props.showControls ? (
                 <div className={styles["p5-selection-range"]}>

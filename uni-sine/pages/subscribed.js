@@ -4,6 +4,7 @@ import styles from "../styles/Subscribed.module.css";
 import { useState, useEffect, useRef } from "react";
 import CanvasConfetti from "react-canvas-confetti";
 import { FaExternalLinkAlt } from "react-icons/fa";
+import { sendGTMEvent } from "@next/third-parties/google";
 function Subscribed(props) {
   const confettiRef = useRef(null);
   const confettiStyles = {
@@ -23,6 +24,36 @@ function Subscribed(props) {
       props.user.app_metadata &&
       props.user.app_metadata.is_premium
     ) {
+
+
+      const premiumData = JSON.parse(localStorage.getItem('premiumData'))
+  
+      if(!premiumData.subscribedAfterRedirect) {
+        const premiumDataToSet = {
+          'isAlreadyPremium': props.user?.app_metadata.is_premium,
+          'subscribedAfterRedirect': true
+        };
+    
+        localStorage.setItem('premiumData', JSON.stringify(premiumDataToSet));
+
+        sendGTMEvent({event: 'subscription_purchase',
+        contents: {
+          content_type: "subscription",
+          content_name: "premium",
+          content_id: 1,
+          currency: ((props.user?.app_metadata.region === 'NA' || props.user?.app_metadata.region === 'SA') ? 'USD' : 'GBP'),
+          email: props.user.email,
+          external_id: props.user.user_id,
+          value: ((props.user?.app_metadata.region === 'NA' || props.user?.app_metadata.region === 'SA') ? 15 : 10),
+          event_id: Math.floor(1e9 + Math.random() * 9e9).toString()
+        }
+      
+      
+      })
+      
+      }
+      
+
       if (confettiRef.current) {
         const screenWidth = window.innerWidth;
         const confettiSettings =

@@ -4,7 +4,7 @@ import styles from '../../styles/Page.module.css'
 import calcStyles from "../../styles/Calculators.module.css";
 
 import LoadingIcon from "../page-construction/LoadingIcon";
-import startCheckout from "../page-construction/StartCheckout";
+
 // this Sketch function is required to allow client side rendering only as window will not be present server side
 const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
   ssr: false,

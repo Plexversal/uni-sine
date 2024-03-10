@@ -563,6 +563,21 @@
 
 }
 
+.subscription-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; 
+  background: linear-gradient(90deg, #ff00f399, #a843fc99, #f13c8299, #ff00f399) !important;
+  font-size: 1em;
+  border: 1px solid rgb(248, 4, 138) !important;
+  color: #ffffff !important;
+  transition: all .5s !important;
+}
+.subscription-link:hover {
+  color: black !important;
+}
+
 @media (max-width: 1600px)  {
   .landing-section-content > div > h1 {
     font-size: 3.5em;

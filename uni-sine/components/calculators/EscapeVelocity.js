@@ -1,36 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from '../../styles/Calculators.module.css';
-import LoadingIcon from "../page-construction/LoadingIcon";
-import startCheckout from "../page-construction/StartCheckout";
+
 const EscapeVelocity = (props) => {
-
-  const [userData, setUser] = useState();
-  const [isLoading, setIsLoading] = useState(true);
-  const [noPremium, setNoPremium] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      
-      setIsLoading(true);
-      try {
-        const response = await fetch(`/api/auth0/auth0-user`);
-        const data = await response.json();
-        if (!data) {
-          setIsLoading(false);
-         return;
-
-        }
-        setUser(data);
-
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-  
 
 
     const [coefficient, setCoefficient] = useState("");

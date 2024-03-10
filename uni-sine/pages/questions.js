@@ -132,7 +132,7 @@ export default function Questions({ user }) {
       {!isLoading ? (
         <>
           {noPremium && (
-            <BuyPremiumModal showOverlay={false} ref={buyPremiumModalRef} />
+            <BuyPremiumModal user={user} showOverlay={true}  ref={buyPremiumModalRef} />
           )}
           <div className={styles["content-container"]}>
             <SecondaryBanner

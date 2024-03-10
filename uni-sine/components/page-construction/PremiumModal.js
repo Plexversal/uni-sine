@@ -4,10 +4,11 @@ import styles from '../../styles/UserAccountModal.module.css'; // Reusing your s
 import { GrFormClose } from 'react-icons/gr';
 import startCheckout from './StartCheckout';
 import Link from 'next/link';
+import { BsStars } from "react-icons/bs";
 
 Modal.setAppElement('#__next');
 
-const BuyPremiumModal = forwardRef((showOverlay, ref) => {
+const BuyPremiumModal = forwardRef((props, ref) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
 
@@ -41,7 +42,7 @@ const BuyPremiumModal = forwardRef((showOverlay, ref) => {
           onAfterOpen={handleAfterOpen}
           onRequestClose={closeModal}
           contentLabel="Buy Premium Modal"
-          className={ showOverlay ? `${styles.Modal} ${styles['modal-initial']} ${isOpened ? styles['modal-open'] : ''
+          className={ props.showOverlay ? `${styles.Modal} ${styles['modal-initial']} ${isOpened ? styles['modal-open'] : ''
             }` : null}
           overlayClassName={`${styles.Overlay} ${styles['overlay-initial']} ${isOpened ? styles['overlay-open'] : ''
             }`}
@@ -62,9 +63,13 @@ const BuyPremiumModal = forwardRef((showOverlay, ref) => {
               <li>Access to AI chat</li>
 
             </ul>
-            <Link href='/api/auth/login' className={styles['buy-premium-btn']} onClick={startCheckout}>Login</Link>
+            {
+            !props.user && <Link href='/api/auth/login' onClick={() => startCheckout(props.user)} className={styles['buy-premium-btn']}>Login/sign up</Link>
 
-            <button className={styles['buy-premium-btn']} onClick={startCheckout}>Buy Premium</button>
+            }
+            {
+              props.user && <button className={styles['subscription-link']} onClick={() => startCheckout(props.user)}><BsStars />Subscribe</button>
+            }
 
           </div>
         </Modal>

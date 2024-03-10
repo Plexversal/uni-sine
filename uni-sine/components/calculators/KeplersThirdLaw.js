@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from '../../styles/Calculators.module.css';
-import LoadingIcon from "../page-construction/LoadingIcon";
-import startCheckout from "../page-construction/StartCheckout";
+
 const KeplersThirdLaw = (props) => {
 
   const [option, setOption] = useState('time');
