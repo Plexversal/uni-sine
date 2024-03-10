@@ -5,12 +5,14 @@ import { GrFormClose } from 'react-icons/gr';
 import startCheckout from './StartCheckout';
 import Link from 'next/link';
 import { BsStars } from "react-icons/bs";
+import { useUserContext } from '../../contexts/UserContext';
 
 Modal.setAppElement('#__next');
 
 const BuyPremiumModal = forwardRef((props, ref) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
+  const { user, isLoading } = useUserContext();
 
   const closeModal = () => {
     setIsOpened(false);
@@ -64,11 +66,11 @@ const BuyPremiumModal = forwardRef((props, ref) => {
 
             </ul>
             {
-            !props.user && <Link href='/api/auth/login' onClick={() => startCheckout(props.user)} className={styles['buy-premium-btn']}>Login/sign up</Link>
+            !user && <Link href='/api/auth/login' onClick={() => startCheckout(user)} className={styles['account-btn']}>Login/sign up</Link>
 
             }
             {
-              props.user && <button className={styles['subscription-link']} onClick={() => startCheckout(props.user)}><BsStars />Subscribe</button>
+              user && <button className={styles['subscription-link']} onClick={() => startCheckout(user)}><BsStars />Subscribe</button>
             }
 
           </div>

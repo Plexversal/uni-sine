@@ -3,7 +3,7 @@ import React, { useEffect, useState, } from "react"
 import dynamic from 'next/dynamic'
 import styles from '../../styles/Page.module.css'
 import calcStyles from "../../styles/Calculators.module.css";
-
+import { useUserContext } from '../../contexts/UserContext';
 import LoadingIcon from "../page-construction/LoadingIcon";
 
 // this Sketch function is required to allow client side rendering only as window will not be present server side
@@ -12,31 +12,9 @@ const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
 })
 
 function P5Graph(props) {
-  const [userData, setUser] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+  const { user, isLoading } = useUserContext();
   const [noPremium, setNoPremium] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch(`/api/auth0/auth0-user`);
-        const data = await response.json();
-        if (!data) {
-          setIsLoading(false);
-         return;
-
-        }
-        setUser(data);
-
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
   const checkPremium = () => {
     if(!props.custom) return
     setNoPremium(true);
@@ -190,7 +168,7 @@ function P5Graph(props) {
     p5.resizeCanvas(width, height);
   }
   return (<>{
-    isLoading ? <LoadingIcon /> : <><br></br><div onClick={userData?.app_metadata?.is_premium ? null : checkPremium} className={styles['p5-container']}>
+    isLoading ? <LoadingIcon /> : <><br></br><div onClick={user?.app_metadata?.is_premium ? null : checkPremium} className={styles['p5-container']}>
 
     <div className={styles['p5-sketch-details']}>
       {props.showControls ?     <div className={styles['p5-selection-range']}>

@@ -5,7 +5,10 @@ import LoadingIcon from "../page-construction/LoadingIcon";
 import PreviewAiQuestions from "./PreviewAiQuestions";
 import CodeBlock from "../page-construction/CodeBlock";
 import { trigMedia, graphMedia, compMedia } from "../../lib/mediaCreationLogic";
-function ManageAi({ user }) {
+import { useUserContext } from "../../contexts/UserContext";
+function ManageAi() {
+  const { user } = useUserContext();
+
   const [aiResponse, setAiResponse] = useState(null);
   const [mediaQuestions, setMediaQuestions] = useState({
     easy: [],

@@ -3,11 +3,11 @@ import styles from '../../styles/Nav.module.css'
 import Link from 'next/link'
 import OfferBanner from "./OfferBanner";
 
-function Nav({user, isLoading}) {
+function Nav() {
 
   return (
     <div id={styles.navbar}>
-        <OfferBanner user={user} isLoading={isLoading}/>
+        <OfferBanner />
       <div className={styles['nav-content']}>
         <div className={styles["nav-container"]}>
           <Link href="/">Uni-Sine</Link>

@@ -271,12 +271,11 @@ function WebDevCourse(props) {
     const fetchData = async () => {
       try {
         let response = await fetch(`/api/db/getUserCourseStats?courseName=${encodeURIComponent(props.courseName)}`)
-        if(response.status === 404) {
+        if(response.status !== 200) {
           return setUserCourseData(null)
         } else {
           let data = await response.json()
           setUserCourseData(data)
-         
         }
       } catch (error) {
         setUserCourseData(null)

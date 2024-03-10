@@ -3,7 +3,10 @@ import { withPageAuthRequired } from "@auth0/nextjs-auth0/client";
 import styles from "../../styles/Admin.module.css";
 import PreviewAdminQuestions from "./PreviewAdminQuestions";
 import MathJaxContent from "../page-construction/MathJaxContent";
-function PublishQuestions({ user }) {
+import { useUserContext } from "../../contexts/UserContext";
+function PublishQuestions() {
+
+  const { user, isLoading } = useUserContext();
 
     // Form state
     const [date, setDate] = useState("");

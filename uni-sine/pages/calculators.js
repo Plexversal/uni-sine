@@ -22,12 +22,15 @@ import P5CustomGraph from '../components/p5-interactions/P5CustomGraph'
 
 import LoadingIcon from "../components/page-construction/LoadingIcon"
 import SecondaryBanner from '../components/page-construction/SecondaryBanner'
+import { useUserContext } from "../contexts/UserContext";
 
 const Backdrop = ({ onClick }) => (
   <div className={contentStyles.backdrop} onClick={onClick}></div>
 );
-export default function Calculators({ user }){ 
+export default function Calculators(){ 
 
+  const { user } = useUserContext();
+  
   const [isLoading, setIsLoading] = useState(true);
   const [noPremium, setNoPremium] = useState(true);
   const [searchTerm, setSearchTerm] = useState(''); 

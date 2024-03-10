@@ -6,8 +6,10 @@ import { BiChevronRight, BiCalculator, BiHome, BiMath, BiAtom, BiCodeBlock, BiSu
 import { GrUserSettings } from 'react-icons/gr'
 import FastRead from './FastRead';
 import AccountModal from "./AccountModal";
+import { useUserContext } from '../../contexts/UserContext';
 
-const SidePanel = ({ user }) => {
+const SidePanel = () => {
+    const { user, isLoading, fetchUser } = useUserContext();
     const [isOpen, setIsOpen] = useState(true);
 
     useEffect(() => {

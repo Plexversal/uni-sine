@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import styles from '../../styles/OfferBanner.module.css';
+import { useUserContext } from '../../contexts/UserContext';
+export default function OfferBanner({code, expires}) {
+    const { user, isLoading } = useUserContext();
 
-export default function OfferBanner({code, expires, user, isLoading}) {
     const [closed, setClosed] = useState(true);
     const [banner, setBanner] = useState(null)
 

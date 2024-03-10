@@ -5,8 +5,10 @@ import Link from "next/link";
 import Image from 'next/image'
 import AccountModal from "./AccountModal";
 import OfferBanner from "./OfferBanner";
-const Header = ({ user, isLoading }) => {
+import { useUserContext } from '../../contexts/UserContext';
+const Header = () => {
     const userAccountModalRef = useRef();
+    const { user, isLoading } = useUserContext();
 
     const handleUserAccountButtonClick = () => {
       userAccountModalRef.current.handleButtonClick();

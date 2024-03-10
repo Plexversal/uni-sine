@@ -3,9 +3,16 @@ import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from "@upstash/redis";
 import { NextResponse } from 'next/server';
 
+
 const ratelimit = new Ratelimit({
   redis: Redis.fromEnv(),
-  limiter: Ratelimit.fixedWindow(10, '10s'),
+  limiter: Ratelimit.fixedWindow(5, '10s'),
+  analytics: true
+});
+
+const ratelimitAI = new Ratelimit({
+  redis: Redis.fromEnv(),
+  limiter: Ratelimit.fixedWindow(5, '30s'),
   analytics: true
 });
 
@@ -30,6 +37,23 @@ export default async function middleware(req) {
   }
 
   if (req.nextUrl.pathname.startsWith('/api/chat')) {
+
+    // rate limit check first
+    const ip = req.headers.get('x-forwarded-for') ?? "";
+    const { success, reset } = await ratelimitAI.limit(ip);
+    if (!success) {
+      const retryAfter = Math.ceil((reset - Date.now()) / 1000);
+      return NextResponse.json(
+        { message: "Slow down eager beaver! Too many requests. Try again in a couple of minutes." },
+        {
+          status: 429,
+          headers: {
+            'Retry-After': retryAfter.toString()
+          }
+        }
+      );
+    }
+
     const res = NextResponse.next();
     const session = await getSession(req, res);
     if (!session) return NextResponse.json(

@@ -5,25 +5,27 @@ import PublishQuestions from "../../components/admin/PublishQuestions";
 import ManageAi from "../../components/admin/ManageAi";
 import ManageUsers from "../../components/admin/ManageUsers";
 import Head from "next/head";
+import { useUserContext } from "../../contexts/UserContext";
 
 import { useState, useEffect } from "react";
 
 function Admin(props) {
+  const { user, isLoading } = useUserContext();
   const [activeComponent, setActiveComponent] = useState(null);
 
-  if (!props.user) return <></>;
-  if (!props.user?.app_metadata?.is_admin) return <></>;
+  if (!user) return <></>;
+  if (!user?.app_metadata?.is_admin) return <></>;
 
   const renderComponent = () => {
     switch (activeComponent) {
       case "publishQuestions":
-        return <PublishQuestions user={props.user} />;
+        return <PublishQuestions user={user} />;
       case "manageAi":
-        return <ManageAi user={props.user} />;
+        return <ManageAi user={user} />;
       case "manageUsers":
-        return <ManageUsers user={props.user} />;
+        return <ManageUsers user={user} />;
       case "viewQuestions":
-        return <ManageUsers user={props.user} />; // todo
+        return <ManageUsers user={user} />; // todo
       default:
         return null;
     }

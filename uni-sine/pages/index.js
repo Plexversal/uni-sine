@@ -12,28 +12,12 @@ import startCheckout from '../components/page-construction/StartCheckout'
 import Head from 'next/head'
 import CookieBanner from '../components/page-construction/CookieBanner'
 import { BsStars } from "react-icons/bs";
-
-// import clientPromise from '../lib/connectDb'; 
-
-
-// export async function getStaticProps() {
-//   const client = await clientPromise;
-//   const db = client.db('uni-sine_master_db'); 
-
-//   const bannerData = await db.collection('siteConfig') 
-//       .findOne({ _id: "siteBanner" });
-
-//   return {
-//       props: {
-//           banner: bannerData ? JSON.parse(JSON.stringify(bannerData.data)) : null,
-//       },
-//       revalidate: 60, // Regenerate the page every 60 seconds if there's a request
-//   };
-// }
-
-export default function Home({ user, isLoading, ...props }) {
+import { useUserContext } from '../contexts/UserContext';
 
 
+export default function Home() {
+
+  const { user, isLoading } = useUserContext();
 
   const [faqQuestionsOpen, setFaqQuestionsOpen] = useState([
     false,

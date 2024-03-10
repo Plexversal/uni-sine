@@ -5,15 +5,13 @@ import styles from '../../styles/Layout.module.css'
 import AiChat from "./AiChat";
 import CookieBanner from "./CookieBanner";
 
-
-const Layout = ({user, isLoading, children }) => {
+const Layout = ({ children }) => {
     return (
         <>
-                    <CookieBanner />
-
-            <Nav user={user} isLoading={isLoading}/>
+            <CookieBanner />
+            <Nav />
             <div className={styles.container}>
-                <SidePanel user={user} />
+                <SidePanel />
                 <main className={styles.main}>
                     <div className={styles['content-wrapper']}>{children}</div>
 

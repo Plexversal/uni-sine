@@ -5,7 +5,10 @@ import { useState, useEffect, useRef } from "react";
 import CanvasConfetti from "react-canvas-confetti";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { sendGTMEvent } from "@next/third-parties/google";
+import { useUserContext } from "../contexts/UserContext";
 function Subscribed(props) {
+  const { user, isLoading } = useUserContext();
+
   const confettiRef = useRef(null);
   const confettiStyles = {
     position: "absolute",
@@ -20,9 +23,9 @@ function Subscribed(props) {
   useEffect(() => {
     // Ensure user is subscribed before triggering confetti
     if (
-      props.user &&
-      props.user.app_metadata &&
-      props.user.app_metadata.is_premium
+      user &&
+      user.app_metadata &&
+      user.app_metadata.is_premium
     ) {
 
 
@@ -30,7 +33,7 @@ function Subscribed(props) {
   
       if(!premiumData.subscribedAfterRedirect) {
         const premiumDataToSet = {
-          'isAlreadyPremium': props.user?.app_metadata.is_premium,
+          'isAlreadyPremium': user?.app_metadata.is_premium,
           'subscribedAfterRedirect': true
         };
     
@@ -41,10 +44,10 @@ function Subscribed(props) {
           content_type: "subscription",
           content_name: "premium",
           content_id: 1,
-          currency: ((props.user?.app_metadata.region === 'NA' || props.user?.app_metadata.region === 'SA') ? 'USD' : 'GBP'),
-          email: props.user.email,
-          external_id: props.user.user_id,
-          value: ((props.user?.app_metadata.region === 'NA' || props.user?.app_metadata.region === 'SA') ? 15 : 10),
+          currency: ((user?.app_metadata.region === 'NA' || user?.app_metadata.region === 'SA') ? 'USD' : 'GBP'),
+          email: user.email,
+          external_id: user.user_id,
+          value: ((user?.app_metadata.region === 'NA' || user?.app_metadata.region === 'SA') ? 15 : 10),
           event_id: Math.floor(1e9 + Math.random() * 9e9).toString()
         }
       
@@ -77,11 +80,11 @@ function Subscribed(props) {
         instance.confetti(confettiSettings);
       }
     }
-  }, [props.user]); // Depend on props.user to trigger effect when user state changes
+  }, [user]); // Depend on user to trigger effect when user state changes
 
   // Redirect logic for non-premium or non-logged-in users
-  if (!props.user) return <></>;
-  if (!props.user?.app_metadata?.is_premium) return <></>;
+  if (!user) return <></>;
+  if (!user?.app_metadata?.is_premium) return <></>;
 
   return (
     <div className={styles["subscribed-container"]}>

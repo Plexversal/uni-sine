@@ -1,6 +1,6 @@
 // components/UserAccountModal.js
 import { useRouter } from 'next/router';
-import { useState, forwardRef, useImperativeHandle } from 'react';
+import { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
 import Modal from 'react-modal';
 import styles from '../../styles/UserAccountModal.module.css';
 import { GrFormClose  } from 'react-icons/gr';
@@ -9,6 +9,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { sendGTMEvent } from '@next/third-parties/google'
 import startCheckout from './StartCheckout';
 import { BsStars } from "react-icons/bs";
+import { useUserContext } from '../../contexts/UserContext';
 Modal.setAppElement('#__next');
 
 const AccountModal = forwardRef((props, ref) => {
@@ -17,7 +18,13 @@ const AccountModal = forwardRef((props, ref) => {
   const [isOpened, setIsOpened] = useState(false);
   const [loadingProfile, setLoadingProfile] = useState(true)
   const router = useRouter();
+  const { user, isLoading, fetchUser } = useUserContext();
 
+  useEffect(() => {
+    if(isOpened) {
+      fetchUser()
+    }
+  }, [isOpened])
   const closeModal = () => {
     setIsOpened(false);
     setTimeout(() => {
@@ -31,7 +38,7 @@ const AccountModal = forwardRef((props, ref) => {
   };
 
   const handleButtonClick = async () => {
-    if (!props.user) {
+    if (!user) {
       const currentUrl = window.location.pathname;
       const returnTo = encodeURIComponent(currentUrl);
       router.push(`/api/auth/login?returnTo=${returnTo}`);
@@ -59,14 +66,14 @@ const AccountModal = forwardRef((props, ref) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        stripeCustomerId: props.user?.app_metadata?.stripe_customer_id,
+        stripeCustomerId: user?.app_metadata?.stripe_customer_id,
       }),
     });
     const { url } = await response.json();
     window.location.assign(url);
   }
 
-  if (props.user) {
+  if (user) {
     
 
     const changePassword = async (e) => {
@@ -112,20 +119,20 @@ const AccountModal = forwardRef((props, ref) => {
                 <ul className={styles['account-list']}>
                   <li>
                     <div><strong>Email</strong></div>
-                    <div>{props.user.email}</div>
+                    <div>{user.email}</div>
 
                   </li>
                   <li>
                     <div><strong>Sign in method</strong></div>
-                    <div>{props.user.identities[0].provider}</div>
+                    <div>{user.identities[0].provider}</div>
                   </li>
                   <li>
                     <div><strong>Password</strong></div>
-                    {props.user.identities[0].isSocial ? <div>Change your password on your social account</div> : <a className={`${styles['account-btn']} ${styles['change-password-btn']}`} onClick={changePassword}>Change Password</a>}
+                    {user.identities[0].isSocial ? <div>Change your password on your social account</div> : <a className={`${styles['account-btn']} ${styles['change-password-btn']}`} onClick={changePassword}>Change Password</a>}
                   </li>
 
                   {
-                    props.user?.app_metadata?.is_premium ?
+                    user?.app_metadata?.is_premium ?
                       <li>
                         <div><strong>Subscription</strong></div>
                         <div><button className={styles['subscription-link']} onClick={handleManageSubscriptionClick}>Manage Subscription</button></div>
@@ -133,7 +140,7 @@ const AccountModal = forwardRef((props, ref) => {
                       :
                       <li >
                         <div><strong>Subscription</strong></div>
-                        <div className={styles['buy-premium-btn']} ><button className={styles['subscription-link']} onClick={() => startCheckout(props.user)}><BsStars />Subscribe</button></div>
+                        <div className={styles['buy-premium-btn']} ><button className={styles['subscription-link']} onClick={() => startCheckout(user)}><BsStars />Subscribe</button></div>
                       </li>
                   }
                   <a href={`/api/auth/logout`} className={styles.logout}>Logout</a>
@@ -144,7 +151,7 @@ const AccountModal = forwardRef((props, ref) => {
         </div>
       </>
     )
-  } else if (!props.user) {
+  } else if (!user) {
     return <></>
   }
 });

@@ -6,44 +6,9 @@ import { UserProvider } from "@auth0/nextjs-auth0/client";
 import ErrorBoundary from "../components/page-construction/ErrorBoundary";
 import { Analytics } from "@vercel/analytics/react";
 import { useState, useEffect } from "react";
-import { useUser } from "@auth0/nextjs-auth0/client";
 import { GoogleTagManager } from "@next/third-parties/google";
+import { UserProviderWrapper  } from '../contexts/UserContext'
 
-function UserFetcher({ children }) {
-  const [customUser, setCustomUser] = useState(null);
-  const { user: authUser, isLoading: isAuthLoading } = useUser();
-  const [isFetchingCustomUser, setIsFetchingCustomUser] = useState(true);
-
-  useEffect(() => {
-    // When authUser changes, check its existence to manage custom user fetching
-    if (authUser) {
-      setIsFetchingCustomUser(true); // Indicate custom user fetching starts
-      const fetchData = async () => {
-        try {
-          const response = await fetch(`/api/auth0/auth0-user`);
-          const data = await response.json();
-          setCustomUser(data);
-        } catch (error) {
-          console.error("Error fetching custom user data:", error);
-        } finally {
-          setIsFetchingCustomUser(false); // Indicate custom user fetching ends
-        }
-      };
-      fetchData();
-    } else {
-      // If no authUser, no fetching is required, and custom user data should be cleared
-      setCustomUser(null);
-      setIsFetchingCustomUser(false); // Reset since there's no authUser to fetch data for
-    }
-  }, [authUser]);
-
-  // Combine loading states to control rendering
-  const isLoading = isAuthLoading || isFetchingCustomUser;
-
-  return children({ user: customUser, isLoading });
-}
-
-// component which wraps all the pages
 function MyApp({ Component, pageProps, router }) {
 
   const [loadedConsent, setLoadedConsent] = useState(false)
@@ -121,8 +86,8 @@ function MyApp({ Component, pageProps, router }) {
   return (
     <ErrorBoundary>
       <UserProvider>
-        <UserFetcher>
-          {({ user, isLoading }) => (
+        <UserProviderWrapper>
+          
             <>
               <Head>
                 <title>
@@ -131,18 +96,18 @@ function MyApp({ Component, pageProps, router }) {
               </Head>
               {router.pathname === "/" ? (
                 <>
-                  <Component {...pageProps} user={user} isLoading={isLoading} />
+                  <Component {...pageProps}/>
                   <Analytics />
                   {loadedConsent &&  <GoogleTagManager gtmId="GTM-M45ZZ7PH" />}
                   <Footer />
                 </>
               ) : (
-                <Layout user={user} isLoading={isLoading}>
+                <Layout >
                   <ErrorBoundary>
                     <Component
                       {...pageProps}
-                      user={user}
-                      isLoading={isLoading}
+
+                      
                     />
                     <Analytics />
                     {loadedConsent &&  <GoogleTagManager gtmId="GTM-M45ZZ7PH" />}
@@ -150,8 +115,8 @@ function MyApp({ Component, pageProps, router }) {
                 </Layout>
               )}
             </>
-          )}
-        </UserFetcher>
+          
+        </UserProviderWrapper>
       </UserProvider>
     </ErrorBoundary>
   );

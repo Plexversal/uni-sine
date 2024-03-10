@@ -4,7 +4,7 @@ import styles from '../../styles/Page.module.css'
 import calcStyles from "../../styles/Calculators.module.css";
 
 import LoadingIcon from "../page-construction/LoadingIcon";
-
+import { useUserContext } from "../../contexts/UserContext";
 // this Sketch function is required to allow client side rendering only as window will not be present server side
 const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
   ssr: false,
@@ -12,32 +12,11 @@ const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
 
 
 function P5Trig(props) {
-  const [userData, setUser] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+  const { user, isLoading } = useUserContext();
+
   const [noPremium, setNoPremium] = useState(false);
   const [showOptions, setShowOptions] = useState(false)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await fetch(`/api/auth0/auth0-user`);
-        const data = await response.json();
-        if (!data) {
-          setIsLoading(false);
-         return;
-
-        }
-        setUser(data);
-
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
   const checkPremium = () => {
     if(!props.custom) return
     setNoPremium(true);
@@ -331,7 +310,7 @@ p5.text(`Area: ${parseFloat(0.5 * a * b * Math.sin(C)).toFixed(2)}`, 20, -(heigh
           {showOptions ?           
           <div className={styles['p5-options']} style={{ width: width }}>
             <div className={styles['misc-options']}>
-              <button className={styles['button-input']} id='randomise-btn' type="button" name="randomise" onClick={userData?.app_metadata?.is_premium ? randomise : null}>Random Problem</button>
+              <button className={styles['button-input']} id='randomise-btn' type="button" name="randomise" onClick={user?.app_metadata?.is_premium ? randomise : null}>Random Problem</button>
               <div className={styles['checkbox-container']}>
                 <div>Degrees</div>
                 <div>

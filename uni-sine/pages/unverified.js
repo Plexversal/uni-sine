@@ -4,10 +4,11 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { useEffect, useState } from 'react';
 import styles from '../styles/Page.module.css'
+import { useUserContext } from '../contexts/UserContext';
+export default function Unverified() {
 
-export default function Unverified({user}) {
+  const { user, isLoading } = useUserContext();
 
-  const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
     
     if (user) {

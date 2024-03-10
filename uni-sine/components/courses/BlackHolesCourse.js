@@ -190,11 +190,11 @@ export default function BlackHoleCourse(props) {
             props.courseName
           )}`
         );
-        if (response.status === 404) {
-          return setUserCourseData(null);
+        if(response.status !== 200) {
+          return setUserCourseData(null)
         } else {
-          let data = await response.json();
-          setUserCourseData(data);
+          let data = await response.json()
+          setUserCourseData(data)
         }
       } catch (error) {
         setUserCourseData(null);

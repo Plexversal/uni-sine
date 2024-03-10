@@ -9,16 +9,18 @@ import BuyPremiumModal from "../components/page-construction/PremiumModal";
 import LoadingIcon from "../components/page-construction/LoadingIcon";
 import PercentIcon from "../components/page-construction/PercentageIcon";
 import Head from "next/head";
+import { useUserContext } from "../contexts/UserContext";
 
 const Backdrop = ({ onClick }) => (
   <div className={contentStyles.backdrop} onClick={onClick}></div>
 );
-export default function Questions({ user }) {
+export default function Questions() {
+  const { user, isLoading } = useUserContext();
+
   const [noPremium, setNoPremium] = useState(false);
   const buyPremiumModalRef = useRef();
   const [searchTerm, setSearchTerm] = useState("");
   const [openCalculator, setOpenCalculator] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [isStatsLoading, setIsStatsLoading] = useState(false);
 
   const [questionData, setQuestionData] = useState(null);
