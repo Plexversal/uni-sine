@@ -42,7 +42,7 @@ export const welcomeEmail = `<!DOCTYPE html>
 
             <div class="email-body">
                 <p>Thank you for subscribing to Uni-Sine Premium. You now have full access to all our premium features!</p>
-                <img src="https://www.uni-sine.com/static/home/courses.gif" alt="Welcome Image" style="max-width: 350px; height: auto;">
+                <img src="https://www.uni-sine.com/static/socials/800500_home.png" alt="Welcome Image" style="max-width: 400px; height: auto;">
 
                 <p>Check out all the features you have access to at <a href='https://uni-sine.com'>uni-sine.com</a></p>
             </div>

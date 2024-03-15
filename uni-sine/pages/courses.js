@@ -293,10 +293,9 @@ export default function Courses() {
                     (bottom right)
                   </p>
                 </div>
-                <img
-                  className={styles["description-gif"]}
-                  src="/static/home/courses.gif"
-                />
+                <video className={styles['video-preview']} autoPlay loop muted controls={false} preload="auto">
+            <source src='/static/home/courses-preview.webm' type="video/webm" />
+          </video>
               </div>
               <div className={styles["course-container"]}>
                 {Object.keys(modalMap)

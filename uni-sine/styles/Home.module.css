@@ -235,10 +235,11 @@
   gap: 50px;
 }
 
-.info-bubble img {
+.info-bubble img,
+.video-preview {
   filter: drop-shadow(16px 19px 16px rgba(0, 0, 0, 0.151));
   border-radius: 30px;
-  width: 350px;
+  width: 300px;
 
 }
 .info-bubble-img-no-style {

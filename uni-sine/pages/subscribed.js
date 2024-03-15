@@ -92,26 +92,36 @@ function Subscribed(props) {
       <h1 className={styles["premium-color"]}>Uni-Sine Premium</h1>
       <CanvasConfetti ref={confettiRef} style={confettiStyles} />
       <p>Explore all that we have to offer</p>
-
+  
       <div className={styles["premium-links"]}>
-        <div
-          className={`${styles["link-container"]} ${styles["link-questions"]}`}
-        >
-          <Link href="/questions">Questions <FaExternalLinkAlt /></Link>
+        <div className={`${styles["link-container"]} ${styles["link-questions"]}`}>
+          <Link href="/questions">
+          <video className={styles['video-preview']} autoPlay loop muted controls={false} preload="auto">
+            <source src='/static/home/questions-preview.webm' type="video/webm" />
+          </video>
+            <span>Questions <FaExternalLinkAlt /></span>
+          </Link>
         </div>
-        <div
-          className={`${styles["link-container"]} ${styles["link-calculators"]}`}
-        >
-          <Link href="/calculators">Calculators <FaExternalLinkAlt /></Link>
+        <div className={`${styles["link-container"]} ${styles["link-courses"]}`}>
+          <Link href="/courses">
+          <video className={styles['video-preview']} autoPlay loop muted controls={false} preload="auto">
+            <source src='/static/home/courses-preview.webm' type="video/webm" />
+          </video>
+            <span>Courses <FaExternalLinkAlt /></span>
+          </Link>
         </div>
-        <div
-          className={`${styles["link-container"]} ${styles["link-courses"]}`}
-        >
-          <Link href="/courses">Courses <FaExternalLinkAlt /></Link>
+        <div className={`${styles["link-container"]} ${styles["link-calculators"]}`}>
+          <Link href="/calculators">
+          <video className={styles['video-preview']} autoPlay loop muted controls={false} preload="auto">
+            <source src='/static/home/calculators-preview.webm' type="video/webm" />
+          </video>
+            <span>Calculators <FaExternalLinkAlt /></span>
+          </Link>
         </div>
       </div>
     </div>
   );
+  
 }
 
 export default withPageAuthRequired(Subscribed);

@@ -20,16 +20,10 @@
 }
 
 .link-container {
-    width: 300px;
-    height: 300px;
-    /* 200px for the image + 20px for the text section */
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    /* Aligns the text section to the bottom */
-
     background-size: cover;
-    /* Cover the 200x200 area with the background */
     background-repeat: no-repeat;
     border-radius: 10px;
     border: 3px solid rgb(95, 94, 94);
@@ -63,40 +57,34 @@
     background-color: rgba(34, 33, 33, 0.911);
     /* Solid background for the block */
     text-align: center;
-    padding: 15px 0;
     text-decoration: none;
     font-weight: 500;
     font-size: 1.3em;
     color: rgb(238, 238, 238);
     /* Initial text color */
     transition: all ease 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.link-container a > span {
     display: inline-flex;
+    text-align: center;
     align-items: center;
     justify-content: center;
     gap: 8px;
+    margin: 10px 0;
 }
-
 .link-container a:hover {
-    transform: scale(1.1);
     color: rgb(187, 187, 187);
 }
 
+.video-preview {
+    width: 300px;
+  }
 
 
-.link-questions {
-    background-image: url('/static/home/questions.gif');
-    /* Replace with your image path */
-}
-
-.link-courses {
-    background-image: url('/static/home/courses.gif');
-    /* Replace with your image path */
-}
-
-.link-calculators {
-    background-image: url('/static/home/unique-questions.gif');
-    /* Replace with your image path */
-}
 
 @media screen and (max-width: 1400px) {
 

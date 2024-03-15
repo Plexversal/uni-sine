@@ -119,8 +119,10 @@
     margin-bottom: 4em;
 }
 
-.example-info img {
+.video-preview {
     width: 300px;
+    filter: drop-shadow(16px 19px 16px rgba(0, 0, 0, 0.151));
+    border-radius: 12px;
 }
 
 .example-info > div {
@@ -374,9 +376,7 @@
 
 .description-gif {
 
-    filter: drop-shadow(16px 19px 16px rgba(0, 0, 0, 0.151));
-    border-radius: 12px;
-    width: 125px;
+
 
 }
 

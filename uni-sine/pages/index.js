@@ -206,7 +206,9 @@ export default function Home() {
 
         <section className={styles['info-bubbles-section']}>
         <div className={styles['info-bubble']}>
-            <img src='/static/home/ai.gif' />
+            <video className={styles['video-preview']} autoPlay loop muted controls={false} preload="auto">
+              <source src='/static/home/ai-preview.webm' type="video/webm" />
+            </video>
             <div>
               <h1>Advanced AI Integration</h1>
               <p>Use the power of AI, built with GPT-4, to help advance your knowledge and reword content that is preferrable to your reading style.</p>
@@ -226,7 +228,9 @@ export default function Home() {
 
           </div>
           <div className={styles['info-bubble']}>
-          <img src='/static/home/questions.gif' />
+          <video className={styles['video-preview']} autoPlay loop muted controls={false} preload="auto">
+            <source src='/static/home/questions-preview.webm' type="video/webm" />
+          </video>
 
             <div>
               <h1>Unique Practice questions</h1>
@@ -245,7 +249,9 @@ export default function Home() {
               <Link href={'/calculators'} className={styles['link-page-btn']}>Calculators</Link>
 
             </div>
-            <img src='/static/home/interactive-comps.gif' />
+            <video className={styles['video-preview']} autoPlay loop muted controls={false} preload="auto">
+              <source src='/static/home/calculators-preview.webm' type="video/webm" />
+          </video>
 
           </div>
 
@@ -293,7 +299,7 @@ export default function Home() {
                   user != null ? <h2>{(user?.app_metadata?.region == 'NA' || user?.app_metadata?.region == 'SA') ? '$' : '£' } Custom</h2> : <h2>£ Custom</h2>
                 }
                 <p>For education institutions looking to get access for multiple students.</p>
-                <p>We are want everyone to have the best access to education and are happy to work with schools and colleges to give all students a valid subscription at a discounted price.</p>
+                <p>We want everyone to have the best access to education and are happy to work with schools and colleges to give all students a valid subscription at a discounted price.</p>
               </div>
               <Link href={'/contact'}>Contact</Link>
             </div>

@@ -147,7 +147,9 @@ function freeCheck(calculator) {
                 You can also use the <strong>AI chat</strong> at the bottom right for programming help or other difficult problems.
                 </p>
               </div>
-              <img className={styles['description-gif']} src="/static/home/interactive-comps.gif" />
+              <video className={styles['video-preview']} autoPlay loop muted controls={false} preload="auto">
+                <source src='/static/home/calculators-preview.webm' type="video/webm" />
+              </video>
             </div>
             <div className={styles['calculator-category-container']}>
             <div className={styles['calculator-category']}>

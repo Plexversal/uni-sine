@@ -156,10 +156,9 @@ export default function Questions() {
                     questions.
                   </p>
                 </div>
-                <img
-                  className={styles["description-gif"]}
-                  src="/static/home/questions.gif"
-                />
+                <video className={styles['video-preview']} autoPlay loop muted controls={false} preload="auto">
+                  <source src='/static/home/questions-preview.webm' type="video/webm" />
+                </video>
               </div>
               <div className={styles["btn-wrapper"]}>
                 {Object.keys(calculatorsMap)
