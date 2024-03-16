@@ -30,6 +30,8 @@ export default function Questions() {
   const offset = ((100 - percent) / 100) * circumference;
   useEffect(() => {
     const fetchData = async () => {
+
+      if(openCalculator) return; // stop reloading stats on modal open
       setIsStatsLoading(true);
 
       try {
@@ -83,11 +85,9 @@ export default function Questions() {
   }, [noPremium]);
 
   const handleOpenCalculator = (calculatorName) => {
-    if (noPremium) {
-      buyPremiumModalRef.current.openModal();
-    } else {
+
       setOpenCalculator(calculatorName);
-    }
+    
   };
 
   const handleCloseCalculator = () => {
@@ -156,8 +156,10 @@ export default function Questions() {
                     questions.
                   </p>
                 </div>
-                <video className={styles['video-preview']} autoPlay loop muted controls={false} preload="auto">
+                <video className={styles['video-preview']} playsInline autoPlay loop muted controls={false} preload="auto">
                   <source src='/static/home/questions-preview.webm' type="video/webm" />
+                  <source src='/static/home/questions-preview.mp4' type="video/mp4" />
+
                 </video>
               </div>
               <div className={styles["btn-wrapper"]}>

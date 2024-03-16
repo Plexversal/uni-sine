@@ -96,24 +96,30 @@ function Subscribed(props) {
       <div className={styles["premium-links"]}>
         <div className={`${styles["link-container"]} ${styles["link-questions"]}`}>
           <Link href="/questions">
-          <video className={styles['video-preview']} autoPlay loop muted controls={false} preload="auto">
+          <video className={styles['video-preview']} playsInline autoPlay loop muted controls={false} preload="auto">
             <source src='/static/home/questions-preview.webm' type="video/webm" />
+            <source src='/static/home/questions-preview.mp4' type="video/mp4" />
+
           </video>
             <span>Questions <FaExternalLinkAlt /></span>
           </Link>
         </div>
         <div className={`${styles["link-container"]} ${styles["link-courses"]}`}>
           <Link href="/courses">
-          <video className={styles['video-preview']} autoPlay loop muted controls={false} preload="auto">
+          <video className={styles['video-preview']} playsInline autoPlay loop muted controls={false} preload="auto">
             <source src='/static/home/courses-preview.webm' type="video/webm" />
+            <source src='/static/home/courses-preview.mp4' type="video/mp4" />
+
           </video>
             <span>Courses <FaExternalLinkAlt /></span>
           </Link>
         </div>
         <div className={`${styles["link-container"]} ${styles["link-calculators"]}`}>
           <Link href="/calculators">
-          <video className={styles['video-preview']} autoPlay loop muted controls={false} preload="auto">
+          <video className={styles['video-preview']} playsInline autoPlay loop muted controls={false} preload="auto">
             <source src='/static/home/calculators-preview.webm' type="video/webm" />
+            <source src='/static/home/calculators-preview.mp4' type="video/mp4" />
+
           </video>
             <span>Calculators <FaExternalLinkAlt /></span>
           </Link>

@@ -83,6 +83,40 @@ function MyApp({ Component, pageProps, router }) {
     }
   }, []);
 
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e) => {
+      // Prevent the mini-infobar from appearing on mobile
+      e.preventDefault();
+      // Save the event so it can be triggered later.
+      setDeferredPrompt(e);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+
+    // Show the install prompt
+    deferredPrompt.prompt();
+    // Wait for the user to respond to the prompt
+    const { outcome } = await deferredPrompt.userChoice;
+
+    if (outcome === 'accepted') {
+      console.log('User accepted the install prompt');
+    } else {
+      console.log('User dismissed the install prompt');
+    }
+
+    setDeferredPrompt(null);
+  };
+
   return (
     <ErrorBoundary>
       <UserProvider>
@@ -99,6 +133,9 @@ function MyApp({ Component, pageProps, router }) {
                   <Component {...pageProps}/>
                   <Analytics />
                   {loadedConsent &&  <GoogleTagManager gtmId="GTM-M45ZZ7PH" />}
+                  <div>
+      {deferredPrompt && <button onClick={handleInstallClick}>Install App</button>}
+    </div>
                   <Footer />
                 </>
               ) : (

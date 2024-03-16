@@ -10,9 +10,16 @@ import Timer from "../page-construction/Timer";
 import MathJaxContent from "../page-construction/MathJaxContent";
 import PercentIcon from "../page-construction/PercentageIcon";
 import CodeBlock from '../page-construction/CodeBlock'
+import { useUserContext } from "../../contexts/UserContext";
+import { useRouter } from 'next/router';
+import BuyPremiumModal from "../page-construction/PremiumModal";
 
-const MathQuestions = (props) => {
+
+
+const QuestionsModal = (props) => {
   const confettiRef = useRef(null);
+  const { user } = useUserContext();
+  const router = useRouter();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [questionSize, setQuestionSize] = useState(0);
   const [questionData, setQuestionData] = useState();
@@ -30,7 +37,8 @@ const MathQuestions = (props) => {
   const radius = 18;
   const circumference = 2 * Math.PI * radius;
   const offset = ((100 - percent) / 100) * circumference;
-
+  const [noPremium, setNoPremium] = useState(false);
+  const buyPremiumModalRef = useRef();
   const confettiStyles = {
     position: "absolute",
     top: 0,
@@ -114,13 +122,17 @@ const MathQuestions = (props) => {
           fetch(`/api/db/getQuestionData?subject=${props.topic}Questions`),
         ]);
         if (!questionDataResponse.value.ok) {
-          const questionData = await questionDataResponse.value.json();
+          if(questionDataResponse.value.status === 401) {
+            router.push('/api/auth/login');
+            return handleClose()
+          } else {
+            alert(
+              "There was an error fetching the questions, please try again later"
+            );
+            return handleClose();
 
-          alert(
-            "There was an error fetching the questions, please try again later"
-          );
-          handleClose();
-          throw new Error("Network response was not ok");
+          }
+
         }
         const questionData = await questionDataResponse.value.json();
 
@@ -168,6 +180,15 @@ const MathQuestions = (props) => {
 
   const handleNextButton = (e) => {
     if (activeNavigation) return;
+
+    if(!user) return
+    if(!user.app_metadata.is_premium){
+
+      return buyPremiumModalRef.current.openModal();
+
+    }
+
+
     const answersDiv = document.getElementById("questions-answer-list");
     // if(!document.querySelector('input[type="radio"]:checked')) return
 
@@ -359,6 +380,8 @@ const MathQuestions = (props) => {
       ) : (
         <div className={styles["container"]}>
           <>
+          <BuyPremiumModal user={user} showOverlay={true}  ref={buyPremiumModalRef} />
+
             <div className={`${styles["calculator-content-container"]}`}>
               {showEndScreen === false && showReportScreen === false ? (
                 <>
@@ -734,4 +757,4 @@ const MathQuestions = (props) => {
   );
 };
 
-export default MathQuestions;
+export default QuestionsModal;

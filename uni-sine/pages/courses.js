@@ -293,9 +293,11 @@ export default function Courses() {
                     (bottom right)
                   </p>
                 </div>
-                <video className={styles['video-preview']} autoPlay loop muted controls={false} preload="auto">
-            <source src='/static/home/courses-preview.webm' type="video/webm" />
-          </video>
+                <video className={styles['video-preview']} playsInline autoPlay loop muted controls={false} preload="auto">
+                  <source src='/static/home/courses-preview.webm' type="video/webm" />
+                  <source src='/static/home/courses-preview.mp4' type="video/mp4" />
+                  
+                </video>
               </div>
               <div className={styles["course-container"]}>
                 {Object.keys(modalMap)

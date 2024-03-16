@@ -206,8 +206,9 @@ export default function Home() {
 
         <section className={styles['info-bubbles-section']}>
         <div className={styles['info-bubble']}>
-            <video className={styles['video-preview']} autoPlay loop muted controls={false} preload="auto">
+            <video className={styles['video-preview']} playsInline autoPlay loop muted controls={false} preload="auto">
               <source src='/static/home/ai-preview.webm' type="video/webm" />
+              <source src='/static/home/ai-preview.mp4' type="video/mp4" />
             </video>
             <div>
               <h1>Advanced AI Integration</h1>
@@ -228,8 +229,10 @@ export default function Home() {
 
           </div>
           <div className={styles['info-bubble']}>
-          <video className={styles['video-preview']} autoPlay loop muted controls={false} preload="auto">
+          <video className={styles['video-preview']} playsInline autoPlay loop muted controls={false} preload="auto">
             <source src='/static/home/questions-preview.webm' type="video/webm" />
+            <source src='/static/home/questions-preview.mp4' type="video/mp4" />
+
           </video>
 
             <div>
@@ -249,8 +252,10 @@ export default function Home() {
               <Link href={'/calculators'} className={styles['link-page-btn']}>Calculators</Link>
 
             </div>
-            <video className={styles['video-preview']} autoPlay loop muted controls={false} preload="auto">
+            <video className={styles['video-preview']} playsInline autoPlay loop muted controls={false} preload="auto">
               <source src='/static/home/calculators-preview.webm' type="video/webm" />
+              <source src='/static/home/calculators-preview.mp4' type="video/mp4" />
+
           </video>
 
           </div>
