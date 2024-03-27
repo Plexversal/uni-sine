@@ -136,7 +136,6 @@
     transform: translate(-50%, -50%) scale(0);
     transition: transform 1s;
     z-index: 5;
-    padding: 20px;
     overscroll-behavior: contain;
 }
 
