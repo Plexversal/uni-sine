@@ -315,12 +315,13 @@ function manipulate() {
     return text;
 }
 manipulate()`, // insert word
-`let text = "${variable}";
+`let number = ${variable};
 
 function manipulate() {
-    return text.split("").map((char, i) => i % 2 === 0 ? char.toLowerCase() : char.toUpperCase()).join("");
+    return number.toString(2);
 }
-manipulate()`, // alternate case
+manipulate()`,  // convert to binary
+
 `let text = "${variable}";
 
 function manipulate() {
@@ -367,12 +368,12 @@ function manipulate() {
 }
 manipulate()`,  // square the number
 
-`let number = ${variable};
+`let text = "${variable}";
 
 function manipulate() {
-    return number.toString(2);
+    return text.split("").map((char, i) => i % 2 === 0 ? char.toLowerCase() : char.toUpperCase()).join("");
 }
-manipulate()`,  // convert to binary
+manipulate()`, // alternate case
 
 `let number = ${variable};
 

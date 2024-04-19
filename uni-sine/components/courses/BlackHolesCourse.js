@@ -211,7 +211,7 @@ export default function BlackHoleCourse(props) {
     <>
       {props.currentSection == 0 ? (
         <div>
-          <div>
+          <div className={styles['course-description']}>
             <h2>Introduction to Black Holes</h2>
             <p>
               Black holes are extraordinary cosmic objects that are formed from

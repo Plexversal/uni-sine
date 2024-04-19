@@ -49,6 +49,7 @@ export default withApiAuthRequired(async function handler(req, res) {
         if(req.query.topic == `math`) {
 
                 const randomTopicSelection = mathSubtopic.sort(() => 0.5 - Math.random()).slice(0, 7).join(', ');
+                console.log(`topics selected: ${randomTopicSelection}`)
         
                 let level = 'A-level'
                 let example = `The equation of a curve is (x+y)^2 = 4y + 2x + 8. Find the equation of the normal to the curve at P, giving your answer in the form ax + by = c , where a, b and c are integers.`
@@ -84,9 +85,11 @@ export default withApiAuthRequired(async function handler(req, res) {
         } else if(req.query.topic == `physics`) {
 
           const randomTopicSelection = physicsSubtopic.sort(() => 0.5 - Math.random()).slice(0, 10).join(', ');
+          console.log(`topics selected: ${randomTopicSelection}`)
+
   
           let level = 'A-level'
-          let example = `High-energy electrons with a de brogile wavelength of 3.00 fm are diffraacted by a carbon-12 nucleus (radius = 2.7 * 10^-15m). Estimaste the angle at which the first minimum appears on the electron beam's diffraction pattern.`
+          let example = `High-energy electrons with a de brogile wavelength of 3.00 fm are diffraacted by a carbon-12 nucleus (radius = 2.7 * 10^-15m). Estimate the angle at which the first minimum appears on the electron beam's diffraction pattern.`
 
           const openai = new OpenAI({
               apiKey: process.env.OPENAI_API_KEY,
@@ -95,7 +98,7 @@ export default withApiAuthRequired(async function handler(req, res) {
           const chatCompletion = await openai.chat.completions.create({
               messages: [
                   { role: "system", content: "You are a programming assistant with the sole purpose to output question data for a database and provide no other context, your responses should be in json only without new lines or additional spaces in the json response" },
-                  { role: "user", content: `Create 4 easy, 4 medium and 2 hard ${req.query.topic} questions for a total of 10 questions. Based on the following topics ${randomTopicSelection}, meaning one question per topic, that would be suitable for ${level} students. An example question would be: ${example}. Its important to Make the questions vary with some questions requiring mathematical ability to work out. Produce the answer in text, 3 wrong answers and 1 correct answer. Each question should include supporting media in Latex format for MathJax. All answers that are equation based should use MathJax type formatting to be parsed by MathJax library. Do not include any new line characters in the response such as ("\\n") or excessive spacing.` }
+                  { role: "user", content: `Create 3 easy, 4 medium and 3 hard ${req.query.topic} questions for a total of 7 questions. Based on the following topics ${randomTopicSelection}, meaning one question per topic, that would be suitable for ${level} students. Questions must require the student to use math to work out and should not be generic. An example question would be: ${example}. Do not reuse the example. Produce the answer in text, 3 wrong answers and 1 correct answer. Each question should include supporting media in Latex format for MathJax library. All answers that are equation based should use MathJax type formatting to be parsed by MathJax library. Do not include any new line characters in the response such as ("\\n") or excessive spacing. Ensure the json complies with parsing, making sure equation backslahes are double. You MUST stick to the schema, do not add key names or modify the object structure.`  }
               ],
               model: "gpt-4",
               temperature: 0.3,
@@ -119,6 +122,7 @@ export default withApiAuthRequired(async function handler(req, res) {
         } else if(req.query.topic == `comp`) {
 
           const randomTopicSelection = compSubtopic.sort(() => 0.5 - Math.random()).slice(0, 8).join(', ');
+          console.log(`topics selected: ${randomTopicSelection}`)
   
           let level = 'A-level'
           let example = `If the execution of an asynchronous function takes 30 seconds to return a response, how long will it take for subsequent code to execute?`
@@ -130,7 +134,7 @@ export default withApiAuthRequired(async function handler(req, res) {
           const chatCompletion = await openai.chat.completions.create({
               messages: [
                   { role: "system", content: "You are a programming assistant with the sole purpose to output question data for a database and provide no other context, your responses should be in json only without new lines or additional spaces in the json response" },
-                  { role: "user", content: `Create 3 easy, 3 medium and 2 hard ${req.query.topic} questions for a total of 8 questions. Do not add or modify key names only the content based on the following topics ${randomTopicSelection}, do not reuse a topic provided each question must be unique, it should be suitable for ${level} students. An example question would be: ${example}. Produce the answer in text, 3 wrong answers and 1 correct answer. All answers that are equation based should use MathJax type formatting to be parsed by MathJax library. Do not include any new line characters in the response such as ("\\n") or excessive spacing.` }
+                  { role: "user", content: `Create 3 easy, 3 medium and 2 hard ${req.query.topic} questions for a total of 8 questions. Based on the following topics ${randomTopicSelection}, meaning one question per topic, that would be suitable for ${level} students. About half the questions should require the student to use math to work out and should not be generic. An example question would be: ${example}. Do not reuse the example. Produce the answer in text, 3 wrong answers and 1 correct answer. Each question should include supporting media in Latex format for MathJax library. All answers that are equation based should use MathJax type formatting to be parsed by MathJax library. Do not include any new line characters in the response such as ("\\n") or excessive spacing. Ensure the json complies with parsing, making sure equation backslahes are double. You MUST stick to the schema, do not add key names or modify the object structure.` }
               ],
               model: "gpt-4",
               temperature: 0.4,

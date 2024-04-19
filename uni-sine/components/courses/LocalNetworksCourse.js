@@ -193,7 +193,7 @@ export default function NuclearEnergyCourse (props) {
     <>
       {props.currentSection == 0 ? (
         <div>
-          <div>
+          <div className={styles['course-description']}>
             <h2>Introduction to Local Networks</h2>
             <p>
             Local networking, the bedrock of daily communication and data exchange within a confined geographical area, is an intricate tapestry of devices, protocols, and connectivity methods woven together to form the backbone of modern computing. At its core, it involves a constellation of devices such as routers, switches, and access points, which facilitate the flow of data. By employing a variety of protocols like TCP/IP for communication, DHCP for dynamic IP address allocation, and VLANs for network segmentation, local networks create a structured and efficient system for data traffic management. These networks are typically characterized by high-speed connections and lower latency compared to wide area networks (WANs), making them ideal for organizational use where devices are in close proximity.

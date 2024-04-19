@@ -39,6 +39,7 @@ const QuestionsModal = (props) => {
   const offset = ((100 - percent) / 100) * circumference;
   const [noPremium, setNoPremium] = useState(false);
   const buyPremiumModalRef = useRef();
+  const timerRef = useRef();
   const confettiStyles = {
     position: "absolute",
     top: 0,
@@ -180,6 +181,7 @@ const QuestionsModal = (props) => {
 
   const handleNextButton = (e) => {
     if (activeNavigation) return;
+    handleSnapshot()
 
     if(!user) return
     if(!user.app_metadata.is_premium){
@@ -297,6 +299,7 @@ const QuestionsModal = (props) => {
         setShowCorrectAnswer(null);
 
         if (currentQuestion === questionSize - 1) {
+          handleSnapshot()
           setShowEndScreen(true);
         } else {
           setCurrentQuestion(currentQuestion + 1);
@@ -308,6 +311,7 @@ const QuestionsModal = (props) => {
       setTimeout(() => {
         setShowCorrectAnswer(null);
         if (currentQuestion === questionSize - 1) {
+          handleSnapshot()
           setShowEndScreen(true);
         } else {
           setCurrentQuestion(currentQuestion + 1);
@@ -373,6 +377,10 @@ const QuestionsModal = (props) => {
     setCurrentQuestion(0);
     setShowEndScreen(false);
   };
+  const handleSnapshot = () => {
+
+    setTimeValue(timerRef.current.getFormattedTime())
+  };
   return (
     <>
       {isLoading ? (
@@ -406,7 +414,8 @@ const QuestionsModal = (props) => {
                       </span>
                     </p>
                     <p>
-                    <strong><Timer /></strong>
+                    <strong><Timer ref={timerRef}/></strong>
+                    
                     </p>
                   </div>
                   <div className={`${styles["questions-body-container"]} ${questionData[difficulty][index].answerType == 'text' ? styles["text-based-question"] : ``}`}>
@@ -672,6 +681,8 @@ const QuestionsModal = (props) => {
                       </p>
                     </div>
                   </div>
+                  
+
                   {questionsAnswered.length > 0 && (
                     <button
                       onClick={() => {
@@ -713,6 +724,7 @@ const QuestionsModal = (props) => {
                       </div>
                     </div>
                   )}
+                  <p className={styles["come-back"]}><i>Come back tomorrow for new questions</i></p>
                   <div className={styles["questions-bottom"]}>
                     <button onClick={handleClose}>Close</button>
                     <button onClick={handleRestart}>Start Again</button>

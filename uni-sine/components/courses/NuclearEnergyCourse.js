@@ -193,7 +193,7 @@ export default function NuclearEnergyCourse (props) {
     <>
       {props.currentSection == 0 ? (
         <div>
-          <div>
+          <div className={styles['course-description']}>
             <h2>Introduction to Nuclear Energy</h2>
             <p>
             Nuclear energy represents one of the most concentrated forms of energy available, produced through the processes of nuclear fission or fusion. In nuclear fission, the nucleus of an atom is split into smaller parts, usually as a result of absorbing a neutron. This splitting releases a significant amount of energy, primarily in the form of heat, which can be harnessed to produce steam that drives turbines to generate electricity. The most common element used in fission reactors is uranium, which is relatively abundant and can release large amounts of energy due to its heavy and unstable nucleus. Nuclear power plants utilize this process in a controlled environment, ensuring a steady and reliable source of electricity while emitting no greenhouse gases during operation.

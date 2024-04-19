@@ -302,7 +302,7 @@ function WebDevCourse(props) {
     <>
       {props.currentSection == 0 ? (
         <div>
-          <div>
+          <div className={styles['course-description']}>
             <h2>Introduction to Web Development</h2>
             <p>
               Web development is the practice of building and maintaining

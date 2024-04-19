@@ -147,8 +147,7 @@ export default function Questions() {
                 <div>
                   <h2>A new way to revise...</h2>
                   <p>
-                    Scrap revising old exam papers. Learn with generative AI
-                    exam grade questions that refresh <strong>daily!</strong>
+                    Scrap revising old exam papers. Learn with <strong>exam style</strong> questions that refresh <strong>daily!</strong>
                   </p>
                   <p>
                     Question difficulty ranges from GCSE to A-level to

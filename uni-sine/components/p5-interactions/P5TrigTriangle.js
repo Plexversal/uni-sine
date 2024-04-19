@@ -14,15 +14,12 @@ const Sketch = dynamic(() => import('react-p5').then((mod) => mod.default), {
 function P5Trig(props) {
   const { user, isLoading } = useUserContext();
 
-  const [noPremium, setNoPremium] = useState(false);
   const [showOptions, setShowOptions] = useState(false)
+  const [widthChecked, setWidthChecked] = useState(false)
 
-  const checkPremium = () => {
-    if(!props.custom) return
-    setNoPremium(true);
-  };
-  let [windowWidth, setWindowWidth] = useState(500)
-  let [pixelScale, setPixelScale] = useState(50)
+
+  let [windowWidth, setWindowWidth] = useState(300)
+  let [pixelScale, setPixelScale] = useState(25)
 
 
 
@@ -34,6 +31,8 @@ function P5Trig(props) {
       setWindowWidth(500)
       setPixelScale(35)
     }
+    setWidthChecked(true)
+    console.log(widthChecked)
   }
   useEffect(() => {
     resizeCheck()
@@ -301,7 +300,8 @@ p5.text(`Area: ${parseFloat(0.5 * a * b * Math.sin(C)).toFixed(2)}`, 20, -(heigh
   }
 
   return (<>{
-    isLoading ? <LoadingIcon /> : <>
+    isLoading == true || widthChecked == false ? <LoadingIcon /> : <>
+    
     <br></br>
     <div className={styles['p5-container']} >
       {props.custom === true ?

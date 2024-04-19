@@ -456,6 +456,12 @@
   
 }
 
+.come-back {
+  text-align: center;
+  font-size: 1.1em;
+  color: #bd08ae;
+}
+
 @media screen and (max-width: 800px) {
   .container {
     width: 590px;

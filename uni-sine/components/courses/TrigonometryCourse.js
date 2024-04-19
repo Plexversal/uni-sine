@@ -187,7 +187,7 @@ export default function TrigCourse (props) {
     <>
       {props.currentSection == 0 ? (
         <div>
-          <div>
+          <div className={styles['course-description']}>
             <h2>Introduction to Trigonometry</h2>
             <p>
               Trigonometry is a branch of mathematics that studies the

@@ -21,11 +21,11 @@ function Nav(props) {
                     <h1>{props.title}</h1>
                     <p className={styles.subheader}>{props.subheader}</p>
                 </div>
-                {/* <ul>
+                <ul>
                     <li>
                         <a className={styles['social-link-tw']} rel="noreferrer" target='_blank' 
-                        href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out ${URL}!`)}`}
-                        aria-label="Share to twitter">
+                        href={`https://twitter.com/UniSineSocial`}
+                        aria-label="Uni-Sine Twitter">
                         <BsTwitter size='1.5rem'/></a>
                     </li>
                     <li>
@@ -36,16 +36,7 @@ function Nav(props) {
                         <BsTiktok size='1.5rem' />
                         </a>
                     </li>
-                    <li>
-                        <a className={styles['social-link-yt']} rel="noreferrer" target='_blank'
-                        href={`https://www.tiktok.com/@unisinesocial`}
-                        aria-label="Uni-Sine Tiktok">
-
-                        <BsYoutube size='1.5rem'/>
-
-                        </a>
-                    </li>
-                </ul> */}
+                </ul>
             </div>
         
             {props.search?.()}
