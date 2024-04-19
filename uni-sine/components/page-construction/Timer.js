@@ -13,7 +13,6 @@ const Timer = forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     getFormattedTime: () => {
-      // This function can now be called from the parent component using the ref
       const hours = Math.floor(seconds / 3600);
       const minutes = Math.floor((seconds % 3600) / 60);
       const remainingSeconds = seconds % 60;
@@ -28,5 +27,8 @@ const Timer = forwardRef((props, ref) => {
 
   return <span>{ref.current?.getFormattedTime() || '00:00'}</span>;
 });
+
+// Assign a displayName to the component
+Timer.displayName = 'Timer';
 
 export default Timer;
