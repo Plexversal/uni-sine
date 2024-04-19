@@ -1,5 +1,6 @@
 .offer-banner {
-    position: absolute; 
+    position: relative; 
+    width: 100%;
     text-align: center;
     color: black;
     background: rgb(236, 96, 120);
