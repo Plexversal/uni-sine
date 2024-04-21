@@ -631,8 +631,8 @@ const QuestionsModal = (props) => {
                           {percent > 75
                             ? "University"
                             : percent > 50
-                            ? "A-Level"
-                            : "GCSE"}
+                            ? "A-Level/AP"
+                            : "GCSE/SAT"}
                         </strong>
                       </p>
                       <p>

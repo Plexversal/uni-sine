@@ -76,13 +76,13 @@ export default function Questions() {
     } else {
       setNoPremium(false);
     }
-  });
+  }, [user]);
 
-  useEffect(() => {
-    if (noPremium && !isLoading) {
-      buyPremiumModalRef.current.openModal();
-    }
-  }, [noPremium]);
+  // useEffect(() => {
+  //   if (noPremium && !isLoading) {
+  //     buyPremiumModalRef.current.openModal();
+  //   }
+  // }, [noPremium]);
 
   const handleOpenCalculator = (calculatorName) => {
 
@@ -150,8 +150,8 @@ export default function Questions() {
                     Scrap revising old exam papers. Learn with <strong>exam style</strong> questions that refresh <strong>daily!</strong>
                   </p>
                   <p>
-                    Question difficulty ranges from GCSE to A-level to
-                    univeristy, you will see your results at the end of the
+                    Question difficulty ranges from <strong>GCSE/SAT</strong> to <strong>A-level/AP</strong> then to
+                    undergraduate university level. You will see your results at the end of the
                     questions.
                   </p>
                 </div>
@@ -218,17 +218,44 @@ export default function Questions() {
                             {percent > 75
                               ? "University"
                               : percent > 50
-                              ? "A-Level"
-                              : "GCSE"}
+                              ? "A-Level/AP"
+                              : "GCSE/SAT"}
                           </strong>
                         </p>
                       </div>
                     </div>
                   ) : (
-                    <div>
-                      Your previous question stats will show here when you start
-                      answering questions from the topics above.
+                    <div className={questionsStyles["end-screen-content"]}>
+                      <PercentIcon {...{ percent, text: "Overall score" }} />
+
+                      <div>
+                        <p style={{ color: "grey" }}>
+                          <i>Stats are based on your first question attempt</i>
+                        </p>
+
+                        <p>
+                          <span>Total questions answered:</span>{" "}
+                          <strong>0</strong>
+                        </p>
+                        <p>
+                          <span>Correct Answers:</span>{" "}
+                          <strong>0</strong>
+                        </p>
+                        <p>
+                          <span>Accuracy:</span>{" "}
+                          <strong>
+                           0%
+                          </strong>
+                        </p>
+                        <p>
+                          <span>Predicted level:</span>{" "}
+                          <strong>
+                            GCSE/SAT
+                          </strong>
+                        </p>
+                      </div>
                     </div>
+                    
                   )}
                 </>
               )}

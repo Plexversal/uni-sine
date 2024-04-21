@@ -206,28 +206,30 @@ export default function Home() {
 
         <section className={styles['info-bubbles-section']}>
         <div className={styles['info-bubble']}>
-            <video className={styles['video-preview']} playsInline autoPlay loop muted controls={false} preload="auto">
-              <source src='/static/home/ai-preview.webm' type="video/webm" />
-              <source src='/static/home/ai-preview.mp4' type="video/mp4" />
-            </video>
-            <div>
-              <h1>Advanced AI Integration</h1>
-              <p>Use the power of AI, built with GPT-4, to help advance your knowledge and reword content that is preferrable to your reading style.</p>
+        <img className={styles['info-bubble-img-no-style']} src='/static/home/home-img-4.png' />
 
+            <div>
+              <h1>Built for GCSE&apos;s, A-levels, ACT&apos;s, SAT&apos;s and AP&apos;s</h1>
+              <ul>
+                <li>Improve your chances of scoring higher in GCSE&apos;s, A-levels, ACT&apos;s, SAT&apos;s and AP&apos;s</li>
+                <li>Information has been specially sourced around the grading exam boards of these tests such as AQA and OCR</li>
+              </ul>
             </div>
 
           </div>
           <div className={styles['info-bubble']}>
-            <div>
-              <h1>Built for GCSE&apos;s, A-levels and ACT&apos;s</h1>
-              <ul>
-                <li>Improve your chances of scoring higher in A-levels, ACT&apos;s or SAT&apos;s</li>
-                <li>Information has been specially sourced around the grading exam boards of these tests such as AQA and OCR</li>
-              </ul>
-            </div>
-            <img className={styles['info-bubble-img-no-style']} src='/static/home/home-img-4.png' />
 
+            <div>
+              <h1>Advanced AI Integration</h1>
+              <p>Use the power of AI, built with <strong>GPT-4</strong>, to help advance your knowledge and reword content that is preferrable to your reading style.</p>
+
+            </div>
+            <video className={styles['video-preview']} playsInline autoPlay loop muted controls={false} preload="auto">
+              <source src='/static/home/ai-preview.webm' type="video/webm" />
+              <source src='/static/home/ai-preview.mp4' type="video/mp4" />
+            </video>
           </div>
+
           <div className={styles['info-bubble']}>
           <video className={styles['video-preview']} playsInline autoPlay loop muted controls={false} preload="auto">
             <source src='/static/home/questions-preview.webm' type="video/webm" />
@@ -238,8 +240,8 @@ export default function Home() {
             <div>
               <h1>Unique Practice questions</h1>
               <ul>
-                <li>Generate unlimited, unique practice questions</li>
-                <li>Tools designed with hard coded math for accurate results</li>
+                <li>Practice with unique questions ranging from <strong>calculus</strong> in math or <strong>nuclear energy</strong> in physics!</li>
+                <li>See answers in real time and get performance stats at the end. New questions refresh <strong>every day!</strong></li>
               </ul>
               <Link href={'/questions'} className={styles['link-page-btn']}> Questions</Link>
             </div>
@@ -248,7 +250,10 @@ export default function Home() {
           <div className={styles['info-bubble']}>
             <div>
               <h1>15+ Interactive calculators</h1>
-              <p>Go beyond a standard calculator with a variety of visual graphing and algebra calculators specially designed for helping you learn faster</p>
+             <ul>
+              <li>Go beyond a standard calculator with a variety of visual <strong>graphing</strong> and <strong>algebra</strong> calculators specially designed for helping you learn faster.</li>
+              <li>Calculators in physics and math, for things like <strong>trigonometry</strong>, <strong>probability</strong>, <strong>potential energy</strong> and more!</li>
+             </ul>
               <Link href={'/calculators'} className={styles['link-page-btn']}>Calculators</Link>
 
             </div>
@@ -259,13 +264,20 @@ export default function Home() {
           </video>
 
           </div>
-
           <div className={styles['info-bubble']}>
-          <img className={styles['info-bubble-img-no-style']} src='/static/home/home-img-3.png' />
+          <video className={styles['video-preview']} playsInline autoPlay loop muted controls={false} preload="auto">
+            <source src='/static/home/courses-preview.webm' type="video/webm" />
+            <source src='/static/home/courses-preview.mp4' type="video/mp4" />
+
+          </video>
 
             <div>
-              <h1>High level math explained for any skill level</h1>
-              <p>We know not everyone can pick up math easily, that&apos;s why we make every effort to show and derive every step.</p>
+              <h1>Specialized Courses</h1>
+              <ul>
+                <li>A range of specific fun and interactive courses in subjects such as <strong>Black Holes</strong> or <strong>Web Development</strong>.</li>
+                <li>Progress saves automatically and you can learn at your own pace!</li>
+              </ul>
+              <Link href={'/courses'} className={styles['link-page-btn']}> Courses</Link>
             </div>
 
           </div>
