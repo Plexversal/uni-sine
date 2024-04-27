@@ -4,7 +4,7 @@ import {
     withApiAuthRequired,
     getSession
 } from "@auth0/nextjs-auth0";
-import { schemaComp, schemaPhysics, schemaMath, mathSubtopic, physicsSubtopic, compSubtopic, aiFunction } from '../../../lib/schemaConstants'
+import { mathSubtopic, physicsSubtopic, compSubtopic, biologySubtopic, aiFunction, chemistrySubtopic, calculusSubtopic } from '../../../lib/schemaConstants'
 
 export default withApiAuthRequired(async function handler(req, res) {
     
@@ -135,6 +135,117 @@ export default withApiAuthRequired(async function handler(req, res) {
               messages: [
                   { role: "system", content: "You are a programming assistant with the sole purpose to output question data for a database and provide no other context, your responses should be in json only without new lines or additional spaces in the json response" },
                   { role: "user", content: `Create 3 easy, 3 medium and 2 hard ${req.query.topic} questions for a total of 8 questions. Based on the following topics ${randomTopicSelection}, meaning one question per topic, that would be suitable for ${level} students. About half the questions should require the student to use math to work out and should not be generic. An example question would be: ${example}. Do not reuse the example. Produce the answer in text, 3 wrong answers and 1 correct answer. Each question should include supporting media in Latex format for MathJax library. All answers that are equation based should use MathJax type formatting to be parsed by MathJax library. Do not include any new line characters in the response such as ("\\n") or excessive spacing. Ensure the json complies with parsing, making sure equation backslahes are double. You MUST stick to the schema, do not add key names or modify the object structure.` }
+              ],
+              model: "gpt-4",
+              temperature: 0.4,
+              functions: [aiFunction]
+          });
+
+          try {
+            let parsed = JSON.parse(chatCompletion.choices[0].message.function_call.arguments)
+            return res.status(200).json({message: "Questions fetched and parsed", chat: parsed, parsed: true});
+          
+          } catch (error) {
+            if(chatCompletion) {
+              return res.status(200).json({message: "Questions fetched but not parsed", chat: chatCompletion.choices[0].message.function_call.arguments, error: error.message, parsed: false});
+
+            } else {
+              return res.status(500).json({message: 'failed to get any AI chat data', error: error.message})
+            } 
+          }
+
+
+
+        } else if(req.query.topic == `biology`) {
+
+          const randomTopicSelection = biologySubtopic.sort(() => 0.5 - Math.random()).slice(0, 8).join(', ');
+          console.log(`topics selected: ${randomTopicSelection}`)
+  
+          let level = 'A-level'
+          let example = `If the execution of an asynchronous function takes 30 seconds to return a response, how long will it take for subsequent code to execute?`
+
+          const openai = new OpenAI({
+              apiKey: process.env.OPENAI_API_KEY,
+          });
+  
+          const chatCompletion = await openai.chat.completions.create({
+              messages: [
+                  { role: "system", content: "You are a programming assistant with the sole purpose to output question data for a database and provide no other context, your responses should be in json only without new lines or additional spaces in the json response" },
+                  { role: "user", content: `Create 4 easy, 4 medium and 2 hard ${req.query.topic} questions for a total of 10 questions. Based on the following topics ${randomTopicSelection}, meaning one question per topic, that would be suitable for ${level} students. About half the questions should require the student to use math to work out and should not be generic. An example question would be: ${example}. Do not reuse the example. Produce the answer in text, 3 wrong answers and 1 correct answer. Each question should include supporting media in Latex format for MathJax library. All answers that are equation based should use MathJax type formatting to be parsed by MathJax library. Do not include any new line characters in the response such as ("\\n") or excessive spacing. Ensure the json complies with parsing, making sure equation backslahes are double. You MUST stick to the schema, do not add key names or modify the object structure.` }
+              ],
+              model: "gpt-4",
+              temperature: 0.4,
+              functions: [aiFunction]
+          });
+
+          try {
+            let parsed = JSON.parse(chatCompletion.choices[0].message.function_call.arguments)
+            return res.status(200).json({message: "Questions fetched and parsed", chat: parsed, parsed: true});
+          
+          } catch (error) {
+            if(chatCompletion) {
+              return res.status(200).json({message: "Questions fetched but not parsed", chat: chatCompletion.choices[0].message.function_call.arguments, error: error.message, parsed: false});
+
+            } else {
+              return res.status(500).json({message: 'failed to get any AI chat data', error: error.message})
+            } 
+          }
+
+
+
+        } else if(req.query.topic == `chemistry`) {
+
+          const randomTopicSelection = chemistrySubtopic.sort(() => 0.5 - Math.random()).slice(0, 8).join(', ');
+          console.log(`topics selected: ${randomTopicSelection}`)
+  
+          let level = 'A-level'
+          let example = `If the execution of an asynchronous function takes 30 seconds to return a response, how long will it take for subsequent code to execute?`
+
+          const openai = new OpenAI({
+              apiKey: process.env.OPENAI_API_KEY,
+          });
+  
+          const chatCompletion = await openai.chat.completions.create({
+              messages: [
+                  { role: "system", content: "You are a programming assistant with the sole purpose to output question data for a database and provide no other context, your responses should be in json only without new lines or additional spaces in the json response" },
+                  { role: "user", content: `Create 4 easy, 4 medium and 2 hard ${req.query.topic} questions for a total of 10 questions. Based on the following topics ${randomTopicSelection}, meaning one question per topic, that would be suitable for ${level} students. About half the questions should require the student to use math to work out and should not be generic. An example question would be: ${example}. Do not reuse the example. Produce the answer in text, 3 wrong answers and 1 correct answer. Each question should include supporting media in Latex format for MathJax library. All answers that are equation based should use MathJax type formatting to be parsed by MathJax library. Do not include any new line characters in the response such as ("\\n") or excessive spacing. Ensure the json complies with parsing, making sure equation backslahes are double. You MUST stick to the schema, do not add key names or modify the object structure.` }
+              ],
+              model: "gpt-4",
+              temperature: 0.4,
+              functions: [aiFunction]
+          });
+
+          try {
+            let parsed = JSON.parse(chatCompletion.choices[0].message.function_call.arguments)
+            return res.status(200).json({message: "Questions fetched and parsed", chat: parsed, parsed: true});
+          
+          } catch (error) {
+            if(chatCompletion) {
+              return res.status(200).json({message: "Questions fetched but not parsed", chat: chatCompletion.choices[0].message.function_call.arguments, error: error.message, parsed: false});
+
+            } else {
+              return res.status(500).json({message: 'failed to get any AI chat data', error: error.message})
+            } 
+          }
+
+
+
+        } else if(req.query.topic == `calculus`) {
+
+          const randomTopicSelection = calculusSubtopic.sort(() => 0.5 - Math.random()).slice(0, 8).join(', ');
+          console.log(`topics selected: ${randomTopicSelection}`)
+  
+          let level = 'A-level'
+          let example = `If the execution of an asynchronous function takes 30 seconds to return a response, how long will it take for subsequent code to execute?`
+
+          const openai = new OpenAI({
+              apiKey: process.env.OPENAI_API_KEY,
+          });
+  
+          const chatCompletion = await openai.chat.completions.create({
+              messages: [
+                  { role: "system", content: "You are a programming assistant with the sole purpose to output question data for a database and provide no other context, your responses should be in json only without new lines or additional spaces in the json response" },
+                  { role: "user", content: `Create 4 easy, 4 medium and 2 hard ${req.query.topic} questions for a total of 10 questions. Based on the following topics ${randomTopicSelection}, meaning one question per topic, that would be suitable for ${level} students. About half the questions should require the student to use math to work out and should not be generic. An example question would be: ${example}. Do not reuse the example. Produce the answer in text, 3 wrong answers and 1 correct answer. Each question should include supporting media in Latex format for MathJax library. All answers that are equation based should use MathJax type formatting to be parsed by MathJax library. Do not include any new line characters in the response such as ("\\n") or excessive spacing. Ensure the json complies with parsing, making sure equation backslahes are double. You MUST stick to the schema, do not add key names or modify the object structure.` }
               ],
               model: "gpt-4",
               temperature: 0.4,

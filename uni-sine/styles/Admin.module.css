@@ -126,6 +126,7 @@
     padding: 0;
     width: 100%;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .ai-response-container > ul button,

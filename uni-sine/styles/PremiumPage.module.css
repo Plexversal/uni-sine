@@ -10,6 +10,7 @@
     display: inline-flex;
     flex-wrap: wrap;
     gap: 50px;
+    justify-content: center;
 
 }
 .calculator-category-container {
@@ -46,6 +47,7 @@
     -webkit-appearance: none;
     appearance: none;
     position: relative;
+    min-width: 250px;
 }
 .open-questions-btn:hover,
 .open-questions-btn:focus

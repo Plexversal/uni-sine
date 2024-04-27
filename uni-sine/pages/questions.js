@@ -109,17 +109,32 @@ export default function Questions() {
   }
 
   const calculatorsMap = {
-    "Daily Physics Questions": (
+    "Physics": (
       <QuestionsModal
         {...{ onClose: handleCloseCalculator, topic: "physics" }}
       />
     ),
-    "Daily Math Questions": (
+    "Math": (
       <QuestionsModal {...{ onClose: handleCloseCalculator, topic: "math" }} />
     ),
-    "Daily Computer Science questions": (
+    "Computer Science": (
       <QuestionsModal
-        {...{ onClose: handleCloseCalculator, topic: "comp", user: user }}
+        {...{ onClose: handleCloseCalculator, topic: "comp" }}
+      />
+    ),
+    "Biology": (
+      <QuestionsModal
+        {...{ onClose: handleCloseCalculator, topic: "biology"}}
+      />
+    ),
+    "Chemistry": (
+      <QuestionsModal
+        {...{ onClose: handleCloseCalculator, topic: "chemistry"}}
+      />
+    ),
+    "Calculus": (
+      <QuestionsModal
+        {...{ onClose: handleCloseCalculator, topic: "calculus" }}
       />
     ),
   };

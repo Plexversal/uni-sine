@@ -126,6 +126,11 @@ const QuestionsModal = (props) => {
           if(questionDataResponse.value.status === 401) {
             router.push('/api/auth/login');
             return handleClose()
+          } else if (questionDataResponse.value.status === 429){
+            alert(
+              "You are making too many requests, slow down and try again in a few seconds."
+            );
+            return handleClose()
           } else {
             alert(
               "There was an error fetching the questions, please try again later"

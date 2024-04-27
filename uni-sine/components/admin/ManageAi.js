@@ -218,6 +218,21 @@ function ManageAi() {
                 Generate Comp Daily AI
               </button>
             </li>
+            <li>
+            <button onClick={(e) => handleAIRequest("biology")}>
+                Generate Biology Daily AI
+              </button>
+            </li>
+            <li>
+            <button onClick={(e) => handleAIRequest("chemistry")}>
+                Generate Chemistry Daily AI
+              </button>
+            </li>
+            <li>
+            <button onClick={(e) => handleAIRequest("calculus")}>
+                Generate Calculus Daily AI
+              </button>
+            </li>
           </ul>
           <>
             {aiResponse !== null ? (
