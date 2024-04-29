@@ -10,6 +10,7 @@ import { sendGTMEvent } from '@next/third-parties/google'
 import startCheckout from './StartCheckout';
 import { BsStars } from "react-icons/bs";
 import { useUserContext } from '../../contexts/UserContext';
+
 Modal.setAppElement('#__next');
 
 const AccountModal = forwardRef((props, ref) => {
@@ -39,9 +40,8 @@ const AccountModal = forwardRef((props, ref) => {
 
   const handleButtonClick = async () => {
     if (!user) {
-      const currentUrl = window.location.pathname;
-      const returnTo = encodeURIComponent(currentUrl);
-      router.push(`/api/auth/login?returnTo=${returnTo}`);
+      const returnLink = `/api/auth/login?returnTo=${encodeURIComponent(router.pathname)}`;
+      router.push(returnLink);
     } else {
       try {
         setLoadingProfile(false);

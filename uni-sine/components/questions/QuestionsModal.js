@@ -124,7 +124,9 @@ const QuestionsModal = (props) => {
         ]);
         if (!questionDataResponse.value.ok) {
           if(questionDataResponse.value.status === 401) {
-            router.push('/api/auth/login');
+            const returnLink = `/api/auth/login?returnTo=${encodeURIComponent(router.pathname)}`;
+
+            router.push(returnLink);
             return handleClose()
           } else if (questionDataResponse.value.status === 429){
             alert(

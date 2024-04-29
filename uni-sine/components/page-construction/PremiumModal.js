@@ -6,14 +6,14 @@ import startCheckout from './StartCheckout';
 import Link from 'next/link';
 import { BsStars } from "react-icons/bs";
 import { useUserContext } from '../../contexts/UserContext';
-
+import { useRouter } from 'next/router'; // Import the useRouter hook
 Modal.setAppElement('#__next');
 
 const BuyPremiumModal = forwardRef((props, ref) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isOpened, setIsOpened] = useState(false);
   const { user, isLoading } = useUserContext();
-
+  const router = useRouter(); // Get the router object
   const closeModal = () => {
     setIsOpened(false);
     setTimeout(() => {
@@ -34,7 +34,7 @@ const BuyPremiumModal = forwardRef((props, ref) => {
   const handleAfterOpen = () => {
     setIsOpened(true);
   };
-
+  const returnLink = `/api/auth/login?returnTo=${encodeURIComponent(router.pathname)}`;
 
   return (
     <>
@@ -66,7 +66,7 @@ const BuyPremiumModal = forwardRef((props, ref) => {
 
             </ul>
             {
-            !user && <Link href='/api/auth/login' onClick={() => startCheckout(user)} className={styles['account-btn']}>Login/sign up</Link>
+            !user && <Link href={returnLink} onClick={() => startCheckout(user)} className={styles['account-btn']}>Login/sign up</Link>
 
             }
             {
