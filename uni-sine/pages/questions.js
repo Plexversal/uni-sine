@@ -176,7 +176,7 @@ export default function Questions() {
 
                 </video>
               </div>
-              <div className={styles["btn-wrapper"]}>
+              <div className={`${styles["btn-wrapper"]} ${styles["questions-btn-wrapper"]}`}>
                 {Object.keys(calculatorsMap)
                   .filter((calculatorName) =>
                     calculatorName

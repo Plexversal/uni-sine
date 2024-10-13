@@ -13,6 +13,11 @@
     justify-content: center;
 
 }
+
+.questions-btn-wrapper {
+   max-width: 900px;
+}
+
 .calculator-category-container {
     margin: 0 4em;
 }
@@ -33,6 +38,7 @@
 
 .open-questions-btn,
 .open-calculator-btn,
+.open-programming-link,
 .open-course-btn {
     color: black;
     padding: 30px;
@@ -50,7 +56,8 @@
     min-width: 250px;
 }
 .open-questions-btn:hover,
-.open-questions-btn:focus
+.open-questions-btn:focus,
+
 .open-course-btn:hover
  {
     box-shadow: 10px 10px 0px #43baff;
@@ -61,6 +68,22 @@
 .open-course-btn:focus {
     box-shadow: 10px 10px 0px rgb(169, 245, 216);
     transform: scale(1.13);
+}
+
+.open-programming-link:focus,
+.open-programming-link:hover {
+    box-shadow: 10px 10px 0px rgb(250, 192, 242);
+    transform: scale(1.13);
+}
+
+.open-programming-link {
+    background-color: rgb(255, 156, 242);
+    box-shadow: 4px 4px 0px rgb(250, 192, 242);
+    height: fit-content;
+    padding: 25px;
+    min-width: 200px;
+    font-size: 1.2em;
+
 }
 
 .open-course-btn {
@@ -98,6 +121,34 @@
 }
 
 
+.completed::after {
+    content: "Completed"; 
+    position: absolute; 
+    top: 0; 
+    right: 50px; 
+    background-color: #1ffa8c; 
+    color: black; 
+    padding: 2px 10px; 
+    font-size: 0.8em; 
+    font-weight: 500;
+    transform: translate(50%, -50%); 
+    border-radius: 4px; 
+}
+
+.not-started::after {
+    content: "Not Started"; 
+    position: absolute; 
+    top: 0; 
+    right: 50px; 
+    background-color: #f0f0f0; 
+    color: black; 
+    padding: 2px 10px; 
+    font-size: 0.8em; 
+    font-weight: 500;
+    transform: translate(50%, -50%); 
+    border-radius: 4px; 
+}
+
 .open-calculator-btn {
     background-color: rgb(253, 120, 120) !important;
     box-shadow: 4px 4px 0px #ffae43;
@@ -108,9 +159,21 @@
     box-shadow: 10px 10px 0px #ffae43;
     transform: scale(1.13);
 }
-
-
-
+.programming-wrapper {
+    gap: 30px;
+}
+.programming-wrapper > a > span {
+    font-size: 0.8em;
+    font-weight: 500;
+    font-style: italic;
+    margin: 5px 0;
+    display: inline-block;
+    color: rgb(46, 46, 46);
+}
+.programming-link-transition {
+    justify-self: center;
+    align-self: center;
+}
 
 .example-info {
     display: flex;

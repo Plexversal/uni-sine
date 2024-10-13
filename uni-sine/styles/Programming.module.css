@@ -1,0 +1,84 @@
+.programming-container code:not(pre > code) {
+    
+    font-weight: 600;
+    font-size: 1.2em;
+    background: rgb(231, 231, 231);
+    border-radius: 5px;
+    padding: 0 4px;
+}
+.programming-container {
+    margin: 30px;
+    gap: 20px;
+}
+.activity {
+    display: flex;
+    margin: 20px 0;
+}
+
+.coding-panel {
+    width: 100%;
+}
+
+.coding-panel > div {
+
+}
+.info-panel {
+    background: rgba(245, 245, 245, 0.651);
+    padding: 10px;
+    border: 1px solid rgb(235, 235, 235);
+    min-width: 50%;
+}
+
+.programming-container ul li {
+    margin: 7px 0;
+}
+
+.programming-container h1 {
+    color: rgb(56, 56, 56);
+    font-weight: 500;
+}
+.result {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+}
+.check-code-btn {
+    font-size: 1.2em;
+    cursor: pointer;
+    background: rgba(78, 75, 65, 0.774);
+    border: 1px solid rgb(121, 121, 121);
+    padding: 10px 25px;
+    transition: all ease-in-out .2s;
+    color: white;
+    align-self: center;
+    justify-self: center;
+}
+.check-code-btn:hover {
+    background: rgba(114, 109, 96, 0.699);
+    
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+.fadeIn {
+    animation-name: fadeIn;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+    padding: 5px;
+    border-radius: 5px;
+    background: rgba(240, 240, 240, 0.425);
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+}
+
+.fadeIn svg {
+    margin-right: 12px;
+}
+
+.correct-axiom {
+    background: rgba(179, 229, 182, 0.425);
+}
