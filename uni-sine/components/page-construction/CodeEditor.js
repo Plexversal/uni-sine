@@ -168,5 +168,5 @@ const CodeEditor = forwardRef((props, ref) => {
     </div>
   );
 });
-
+CodeEditor.displayName = "CodeEditor";
 export default CodeEditor;
