@@ -15,7 +15,8 @@ export default function Programming(){
   
   const [isLoading, setIsLoading] = useState(true);
   const [noPremium, setNoPremium] = useState(true);
-  const [searchTerm, setSearchTerm] = useState(''); 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [userData, setUserData] = useState(null)
   const buyPremiumModalRef = useRef();
 
 
@@ -31,6 +32,25 @@ export default function Programming(){
   })
 
   useEffect(() => {
+    async function fetchUseData(){
+      if(user) {
+        let response = await fetch('/api/db/getUserProgrammingStats')
+        if(!response) return
+  
+        let result = await response.json()
+  
+        if(response.status == 200) {
+          return setUserData(result)
+        } else {
+          setUserData(null)
+        }
+      }
+    }
+
+    fetchUseData()
+  }, user)
+
+  useEffect(() => {
     if (noPremium && !isLoading) {
       buyPremiumModalRef.current.openModal();
     }
@@ -42,6 +62,8 @@ function searchComponent() {
       <input placeholder='Search for all programming problems' className={contentStyles['user-topic-search']} id='user-search-topic' onChange={e => setSearchTerm(e.target.value)} type='text'></input>
   </div>)
 }
+
+
 
   return (
     <>
@@ -64,7 +86,7 @@ function searchComponent() {
           )}
           <div className={styles["content-container"]}>
             <SecondaryBanner
-              title="100 programming problems"
+              title="Programming Problems"
               search={true ? searchComponent : <div>Loading</div>}
               subheader={`Programming problems with difficulty ranging from easy to hard. Premium members only`}
             />
@@ -101,20 +123,22 @@ function searchComponent() {
                 </video>
               </div>
               <div >
+
                 <div className={styles["calculator-category"]}>
                   <h3>Functions</h3>
                   <div className={`${styles["btn-wrapper"]} ${styles["programming-wrapper"]}`}>
-                    <Link
+                    <Link 
                       href={"/programming/1"}
-                      className={`${styles["open-programming-link"]}`}
+                      className={`${styles["open-programming-link"]} ${userData?.['functions-1']?.completed ? styles['completed'] : styles['not-started']}`}
+
                     >
                       <span>Beginner &#xb7; Problem 1 &#xb7; Fundamentals</span>
                       <br></br>
                       Console log date
                     </Link>
                     <Link
-                      href={"/test"}
-                      className={`${styles["open-programming-link"]}`}
+                      href={"/programming/2"}
+                      className={`${styles["open-programming-link"]} ${userData?.['functions-2']?.completed ? styles['completed'] : styles['not-started']}`}
                     >
                       <span>Easy &#xb7; Problem 2 &#xb7; Algebra</span>
                       <br></br>
@@ -122,8 +146,9 @@ function searchComponent() {
                     </Link>
 
                     <Link
-                      href={"/test"}
-                      className={`${styles["open-programming-link"]}`}
+                      href={"/programming/3"}
+                      className={`${styles["open-programming-link"]} ${userData?.['functions-3']?.completed ? styles['completed'] : styles['not-started']}`}
+
                     >
                       <span>Intermediate &#xb7; Problem 3 &#xb7; Fundamentals</span>
                       <br></br>
@@ -132,8 +157,9 @@ function searchComponent() {
                     </Link>
 
                     <Link
-                      href={"/test"}
-                      className={`${styles["open-programming-link"]}`}
+                      href={"/programming/4"}
+                      className={`${styles["open-programming-link"]} ${userData?.['functions-4']?.completed ? styles['completed'] : styles['not-started']}`}
+
                     >
                       <span>Hard &#xb7; Problem 4 &#xb7; Fundamentals</span>
                       <br></br>

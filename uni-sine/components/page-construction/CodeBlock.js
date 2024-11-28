@@ -5,13 +5,14 @@ import copy from "copy-to-clipboard";
 import styles from '../../styles/CodeBlock.module.css'
 import { CgCopy } from 'react-icons/cg'
 import { BsCheck2 } from 'react-icons/bs'
+import { FaRegCopy, FaRegCheckSquare } from "react-icons/fa";
 const CodeBlock = ({ code, language = "cpp", showCopy = true }) => {
-  const [copyStatus, setCopyStatus] = useState(<CgCopy />);
+  const [copyStatus, setCopyStatus] = useState(<FaRegCopy size={20} />);
 
   const handleCopyClick = () => {
     copy(code);
-    setCopyStatus(<><BsCheck2 /></>);
-    setTimeout(() => setCopyStatus(<CgCopy />), 1500);
+    setCopyStatus(<><FaRegCheckSquare color="#b2f7b6" size={20} /></>);
+    setTimeout(() => setCopyStatus(<FaRegCopy size={20} />), 1500);
   };
 
   return (
@@ -22,7 +23,7 @@ const CodeBlock = ({ code, language = "cpp", showCopy = true }) => {
         </div>
       )}
       <DynamicSyntaxHighlighter
-        showLineNumbers={true}
+        showLineNumbers={false}
         language={language}
         style={vs2015}
       >

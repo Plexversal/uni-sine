@@ -1,10 +1,10 @@
 
 
 .landing-section {
-  background: radial-gradient(circle at bottom right, #200047 0%, #496C6C 42%, #496C6C 100%);
+  background-image: linear-gradient(to left top, #304164, #4b4473, #6c437b, #8f3e78, #af396b);
   backdrop-filter:blur(100px);
   width: 100%;
-  min-height: 880px;
+  min-height: 100dvh;
   padding: 0px 0px 20px;
   color: #fff;
   background-size: cover;
@@ -16,12 +16,16 @@
 .landing-section-top {
   margin: 0 250px;
 }
+.landing-left {
+  max-width: 650px;
+}
 .landing-section-content {
 
   display: flex;
-  justify-content: space-between;
-  gap: 10em;
+  gap: 5em;
   margin: 200px 150px;
+  align-items: center;
+  justify-content: center;
 }
 
 .landing-section-content * {
@@ -33,8 +37,8 @@
 }
 
 .landing-section-content > div > p {
-  font-size: 1.5em;
-  color: #b8b8b8;
+  font-size: 1.25em;
+  color: #d4d4d4;
   margin: 0.9rem 0;
 }
 
@@ -48,6 +52,41 @@
   background: #00000088;
 
 }
+
+.header-links {
+  display: flex;
+  gap: 20px;
+
+}
+
+.acc-btn {
+  padding: 8px 16px;
+  width: fit-content;
+  min-width: 80px;
+  text-align: center;
+  border-radius: 7px;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.join-link {
+  background: #FF006B;
+  color: rgb(46, 46, 46);
+  transition: all .2s ease-in-out;
+}
+.sign-in-link {
+  color: #76a8a8;
+}
+.sign-in-link:hover {
+  color: white;
+}
+
+.join-link:hover {
+  background: white;
+  transform: translateY(-5px);
+
+}
+
 .header-content {
   display: flex;
   flex-direction: row;
@@ -55,7 +94,7 @@
   align-items: center;
   padding: 15px 120px;
 }
-.header-content> div > h1 {
+.header-content > div > h1 {
   margin: 0;
   font-size: 2.5em;
   color: #FF006B;
@@ -64,16 +103,6 @@
   margin: 0;
   color: #C7C7C7;
   font-size: 1.2em;
-}
-
-.acc-btn {
-  padding: 10px 50px;
-  border-radius: 999px;
-  font-weight: 500;
-  text-transform: uppercase;
-  font-size: 1.3em;
-  margin: 0px 10px;
-  cursor: pointer;
 }
 
 .signed-in-info{
@@ -112,9 +141,9 @@
 .explore-btn,
 .calculators-btn,
 .link-page-btn {
-  border: 5px solid #00FFC2;
+  border: 2px solid #00FFC2;
   padding: 10px 50px;
-  border-radius: 999px;
+  border-radius: 8px;
   font-weight: 500;
   font-size: 1.3em;
   margin: 10px 10px;
@@ -130,90 +159,31 @@
 
 .link-page-btn {
 
-  border: 5px solid #3b3b3b;
+  border: 2px solid #3b3b3b;
   color: #00000098;
 
 }
 
 .calculators-btn {
-  border: 5px solid #43baff;
+  border: 2px solid #43baff;
 }
 
 .explore-btn:hover,
 .calculators-btn:hover  {
   box-shadow: 4px 4px 8px -2px rgba(0,0,0,0.1);
-  transform: scale(1.15) !important;
-  border: 5px solid #ffffff;
+  transform: translateY(-4px);
+  border: 2px solid #ffffff;
 
 } 
 .link-page-btn:hover {
   box-shadow: 4px 4px 8px -2px rgba(0,0,0,0.1);
-  transform: scale(1.1) !important;
+  transform: translateY(-4px);
   background: #000;
   color: white;
 }
-.join-link {
-  border: 5px solid #FF006B;
-  color: #FF006B;
-  transition: all .3s;
 
-}
 
-.join-link:hover{
-  color: #fff;
-  border: 5px solid #000000;
 
-}
-
-.sign-in-link {
-  border: 5px solid #ffffff;
-  transition: all .3s;
-  color: white;
-}
-
-.sign-in-link:hover {
-  border: 5px solid #000;
-  color: #fff;
-}
-
-.image-container {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-
-  align-self: center;
-  
-}
-
-.home-img-1, .home-img-2, .home-img-3 {
-  grid-row: 1/2;
-}
-
-.home-img-1 {
-  grid-column: 5/7;
-  width: 110px;
-  height: auto;
-  object-fit: contain;
-  align-self: end;
-  z-index: 3;
-}
-
-.home-img-2 {
-  grid-column: 6/-1;
-  width: 400px;
-  height: auto;
-  object-fit: contain;
-  align-self: end;
-  z-index: 2;
-}
-
-.home-img-3 {
-  grid-column: 1/-4;
-  width: 500px;
-  height: auto;
-  object-fit: contain;
-  align-self: end;
-  z-index: 1;
-}
 
 /* Firefox is different when display grid columns apparently?? */
 @-moz-document url-prefix() {
@@ -251,6 +221,93 @@
   justify-content: center;
   align-items: center;
   gap: 50px;
+}
+.mockup {
+
+  height: fit-content;
+  filter: drop-shadow(rgba(235, 235, 235, 0.493) -0.7rem 0.7rem 16px);
+  max-width: 600px;
+  min-width: 600px;
+} 
+.project-img-container {
+  margin: 0;
+  width: 100%;
+
+}
+.project-img-container-header {
+  height: 40px;
+  background: #22272e;
+  border: 1px solid #444c56;
+  border-radius: 9px 9px 0 0;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.project-img-container-header-circles {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.project-img-container-header-circles > span {
+
+  content: '';
+  height: 10px;
+  width: 10px;
+  background-color: #504f4f;
+  border-radius: 50%;
+
+}
+
+.project-img-container-header-arrows {
+  margin: 0 20px;
+  color: grey;
+  gap: 5px;
+  display: flex;
+}
+
+.project-img-container-header-search {
+  width: 50%;
+  height: 18px;
+  background: rgb(231, 231, 231);
+  border-radius: 4px;
+  margin: 0 10px;
+  margin-left: auto;
+  
+}
+
+.project-img-container-header-hamburg {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-left: auto;
+
+}
+
+.project-img-container-header-hamburg span {
+  width: 10px;
+  height: 2px;
+  background: grey;
+}
+
+
+
+.project-img-container-img {
+
+  background: #1c2128;
+  border: 1px solid #444c56;
+  
+  border-radius:  0 0 9px 9px;
+  overflow: hidden;
+
+}
+
+.project-img-container-img img {
+  object-fit: cover;
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .info-bubble img,
@@ -617,13 +674,15 @@
 
 @media (max-width: 1500px)  {
 
-  .landing-section-content {
-    gap: 30px;
-    margin: 150px 50px
-  }
   .landing-section-content > div > h1{
     font-size: 3.3em;
 
+  }
+
+
+  .mockup {
+    max-width: 500px;
+    min-width: 500px;
   }
 
   .landing-section-top {
@@ -645,6 +704,10 @@
   .home-img-1 {
     width: 80px;
   }
+  .landing-section-content {
+    flex-direction: column;
+  }
+
 
   .home-img-2 {
     width: 270px;
@@ -668,14 +731,21 @@
   .info-bubble > img{
    width: 300px;
 }
+
+  .mockup {
+    align-self: center;
+    max-width: 600px;
+    min-width: 0;
+  }
+
 }
 
 @media (max-width: 1000px)  {
-  .landing-section-content {
-    flex-direction: column;
-    gap: 100px;
-  }
 
+
+  .landing-section-content {
+    margin: 120px 30px;
+  }
   .section-three {
     padding: 0 50px 100px 50px;
   }
@@ -688,9 +758,6 @@
     font-size: 3em;
   }
 
-  .landing-section {
-    height: 1400px;
-  }
 
   .home-img-1 {
     width: 100px;
@@ -720,6 +787,7 @@
     font-size: 1em;
   }
 
+
   .price-section {
     padding: 100px 20px;
   }
@@ -728,6 +796,10 @@
     flex-direction: column;
     gap: 40px
   }
+  .landing-section {
+    height: 1300px;
+  }
+
 }
 
 @media (max-width: 800px) {
@@ -738,12 +810,7 @@
   .header-content  > div > h1 {
     font-size: 2em;
   }
-  .acc-btn {
-    padding: 10px 30px;
-    font-size: 1em;
-    margin: 0;
-    margin-left: 12px;
-  }
+
   
   .home-btn-wrapper {
     display: flex;
@@ -753,6 +820,7 @@
   .info-bubble {
     width: 600px;
   }
+
 }
 
 @media (max-width: 600px)  { 
@@ -768,7 +836,7 @@
     order: 1;
   }
   .container section h1 {
-    font-size: 3.2em;
+    font-size: 2.6em;
   }
 
 }
@@ -799,6 +867,9 @@
   .section-three-content-sub div h1 {
     font-size: 2em;
   }
+  .landing-section-content >div > p {
+    font-size: 1.1em;
+  }
 }
 
 
@@ -809,9 +880,7 @@
   .landing-section-content {
     margin: 100px 30px;
   }
-  .landing-section-content >div > h1 {
-    font-size: 2.8em;
-  }
+
   .landing-section-content >div > p {
     font-size: 1.2em;
   }
@@ -838,9 +907,6 @@
 
   .header-content  > div > h1 {
     font-size: 1.5em;
-  }
-  .acc-btn {
-    padding: 10px 15px;
   }
 
   .info-bubbles-section {

@@ -40,11 +40,6 @@ export default withApiAuthRequired(async function handler(req, res) {
             return;
         }
 
-        if(!data) {
-            res.status(401).json({message: "Unauthorized"});
-            return;
-        }
-
         if(!data.app_metadata.is_premium ) {
 
             res.status(401).json({message: "no premium"});

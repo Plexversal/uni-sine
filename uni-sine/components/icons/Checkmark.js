@@ -16,7 +16,7 @@ const Checkmark = () => {
       attributeName="stroke-dashoffset"
       from="440"
       to="0"
-      dur="0.5s"
+      dur="0.7s"
       fill="freeze"
       repeatCount="0"
     />

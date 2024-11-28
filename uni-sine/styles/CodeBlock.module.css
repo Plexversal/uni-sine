@@ -3,32 +3,36 @@
   padding-left: "1rem";
   border-radius: "5px";
   font-size: "1.1em";
+  
 }
 
 .copy-btn {
-  background-color: #5e5c5c;
-  color: white;
-  border-radius: 3px;
-  padding: 0.25rem 0.5rem;
+  color: #a3a2a2;
   cursor: pointer;
-  font-size: 0.8em;
-  width: fit-content;
-  margin: 6px;
   align-self: end;
+  position: absolute;
+  display: none;
 }
 
+
+
 .copy-btn:hover {
-  background-color: #444444;
+  color: white
+}
+
+.code-block-container:hover .copy-btn {
+  display: block;
 }
 
 .code-block-container {
   background-color: #1e1e1e;
-  padding-left: 1rem;
-  border-radius: 5px;
+  padding: 1rem;
+  border-radius: 10px;
   font-size: 1.1em;
   display: flex;
   flex-direction: column;
-
+  border: 2px solid grey;
+  overflow:hidden
 }
 
 .code-block-container pre {
@@ -75,8 +79,7 @@
   flex-grow: 1;
   height: 400px; 
   overflow-x: auto;
-  flex-basis: calc(50%);
-  max-width: calc(50%);
+
 }
 .editor-user-input {
   display: flex; 
@@ -86,27 +89,40 @@
   overflow-x: auto; 
 }
 .code-preview-wrapper {
-  border: 5px solid rgb(161, 161, 161);
   background: white;
+  min-width: 50%;
+  border: 1px solid rgba(184, 184, 184, 0.493);
 }
 
 .editor-selection-wrapper {
   display: flex;
   justify-content: space-between;
-  background: rgb(179, 179, 179);
-  padding: 5px;
+  background: #33363b;
+  
 }
 
 .editor-selection-wrapper button {
-  padding: 5px;
-  min-width: 90px;
-  border-radius: 2px;
+  padding: 7px;
+  min-width: 100px;
+  height: 100%;
   outline: none;
   border: none;
-  background: rgb(70, 70, 70);
+  background: #33363b;
   color: white;
   cursor: pointer;
   transition: all 0.3s;
+  border-top: 2px solid #33363b;
+
+}
+
+.run-btn {
+  background-color: rgb(1, 168, 112) !important;
+  color: #000 !important;
+}
+
+.run-btn:hover {
+  background-color: rgba(5, 197, 133, 0.616) !important;
+  color: #000 !important;
 }
 
 .editor-selection-wrapper button:hover {
@@ -115,7 +131,8 @@
 }
 
 .active-editor {
-  background: rgb(29, 28, 28) !important;
+  background: #282c34 !important;
+  border-top: 2px solid orange !important;
 }
 
 .code-editor {
@@ -133,6 +150,19 @@
 .code-editor > div {
   height: 100%;
 
+}
+
+.console-log {
+  height: 100px;
+  background-color: rgb(36, 36, 36);
+  color: white;
+  padding: 5px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.console-log p {
+  margin: 1px 0;
 }
 
 @media (max-width: 1000px) {

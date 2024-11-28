@@ -297,65 +297,74 @@ export function compMedia() {
     );
     return lines.map(line => line.slice(minIndent)).join('\n').trim();
   }
-    function stringQuestion () {
-        let question = `What would be the final returned value from this string manipulation function?`
-        let variable =  randomStrings[Math.floor(Math.random() * randomStrings.length)];
-        let codeOptions = [
-`let text = "${variable}";
+  function stringQuestion () {
+    let question = `What would be the final returned value from this string manipulation function?`;
+    let variable =  randomStrings[Math.floor(Math.random() * randomStrings.length)];
+    
+    let codeOptions = [
+        `let text = "${variable}";
 
-function manipulate() {
-    return text.split("").reverse().join("");
-}
-manipulate()`, // reverse string
-`let text = "${variable}";
+        function manipulate() {
+            return text.split("").reverse().join("");
+        }
+        manipulate()`, // reverse string
 
-function manipulate() {
-    let word = 'lorem ipsum';
-    text = text + word.slice(5);
-    return text;
-}
-manipulate()`, // insert word
-`let number = ${variable};
+        `let text = "${variable}";
 
-function manipulate() {
-    return number.toString(2);
-}
-manipulate()`,  // convert to binary
+        function manipulate() {
+            let word = 'lorem ipsum';
+            text = text + word.slice(5);
+            return text;
+        }
+        manipulate()`, // insert word
 
-`let text = "${variable}";
+        `let number = ${variable};
 
-function manipulate() {
-    let word = "world";
-    return text.concat(' ', word)
-  }
-manipulate()`, // concat word
-`let text = "${variable}";
+        function manipulate() {
+            return number.toString(2);
+        }
+        manipulate()`,  // convert to binary
 
-function manipulate() {
-    return text.replace(/\\s+/g, "-");
-}
-manipulate()` // replace regex
-        ]; 
-        
-        const randomIndex = Math.floor(Math.random() * codeOptions.length);
+        `let text = "${variable}";
 
-        let correctAnswer = eval(codeOptions[randomIndex]);
-        let questionData = {
-            question: question,
-            answers: [
-              {
+        function manipulate() {
+            let word = "world";
+            return text.concat(' ', word);
+        }
+        manipulate()`, // concat word
+
+        `let text = "${variable}";
+
+        function manipulate() {
+            return text.replace(/\\s+/g, "-");
+        }
+        manipulate()` // replace regex
+    ]; 
+    
+    const randomIndex = Math.floor(Math.random() * codeOptions.length);
+
+    // Use the Function constructor to create an isolated function
+    const executeCode = new Function(codeOptions[randomIndex]);
+    let correctAnswer = executeCode(); // Run the function
+
+    let questionData = {
+        question: question,
+        answers: [
+            {
                 text: `${correctAnswer}`,
                 isCorrect: true,
-              }
-            ],
-            requiresMedia: true,
-            isAnswersEquation: false,
-            mediaType: "codeblock",
-            answerType: 'text',
-            media: codeOptions[randomIndex],
-          };
-        return questionData
-    }
+            }
+        ],
+        requiresMedia: true,
+        isAnswersEquation: false,
+        mediaType: "codeblock",
+        answerType: 'text',
+        media: codeOptions[randomIndex],
+    };
+
+    return questionData;
+}
+
     function mathQuestion() {
         let question = "What would be the final returned value from this math operation function?";
         let variable = Math.floor(Math.random() * 100) + 1; // Random number between 1 and 100

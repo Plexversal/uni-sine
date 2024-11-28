@@ -1,5 +1,6 @@
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useEffect, useState } from 'react'
@@ -132,74 +133,32 @@ export default function Home() {
               </div>
             </div>
 
-            <div className={styles['image-container']}>
-              <motion.img src="/static/home/mac-final.png" className={styles['home-img-3']} initial='hidden' animate='visible' variants={
-                {
-                  hidden: {
-                    y: '-100vh',
-                    opacity: 0
-                  },
-                  visible: {
-                    scale: 1,
-                    opacity: 1,
-                    transition: {
-                      delay: .1,
-                      type: 'spring',
-                      damping: '20',
-                      stiffness: '80'
-                    },
-                    y: '0'
-                  },
+            <div className={styles['mockup']}>
+                <figure className={styles['project-img-container']}>
+                    <figcaption className={styles['project-img-container-header']}>
+                        <div className={styles['project-img-container-header-circles']}>
+                            <span style={{backgroundColor: "#fc3261"}}></span>
+                            <span style={{backgroundColor: "#ffb566"}}></span>
+                            <span style={{backgroundColor: "#70ea5d"}}></span>
+                        </div>
+                        <div className={styles['project-img-container-header-arrows']}>
+                            <span>{'<'}</span>
+                            <span>{'>'}</span>
 
-                }
-              }>
+                        </div>
+                        <div className={styles['project-img-container-header-search']}></div>
+                        <div className={styles['project-img-container-header-hamburg']}>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
 
-              </motion.img>
 
-              <motion.img src="/static/home/ipad-final.png" className={styles['home-img-2']} initial='hidden' animate='visible' variants={
-                {
-                  hidden: {
-                    y: '-100vh',
-                    opacity: 0
-                  },
-                  visible: {
-                    scale: 1,
-                    opacity: 1,
-                    transition: {
-                      delay: .2,
-                      type: 'spring',
-                      damping: '20',
-                      stiffness: '80'
-                    },
-                    y: '0'
-                  },
-
-                }
-              }>
-
-              </motion.img>
-
-              <motion.img src="/static/home/iphone-final.png" className={styles['home-img-1']} initial='hidden' animate='visible' variants={
-                {
-                  hidden: {
-                    y: '-100vh',
-                    opacity: 0
-                  },
-                  visible: {
-                    scale: 1,
-                    opacity: 1,
-                    transition: {
-                      delay: .4,
-                      type: 'spring',
-                      damping: '20',
-                      stiffness: '80'
-                    },
-                    y: '0'
-                  },
-
-                }
-              }>
-              </motion.img>
+                    </figcaption>
+                </figure>
+                <div className={styles['project-img-container-img']}>
+                    <Image  width={600 } height={400} src={'/static/home/uni-sine.png'} alt="uni-sine-home"/>
+                </div>
             </div>
           </div>
         </section>

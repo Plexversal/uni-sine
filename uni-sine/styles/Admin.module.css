@@ -156,7 +156,7 @@
 }
 
 .code-block-wrapper {
-    max-width: 100%;
+    max-width: 65%;
 }
 
 @media (max-width: 800px) {

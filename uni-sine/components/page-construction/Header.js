@@ -38,14 +38,15 @@ const Header = () => {
 
                         </div>
                         :
-                        <>
+                        <div className={styles['header-links']}>
+                                                        <Link className={`${styles['sign-in-link']} ${styles['acc-btn']}`} href='/api/auth/login'>
+                                Sign in
+                            </Link>
                             <Link className={`${styles['join-link']} ${styles['acc-btn']}`} href='/api/auth/login' >
                                 Join
                             </Link>
-                            <Link className={`${styles['sign-in-link']} ${styles['acc-btn']}`} href='/api/auth/login'>
-                                Sign in
-                            </Link>
-                        </>
+
+                        </div>
                 }
 
             </div>
