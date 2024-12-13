@@ -126,10 +126,10 @@
 }
 .signed-in-actions > a {
   color: #ffffff;
-  font-weight: 200;
+  font-weight: 300;
   margin-left: 10px;
   font-size: 1.1em;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   cursor: pointer;
   width: fit-content;
 }
