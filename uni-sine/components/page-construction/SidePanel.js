@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import styles from '../../styles/SidePanel.module.css'
 import Link from "next/link";
 import { BsChevronDoubleLeft, BsChevronDoubleRight,  } from 'react-icons/bs'
-import { BiChevronRight, BiCalculator, BiHome, BiMath, BiAtom, BiCodeBlock, BiSupport, BiFontFamily, BiSlider, BiBook } from 'react-icons/bi'
+import { BiChevronRight, BiCalculator, BiHome, BiMath, BiAtom, BiCodeBlock, BiSupport, BiFontFamily, BiSlider, BiBook, BiCodeCurly } from 'react-icons/bi'
 import { GrUserSettings } from 'react-icons/gr'
 import FastRead from './FastRead';
 import AccountModal from "./AccountModal";
@@ -88,6 +88,16 @@ const SidePanel = () => {
                             </Link>
                         </li>
                         <li>
+                            <Link legacyBehavior href="/programming">
+                                <a onClick={() => window.innerWidth < 600 ? setIsOpen(false) : null}>
+                                    <div>
+                                        <span><BiCodeCurly /></span>Programming
+                                    </div>
+                                    <BiChevronRight />
+                                </a>
+                            </Link>
+                        </li>
+                        <li>
                             <Link legacyBehavior href="/calculators">
                                 <a onClick={() => window.innerWidth < 600 ? setIsOpen(false) : null}>
                                     <div>
@@ -107,6 +117,7 @@ const SidePanel = () => {
                                 </a>
                             </Link>
                         </li>
+
                     </ul>
 
                 </div>
