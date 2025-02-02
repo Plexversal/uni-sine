@@ -115,7 +115,6 @@ function P5Graph(props) {
     p5.stroke('#06A')
 
     for (let x = 10; x > -10; x -= 0.1) {
-      //let yquad = (a * Math.pow(x, 2)) + (b * x) + c
       let yquad = (a * Math.pow(x, 2)) + (b * x) + c
     
       p5.vertex(x * pixelScale, yquad * pixelScale)
