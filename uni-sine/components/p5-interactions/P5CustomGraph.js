@@ -44,16 +44,38 @@ function P5Graph(props) {
   const signed = (num) => (num < 0 ? `${num}`: `+ ${num}`);
 
   useEffect(() => {
-    if(props.preset == 'cubic') {
-      setEquation(`${presetvalues.a}x^3 ${signed(presetvalues.b)}x^2 ${signed(presetvalues.c)}x ${signed(presetvalues.d)}`)
-    } else if(props.preset == 'quadratic') {
-      setEquation(`${presetvalues.a}x^2 ${signed(presetvalues.b)}x ${signed(presetvalues.c)}`)
-    } else if(props.preset == 'log') {
-      setEquation(`${presetvalues.a}log(x) ${(presetvalues.c)}`)
-    } else if(props.preset == 'linear') {
-      setEquation(`${presetvalues.a}x ${signed(presetvalues.b)}`)
+    const safeValue = (value) => (value !== "" && value !== null && value !== undefined);
+  
+    if (props.preset === "cubic") {
+      const terms = [
+        safeValue(presetvalues.a) ? `${presetvalues.a}x^3` : "",
+        safeValue(presetvalues.b) ? `${signed(presetvalues.b)}x^2` : "",
+        safeValue(presetvalues.c) ? `${signed(presetvalues.c)}x` : "",
+        safeValue(presetvalues.d) ? `${signed(presetvalues.d)}` : "",
+      ];
+      setEquation(terms.filter(Boolean).join(" "));
+    } else if (props.preset === "quadratic") {
+      const terms = [
+        safeValue(presetvalues.a) ? `${presetvalues.a}x^2` : "",
+        safeValue(presetvalues.b) ? `${signed(presetvalues.b)}x` : "",
+        safeValue(presetvalues.c) ? `${signed(presetvalues.c)}` : "",
+      ];
+      setEquation(terms.filter(Boolean).join(" "));
+    } else if (props.preset === "log") {
+      const terms = [
+        safeValue(presetvalues.a) ? `${presetvalues.a}log(x)` : "",
+        safeValue(presetvalues.c) ? `${signed(presetvalues.c)}` : "",
+      ];
+      setEquation(terms.filter(Boolean).join(" "));
+    } else if (props.preset === "linear") {
+      const terms = [
+        safeValue(presetvalues.a) ? `${presetvalues.a}x` : "",
+        safeValue(presetvalues.b) ? `${signed(presetvalues.b)}` : "",
+      ];
+      setEquation(terms.filter(Boolean).join(" "));
     }
-  }, [presetvalues]);
+  }, [presetvalues, props.preset]);
+  
  
   useEffect(() => {
 
