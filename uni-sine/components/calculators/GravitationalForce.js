@@ -1,99 +1,147 @@
 import React, { useState, useEffect } from "react";
 import styles from '../../styles/Calculators.module.css';
+import MathJaxContent from '../page-construction/MathJaxContent';
 
 const GravitationalForce = (props) => {
+  const [mass, setMass] = useState(null);
+  const [massPowerOfTen, setMassPowerOfTen] = useState(null);
+  const [mass2, setMass2] = useState(null);
+  const [massPowerOfTen2, setMassPowerOfTen2] = useState(null);
+  const [radius, setRadius] = useState(null);
+  const [radiusPowerOfTen, setRadiusPowerOfTen] = useState(null);
+  const [gravitationalForce, setGravitationalForce] = useState(null);
+  const [equation, setEquation] = useState('');
 
+  const G = 6.67430e-11; // Gravitational constant
 
+  // 🔹 Dynamically update equation preview
+  useEffect(() => {
+    let eq = `F = \\frac{G \\times (${mass || 'M_1'} \\times 10^{${massPowerOfTen || 'm'}}) \\times (${mass2 || 'M_2'} \\times 10^{${massPowerOfTen2 || 'p'}})}{(${radius || 'r'} \\times 10^{${radiusPowerOfTen || 'n'}})^2}`;
 
+    setEquation(eq);
+  }, [mass, massPowerOfTen, mass2, massPowerOfTen2, radius, radiusPowerOfTen]);
 
-    const [massCoefficient, setMassCoefficient] = useState("5.9722");
-    const [powerOfTen, setPowerOfTen] = useState("24");
-
-    const [massCoefficient1, setMassCoefficient1] = useState("5.9722");
-    const [powerOfTen1, setPowerOfTen1] = useState("24");
-    const [powerOfTen2, setPowerOfTen2] = useState("24");
-
-    const [radius, setRadius] = useState("6371000");
-    const [gravitationalConstant, setGravitationalConstant] = useState("6.67430e-11");
-    const [gravitationalForce, setGravitationalForce] = useState(null);
-  
-    const calculateGravitationalForce = () => {
-      const mass = massCoefficient * Math.pow(10, powerOfTen);
-      const mass1 = massCoefficient1 * Math.pow(10, powerOfTen1);
-
-      const force = (gravitationalConstant * mass * mass1)/(Math.pow(radius * Math.pow(10, powerOfTen2), 2))
-
-      setGravitationalForce(force);
-    };
-  
-    return (
-      <>
-      <div className={styles['container']}>
-             
-      <h1>Gravitational Force Calculator</h1>
-    <div className={styles["calculator-content-container"]}>
-      <div className={styles["user-inputs-container"]}>
-      <div className={styles['calculator-content']}>
-        <div>
-          Mass (kg):
-          <input
-          className={`${styles['user-input']} ${styles['user-input-coefficient']}`}
-            type="number"
-
-            onChange={(e) => setMassCoefficient(parseFloat(e.target.value))}
-          />
-        X 10<sup><input
-          className={`${styles['user-input']} ${styles['user-input-exp']}`}
-          type="number"
-
-          onChange={(e) => setPowerOfTen(parseFloat(e.target.value))}
-          /></sup>
-        </div>
-        <div>
-          Mass (kg):
-          <input
-          className={`${styles['user-input']} ${styles['user-input-coefficient']}`}
-            type="number"
-
-            onChange={(e) => setMassCoefficient1(parseFloat(e.target.value))}
-          />
-        X 10<sup><input
-          className={`${styles['user-input']} ${styles['user-input-exp']}`}
-          type="number"
-
-          onChange={(e) => setPowerOfTen1(parseFloat(e.target.value))}
-          /></sup>
-        </div>
-        <div>
-          Radius (m):
-          <input
-          className={`${styles['user-input']} ${styles['user-input-coefficient']}`}
-            type="number"
-
-            onChange={(e) => setRadius(parseFloat(e.target.value))}
-          />
-        X 10<sup><input
-          className={`${styles['user-input']} ${styles['user-input-exp']}`}
-          type="number"
-
-          onChange={(e) => setPowerOfTen2(parseFloat(e.target.value))}
-          /></sup>
-        </div>
-        <button className={styles['user-input-btn']} onClick={calculateGravitationalForce}>Calculate Gravitational Force</button>
-
-      </div>
-      </div>
-      <div className={styles["result-container"]}>
-        {gravitationalForce !== null && (
-          <>
-            <p>Gravitational Force: <strong>{gravitationalForce.toFixed(5)} Newtons</strong></p>
-          </>
-        )}
-      </div>
-    </div>
-    </div>
-</>
-    );
+  // 🔹 Calculation logic
+  const calculate = () => {
+    if (mass && massPowerOfTen && mass2 && massPowerOfTen2 && radius && radiusPowerOfTen) {
+      const m1 = mass * Math.pow(10, massPowerOfTen);
+      const m2 = mass2 * Math.pow(10, massPowerOfTen2);
+      const r = radius * Math.pow(10, radiusPowerOfTen);
+      setGravitationalForce((G * m1 * m2) / Math.pow(r, 2));
+    }
   };
-  
-  export default GravitationalForce;
+
+  // 🔹 Handle Enter key to trigger calculation
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        calculate();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [calculate]);
+
+  return (
+    <div className={styles['container']}>
+      <div className={styles['calculator-header']}>
+        <h1>Gravitational Force Calculator</h1>
+        <button className={styles['close-btn']} onClick={props.onClose}>X</button>
+      </div>
+      <div className={styles["calculator-content-container"]}>
+        <div className={styles["user-inputs-container"]}>
+          <div className={styles['calculator-content']}>
+            <div className={styles['input-container']}>
+              <div>
+                <div><strong>Mass <sub>1</sub> (kg):</strong></div>
+                <input
+                  className={`${styles['user-input']} ${styles['user-input-coefficient']}`}
+                  type="number"
+                  value={mass ?? ''}
+                  onChange={(e) => setMass(parseFloat(e.target.value) || null)}
+                  placeholder="Mass 1"
+                />
+                <code>x10</code><sup>
+                  <input
+                    className={`${styles['user-input']} ${styles['user-input-exp']}`}
+                    type="number"
+                    value={massPowerOfTen ?? ''}
+                    onChange={(e) => setMassPowerOfTen(parseFloat(e.target.value) || null)}
+                    placeholder="Exponent"
+                  />
+                </sup>
+              </div>
+
+              <div>
+                <div><strong>Mass <sub>2</sub> (kg):</strong></div>
+                <input
+                  className={`${styles['user-input']} ${styles['user-input-coefficient']}`}
+                  type="number"
+                  value={mass2 ?? ''}
+                  onChange={(e) => setMass2(parseFloat(e.target.value) || null)}
+                  placeholder="Mass 2"
+                />
+                <code>x10</code><sup>
+                  <input
+                    className={`${styles['user-input']} ${styles['user-input-exp']}`}
+                    type="number"
+                    value={massPowerOfTen2 ?? ''}
+                    onChange={(e) => setMassPowerOfTen2(parseFloat(e.target.value) || null)}
+                    placeholder="Exponent"
+                  />
+                </sup>
+              </div>
+
+              <div>
+                <div><strong>Radius (m):</strong></div>
+                <input
+                  className={`${styles['user-input']} ${styles['user-input-coefficient']}`}
+                  type="number"
+                  value={radius ?? ''}
+                  onChange={(e) => setRadius(parseFloat(e.target.value) || null)}
+                  placeholder="Radius"
+                />
+                <code>x10</code><sup>
+                  <input
+                    className={`${styles['user-input']} ${styles['user-input-exp']}`}
+                    type="number"
+                    value={radiusPowerOfTen ?? ''}
+                    onChange={(e) => setRadiusPowerOfTen(parseFloat(e.target.value) || null)}
+                    placeholder="Exponent"
+                  />
+                </sup>
+              </div>
+            </div>
+          </div>
+
+          {/* Dynamic Equation Preview */}
+          <div className={styles['equation-preview']}>
+            <MathJaxContent content={`$$ ${equation} $$`} />
+          </div>
+
+          {/* Single Calculate Button */}
+          <button className={styles['user-input-btn']} onClick={calculate}>
+            Calculate Gravitational Force
+          </button>
+        </div>
+
+        {/* Results Section */}
+        <div className={styles["result-container"]}>
+          {gravitationalForce !== null && (
+            <>
+              <div>Gravitational Force:</div>
+              <p><strong>{gravitationalForce.toExponential(5)} Newtons</strong></p>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default GravitationalForce;

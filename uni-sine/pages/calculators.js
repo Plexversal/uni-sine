@@ -76,7 +76,7 @@ function searchComponent() {
 
 
   const compCalcs = {
-    'Code Editor': <CodeEditor />
+    'Code Editor': <CodeEditor {...{onClose: handleCloseCalculator }}  />
   }
 
   const mathCalcs = {
@@ -88,7 +88,7 @@ function searchComponent() {
     'Trigonometry Calculator': <P5TrigTriangle {...{onClose: handleCloseCalculator, custom: true}}/>,
     'Vectors Calculator': <P5Vectors {...{onClose: handleCloseCalculator}}/>,
     'Custom Graph': <P5CustomGraph {...{onClose: handleCloseCalculator}}/>,
-    'Equation Notepad': <EquationNotepad />
+    'Equation Notepad': <EquationNotepad {...{onClose: handleCloseCalculator}}/>
   }
 
   const physicsCalcs = {
@@ -97,7 +97,7 @@ function searchComponent() {
     'Escape Velocity Calculator': <EscapeVelocity {...{onClose: handleCloseCalculator}}/>,
     'Gravitational Force Calculator': <GravitationalForce {...{onClose: handleCloseCalculator}}/>,
     'Gravitational Potential Calculator': <GravitationalPotential {...{onClose: handleCloseCalculator}}/>,
-    'Keplers Third Law Calculator': <KeplersThirdLaw />,
+    'Keplers Third Law Calculator': <KeplersThirdLaw {...{onClose: handleCloseCalculator}} />,
     'Half Life Calculator': <HalfLife {...{onClose: handleCloseCalculator}}/>,
   }
 

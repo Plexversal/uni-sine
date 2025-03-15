@@ -11,7 +11,10 @@ const BindingEnergy = (props) => {
           <div
             className={styles["container"]}
           >
-            <h1>Code Editor</h1>
+                  <div className={styles['calculator-header']}>
+                    <h1>Code Editor</h1>
+                    <button className={styles['close-btn']} onClick={props.onClose}>X</button>
+                  </div>
             <CodeEditor />
 
           </div>

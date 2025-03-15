@@ -10,7 +10,7 @@
     max-height: 90vh;
 }
 
-.container h1 {
+.calculator-header h1 {
     font-size: 1.2em;
     margin: 20px;
     color: white;
@@ -22,25 +22,44 @@
 }
 
 .user-inputs-container {
-    background-color: rgb(56, 56, 56);
+    background: #282c34 !important;
+
     flex: 1;
     color: white;
 }
 
 .result-container {
-    background-color: rgb(96 96 96);
+    background-color: #33363b;
     flex: 1;
     padding: 1rem;
     color: white;
 }
 
 .user-input {
-    width: 50px;
-    margin: 0 5px;
+    width: 100px;
     border: none;
-    background: rgba(250, 250, 250, 0.678);
+    margin: 5px 4px 0px 4px;
+    background: #6e696277;
     border-radius: 3px;
-    padding: 3px;
+    padding: 3.5px 4px;
+    color: rgb(228, 228, 228);
+    font-size: 1em;
+}
+
+/* Chrome, Safari, Edge, Opera */
+.user-input::-webkit-outer-spin-button,
+.user-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.user-input:focus,
+.equation-inputs input:focus {
+    outline: thin solid rgb(126, 126, 126);
+}
+/* Firefox */
+.user-input[type=number] {
+  -moz-appearance: textfield;
 }
 
 .user-input-btn {
@@ -62,7 +81,11 @@
     background: rgb(255, 255, 255);
     color: black;
 }
+.user-input-exp {
+    padding: 3.5px 4px;
+    width: 80px;
 
+}
 .input-switch[type=checkbox] {
     height: 0;
     width: 0;
@@ -111,8 +134,28 @@
     padding: 1rem;
 }
 
-.calculator-content>div {
-    margin: 10px 0;
+.calculator-content > div {
+
+}
+
+
+.calculator-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.close-btn {
+    height: fit-content;
+    width: 40px;
+    background: none;
+    color: white;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+}
+.close-btn:hover {
+    background: rgb(248, 69, 69);
 }
 
 .option-container input[type='radio'] {
@@ -126,24 +169,26 @@
 
 .option-container {
     display: flex;
-    background-color: #eeba7509;
+    background-color: #33363b;
 }
 
-.option-container div {
+.option-container label {
     width: 100%;
     text-align: center;
     transition: all .3s;
     font-weight: 400;
+    user-select: none;
+
 }
 
-.option-container div:hover {
-    background: rgb(89, 255, 177);
-    color: black;
+.option-container label:hover {
+  background: rgb(29, 28, 28);
+
 }
 
 .checked-option {
-    background: rgb(89, 255, 177);
-    color: black;
+    background: #282c34 !important;
+    border-top: 2px solid orange !important;
 }
 
 .option-container label {
@@ -265,14 +310,13 @@
 }
 
 .equation-notepad {
-    background: white;
-    padding: 20px;
+    background: #282c34;
     min-width: 700px;
     max-width: 80vw;
     text-align: center;
     border-radius: 6px;
     max-height: 70vh;
-    overflow-y: auto;
+    overflow: auto;
 
 }
 .equation-inputs {
@@ -282,8 +326,15 @@
     position: sticky;
     top: 0;
     z-index: 1;
+    margin: 20px;
 }
-
+.equation-list,
+.equation-notepad-preview {
+    white-space: nowrap;
+    overflow-x: auto;
+    max-width: 100%;
+    margin: 0 20px;
+}
 .equation-inputs button {
     width: 40px;
     border-radius: 5px;
@@ -304,16 +355,23 @@
     width: 100%;
     border-radius: 5px;
     border: 1px solid rgb(85, 85, 85);
-    background: rgb(209, 209, 209);
+    background: #6e696277;
     font-family: inherit;
+    color: white;
 }
 .equation-list {
     display: flex;
     justify-content: space-between;
     margin: 8px 0;
     align-items: center;
+    color: white;
 }
-
+.equation-list > div {
+    margin: 0 20px;
+}
+.equation-notepad-preview {
+    color: white;
+}
 .equation-list button {
     background: none;
     border: none;
@@ -323,6 +381,19 @@
     height: 20px;
     font-size: 1.1em;
 }
+
+.equation-preview {
+    border-top: 2px solid rgb(92, 92, 92);
+}
+
+.input-container {
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
 @media (max-width: 800px) {
     .calculator-modal {
         width: 90%;
