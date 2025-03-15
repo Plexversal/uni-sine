@@ -59,7 +59,7 @@ export default function Programming(){
 
 function searchComponent() {
   return (<div className={contentStyles['search-content-wrapper']}>
-      <input placeholder='Search for all programming problems' className={contentStyles['user-topic-search']} id='user-search-topic' onChange={e => setSearchTerm(e.target.value)} type='text'></input>
+      <input placeholder='Search for all coding problems' className={contentStyles['user-topic-search']} id='user-search-topic' onChange={e => setSearchTerm(e.target.value)} type='text'></input>
   </div>)
 }
 
@@ -86,17 +86,16 @@ function searchComponent() {
           )}
           <div className={styles["content-container"]}>
             <SecondaryBanner
-              title="Programming Problems"
+              title="Coding Problems"
               search={true ? searchComponent : <div>Loading</div>}
-              subheader={`Programming problems with difficulty ranging from easy to hard. Premium members only`}
+              subheader={`Coding problems with difficulty ranging from easy to hard. Premium members only`}
             />
             <div className={styles["content-wrapper"]}>
               <div className={styles["example-info"]}>
                 <div>
                   <h2>Programming for any level...</h2>
                   <p>
-                    100 programming problems ranging from easy to hard, allowing
-                    you to test your knowledge whatever level you are at.
+                    Coding challenges of varying difficulty. Start easy and work your way up, or skip to the hardest.
                   </p>
                   <p>
                     You can also use the <strong>AI chat</strong> at the bottom

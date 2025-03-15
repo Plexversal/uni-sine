@@ -81,7 +81,7 @@ const SidePanel = () => {
                             <Link legacyBehavior href="/questions">
                                 <a onClick={() => window.innerWidth < 600 ? setIsOpen(false) : null}>
                                     <div>
-                                        <span><BiFontFamily /></span>Practice questions
+                                        <span><BiFontFamily /></span>Practice Questions
                                     </div>
                                     <BiChevronRight />
                                 </a>
@@ -91,7 +91,7 @@ const SidePanel = () => {
                             <Link legacyBehavior href="/programming">
                                 <a onClick={() => window.innerWidth < 600 ? setIsOpen(false) : null}>
                                     <div>
-                                        <span><BiCodeCurly /></span>Programming
+                                        <span><BiCodeCurly /></span>Coding Challenges
                                     </div>
                                     <BiChevronRight />
                                 </a>
