@@ -124,9 +124,9 @@ export default function Home() {
 
           <div className={styles['landing-section-content']}>
             <div className={styles['landing-left']}>
-              <h1>All the knowledge you need in one place</h1>
-              <p>Uni-Sine Learning is an online learning platform designed to help you learn through <strong>visual and interactive tools</strong>, Advanced <strong>AI inegration</strong> and <strong>specialized courses</strong>.</p>
-              <p>Need to pass your exams? Or perhaps just curious about the world. This is the place to learn. </p>
+              <h1><span style={{color: 'lightblue'}}>Need knowledge fast?</span> You&apos;re in the right place...</h1>
+              <p>Are you in school or uni? Need to pass your exams? Or perhaps just curious about the world. This is the place to learn. </p>
+              <p>Uni-Sine Learning is an online learning platform designed to help you learn through <strong>visual and interactive tools</strong>, Advanced <strong>AI integration</strong> and <strong>specialized courses</strong>.</p>
               <div className={styles['home-btn-wrapper']}>
               <button onClick={scrollClick} className={styles['explore-btn']}>Free Topics</button>
               <Link href={'/courses'} className={styles['calculators-btn']}>Explore Courses</Link>

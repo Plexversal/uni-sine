@@ -1,295 +1,227 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../styles/Calculators.module.css";
+import MathJaxContent from "../page-construction/MathJaxContent";
 
 const ElectricField = (props) => {
-
-  const [option, setOption] = useState("force");
-  const [charge, setCharge] = useState(null);
-  const [chargePowerOfTen, setChargePowerOfTen] = useState(null);
-  const [chargePowerOfTen2, setChargePowerOfTen2] = useState(null);
-
-  const [distance, setDistance] = useState(null);
-  const [distancePowerOfTen, setDistancePowerOfTen] = useState(null);
+  const [selectedValue, setSelectedValue] = useState("Force");
+  const [charge1, setCharge1] = useState(null);
+  const [chargePower1, setChargePower1] = useState(null);
   const [charge2, setCharge2] = useState(null);
-  const [result, setResult] = useState(null);
+  const [chargePower2, setChargePower2] = useState(null);
+  const [distance, setDistance] = useState(null);
+  const [distancePower, setDistancePower] = useState(null);
   const [voltage, setVoltage] = useState(null);
+  const [result, setResult] = useState(null);
+  const [equation, setEquation] = useState("");
 
-  const k = 8.9875517923e9; // Coulomb's constant
+  const k = 8.9875517923e9;
 
-  const handleOptionChange = (e) => {
-    setOption(e.target.value);
+  useEffect(() => {
+    let eq = "";
+
+    if (selectedValue === "Force") {
+      eq = `F = \\frac{k \\times (${charge1 || 'Q_1'} \\times 10^{${chargePower1 || 'a'}}) \\times (${charge2 || 'Q_2'} \\times 10^{${chargePower2 || 'b'}})}{(${distance || 'r'} \\times 10^{${distancePower || 'c'}})^2}`;
+    } else if (selectedValue === "Radial Field") {
+      eq = `E = \\frac{k \\times (${charge1 || 'Q'} \\times 10^{${chargePower1 || 'a'}})}{(${distance || 'r'} \\times 10^{${distancePower || 'b'}})^2}`;
+    } else if (selectedValue === "Uniform Field") {
+      eq = `E = \\frac{${voltage || 'V'}}{(${distance || 'd'} \\times 10^{${distancePower || 'a'}})}`;
+    }
+
+    setEquation(eq);
+  }, [selectedValue, charge1, chargePower1, charge2, chargePower2, distance, distancePower, voltage]);
+
+  const calculate = () => {
+    if (selectedValue === "Force" && charge1 && chargePower1 && charge2 && chargePower2 && distance && distancePower) {
+      const q1 = charge1 * Math.pow(10, chargePower1);
+      const q2 = charge2 * Math.pow(10, chargePower2);
+      const r = distance * Math.pow(10, distancePower);
+      setResult((k * q1 * q2) / Math.pow(r, 2));
+    } else if (selectedValue === "Radial Field" && charge1 && chargePower1 && distance && distancePower) {
+      const q = charge1 * Math.pow(10, chargePower1);
+      const r = distance * Math.pow(10, distancePower);
+      setResult((k * q) / Math.pow(r, 2));
+    } else if (selectedValue === "Uniform Field" && voltage && distance && distancePower) {
+      const d = distance * Math.pow(10, distancePower);
+      setResult(voltage / d);
+    }
+  };
+
+  const selectOption = (e) => {
+    setSelectedValue(e.target.value);
+    setCharge1(null);
+    setChargePower1(null);
+    setCharge2(null);
+    setChargePower2(null);
+    setDistance(null);
+    setDistancePower(null);
+    setVoltage(null);
     setResult(null);
+    setEquation("");
   };
 
-  const calculateForce = () => {
-    const q1 = charge * Math.pow(10, chargePowerOfTen);
-    const q2 = charge2 * Math.pow(10, chargePowerOfTen2);
-    const r = distance * Math.pow(10, distancePowerOfTen);
-    const F = (k * q1 * q2) / Math.pow(r, 2);
-    setResult(F);
-  };
-
-  const calculateRadialField = () => {
-    const q = charge * Math.pow(10, chargePowerOfTen);
-    const r = distance * Math.pow(10, distancePowerOfTen);
-    const E = (k * q) / Math.pow(r, 2);
-    setResult(E);
-  };
-
-  const calculateUniformField = () => {
-    const fieldStrength =
-      voltage / (distance * Math.pow(10, distancePowerOfTen));
-    setResult(fieldStrength);
-  };
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        calculate();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [calculate]);
 
   return (
-    <>
-      
-        <div
-          className={styles["container"]}
-        >
+    <div className={styles["container"]}>
+      <div className={styles["calculator-header"]}>
+        <h1>Electric Field Calculator</h1>
+        <button className={styles["close-btn"]} onClick={props.onClose}>X</button>
+      </div>
 
-          <h1>Electric Field Calculator</h1>
-          <div className={styles["calculator-content-container"]}>
-            <div className={styles["user-inputs-container"]}>
-              <div className={styles["option-container"]}>
-                <div
-                  className={option === "force" ? styles["checked-option"] : ""}
+      <div className={styles["calculator-content-container"]}>
+        <div className={styles["user-inputs-container"]}>
+          <div className={styles["option-container"]}>
+            {["Force", "Radial Field", "Uniform Field"].map((option) => (
+              <React.Fragment key={option}>
+                <input
+                  type="radio"
+                  id={option}
+                  name="selection"
+                  value={option}
+                  onChange={selectOption}
+                  checked={selectedValue === option}
+                />
+                <label
+                  className={selectedValue === option ? styles["checked-option"] : ""}
+                  htmlFor={option}
                 >
-                  <input
-                    type="radio"
-                    id="force"
-                    name="selection"
-                    value="force"
-                    onChange={handleOptionChange}
-                    defaultChecked
-                  />
-                  <label htmlFor="force">Force</label>
-                </div>
-                <div
-                  className={
-                    option === "radial" ? styles["checked-option"] : ""
-                  }
-                >
-                  <input
-                    type="radio"
-                    id="radial"
-                    name="selection"
-                    value="radial"
-                    onChange={handleOptionChange}
-                  />
-                  <label htmlFor="radial">Radial Field</label>
-                </div>
-                <div
-                  className={
-                    option === "uniform" ? styles["checked-option"] : ""
-                  }
-                >
-                  <input
-                    type="radio"
-                    id="uniform"
-                    name="selection"
-                    value="uniform"
-                    onChange={handleOptionChange}
-                  />
-                  <label htmlFor="uniform">Uniform Field</label>
-                </div>
-              </div>
-              <div className={styles["calculator-content"]}>
-                {option === "force" ? (
-                  <>
-                    <div>
-                      <strong>
-                        Charge <sub>1</sub> (C):
-                      </strong>
-                      <input
-                        className={`${styles["user-input"]} ${styles["user-input-coefficient"]}`}
-                        type="number"
-                        onChange={(e) => setCharge(parseFloat(e.target.value))}
-                      />
-                      X 10
-                      <sup>
-                        <input
-                          className={`${styles["user-input"]} ${styles["user-input-exp"]}`}
-                          type="number"
-                          onChange={(e) =>
-                            setChargePowerOfTen(parseFloat(e.target.value))
-                          }
-                        />
-                      </sup>
-                    </div>
-                    <div>
-                      <strong>
-                        Charge <sub>2</sub> (C):
-                      </strong>
-                      <input
-                        className={`${styles["user-input"]} ${styles["user-input-coefficient"]}`}
-                        type="number"
-                        onChange={(e) => setCharge2(parseFloat(e.target.value))}
-                      />
-                      X 10
-                      <sup>
-                        <input
-                          className={`${styles["user-input"]} ${styles["user-input-exp"]}`}
-                          type="number"
-                          onChange={(e) =>
-                            setChargePowerOfTen2(parseFloat(e.target.value))
-                          }
-                        />
-                      </sup>
-                    </div>
+                  {option}
+                </label>
+              </React.Fragment>
+            ))}
+          </div>
 
-                    <div>
-                      <strong>Distance (m):</strong>
-                      <input
-                        className={`${styles["user-input"]} ${styles["user-input-coefficient"]}`}
-                        type="number"
-                        onChange={(e) =>
-                          setDistance(parseFloat(e.target.value))
-                        }
-                      />
-                      X 10
-                      <sup>
-                        <input
-                          className={`${styles["user-input"]} ${styles["user-input-exp"]}`}
-                          type="number"
-                          onChange={(e) =>
-                            setDistancePowerOfTen(parseFloat(e.target.value))
-                          }
-                        />
-                      </sup>
-                    </div>
-                    <button
-                      className={styles["user-input-btn"]}
-                      onClick={calculateForce
-                      }
-                    >
-                      Calculate Force
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    {option === "uniform" ? (
-                      <>
-                        <div>
-                          <strong>Voltage (V):</strong>
-                          <input
-                            className={`${styles["user-input"]} ${styles["user-input-coefficient"]}`}
-                            type="number"
-                            onChange={(e) =>
-                              setVoltage(parseFloat(e.target.value))
-                            }
-                          />
-                        </div>
-                        <div>
-                          <strong>Distance (m):</strong>
-                          <input
-                            className={`${styles["user-input"]} ${styles["user-input-coefficient"]}`}
-                            type="number"
-                            onChange={(e) =>
-                              setDistance(parseFloat(e.target.value))
-                            }
-                          />
-                          X 10
-                          <sup>
-                            <input
-                              className={`${styles["user-input"]} ${styles["user-input-exp"]}`}
-                              type="number"
-                              onChange={(e) =>
-                                setDistancePowerOfTen(
-                                  parseFloat(e.target.value)
-                                )
-                              }
-                            />
-                          </sup>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <div>
-                          <strong>Distance (m):</strong>
-                          <input
-                            className={`${styles["user-input"]} ${styles["user-input-coefficient"]}`}
-                            type="number"
-                            onChange={(e) =>
-                              setDistance(parseFloat(e.target.value))
-                            }
-                          />
-                          X 10
-                          <sup>
-                            <input
-                              className={`${styles["user-input"]} ${styles["user-input-exp"]}`}
-                              type="number"
-                              onChange={(e) =>
-                                setDistancePowerOfTen(
-                                  parseFloat(e.target.value)
-                                )
-                              }
-                            />
-                          </sup>
-                        </div>
-                        <div>
-                          <strong>Charge (C):</strong>
-                          <input
-                            className={`${styles["user-input"]} ${styles["user-input-coefficient"]}`}
-                            type="number"
-                            onChange={(e) =>
-                              setCharge(parseFloat(e.target.value))
-                            }
-                          />
-                          X 10
-                          <sup>
-                            <input
-                              className={`${styles["user-input"]} ${styles["user-input-exp"]}`}
-                              type="number"
-                              onChange={(e) =>
-                                setChargePowerOfTen(parseFloat(e.target.value))
-                              }
-                            />
-                          </sup>
-                        </div>
-                      </>
-                    )}
-                    {option === "radial" ? (
-                      <button
-                        className={styles["user-input-btn"]}
-                        onClick={calculateRadialField
-                        }
-                      >
-                        Calculate Radial Field
-                      </button>
-                    ) : (
-                      <button
-                        className={styles["user-input-btn"]}
-                        onClick={calculateUniformField
-                        }
-                      >
-                        Calculate Uniform Field
-                      </button>
-                    )}
-                  </>
-                )}
-              </div>
-            </div>
-            <div className={styles["result-container"]}>
-              {result !== null && (
+          <div className={styles["calculator-content"]}>
+            <div className={styles["input-container"]}>
+              {(selectedValue === "Force" || selectedValue === "Radial Field") && (
                 <>
-                  {option === "force" ? (
-                    <p>
-                      Electric Force: <strong>{result} N</strong>
-                    </p>
-                  ) : (
-                    <p>
-                      Electric Field Strength: <strong>{result} N/C</strong>
-                    </p>
-                  )}
+                  <div>
+                    <div><strong>Charge {selectedValue === "Force" ? <sub>1</sub> : ""} (C):</strong></div>
+                    <input
+                      className={`${styles["user-input"]} ${styles["user-input-coefficient"]}`}
+                      type="number"
+                      onChange={(e) => setCharge1(parseFloat(e.target.value) || null)}
+                      placeholder="Charge"
+                      value={charge1 ?? ''}
+                    />
+                    <code>x10</code><sup>
+                      <input
+                        className={`${styles["user-input"]} ${styles["user-input-exp"]}`}
+                        type="number"
+                        onChange={(e) => setChargePower1(parseFloat(e.target.value) || null)}
+                        placeholder="Exponent"
+                        value={chargePower1 ?? ''}
+                      />
+                    </sup>
+                  </div>
+                </>
+              )}
+
+              {selectedValue === "Force" && (
+                <div>
+                  <div><strong>Charge <sub>2</sub> (C):</strong></div>
+                  <input
+                    className={`${styles["user-input"]} ${styles["user-input-coefficient"]}`}
+                    type="number"
+                    onChange={(e) => setCharge2(parseFloat(e.target.value) || null)}
+                    placeholder="Charge"
+                    value={charge2 ?? ''}
+                  />
+                  <code>x10</code><sup>
+                    <input
+                      className={`${styles["user-input"]} ${styles["user-input-exp"]}`}
+                      type="number"
+                      onChange={(e) => setChargePower2(parseFloat(e.target.value) || null)}
+                      placeholder="Exponent"
+                      value={chargePower2 ?? ''}
+                    />
+                  </sup>
+                </div>
+              )}
+
+              {selectedValue !== "Uniform Field" && (
+                <div>
+                  <div><strong>Distance (m):</strong></div>
+                  <input
+                    className={`${styles["user-input"]} ${styles["user-input-coefficient"]}`}
+                    type="number"
+                    onChange={(e) => setDistance(parseFloat(e.target.value) || null)}
+                    placeholder="Distance"
+                    value={distance ?? ''}
+                  />
+                  <code>x10</code><sup>
+                    <input
+                      className={`${styles["user-input"]} ${styles["user-input-exp"]}`}
+                      type="number"
+                      onChange={(e) => setDistancePower(parseFloat(e.target.value) || null)}
+                      placeholder="Exponent"
+                      value={distancePower ?? ''}
+                    />
+                  </sup>
+                </div>
+              )}
+
+              {selectedValue === "Uniform Field" && (
+                <>
+                  <div>
+                    <div><strong>Voltage (V):</strong></div>
+                    <input
+                      className={`${styles["user-input"]} ${styles["user-input-coefficient"]}`}
+                      type="number"
+                      onChange={(e) => setVoltage(parseFloat(e.target.value) || null)}
+                      placeholder="Voltage"
+                      value={voltage ?? ''}
+                    />
+                  </div>
+                  <div>
+                    <div><strong>Distance (m):</strong></div>
+                    <input
+                      className={`${styles["user-input"]} ${styles["user-input-coefficient"]}`}
+                      type="number"
+                      onChange={(e) => setDistance(parseFloat(e.target.value) || null)}
+                      placeholder="Distance"
+                      value={distance ?? ''}
+                    />
+                    <code>x10</code><sup>
+                      <input
+                        className={`${styles["user-input"]} ${styles["user-input-exp"]}`}
+                        type="number"
+                        onChange={(e) => setDistancePower(parseFloat(e.target.value) || null)}
+                        placeholder="Exponent"
+                        value={distancePower ?? ''}
+                      />
+                    </sup>
+                  </div>
                 </>
               )}
             </div>
           </div>
+
+          <div className={styles["equation-preview"]}>
+            <MathJaxContent content={`$$ ${equation} $$`} />
+          </div>
+
+          <button className={styles["user-input-btn"]} onClick={calculate}>
+            Calculate {selectedValue}
+          </button>
         </div>
-      
-    </>
+
+        <div className={styles["result-container"]}>
+          {result !== null && (
+            <p><strong>{result.toExponential(5)} {selectedValue === "Force" ? "N" : "N/C"}</strong></p>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 
