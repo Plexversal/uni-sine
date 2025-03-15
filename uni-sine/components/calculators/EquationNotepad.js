@@ -32,6 +32,10 @@ const EquationNotepad = (props) => {
   return (
     <>
       <div className={styles["equation-notepad"]}>
+      <div className={styles['calculator-header']}>
+        <h1>Equation notepad</h1>
+        <button className={styles['close-btn']} onClick={props.onClose}>X</button>
+      </div>
         <div className={styles["equation-inputs"]}>
           <input
             type="text"
@@ -53,7 +57,9 @@ const EquationNotepad = (props) => {
 
           ))
         }
-        <MathJaxContent content={`$$ ${equation} $$`} />
+        <div className={styles['equation-notepad-preview']}>
+          <MathJaxContent content={`$$ ${equation} $$`} />
+        </div>
 
       </div>
     </>
