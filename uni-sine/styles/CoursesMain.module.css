@@ -1,0 +1,78 @@
+.course-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.course-wrapper {
+    border-bottom: 1px solid black;
+    padding-bottom: 5em;
+}
+
+.courses-title-wrapper  * {
+    margin: 0;
+}
+
+.courses-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+    margin: 2em 0;
+    font-size: 1.1em;
+}
+
+.courses-title-wrapper p {
+
+}
+.courses-title-stats-wrapper {
+    color: rgb(119, 119, 119);
+    font-style: italic;
+    margin-top: 10px;
+}
+.courses-links-wrapper {
+    display: flex; /* Use flexbox instead of grid */
+    flex-wrap: wrap; /* Allow wrapping if necessary */
+    gap: 2em;
+    justify-content: flex-start;
+    align-items: stretch; /* Make all items match the height of the tallest one */
+    padding: 15px;
+    width: 100%;
+}
+
+.courses-links-wrapper a {
+    display: flex;
+    gap: 1.3em;
+    max-width: 300px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(105, 105, 105);
+    border-radius: 6px;
+    transition: all .3s;
+    font-weight: 600;
+    font-size: 1.3em;
+    color: rgb(43, 42, 42);
+    padding: 40px;
+    text-align: center;
+    width: 100%;  /* Makes each link match the largest size */
+    font-family: inherit;
+    flex: 1;
+}
+
+.courses-links-wrapper a button {
+    background-color: rgb(53, 223, 158);
+    box-shadow: 4px 4px 0px rgb(169, 245, 216);
+    cursor: pointer;
+    border: 2px solid rgb(0, 0, 0);
+    transition: all .3s;
+    font-weight: 600;
+    padding: 20px;
+    font-size: 1em;
+}
+
+.courses-links-wrapper a button:hover,
+.courses-links-wrapper a button:focus {
+    box-shadow: 10px 10px 0px rgb(169, 245, 216);
+    transform: scale(1.13);
+}
+
