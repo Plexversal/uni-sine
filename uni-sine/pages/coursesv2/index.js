@@ -181,7 +181,7 @@ export default function Courses() {
                         </Link>
                         <Link href={'/coursesv2'}>
                             <GiNuclearPlant size={80}/>
-                            <span>API's</span>
+                            <span>API&apos;s</span>
                         </Link>
                         <Link href={'/coursesv2'}>
                             <GiNuclearPlant size={80}/>

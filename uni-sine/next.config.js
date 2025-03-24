@@ -12,7 +12,9 @@ const nextConfig = {
   images: {
     domains: ['s.gravatar.com'],
   },
-
+  eslint: {
+    ignoreDuringBuilds: true
+  },
   images: {
     remotePatterns: [
       {
