@@ -18,8 +18,8 @@ export default function Webdevcoding() {
         "Display Block",
         "Practice: Display elements",
         "JavaScript",
-        "Create elements with JS",
-        "Practice: Develop a script"
+        "Create elements with JS"
+
     ]
 
     return <>
