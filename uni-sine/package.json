@@ -25,6 +25,7 @@
     "codemirror": "^6.0.1",
     "copy-to-clipboard": "^3.3.3",
     "dedent-js": "^1.0.1",
+    "dom-to-image": "^2.6.0",
     "framer-motion": "^4.1.17",
     "lodash": "^4.17.21",
     "mathjs": "^11.9.1",
