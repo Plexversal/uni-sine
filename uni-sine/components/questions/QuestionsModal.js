@@ -13,8 +13,8 @@ import CodeBlock from '../page-construction/CodeBlock'
 import { useUserContext } from "../../contexts/UserContext";
 import { useRouter } from 'next/router';
 import BuyPremiumModal from "../page-construction/PremiumModal";
-import html2canvas from 'html2canvas';
 import domtoimage from 'dom-to-image';
+
 
 const QuestionsModal = (props) => {
   const confettiRef = useRef(null);
@@ -390,35 +390,39 @@ const QuestionsModal = (props) => {
   };
 
   const captureRef = useRef(null);
+ 
+
   const handleDownloadImage = async () => {
     const elementToCapture = captureRef.current;
-    
+
     if (!elementToCapture) {
       console.error("Element to capture not found!");
       alert("Could not capture the results image. Please try again.");
       return;
     }
-    
+
     try {
-      // Optional: Add a small delay
-      await new Promise(resolve => setTimeout(resolve, 300));
-      
-      // Use dom-to-image instead of html2canvas
+
+      await new Promise((resolve) => setTimeout(resolve, 300));
+
       const dataUrl = await domtoimage.toPng(elementToCapture, {
-        bgcolor: '#ffffff',
-        scale: 2
+        bgcolor: "#ffffff",
+
+        scale: 2,
       });
-      
+
       // Download the image
-      const link = document.createElement('a');
-      link.download = 'quiz-results.png';
+      const link = document.createElement("a");
+      link.download = "quiz-results.png";
       link.href = dataUrl;
       link.click();
     } catch (error) {
       console.error("Error capturing image:", error);
+
       alert("Sorry, there was an error generating the image.");
     }
   };
+
   return (
     <>
       {isLoading ? (
@@ -426,9 +430,10 @@ const QuestionsModal = (props) => {
       ) : (
         <div className={styles["container"]}>
           <>
-          <button id="download-question-button" onClick={handleDownloadImage}>
-                     Download Results
-                   </button>
+
+          {
+            user?.app_metadata?.is_admin && <button id="download-question-button" onClick={handleDownloadImage}>Download image</button>
+          }
           <BuyPremiumModal user={user} showOverlay={true}  ref={buyPremiumModalRef} />
 
             <div ref={captureRef} className={`${styles["calculator-content-container"]}`}>
