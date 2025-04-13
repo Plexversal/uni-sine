@@ -13,8 +13,8 @@ import CodeBlock from '../page-construction/CodeBlock'
 import { useUserContext } from "../../contexts/UserContext";
 import { useRouter } from 'next/router';
 import BuyPremiumModal from "../page-construction/PremiumModal";
-
-
+import html2canvas from 'html2canvas';
+import domtoimage from 'dom-to-image';
 
 const QuestionsModal = (props) => {
   const confettiRef = useRef(null);
@@ -388,6 +388,37 @@ const QuestionsModal = (props) => {
 
     setTimeValue(timerRef.current.getFormattedTime())
   };
+
+  const captureRef = useRef(null);
+  const handleDownloadImage = async () => {
+    const elementToCapture = captureRef.current;
+    
+    if (!elementToCapture) {
+      console.error("Element to capture not found!");
+      alert("Could not capture the results image. Please try again.");
+      return;
+    }
+    
+    try {
+      // Optional: Add a small delay
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      // Use dom-to-image instead of html2canvas
+      const dataUrl = await domtoimage.toPng(elementToCapture, {
+        bgcolor: '#ffffff',
+        scale: 2
+      });
+      
+      // Download the image
+      const link = document.createElement('a');
+      link.download = 'quiz-results.png';
+      link.href = dataUrl;
+      link.click();
+    } catch (error) {
+      console.error("Error capturing image:", error);
+      alert("Sorry, there was an error generating the image.");
+    }
+  };
   return (
     <>
       {isLoading ? (
@@ -395,9 +426,12 @@ const QuestionsModal = (props) => {
       ) : (
         <div className={styles["container"]}>
           <>
+          <button id="download-question-button" onClick={handleDownloadImage}>
+                     Download Results
+                   </button>
           <BuyPremiumModal user={user} showOverlay={true}  ref={buyPremiumModalRef} />
 
-            <div className={`${styles["calculator-content-container"]}`}>
+            <div ref={captureRef} className={`${styles["calculator-content-container"]}`}>
               {showEndScreen === false && showReportScreen === false ? (
                 <>
                   <div className={styles["questions-top"]}>
