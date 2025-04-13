@@ -23,7 +23,7 @@
   position: relative;
   width: 100%;
   /* Height should be enough for text above line + dot + some breathing room */
-  height: 180px; /* Increased height slightly */
+  height: 320px; /* Increased height slightly */
   margin-top: 2rem;
 }
 
@@ -135,6 +135,38 @@
   /* No padding-bottom needed here anymore */
 }
 
+.timeline-item::before {
+  content: '';
+  position: absolute;
+
+  /* --- Horizontal Centering --- */
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* --- Vertical Positioning & Height --- */
+  /* Anchor the BOTTOM of the line to the vertical center (dot's position) */
+  bottom: 50%;
+
+  /* Height is still the distance created by course-name's margin */
+  /* Use the value from .course-name's margin-bottom (100px) */
+  /* Subtract ~half the dot's visual height (12px) */
+  /* Adjust '12px' value for precise visual alignment */
+  height: calc(100px - 12px); /* Example: 100px margin - 12px dot radius */
+
+  /* Offset bottom slightly to avoid overlap if needed */
+  /* Adjust this pixel value if the line overlaps the dot too much */
+  /* margin-bottom: 10px; */ /* Optional: pushes line start further below dot center */
+
+
+  /* --- Appearance --- */
+  width: 2px; /* Thickness */
+  background-color: #d89cf6; /* Color */
+
+  /* --- Stacking Order --- */
+  z-index: 2; /* Behind dot (3) and name (4) */
+}
+
+
 /* Course name text - Pushed UPWARDS */
 .course-name {
   white-space: nowrap;
@@ -147,6 +179,12 @@
   margin-bottom: 100px; /* << KEY CHANGE: Adjust this value for vertical distance */
   z-index: 4; /* Ensure text is above potential overlaps */
   position: relative; /* Ensures z-index works reliably */
+}
+
+.course-description {
+  font-size: 1rem; /* Adjust as needed (e.g., 1.1rem, 16px) */
+  color: #333; /* Darker for better readability */
+  font-weight: 500; /* Slightly bolder */
 }
 
 /* The glowing dot on the timeline - CENTERED */

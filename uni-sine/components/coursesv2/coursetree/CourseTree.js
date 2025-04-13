@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState, useCallback } from 'react';
 import styles from '../../../styles/courses/CourseTree.module.css';
 import CourseTreeStats from "../CourseTreeStats";
 
-export default function CourseTree({ courseList: initialCourseList, lastCompletedIndex = 3 }) {
+export default function CourseTree({ courseList: initialCourseList, lastCompletedIndex = 0 }) {
   const courseList = Array.isArray(initialCourseList) ? initialCourseList : [];
 
   const progressLineRef = useRef(null);
@@ -22,14 +22,12 @@ export default function CourseTree({ courseList: initialCourseList, lastComplete
 
     // Need items refs to be ready
     if (!container || itemRefs.current.some(ref => !ref.current)) {
-      console.log("CourseTree: Refs not ready for initial pixel calculation.");
       setDotPixelPositions([]);
       return;
     }
 
     requestAnimationFrame(() => {
         // No need for scrollWidth here, just item positions
-        console.log(`CourseTree: Calculating pixel positions.`);
 
         const pixelPositions = itemRefs.current.map((itemRef, index) => {
           const item = itemRef.current;
@@ -38,12 +36,9 @@ export default function CourseTree({ courseList: initialCourseList, lastComplete
           // Center position IN PIXELS relative to the scroll container's start edge
           const itemCenterPx = item.offsetLeft + item.offsetWidth / 2;
 
-          console.log(`CourseTree Item ${index}: offsetLeft=${item.offsetLeft.toFixed(2)}, offsetWidth=${item.offsetWidth.toFixed(2)}, centerPx=${itemCenterPx.toFixed(2)}`);
-
           return itemCenterPx; // Store the raw pixel value
         });
 
-        console.log("CourseTree: Calculated Dot Pixel Positions:", pixelPositions.map(p => p.toFixed(2)));
         setDotPixelPositions(pixelPositions);
     }); // End of requestAnimationFrame
 
@@ -51,7 +46,6 @@ export default function CourseTree({ courseList: initialCourseList, lastComplete
 
   // Effect 1: Calculate positions ONCE on mount / courseList length change
   useEffect(() => {
-    console.log("CourseTree: Mount/courseList length effect running.");
     // Slight delay might help ensure layout is fully stable after initial render
     const timer = setTimeout(calculatePositions, 50); // e.g., 50ms delay
 
@@ -72,6 +66,7 @@ export default function CourseTree({ courseList: initialCourseList, lastComplete
         return;
     }
 
+    
     let targetWidthPx = 0; // Default width 0px
     let reason = "No courses completed (index < 0)";
 
@@ -96,14 +91,40 @@ export default function CourseTree({ courseList: initialCourseList, lastComplete
 
     // Ensure width is not negative
     targetWidthPx = Math.max(0, targetWidthPx);
-
-    console.log(`CourseTree Width Update: Index=${lastCompletedIndex}, Target=${targetWidthPx.toFixed(2)}px. Reason: ${reason}`);
-
     progressLineRef.current.style.width = `${targetWidthPx}px`; // Set width in pixels
 
-  // Add scrollContainerRef.current indirectly via dotPixelPositions dependency,
-  // but primarily depends on index and the calculated positions array
+
   }, [lastCompletedIndex, dotPixelPositions]); // Dependencies remain the same
+
+// Add this useEffect inside your CourseTree component function
+
+useEffect(() => {
+  const container = scrollContainerRef.current; // Get the DOM element
+
+  if (!container) {
+    // Exit if the ref is not attached yet
+    return;
+  }
+
+  const handleWheelScroll = (event) => {
+    // Check if the element can actually scroll horizontally
+    const canScrollHorizontally = container.scrollWidth > container.clientWidth;
+    if (canScrollHorizontally) {
+      event.preventDefault();
+
+      container.scrollLeft += event.deltaY * 1;
+      container.scrollLeft += event.deltaX * 1;
+    }
+
+  };
+  container.addEventListener('wheel', handleWheelScroll, { passive: false });
+
+  return () => {
+    if (container) {
+      container.removeEventListener('wheel', handleWheelScroll, { passive: false });
+    }
+  };
+}, []); 
 
   // --- Render ---
   return (
@@ -139,6 +160,8 @@ export default function CourseTree({ courseList: initialCourseList, lastComplete
               >
                 <span className={styles['course-name']}>{course}</span>
                 <div className={styles['timeline-dot']}></div>
+                <span className={styles['course-description']}>hello hello hello hello hello hello hello hello hello</span>
+
               </li>
             ))}
           </ul>
