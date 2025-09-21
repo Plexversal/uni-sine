@@ -129,10 +129,10 @@ useEffect(() => {
   // --- Render ---
   return (
     <div className={styles['course-tree-page-container']}>
-      <CourseTreeStats />
-      <div className={styles['timeline-section']}>
-        <h1>Modules</h1>
+      <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+        <CourseTreeStats />
       </div>
+
       <div className={styles['timeline-wrapper']}>
         {/* Optional: Static base line container (stays outside) */}
         <div className={styles['timeline-line-container']}>

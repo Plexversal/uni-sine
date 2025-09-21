@@ -1,4 +1,3 @@
-/* Overall page container */
 
 
 .course-tree-page-container {
@@ -7,7 +6,6 @@
   overflow-x: hidden;
 }
 
-/* Section for the title */
 .timeline-section {
   text-align: center;
   margin-bottom: 1rem;
@@ -18,68 +16,52 @@
   color: #333;
 }
 
-/* Wrapper to establish positioning context */
 .timeline-wrapper {
   position: relative;
   width: 100%;
-  /* Height should be enough for text above line + dot + some breathing room */
-  height: 320px; /* Increased height slightly */
+  height: 320px;
   margin-top: 2rem;
 }
 
-/* Container for the visual line - CENTERED vertically */
 .timeline-line-container {
   position: absolute;
   top: 50%;
-  /* Remove the initial transform - we'll center lines inside */
-  /* transform: translateY(-50%); */
   left: 0;
   width: 100%;
-  /* Height should accommodate the LARGEST line (4px) */
-  /* We center lines within this container's vertical midpoint */
   height: 4px;
-  z-index: 1; /* Behind dots/items */
-  pointer-events: none; /* Don't block interactions below */
-  /* Add relative positioning if it wasn't absolute already */
-  /* position: relative; <-- Not needed if already absolute */
+  z-index: 1;
+  pointer-events: none;
 }
 
 .timeline-line-base {
-  position: absolute; /* Position relative to container */
-  top: 50%;           /* Center vertically */
-  transform: translateY(-50%); /* Precise vertical centering */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   left: 0;
   width: 100%;
-  height: 2px; /* Original height */
-  background: #e5e7eb; /* Example: Subtle grey */
-  /* Or keep your gradient if you prefer */
-  /* background: linear-gradient(90deg, #f871b9, #ab67e0, #8b5cf6); */
-  /* box-shadow: 0 0 5px rgba(192, 132, 252, 0.5); */
+  height: 2px;
+  background: #e5e7eb;
   border-radius: 1px;
-  z-index: 1; /* Base layer within the container */
+  z-index: 1;
 }
 
 .timeline-line-progress {
-  position: absolute; /* Position relative to container */
-  top: 50%;           /* Center vertically */
-  transform: translateY(-50%); /* Precise vertical centering */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   left: 0;
-  width: 0%; /* Start at 0 width */
-  height: 4px; /* Your desired thicker height */
-  /* Use a distinct, possibly brighter color/gradient */
+  width: 0%;
+  height: 4px;
   background: linear-gradient(90deg, #f871b9, #ab67e0, #8b5cf6);
-  box-shadow: 0 0 8px rgba(192, 132, 252, 0.7); /* Optional stronger glow */
+  box-shadow: 0 0 8px rgba(192, 132, 252, 0.7);
   border-radius: 2px;
-  z-index: 2; /* Above the base line */
-  /* Add transition for smooth width animation */
-  transition: width 2s ease-in-out; /* Adjust timing/easing as needed */
+  z-index: 2;
+  transition: width 2s ease-in-out;
 }
 
 
 
-/* The visual timeline line */
 
-/* Container that scrolls horizontally */
 .timeline-scroll-container {
   width: 100%;
   overflow-x: auto;
@@ -87,11 +69,10 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 100%; /* Match wrapper height */
+  height: 100%;
   z-index: 2;
   -webkit-overflow-scrolling: touch;
 
-  /* Custom Scrollbar */
   &::-webkit-scrollbar {
     height: 8px;
   }
@@ -110,111 +91,93 @@
   scrollbar-color: #c4b5fd #f1f1f1;
 }
 
-/* The list itself */
 .course-list {
   display: inline-flex;
   list-style: none;
-  padding: 0 60px; /* Increased padding slightly for edges */
+  padding: 0 60px;
   margin: 0;
   height: 100%;
-  /* Vertically center the items within the scroll container */
   align-items: center;
   position: relative;
 }
 
-/* Individual timeline item */
 .timeline-item {
   display: flex;
-  flex-direction: column; /* Text on top of dot */
-  align-items: center;    /* Center horizontally */
-  position: relative;     /* Crucial for absolute dot positioning */
-  margin: 0 50px;         /* Increased horizontal spacing */
-  min-width: 150px;       /* Increased min-width */
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin: 0 50px;
+  min-width: 150px;
   text-align: center;
   z-index: 3;
-  /* No padding-bottom needed here anymore */
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  user-select: none;
+}
+
+.timeline-item:hover {
+  scale: 1.2;
 }
 
 .timeline-item::before {
   content: '';
   position: absolute;
 
-  /* --- Horizontal Centering --- */
   left: 50%;
   transform: translateX(-50%);
 
-  /* --- Vertical Positioning & Height --- */
-  /* Anchor the BOTTOM of the line to the vertical center (dot's position) */
   bottom: 50%;
 
-  /* Height is still the distance created by course-name's margin */
-  /* Use the value from .course-name's margin-bottom (100px) */
-  /* Subtract ~half the dot's visual height (12px) */
-  /* Adjust '12px' value for precise visual alignment */
-  height: calc(100px - 12px); /* Example: 100px margin - 12px dot radius */
-
-  /* Offset bottom slightly to avoid overlap if needed */
-  /* Adjust this pixel value if the line overlaps the dot too much */
-  /* margin-bottom: 10px; */ /* Optional: pushes line start further below dot center */
+  height: calc(100px - 12px);
 
 
-  /* --- Appearance --- */
-  width: 2px; /* Thickness */
-  background-color: #d89cf6; /* Color */
 
-  /* --- Stacking Order --- */
-  z-index: 2; /* Behind dot (3) and name (4) */
+  width: 2px;
+  background-color: #d89cf6;
+
+  z-index: 2;
 }
 
 
-/* Course name text - Pushed UPWARDS */
 .course-name {
   white-space: nowrap;
-  /* Increased font size */
-  font-size: 1rem; /* Adjust as needed (e.g., 1.1rem, 16px) */
-  color: #333; /* Darker for better readability */
-  font-weight: 500; /* Slightly bolder */
-  /* This margin pushes the dot (and thus the line) DOWN relative to the text */
-  /* Effectively moving the text UP from the line */
-  margin-bottom: 100px; /* << KEY CHANGE: Adjust this value for vertical distance */
-  z-index: 4; /* Ensure text is above potential overlaps */
-  position: relative; /* Ensures z-index works reliably */
+  font-size: 1rem;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 100px;
+  z-index: 4;
+  position: relative;
+  background: white;
+  padding: 0.5em;
 }
 
 .course-description {
-  font-size: 1rem; /* Adjust as needed (e.g., 1.1rem, 16px) */
-  color: #333; /* Darker for better readability */
-  font-weight: 500; /* Slightly bolder */
+  font-size: 1rem;
+  color: #333;
+  font-weight: 500;
 }
 
-/* The glowing dot on the timeline - CENTERED */
 .timeline-dot {
-  width: 18px; /* Slightly larger dot */
-  height: 18px; /* Slightly larger dot */
+  width: 18px;
+  height: 18px;
   background-color: #d89cf6;
-  border: 3px solid #ffffff; /* Thicker border */
+  border: 3px solid #ffffff;
   border-radius: 50%;
   position: absolute;
-  /* Center the dot horizontally within the item */
   left: 50%;
-  /* Center the dot vertically within the item */
-  /* Since the item is centered in the list, and the list fills the */
-  /* container where the line is also centered, this puts the dot ON the line */
   top: 50%;
-  transform: translate(-50%, -50%); /* Precise centering */
-  z-index: 3; /* Above the line, below text if overlapping */
+  transform: translate(-50%, -50%);
+  z-index: 3;
   transition:
     background-color 0.3s ease,
     box-shadow 0.3s ease;
 
-  /* Persistent Glow Effect */
   box-shadow:
     0 0 8px #c084fc,
     0 0 15px #f472b6,
     0 0 2px #ffffff;
 }
 
-/* Enhance glow on hover */
 .timeline-item:hover .timeline-dot {
   background-color: #f472b6;
   box-shadow:

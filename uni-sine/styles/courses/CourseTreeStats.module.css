@@ -1,0 +1,56 @@
+
+
+.course-tree-stats {
+  display: flex;
+  gap: 2rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 4rem 0;
+
+
+}
+
+.course-tree-stats h1 {
+    margin: 0;
+    margin-bottom: 1em !important;
+}
+
+.title-wrapper {
+  flex: 1;
+  text-align: right;
+}
+
+.title-wrapper h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.title-wrapper p {
+  margin: 0;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.stats-wrapper {
+  flex: 1;
+  text-align: left;
+  border-left: 2px solid rgb(233, 233, 233);
+  padding-left: 2rem;
+}
+
+.stats-wrapper h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.stats-wrapper p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #666;
+
+}
+
+.stats-wrapper div {
+  margin: 0.5rem 0;
+}
