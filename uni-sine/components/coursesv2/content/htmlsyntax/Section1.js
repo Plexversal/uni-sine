@@ -3,7 +3,7 @@ import styles from '../../../../styles/courses/MainCourseContent.module.css';
 import CodeBlock from '../../../page-construction/CodeBlock';
 import { courseAnimations } from '../../../../lib/courseAnimations';
 
-export default function Section1({ sectionNumber = 1 }) {
+export default function Section1() {
 
     return (
         <motion.div
@@ -12,7 +12,7 @@ export default function Section1({ sectionNumber = 1 }) {
             animate="visible"
         >
             <motion.h1 variants={courseAnimations.contentItem}>
-                Basic HTML {sectionNumber > 1 && `(Section ${sectionNumber})`}
+                Basic HTML
             </motion.h1>
             <motion.p variants={courseAnimations.contentItem}>
                 HTML is made of elements, written with tags inside angle brackets:
@@ -27,12 +27,12 @@ export default function Section1({ sectionNumber = 1 }) {
                 Most elements have an opening {' '}
                 <code>
                     <span className={styles['bracket']}>&lt;</span>
-                    <span className={styles['tag']}>div</span>
+                    <span className={styles['tag']}>tag</span>
                     <span className={styles['bracket']}>&gt;</span>
                 </code> and a closing {' '}
                 <code>
                     <span className={styles['bracket']}>&lt;/</span>
-                    <span className={styles['tag']}>div</span>
+                    <span className={styles['tag']}>tag</span>
                     <span className={styles['bracket']}>&gt;</span>
                 </code>
             </motion.p>

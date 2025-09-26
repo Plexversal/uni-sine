@@ -37,6 +37,7 @@
 
 .code-block-container pre {
   margin: 0;
+  line-height: calc(1em + 6px);
   scrollbar-width: thin;
   scrollbar-color: #000 transparent;
 }

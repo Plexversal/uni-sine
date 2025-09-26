@@ -1,12 +1,28 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Section1 from "../../../../components/coursesv2/content/htmlsyntax/Section1";
+import Section2 from '../../../../components/coursesv2/content/htmlsyntax/Section2';
 import styles from '../../../../styles/courses/MainCourseContent.module.css';
 
 export default function Htmlsyntax() {
     const [currentSection, setCurrentSection] = useState(1);
     const totalSections = 3;
     const sectionRefs = useRef([]);
+
+    useEffect(() => {
+        const setNavbarHeight = () => {
+            const navbar = document.querySelector('#navbar, [id*="navbar"]');
+            if (navbar) {
+                const navbarHeight = navbar.offsetHeight;
+                document.documentElement.style.setProperty('--navbar-height', `${navbarHeight}px`);
+            }
+        };
+
+        setNavbarHeight();
+        window.addEventListener('resize', setNavbarHeight);
+
+        return () => window.removeEventListener('resize', setNavbarHeight);
+    }, []);
 
     const handleNext = () => {
         if (currentSection < totalSections) {
@@ -46,7 +62,7 @@ export default function Htmlsyntax() {
                         initial="hidden"
                         animate="visible"
                     >
-                        <Section1 sectionNumber={1} />
+                        <Section1 />
                     </motion.div>
                 )}
 
@@ -59,7 +75,7 @@ export default function Htmlsyntax() {
                         initial="hidden"
                         animate="visible"
                     >
-                        <Section1 sectionNumber={2} />
+                        <Section2 />
                     </motion.div>
                 )}
 
@@ -72,7 +88,7 @@ export default function Htmlsyntax() {
                         initial="hidden"
                         animate="visible"
                     >
-                        <Section1 sectionNumber={3} />
+                        <Section1 />
                     </motion.div>
                 )}
             </div>
