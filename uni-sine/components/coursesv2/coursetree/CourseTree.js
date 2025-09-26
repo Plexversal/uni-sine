@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import styles from '../../../styles/courses/CourseTree.module.css';
 import CourseTreeStats from "../CourseTreeStats";
+import Link from 'next/link';
 
 export default function CourseTree({ courseList: initialCourseList, lastCompletedIndex = 0 }) {
   const courseList = Array.isArray(initialCourseList) ? initialCourseList : [];
@@ -158,9 +159,11 @@ useEffect(() => {
                 ref={itemRefs.current[index]}
                 className={styles['timeline-item']} // Needs position relative, higher z-index
               >
-                <span className={styles['course-name']}>{course}</span>
-                <div className={styles['timeline-dot']}></div>
-                <span className={styles['course-description']}>hello hello hello hello hello hello hello hello hello</span>
+                <Link href={'/coursesv2/webdevcoding/htmlsyntax'}>
+                  <span className={styles['course-name']}>{course}</span>
+                  <div className={styles['timeline-dot']}></div>
+                  <span className={styles['course-description']}>hello hello hello hello hello hello hello hello hello</span>
+                </Link>
 
               </li>
             ))}

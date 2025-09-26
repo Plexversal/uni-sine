@@ -1,0 +1,125 @@
+
+.full-course-container {
+    --color-blue: #5341db;
+    --grey-bg: #f3f3f3;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.progress-bar {
+    background: var(--grey-bg);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.content-container {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    font-size: 1.3em;
+    flex-direction: column;
+  min-height: 100svh;
+
+}
+
+.section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  scroll-margin-top: 80px;
+  padding: 2rem 0;
+}
+
+.section:not(:last-child) {
+  min-height: fit-content;
+  padding-bottom: 2rem;
+}
+
+
+.section:last-child {
+    min-height: calc(100svh - 200px);
+    padding-bottom: calc(100svh - 100%);
+    padding-top: 6rem;
+}
+
+.section:first-child:last-child {
+    padding-top: 2rem;
+}
+
+.footer {
+  position: sticky;
+  bottom: 0;
+  background: white; /* match your page bg */
+  padding: 2em 0;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #ddd;
+  z-index: 100;
+}
+
+.basic-code-element {
+    color: var(--color-blue);
+    font-weight: bolder;
+    font-size: 2em;
+    border: 4px dashed var(--grey-bg);
+    width: fit-content;
+    padding: 5px 10px;
+    margin: 1em auto;
+}
+
+.content-container code {
+  font-family: "Fira Code", monospace;
+  font-size: 1.1em;
+  background-color: var(--grey-bg);
+  color: #dcdcaa;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.content-container code .tag {
+  color: var(--color-blue); /* tag name */
+}
+.content-container code .bracket {
+  color: #808080; /* < and > */
+}
+.content-container code .attr {
+  color: #9cdcfe; /* attribute */
+}
+.content-container code .value {
+  color: #ce9178; /* attribute value */
+}
+
+.next-btn {
+    color: white;
+    padding: 30px;
+    cursor: pointer;
+    background-color: rgb(49, 49, 49);
+    box-shadow: 4px 4px 0px #5c5c5c;
+    border: 2px solid rgb(0, 0, 0);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 1.3em;
+    transition: all .3s;
+    -webkit-appearance: none;
+    appearance: none;
+    position: sticky;
+    bottom: 50px;
+    min-width: 250px;
+    z-index: 100;
+    align-self: center;
+    margin: 2em 0;
+}
+
+.next-btn:focus,
+.next-btn:hover
+ {
+    box-shadow: 10px 10px 0px #5c5c5c;
+    transform: scale(1.13);
+
+}
