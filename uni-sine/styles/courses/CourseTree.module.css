@@ -19,7 +19,7 @@
 .timeline-wrapper {
   position: relative;
   width: 100%;
-  height: 320px;
+  height: 400px;
   margin-top: 2rem;
 }
 
@@ -39,9 +39,9 @@
   transform: translateY(-50%);
   left: 0;
   width: 100%;
-  height: 2px;
+  height: 3px;
   background: #e5e7eb;
-  border-radius: 1px;
+  border-radius: 1.5px;
   z-index: 1;
 }
 
@@ -51,12 +51,27 @@
   transform: translateY(-50%);
   left: 0;
   width: 0%;
-  height: 4px;
+  height: 6px;
   background: linear-gradient(90deg, #f871b9, #ab67e0, #8b5cf6);
-  box-shadow: 0 0 8px rgba(192, 132, 252, 0.7);
-  border-radius: 2px;
+  box-shadow: 0 0 12px rgba(192, 132, 252, 0.7);
+  border-radius: 3px;
   z-index: 2;
   transition: width 2s ease-in-out;
+}
+
+.timeline-line-hover {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  width: 0%;
+  height: 6px;
+  background: linear-gradient(90deg, #fbb4d9, #d8b4fe, #c4b5fd);
+  box-shadow: 0 0 8px rgba(192, 132, 252, 0.4);
+  border-radius: 3px;
+  z-index: 1;
+  transition: width 0.3s ease-out;
+  opacity: 0.8;
 }
 
 
@@ -106,8 +121,8 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  margin: 0 50px;
-  min-width: 175px;
+  margin: 0 65px;
+  min-width: 220px;
   text-align: center;
   z-index: 3;
   cursor: pointer;
@@ -141,27 +156,27 @@
 
 .course-name {
   white-space: nowrap;
-  font-size: 1rem;
+  font-size: 1.3rem;
   color: #333;
   font-weight: 500;
-  margin-bottom: 100px;
+  margin-bottom: 120px;
   z-index: 4;
   position: relative;
   background: white;
-  padding: 0.5em;
+  padding: 0.6em;
 }
 
 .course-description {
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: #333;
   font-weight: 500;
 }
 
 .timeline-dot {
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   background-color: #d89cf6;
-  border: 3px solid #ffffff;
+  border: 4px solid #ffffff;
   border-radius: 50%;
   position: absolute;
   left: 50%;
@@ -173,15 +188,87 @@
     box-shadow 0.3s ease;
 
   box-shadow:
-    0 0 8px #c084fc,
-    0 0 15px #f472b6,
-    0 0 2px #ffffff;
+    0 0 12px #c084fc,
+    0 0 20px #f472b6,
+    0 0 3px #ffffff;
 }
 
 .timeline-item:hover .timeline-dot {
   background-color: #f472b6;
   box-shadow:
-    0 0 12px #f472b6,
-    0 0 25px #c084fc,
-    0 0 5px #ffffff;
+    0 0 16px #f472b6,
+    0 0 32px #c084fc,
+    0 0 6px #ffffff;
 }
+
+.rotating-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  border: 2px solid transparent;
+  border-top: 2px solid #f871b9;
+  border-right: 2px solid #ab67e0;
+  border-radius: 50%;
+  animation: rotate 2s linear infinite;
+  z-index: 4;
+}
+
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Current item - always shining */
+.current-item .timeline-dot {
+  background-color: #f472b6 !important;
+  box-shadow:
+    0 0 16px #f472b6,
+    0 0 32px #c084fc,
+    0 0 6px #ffffff !important;
+}
+
+.current-item a {
+  scale: 1.1;
+}
+
+/* Future items - grey and dimmed */
+.future-item .course-name,
+.future-item .course-description {
+  color: #9ca3af !important;
+}
+
+.future-item .timeline-dot {
+  background-color: #9ca3af !important;
+  box-shadow: 0 0 4px rgba(156, 163, 175, 0.3) !important;
+  border-color: #e5e7eb !important;
+}
+
+.future-item a::before {
+  background-color: #d1d5db !important;
+}
+
+/* Restore original colors on hover for future items */
+.future-item:hover .course-name,
+.future-item:hover .course-description {
+  color: #333 !important;
+}
+
+.future-item:hover .timeline-dot {
+  background-color: #f472b6 !important;
+  box-shadow:
+    0 0 16px #f472b6,
+    0 0 32px #c084fc,
+    0 0 6px #ffffff !important;
+}
+
+.future-item:hover a::before {
+  background-color: #d89cf6 !important;
+}
+

@@ -25,7 +25,7 @@
 }
 
 .code-block-container {
-  background-color: #1e1e1e;
+  background-color: #292C35;
   padding: 1rem;
   border-radius: 10px;
   font-size: 1.1em;
@@ -35,11 +35,68 @@
   overflow:hidden
 }
 
+/* Mac-style window chrome */
+.mac-style {
+  border: 1px solid #3a3a3a;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 0;
+}
+
+.mac-header {
+  height: 42px;
+  background: linear-gradient(to bottom, #3e3e3e 0%, #2d2d2d 100%);
+  border-bottom: 1px solid #1a1a1a;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  border-radius: 8px 8px 0 0;
+  margin: 0;
+}
+
+.mac-content {
+  padding: 1rem;
+}
+
+.mac-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.mac-dots span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset;
+}
+
+.dot-red {
+  background: #ff5f57;
+}
+
+.dot-yellow {
+  background: #febc2e;
+}
+
+.dot-green {
+  background: #28c840;
+}
+
+.mac-style .copy-btn {
+  top: 40px;
+  right: 1rem;
+}
+
+.mac-content pre {
+  margin: 0;
+}
+
 .code-block-container pre {
   margin: 0;
   line-height: calc(1em + 6px);
   scrollbar-width: thin;
   scrollbar-color: #000 transparent;
+  background-color: #292C35 !important;
 }
 
 .code-block-container pre::-webkit-scrollbar {

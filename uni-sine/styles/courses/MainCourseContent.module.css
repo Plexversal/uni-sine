@@ -2,6 +2,7 @@
 .full-course-container {
     --color-blue: #5341db;
     --grey-bg: #f3f3f3;
+    --property-blue: rgb(28, 165, 189);
 
     display: flex;
     flex-direction: column;
@@ -27,7 +28,7 @@
     font-size: 1.3em;
     flex-direction: column;
     min-height: 100svh;
-    width: 650px;
+    width: min(650px, 100vw - 5rem);
 
 }
 
@@ -81,7 +82,7 @@
   font-family: "Fira Code", monospace;
   font-size: 1.1em;
   background-color: var(--grey-bg);
-  color: #dcdcaa;
+  color: #575757;
   padding: 2px 6px;
   border-radius: 4px;
 }
@@ -90,6 +91,83 @@
 }
 .codeblock-wrapper code {
   all: unset;
+}
+
+.css-demo-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin: 2.5em 0;
+}
+
+.css-demo-container .codeblock-wrapper {
+  margin: 0;
+  min-width: 0;
+}
+
+.preview-container {
+  border: 1px solid #3a3a3a;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.mac-preview-header {
+  height: 42px;
+  background: linear-gradient(to bottom, #3e3e3e 0%, #2d2d2d 100%);
+  border-bottom: 1px solid #1a1a1a;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+}
+
+.mac-preview-dots {
+  display: flex;
+  gap: 8px;
+}
+
+.mac-preview-dots span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.mac-preview-dots .dot-red {
+  background: #ff5f57;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset;
+}
+
+.mac-preview-dots .dot-yellow {
+  background: #febc2e;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset;
+}
+
+.mac-preview-dots .dot-green {
+  background: #28c840;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset;
+}
+
+.preview-content {
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.preview-content p {
+  margin: 0;
+  font-size: 1.2em;
+  
+}
+
+@media (max-width: 768px) {
+  .css-demo-container {
+    grid-template-columns: 1fr;
+  }
 }
 .content-container code .tag {
   color: var(--color-blue); /* tag name */
@@ -118,6 +196,10 @@
 
 .codeblock-wrapper code .value {
   color: unset;
+}
+
+.property {
+  color: var(--property-blue);
 }
 
 .next-btn {

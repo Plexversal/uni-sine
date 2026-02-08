@@ -3,13 +3,14 @@ import styles from '../../../../styles/courses/MainCourseContent.module.css';
 import CodeBlock from '../../../page-construction/CodeBlock';
 import { courseAnimations } from '../../../../lib/courseAnimations';
 
-export default function Section1() {
+export default function Section1({ onAnimationComplete }) {
 
     return (
         <motion.div
             variants={courseAnimations.sectionContent}
             initial="hidden"
             animate="visible"
+            onAnimationComplete={onAnimationComplete}
         >
             <motion.h1 variants={courseAnimations.contentItem}>
                 Basic HTML

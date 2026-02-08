@@ -16,19 +16,28 @@ const CodeBlock = ({ code, language = "cpp", showCopy = true }) => {
   };
 
   return (
-    <div className={styles["code-block-container"]}>
-      {showCopy && (
-        <div className={styles["copy-btn"]} onClick={handleCopyClick}>
-          {copyStatus}
+    <div className={`${styles["code-block-container"]} ${styles["mac-style"]}`}>
+      <div className={styles["mac-header"]}>
+        <div className={styles["mac-dots"]}>
+          <span className={styles["dot-red"]}></span>
+          <span className={styles["dot-yellow"]}></span>
+          <span className={styles["dot-green"]}></span>
         </div>
-      )}
-      <DynamicSyntaxHighlighter
-        showLineNumbers={false}
-        language={language}
-        style={vs2015}
-      >
-        {code}
-      </DynamicSyntaxHighlighter>
+      </div>
+      <div className={styles["mac-content"]}>
+        {showCopy && (
+          <div className={styles["copy-btn"]} onClick={handleCopyClick}>
+            {copyStatus}
+          </div>
+        )}
+        <DynamicSyntaxHighlighter
+          showLineNumbers={false}
+          language={language}
+          style={vs2015}
+        >
+          {code}
+        </DynamicSyntaxHighlighter>
+      </div>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import styles from '../../../styles/courses/CourseTree.module.css';
 import CourseTreeStats from "../CourseTreeStats";
 import Link from 'next/link';
 
-export default function CourseTree({ courseList: initialCourseList, lastCompletedIndex = 0 }) {
+export default function CourseTree({ courseList: initialCourseList, lastCompletedIndex = 2 }) {
   const courseList = Array.isArray(initialCourseList) ? initialCourseList : [];
 
   const progressLineRef = useRef(null);
@@ -16,6 +16,7 @@ export default function CourseTree({ courseList: initialCourseList, lastComplete
 
   // --- State to store target PIXEL widths ---
   const [dotPixelPositions, setDotPixelPositions] = useState([]);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   // --- Calculate Positions Function (memoized) ---
   const calculatePositions = useCallback(() => {
@@ -151,22 +152,49 @@ useEffect(() => {
             className={styles['timeline-line-progress']}
           ></div>
 
+          {/* Hover progress line */}
+          <div
+            className={styles['timeline-line-hover']}
+            style={{
+              width: hoveredIndex !== null && hoveredIndex > lastCompletedIndex && dotPixelPositions[hoveredIndex]
+                ? `${dotPixelPositions[hoveredIndex]}px`
+                : '0px'
+            }}
+          ></div>
+
           {/* Course list - POSITION RELATIVE, higher z-index */}
           <ul className={styles['course-list']}>
-            {courseList.map((course, index) => (
+            {courseList.map((course, index) => {
+              let itemClass = styles['timeline-item'];
+              if (index < lastCompletedIndex) {
+                itemClass += ` ${styles['completed-item']}`;
+              } else if (index === lastCompletedIndex) {
+                itemClass += ` ${styles['current-item']}`;
+              } else {
+                itemClass += ` ${styles['future-item']}`;
+              }
+
+              return (
               <li
                 key={index}
                 ref={itemRefs.current[index]}
-                className={styles['timeline-item']} // Needs position relative, higher z-index
+                className={itemClass}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
               >
                 <Link href={'/coursesv2/webdevcoding/htmlsyntax'}>
                   <span className={styles['course-name']}>{course}</span>
-                  <div className={styles['timeline-dot']}></div>
+                  <div className={styles['timeline-dot']}>
+                    {index === lastCompletedIndex && (
+                      <div className={styles['rotating-circle']}></div>
+                    )}
+                  </div>
                   <span className={styles['course-description']}>hello hello hello hello hello hello hello hello hello</span>
                 </Link>
 
               </li>
-            ))}
+              );
+            })}
           </ul>
         </div>
       </div>
